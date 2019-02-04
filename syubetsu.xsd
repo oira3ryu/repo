@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="syubetsu" targetNamespace="http://tempuri.org/syubetsu.xsd" xmlns:mstns="http://tempuri.org/syubetsu.xsd" xmlns="http://tempuri.org/syubetsu.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="syubetsu" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="syubetsu" msprop:Generator_UserDSName="syubetsu">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="syubetsu" msprop:Generator_TableClassName="syubetsuDataTable" msprop:Generator_TableVarName="tablesyubetsu" msprop:Generator_TablePropName="_syubetsu" msprop:Generator_RowDeletingName="syubetsuRowDeleting" msprop:Generator_RowChangingName="syubetsuRowChanging" msprop:Generator_RowEvHandlerName="syubetsuRowChangeEventHandler" msprop:Generator_RowDeletedName="syubetsuRowDeleted" msprop:Generator_UserTableName="syubetsu" msprop:Generator_RowChangedName="syubetsuRowChanged" msprop:Generator_RowEvArgName="syubetsuRowChangeEvent" msprop:Generator_RowClassName="syubetsuRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="s_id" msprop:Generator_ColumnVarNameInTable="columns_id" msprop:Generator_ColumnPropNameInRow="s_id" msprop:Generator_ColumnPropNameInTable="s_idColumn" msprop:Generator_UserColumnName="s_id" type="xs:string" />
+              <xs:element name="syubetsu" msprop:Generator_ColumnVarNameInTable="columnsyubetsu" msprop:Generator_ColumnPropNameInRow="syubetsu" msprop:Generator_ColumnPropNameInTable="syubetsuColumn" msprop:Generator_UserColumnName="syubetsu" type="xs:string" minOccurs="0" />
+              <xs:element name="shisetsumei" msprop:Generator_ColumnVarNameInTable="columnshisetsumei" msprop:Generator_ColumnPropNameInRow="shisetsumei" msprop:Generator_ColumnPropNameInTable="shisetsumeiColumn" msprop:Generator_UserColumnName="shisetsumei" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:syubetsu" />
+      <xs:field xpath="mstns:s_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

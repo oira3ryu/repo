@@ -1,0 +1,549 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E686D0CE-538E-4BEE-9BCD-5C7E0DFE07FA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>rk_seikyu</RootNamespace>
+    <AssemblyName>rk_seikyu</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Bill-48.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CRVsPackageLib, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Design, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Data.AdoDotNetInterop, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304">
+      <HintPath>packages\CrystalReports.FlashControlV71.13.0.3501\lib\net20\FlashControlV71.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Npgsql, Version=4.0.4.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>packages\Npgsql.4.0.4\lib\net451\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="ShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304">
+      <HintPath>packages\CrystalReports.FlashControlV71.13.0.3501\lib\net20\ShockwaveFlashObjects.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="bank.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>bank.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="crGenbo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crGenbo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="crShiharai.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crShiharai.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="crUchiwake.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crUchiwake.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="crNoufusyo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crNoufusyo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="crWithdrawal.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crWithdrawal.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Form_bank.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_bank.Designer.cs">
+      <DependentUpon>Form_bank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_chg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_chg.Designer.cs">
+      <DependentUpon>Form_chg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_gyoumu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_gyoumu.Designer.cs">
+      <DependentUpon>Form_gyoumu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_holiday.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_holiday.Designer.cs">
+      <DependentUpon>Form_holiday.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_nen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_nen.Designer.cs">
+      <DependentUpon>Form_nen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_prn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_prn.Designer.cs">
+      <DependentUpon>Form_prn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_par.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_par.Designer.cs">
+      <DependentUpon>Form_par.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_rep.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_rep.Designer.cs">
+      <DependentUpon>Form_rep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_req.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_req.Designer.cs">
+      <DependentUpon>Form_req.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_seikyu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_seikyu.Designer.cs">
+      <DependentUpon>Form_seikyu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_syubetsu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_syubetsu.Designer.cs">
+      <DependentUpon>Form_syubetsu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_withdrawal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_withdrawal.Designer.cs">
+      <DependentUpon>Form_withdrawal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gyoumu_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gyoumu_ds.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="holiday.Designer.cs" />
+    <Compile Include="nen.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>nen.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="par.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>par.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="rep.Designer.cs" />
+    <Compile Include="req_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>req_ds.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="seikyu.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>seikyu.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="seikyu_ds.Designer.cs" />
+    <Compile Include="shiharai_houhou_ds.Designer.cs" />
+    <Compile Include="shinzoku_kankei_ds.Designer.cs" />
+    <Compile Include="syubetsu.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>syubetsu.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="tsuki.Designer.cs" />
+    <Compile Include="withdrawal_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>withdrawal_ds.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="year.Designer.cs" />
+    <EmbeddedResource Include="crGenbo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crGenbo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="crShiharai.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crShiharai.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="crUchiwake.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crUchiwake.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="crNoufusyo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crNoufusyo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="crWithdrawal.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crWithdrawal.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_bank.resx">
+      <DependentUpon>Form_bank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_chg.resx">
+      <DependentUpon>Form_chg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_gyoumu.resx">
+      <DependentUpon>Form_gyoumu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_holiday.resx">
+      <DependentUpon>Form_holiday.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_nen.resx">
+      <DependentUpon>Form_nen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_prn.resx">
+      <DependentUpon>Form_prn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_par.resx">
+      <DependentUpon>Form_par.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_rep.resx">
+      <DependentUpon>Form_rep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_req.resx">
+      <DependentUpon>Form_req.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_seikyu.resx">
+      <DependentUpon>Form_seikyu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_syubetsu.resx">
+      <DependentUpon>Form_syubetsu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_withdrawal.resx">
+      <DependentUpon>Form_withdrawal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="bank.xsc">
+      <DependentUpon>bank.xsd</DependentUpon>
+    </None>
+    <None Include="bank.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>bank.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="bank.xss">
+      <DependentUpon>bank.xsd</DependentUpon>
+    </None>
+    <None Include="gyoumu_ds.xsc">
+      <DependentUpon>gyoumu_ds.xsd</DependentUpon>
+    </None>
+    <None Include="gyoumu_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>gyoumu_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="gyoumu_ds.xss">
+      <DependentUpon>gyoumu_ds.xsd</DependentUpon>
+    </None>
+    <None Include="holiday.xsc">
+      <DependentUpon>holiday.xsd</DependentUpon>
+    </None>
+    <None Include="holiday.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>holiday1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="holiday.xss">
+      <DependentUpon>holiday.xsd</DependentUpon>
+    </None>
+    <None Include="nen.xsc">
+      <DependentUpon>nen.xsd</DependentUpon>
+    </None>
+    <None Include="nen.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>nen.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="nen.xss">
+      <DependentUpon>nen.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="par.xsc">
+      <DependentUpon>par.xsd</DependentUpon>
+    </None>
+    <None Include="par.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>par.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="par.xss">
+      <DependentUpon>par.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="rep.xsc">
+      <DependentUpon>rep.xsd</DependentUpon>
+    </None>
+    <None Include="rep.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>rep1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="rep.xss">
+      <DependentUpon>rep.xsd</DependentUpon>
+    </None>
+    <None Include="req_ds.xsc">
+      <DependentUpon>req_ds.xsd</DependentUpon>
+    </None>
+    <None Include="req_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>req_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="req_ds.xss">
+      <DependentUpon>req_ds.xsd</DependentUpon>
+    </None>
+    <None Include="seikyu.xsc">
+      <DependentUpon>seikyu.xsd</DependentUpon>
+    </None>
+    <None Include="seikyu.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>seikyu.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="seikyu.xss">
+      <DependentUpon>seikyu.xsd</DependentUpon>
+    </None>
+    <None Include="seikyu_ds.xsc">
+      <DependentUpon>seikyu_ds.xsd</DependentUpon>
+    </None>
+    <None Include="seikyu_ds.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>seikyu_ds1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="seikyu_ds.xss">
+      <DependentUpon>seikyu_ds.xsd</DependentUpon>
+    </None>
+    <None Include="shiharai_houhou_ds.xsc">
+      <DependentUpon>shiharai_houhou_ds.xsd</DependentUpon>
+    </None>
+    <None Include="shiharai_houhou_ds.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>shiharai_houhou_ds1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="shiharai_houhou_ds.xss">
+      <DependentUpon>shiharai_houhou_ds.xsd</DependentUpon>
+    </None>
+    <None Include="shinzoku_kankei_ds.xsc">
+      <DependentUpon>shinzoku_kankei_ds.xsd</DependentUpon>
+    </None>
+    <None Include="shinzoku_kankei_ds.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>shinzoku_kankei_ds1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="shinzoku_kankei_ds.xss">
+      <DependentUpon>shinzoku_kankei_ds.xsd</DependentUpon>
+    </None>
+    <None Include="syubetsu.xsc">
+      <DependentUpon>syubetsu.xsd</DependentUpon>
+    </None>
+    <None Include="syubetsu.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>syubetsu.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="syubetsu.xss">
+      <DependentUpon>syubetsu.xsd</DependentUpon>
+    </None>
+    <None Include="tsuki.xsc">
+      <DependentUpon>tsuki.xsd</DependentUpon>
+    </None>
+    <None Include="tsuki.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>tsuki1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tsuki.xss">
+      <DependentUpon>tsuki.xsd</DependentUpon>
+    </None>
+    <None Include="withdrawal_ds.xsc">
+      <DependentUpon>withdrawal_ds.xsd</DependentUpon>
+    </None>
+    <None Include="withdrawal_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>withdrawal_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="withdrawal_ds.xss">
+      <DependentUpon>withdrawal_ds.xsd</DependentUpon>
+    </None>
+    <None Include="year.xsc">
+      <DependentUpon>year.xsd</DependentUpon>
+    </None>
+    <None Include="year.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>year1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="year.xss">
+      <DependentUpon>year.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bill-48.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 および x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows インストーラー 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="SAP.CrystalReports14.NET.2.0">
+      <Visible>False</Visible>
+      <ProductName>SAP Crystal Reports Runtime Engine for .NET Framework</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

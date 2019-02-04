@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="par" targetNamespace="http://tempuri.org/par.xsd" xmlns:mstns="http://tempuri.org/par.xsd" xmlns="http://tempuri.org/par.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="par" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="par" msprop:Generator_UserDSName="par">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="par" msprop:Generator_TableClassName="parDataTable" msprop:Generator_TableVarName="tablepar" msprop:Generator_RowChangedName="parRowChanged" msprop:Generator_TablePropName="_par" msprop:Generator_RowDeletingName="parRowDeleting" msprop:Generator_RowChangingName="parRowChanging" msprop:Generator_RowEvHandlerName="parRowChangeEventHandler" msprop:Generator_RowDeletedName="parRowDeleted" msprop:Generator_RowClassName="parRow" msprop:Generator_UserTableName="par" msprop:Generator_RowEvArgName="parRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="p_id" msprop:Generator_ColumnVarNameInTable="columnp_id" msprop:Generator_ColumnPropNameInRow="p_id" msprop:Generator_ColumnPropNameInTable="p_idColumn" msprop:Generator_UserColumnName="p_id" type="xs:string" />
+              <xs:element name="title" msprop:Generator_ColumnVarNameInTable="columntitle" msprop:Generator_ColumnPropNameInRow="title" msprop:Generator_ColumnPropNameInTable="titleColumn" msprop:Generator_UserColumnName="title" type="xs:string" minOccurs="0" />
+              <xs:element name="content1" msprop:Generator_ColumnVarNameInTable="columncontent1" msprop:Generator_ColumnPropNameInRow="content1" msprop:Generator_ColumnPropNameInTable="content1Column" msprop:Generator_UserColumnName="content1" type="xs:string" minOccurs="0" />
+              <xs:element name="content2" msprop:Generator_ColumnVarNameInTable="columncontent2" msprop:Generator_ColumnPropNameInRow="content2" msprop:Generator_ColumnPropNameInTable="content2Column" msprop:Generator_UserColumnName="content2" type="xs:string" minOccurs="0" />
+              <xs:element name="content3" msprop:Generator_ColumnVarNameInTable="columncontent3" msprop:Generator_ColumnPropNameInRow="content3" msprop:Generator_ColumnPropNameInTable="content3Column" msprop:Generator_UserColumnName="content3" type="xs:string" minOccurs="0" />
+              <xs:element name="sub_title" msprop:Generator_ColumnVarNameInTable="columnsub_title" msprop:Generator_ColumnPropNameInRow="sub_title" msprop:Generator_ColumnPropNameInTable="sub_titleColumn" msprop:Generator_UserColumnName="sub_title" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:par" />
+      <xs:field xpath="mstns:p_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

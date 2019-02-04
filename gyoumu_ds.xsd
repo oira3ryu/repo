@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="gyoumu_ds" targetNamespace="http://tempuri.org/gyoumu_ds.xsd" xmlns:mstns="http://tempuri.org/gyoumu_ds.xsd" xmlns="http://tempuri.org/gyoumu_ds.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="gyoumu_ds" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="gyoumu_ds" msprop:Generator_UserDSName="gyoumu_ds">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="gyoumu_ds" msprop:Generator_TableClassName="gyoumu_dsDataTable" msprop:Generator_TableVarName="tablegyoumu_ds" msprop:Generator_TablePropName="_gyoumu_ds" msprop:Generator_RowDeletingName="gyoumu_dsRowDeleting" msprop:Generator_RowChangingName="gyoumu_dsRowChanging" msprop:Generator_RowEvHandlerName="gyoumu_dsRowChangeEventHandler" msprop:Generator_RowDeletedName="gyoumu_dsRowDeleted" msprop:Generator_UserTableName="gyoumu_ds" msprop:Generator_RowChangedName="gyoumu_dsRowChanged" msprop:Generator_RowEvArgName="gyoumu_dsRowChangeEvent" msprop:Generator_RowClassName="gyoumu_dsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="g_id" msprop:Generator_ColumnVarNameInTable="columng_id" msprop:Generator_ColumnPropNameInRow="g_id" msprop:Generator_ColumnPropNameInTable="g_idColumn" msprop:Generator_UserColumnName="g_id" type="xs:string" />
+              <xs:element name="gyoumu" msprop:Generator_ColumnVarNameInTable="columngyoumu" msprop:Generator_ColumnPropNameInRow="gyoumu" msprop:Generator_ColumnPropNameInTable="gyoumuColumn" msprop:Generator_UserColumnName="gyoumu" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="gyoumu_dsKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:gyoumu_ds" />
+      <xs:field xpath="mstns:g_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="tsuki" targetNamespace="http://tempuri.org/tsuki.xsd" xmlns:mstns="http://tempuri.org/tsuki.xsd" xmlns="http://tempuri.org/tsuki.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="tsuki" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="tsuki" msprop:Generator_UserDSName="tsuki">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="tsuki" msprop:Generator_TableClassName="tsukiDataTable" msprop:Generator_TableVarName="tabletsuki" msprop:Generator_TablePropName="_tsuki" msprop:Generator_RowDeletingName="tsukiRowDeleting" msprop:Generator_RowChangingName="tsukiRowChanging" msprop:Generator_RowEvHandlerName="tsukiRowChangeEventHandler" msprop:Generator_RowDeletedName="tsukiRowDeleted" msprop:Generator_UserTableName="tsuki" msprop:Generator_RowChangedName="tsukiRowChanged" msprop:Generator_RowEvArgName="tsukiRowChangeEvent" msprop:Generator_RowClassName="tsukiRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="t_id" msprop:Generator_ColumnVarNameInTable="columnt_id" msprop:Generator_ColumnPropNameInRow="t_id" msprop:Generator_ColumnPropNameInTable="t_idColumn" msprop:Generator_UserColumnName="t_id" type="xs:string" />
+              <xs:element name="tsuki" msprop:Generator_ColumnVarNameInTable="columntsuki" msprop:Generator_ColumnPropNameInRow="tsuki" msprop:Generator_ColumnPropNameInTable="tsukiColumn" msprop:Generator_UserColumnName="tsuki" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:tsuki" />
+      <xs:field xpath="mstns:t_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

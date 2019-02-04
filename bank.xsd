@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="bank" targetNamespace="http://tempuri.org/bank.xsd" xmlns:mstns="http://tempuri.org/bank.xsd" xmlns="http://tempuri.org/bank.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="bank" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="bank" msprop:Generator_UserDSName="bank">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="bank" msprop:Generator_TableClassName="bankDataTable" msprop:Generator_TableVarName="tablebank" msprop:Generator_TablePropName="_bank" msprop:Generator_RowDeletingName="bankRowDeleting" msprop:Generator_RowChangingName="bankRowChanging" msprop:Generator_RowEvHandlerName="bankRowChangeEventHandler" msprop:Generator_RowDeletedName="bankRowDeleted" msprop:Generator_UserTableName="bank" msprop:Generator_RowChangedName="bankRowChanged" msprop:Generator_RowEvArgName="bankRowChangeEvent" msprop:Generator_RowClassName="bankRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="bid" msprop:Generator_ColumnVarNameInTable="columnbid" msprop:Generator_ColumnPropNameInRow="bid" msprop:Generator_ColumnPropNameInTable="bidColumn" msprop:Generator_UserColumnName="bid" type="xs:string" />
+              <xs:element name="b_id" msprop:Generator_ColumnVarNameInTable="columnb_id" msprop:Generator_ColumnPropNameInRow="b_id" msprop:Generator_ColumnPropNameInTable="b_idColumn" msprop:Generator_UserColumnName="b_id" type="xs:string" minOccurs="0" />
+              <xs:element name="b_code" msprop:Generator_ColumnVarNameInTable="columnb_code" msprop:Generator_ColumnPropNameInRow="b_code" msprop:Generator_ColumnPropNameInTable="b_codeColumn" msprop:Generator_UserColumnName="b_code" type="xs:string" minOccurs="0" />
+              <xs:element name="b_name" msprop:Generator_ColumnVarNameInTable="columnb_name" msprop:Generator_ColumnPropNameInRow="b_name" msprop:Generator_ColumnPropNameInTable="b_nameColumn" msprop:Generator_UserColumnName="b_name" type="xs:string" minOccurs="0" />
+              <xs:element name="sb_name" msprop:Generator_ColumnVarNameInTable="columnsb_name" msprop:Generator_ColumnPropNameInRow="sb_name" msprop:Generator_ColumnPropNameInTable="sb_nameColumn" msprop:Generator_UserColumnName="sb_name" type="xs:string" minOccurs="0" />
+              <xs:element name="br_code" msprop:Generator_ColumnVarNameInTable="columnbr_code" msprop:Generator_ColumnPropNameInRow="br_code" msprop:Generator_ColumnPropNameInTable="br_codeColumn" msprop:Generator_UserColumnName="br_code" type="xs:string" minOccurs="0" />
+              <xs:element name="br_name" msprop:Generator_ColumnVarNameInTable="columnbr_name" msprop:Generator_ColumnPropNameInRow="br_name" msprop:Generator_ColumnPropNameInTable="br_nameColumn" msprop:Generator_UserColumnName="br_name" type="xs:string" minOccurs="0" />
+              <xs:element name="sy" msprop:Generator_ColumnVarNameInTable="columnsy" msprop:Generator_ColumnPropNameInRow="sy" msprop:Generator_ColumnPropNameInTable="syColumn" msprop:Generator_UserColumnName="sy" type="xs:string" minOccurs="0" />
+              <xs:element name="sm" msprop:Generator_ColumnVarNameInTable="columnsm" msprop:Generator_ColumnPropNameInRow="sm" msprop:Generator_ColumnPropNameInTable="smColumn" msprop:Generator_UserColumnName="sm" type="xs:string" minOccurs="0" />
+              <xs:element name="sd" msprop:Generator_ColumnVarNameInTable="columnsd" msprop:Generator_ColumnPropNameInRow="sd" msprop:Generator_ColumnPropNameInTable="sdColumn" msprop:Generator_UserColumnName="sd" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:bank" />
+      <xs:field xpath="mstns:bid" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

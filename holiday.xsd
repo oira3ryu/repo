@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="holiday" targetNamespace="http://tempuri.org/holiday.xsd" xmlns:mstns="http://tempuri.org/holiday.xsd" xmlns="http://tempuri.org/holiday.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="holiday" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="holiday" msprop:Generator_UserDSName="holiday">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="holiday" msprop:Generator_TableClassName="holidayDataTable" msprop:Generator_TableVarName="tableholiday" msprop:Generator_TablePropName="_holiday" msprop:Generator_RowDeletingName="holidayRowDeleting" msprop:Generator_RowChangingName="holidayRowChanging" msprop:Generator_RowEvHandlerName="holidayRowChangeEventHandler" msprop:Generator_RowDeletedName="holidayRowDeleted" msprop:Generator_UserTableName="holiday" msprop:Generator_RowChangedName="holidayRowChanged" msprop:Generator_RowEvArgName="holidayRowChangeEvent" msprop:Generator_RowClassName="holidayRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="h_id" msprop:Generator_ColumnVarNameInTable="columnh_id" msprop:Generator_ColumnPropNameInRow="h_id" msprop:Generator_ColumnPropNameInTable="h_idColumn" msprop:Generator_UserColumnName="h_id" type="xs:string" />
+              <xs:element name="holiday" msprop:Generator_ColumnVarNameInTable="columnholiday" msprop:Generator_ColumnPropNameInRow="holiday" msprop:Generator_ColumnPropNameInTable="holidayColumn" msprop:Generator_UserColumnName="holiday" type="xs:string" minOccurs="0" />
+              <xs:element name="h_name" msprop:Generator_ColumnVarNameInTable="columnh_name" msprop:Generator_ColumnPropNameInRow="h_name" msprop:Generator_ColumnPropNameInTable="h_nameColumn" msprop:Generator_UserColumnName="h_name" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:holiday" />
+      <xs:field xpath="mstns:h_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="nen" targetNamespace="http://tempuri.org/nen.xsd" xmlns:mstns="http://tempuri.org/nen.xsd" xmlns="http://tempuri.org/nen.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="nen" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="nen" msprop:Generator_UserDSName="nen">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="nen" msprop:Generator_TableClassName="nenDataTable" msprop:Generator_TableVarName="tablenen" msprop:Generator_TablePropName="_nen" msprop:Generator_RowDeletingName="nenRowDeleting" msprop:Generator_RowChangingName="nenRowChanging" msprop:Generator_RowEvHandlerName="nenRowChangeEventHandler" msprop:Generator_RowDeletedName="nenRowDeleted" msprop:Generator_UserTableName="nen" msprop:Generator_RowChangedName="nenRowChanged" msprop:Generator_RowEvArgName="nenRowChangeEvent" msprop:Generator_RowClassName="nenRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="n_id" msprop:Generator_ColumnVarNameInTable="columnn_id" msprop:Generator_ColumnPropNameInRow="n_id" msprop:Generator_ColumnPropNameInTable="n_idColumn" msprop:Generator_UserColumnName="n_id" type="xs:string" />
+              <xs:element name="nen" msprop:Generator_ColumnVarNameInTable="columnnen" msprop:Generator_ColumnPropNameInRow="nen" msprop:Generator_ColumnPropNameInTable="nenColumn" msprop:Generator_UserColumnName="nen" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:nen" />
+      <xs:field xpath="mstns:n_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
