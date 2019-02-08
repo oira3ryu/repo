@@ -84,24 +84,6 @@ namespace rk_seikyu
 
         private void Form_seikyu_Load(object sender, EventArgs e)
         {
-            //// -- ちらつきを防止する処理 --
-            //// DataGirdViewのTypeを取得
-            //System.Type dgvtype = typeof(DataGridView);
-
-
-            //// プロパティ設定の取得
-            //System.Reflection.PropertyInfo dgvPropertyInfo =
-            //      dgvtype.GetProperty(
-            //      "DoubleBuffered", System.Reflection.BindingFlags.Instance |
-            //      System.Reflection.BindingFlags.NonPublic);
-
-
-            //// 対象のDataGridViewにtrueをセットする
-            //dgvPropertyInfo.SetValue(dataGridViewSeikyu, true, null);
-            //dgvPropertyInfo.SetValue(dataGridViewShiharai_houhou, true, null);
-            //dgvPropertyInfo.SetValue(dataGridViewShinzoku_kankei, true, null);
-            //// -- ここまで --
-            ////
 
             nen_da.SelectCommand = new NpgsqlCommand
             (
@@ -401,6 +383,8 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
+
                             Console.WriteLine("Case " + cmb_s_id_int + "!");
 
                             da.SelectCommand = new NpgsqlCommand
@@ -588,6 +572,8 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
+
                             Console.WriteLine("Case " + cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
@@ -657,8 +643,6 @@ namespace rk_seikyu
                                                 + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
                                                 + " end"
                                 + ");"
-
-                                //+ " order by id"
                                 , m_conn
                             );
 
@@ -842,6 +826,8 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
+
                             Console.WriteLine("Case " + cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
@@ -1115,20 +1101,9 @@ namespace rk_seikyu
 
         private void DataGridViewEvent()
         {
-            //dataGridViewSeikyu.DefaultValuesNeeded += new DataGridViewRowEventHandler(dataGridViewSeikyu_DefaultValuesNeeded);
-
             dataGridViewSeikyu.CellMouseMove += new DataGridViewCellMouseEventHandler(dataGridViewSeikyu_CellMouseMove);
-
-            //dataGridViewSeikyu.CellValidating += new DataGridViewCellValidatingEventHandler(dataGridViewSeikyu_CellValidating);
-
-            //dataGridViewSeikyu.CellEnter += new DataGridViewCellEventHandler(dataGridView_CellEnter);
-
-            //dataGridViewSeikyu.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(dataGridView_EditingControlShowing);
-
             dataGridViewSeikyu.CellPainting += new DataGridViewCellPaintingEventHandler(dataGridViewSeikyu_CellPainting);
-            //dataGridViewSeikyu.CellFormatting += new DataGridViewCellFormattingEventHandler(dataGridViewSeikyu_CellFormatting);
             dataGridViewSeikyu.CellValueChanged += new DataGridViewCellEventHandler(dataGridViewSeikyu_CellValueChanged);
-
         }
 
         private void cmdSave_Click(object sender, EventArgs e)
@@ -1146,6 +1121,8 @@ namespace rk_seikyu
                             case 3:
                             case 4:
                             case 5:
+                            case 6:
+
                                 update_count += da.Update(_seikyu_ds.Tables["seikyu_ds"].Select(null, null, DataViewRowState.Deleted));
                                 update_count += da.Update(_seikyu_ds.Tables["seikyu_ds"].Select(null, null, DataViewRowState.ModifiedCurrent));
                                 update_count += da.Update(_seikyu_ds.Tables["seikyu_ds"].Select(null, null, DataViewRowState.Added));
@@ -1160,6 +1137,8 @@ namespace rk_seikyu
                             case 3:
                             case 4:
                             case 5:
+                            case 6:
+
                                 update_count += da.Update(_shiharai_houhou_ds.Tables["shiharai_houhou_ds"].Select(null, null, DataViewRowState.Deleted));
                                 update_count += da.Update(_shiharai_houhou_ds.Tables["shiharai_houhou_ds"].Select(null, null, DataViewRowState.ModifiedCurrent));
                                 update_count += da.Update(_shiharai_houhou_ds.Tables["shiharai_houhou_ds"].Select(null, null, DataViewRowState.Added));
@@ -1174,6 +1153,8 @@ namespace rk_seikyu
                             case 3:
                             case 4:
                             case 5:
+                            case 6:
+
                                 update_count += da.Update(_shinzoku_kankei_ds.Tables["shinzoku_kankei_ds"].Select(null, null, DataViewRowState.Deleted));
                                 update_count += da.Update(_shinzoku_kankei_ds.Tables["shinzoku_kankei_ds"].Select(null, null, DataViewRowState.ModifiedCurrent));
                                 update_count += da.Update(_shinzoku_kankei_ds.Tables["shinzoku_kankei_ds"].Select(null, null, DataViewRowState.Added));
@@ -1208,6 +1189,8 @@ namespace rk_seikyu
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
+
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -1260,6 +1243,8 @@ namespace rk_seikyu
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
+
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -1338,6 +1323,8 @@ namespace rk_seikyu
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
+
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -1431,6 +1418,8 @@ namespace rk_seikyu
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
+
                                         e.Row["c1"] = reader["c1"];
                                         e.Row["c2"] = reader["c2"];
                                         e.Row["c3"] = reader["c3"];
@@ -1473,6 +1462,8 @@ namespace rk_seikyu
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
+
                                         e.Row["c1"] = reader["c1"];
                                         e.Row["c2"] = reader["c2"];
                                         e.Row["c3"] = reader["c3"];
@@ -1540,6 +1531,8 @@ namespace rk_seikyu
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
+
                                         e.Row["c1"] = reader["c1"];
                                         e.Row["c2"] = reader["c2"];
                                         e.Row["c3"] = reader["c3"];
@@ -1628,6 +1621,8 @@ namespace rk_seikyu
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
+
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -1680,6 +1675,8 @@ namespace rk_seikyu
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
+
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -1757,6 +1754,8 @@ namespace rk_seikyu
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
+
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -1851,6 +1850,7 @@ namespace rk_seikyu
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
 
                                         e.Row["c1"] = reader["c1"];
                                         e.Row["c2"] = reader["c2"];
@@ -1894,6 +1894,8 @@ namespace rk_seikyu
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
+
                                         e.Row["c1"] = reader["c1"];
                                         e.Row["c2"] = reader["c2"];
                                         e.Row["c3"] = reader["c3"];
@@ -1961,6 +1963,8 @@ namespace rk_seikyu
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
+
                                         e.Row["c1"] = reader["c1"];
                                         e.Row["c2"] = reader["c2"];
                                         e.Row["c3"] = reader["c3"];
@@ -2052,6 +2056,8 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
+
                             tblStr = " t_seikyu";
                             Console.WriteLine("tblStr = " + tblStr);
                             dataGridViewSeikyu.Columns[0].HeaderText = "利用者番号";
@@ -2105,6 +2111,7 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
 
                             tblStr = "t_shiharai_houhou";
                             Console.WriteLine("tblStr = " + tblStr);
@@ -2174,6 +2181,8 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
+
                             tblStr = " t_shinzoku_kankei";
                             Console.WriteLine("tblStr = " + tblStr);
                             dataGridViewShinzoku_kankei.Columns[0].HeaderText = "利用者番号";
@@ -2294,6 +2303,7 @@ namespace rk_seikyu
                             case 3:
                             case 4:
                             case 5:
+                            case 6:
 
                                 da.InsertCommand = new NpgsqlCommand(
                                     "insert into t_csv ("
@@ -2465,6 +2475,8 @@ namespace rk_seikyu
                             case 3:
                             case 4:
                             case 5:
+                            case 6:
+
                                 da.InsertCommand = new NpgsqlCommand(
                                     "insert into t_csv ("
                                     + " c1"
@@ -2633,8 +2645,6 @@ namespace rk_seikyu
                                 da.InsertCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                 da.InsertCommand.Parameters.Add(new NpgsqlParameter("p_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "p_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                 da.InsertCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                //da.InsertCommand.Parameters.Add(new NpgsqlParameter("nen", NpgsqlTypes.NpgsqlDbType.Text, 0, "nen", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                //da.InsertCommand.Parameters.Add(new NpgsqlParameter("tsuki", NpgsqlTypes.NpgsqlDbType.Text, 0, "tsuki", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
 
                                 break;
                         }
@@ -2647,6 +2657,8 @@ namespace rk_seikyu
                             case 3:
                             case 4:
                             case 5:
+                            case 6:
+
                                 da.InsertCommand = new NpgsqlCommand(
                                     "insert into t_csv ("
                                     + " c1"
@@ -2950,6 +2962,8 @@ namespace rk_seikyu
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
+
                                         if (_seikyu_ds.Tables["seikyu_ds"] != null)
                                             _seikyu_ds.Tables["seikyu_ds"].Clear();
                                         da.Fill(_seikyu_ds, "seikyu_ds");
@@ -2982,6 +2996,8 @@ namespace rk_seikyu
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
+
                                         if (_shiharai_houhou_ds.Tables["shiharai_houhou_ds"] != null)
                                             _shiharai_houhou_ds.Tables["shiharai_houhou_ds"].Clear();
                                         da.Fill(_shiharai_houhou_ds, "shiharai_houhou_ds");
@@ -3017,6 +3033,8 @@ namespace rk_seikyu
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
+
                                         if (_shinzoku_kankei_ds.Tables["shinzoku_kankei_ds"] != null)
                                             _shinzoku_kankei_ds.Tables["shinzoku_kankei_ds"].Clear();
                                         da.Fill(_shinzoku_kankei_ds, "shinzoku_kankei_ds");
@@ -3066,6 +3084,7 @@ namespace rk_seikyu
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     try
                                     {
                                         //m_conn.Open();
@@ -3174,11 +3193,10 @@ namespace rk_seikyu
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     {
                                         try
                                         {
-                                            //m_conn.Open();
-                                            //NpgsqlTransaction t = m_conn.BeginTransaction();
                                             Cursor.Current = Cursors.WaitCursor;
                                             {
                                                 da.InsertCommand = new NpgsqlCommand(
@@ -3296,7 +3314,7 @@ namespace rk_seikyu
                                                 + "       when length('" + cmb_tsuki_str + "')=2 then"
                                                 + " string_to_array ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "', '/')"
                                                 + " end"
-                                                + " from t_csv where c3 = '0156780033';"
+                                                + " from t_csv where c3 = '0176700250';"
                                                     //+ " order by id"
                                                     , m_conn);
                                                 da.InsertCommand.ExecuteNonQuery();
@@ -3336,11 +3354,10 @@ namespace rk_seikyu
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     {
                                         try
                                         {
-                                            //    m_conn.Open();
-                                            //NpgsqlTransaction t = m_conn.BeginTransaction();
                                             Cursor.Current = Cursors.WaitCursor;
                                             {
                                                 da.InsertCommand = new NpgsqlCommand(
@@ -3480,7 +3497,6 @@ namespace rk_seikyu
                                                     //+ " order by id"
                                                     , m_conn);
                                                 da.InsertCommand.ExecuteNonQuery();
-                                                //t.Commit();
                                             }
                                             if (_shinzoku_kankei_ds.Tables["shinzoku_kankei_ds"] != null)
                                                 _shinzoku_kankei_ds.Tables["shinzoku_kankei_ds"].Clear();
@@ -3509,9 +3525,6 @@ namespace rk_seikyu
                             }
                             break;
                     }
-                    //try
-                    //{
-                    //    m_conn.Open();
 
                     // 再表示
                     switch (cmb_g_id_int)
@@ -3524,7 +3537,7 @@ namespace rk_seikyu
                                 case 3:
                                 case 4:
                                 case 5:
-
+                                case 6:
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -3599,7 +3612,6 @@ namespace rk_seikyu
                                     }
 
                                     // insert
-                                    //NpgsqlTransaction t = m_conn.BeginTransaction();
                                     da.InsertCommand = new NpgsqlCommand(
                                     "insert into t_seikyu ("
                                             + " c1"
@@ -3659,8 +3671,7 @@ namespace rk_seikyu
                                             + ", :p_id"
                                             + ", :req_id"
                                             + ", :id"
-                                            + " from t_csv where c3 = '0156780033';"
-                                                //+ " order by id;"
+                                            + " from t_csv;"
                                                 , m_conn
                                                 );
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -3694,7 +3705,6 @@ namespace rk_seikyu
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // update
-                                    //NpgsqlTransaction t = m_conn.BeginTransaction();
                                     da.UpdateCommand = new NpgsqlCommand(
                                             "update t_seikyu set"
                                             + " c1 = :c1"
@@ -3771,12 +3781,6 @@ namespace rk_seikyu
                                     // RowUpdate
                                     da.RowUpdated += new NpgsqlRowUpdatedEventHandler(SeikyuRowUpdated);
 
-                                    //if (c4_ds.Tables["t_seikyu"] != null)
-                                    //    c4_ds.Tables["t_seikyu"].Clear();
-                                    //c4_da.Fill(c4_ds, "t_seikyu");
-                                    //if (s_id_ds.Tables["t_syubetsu"] != null)
-                                    //    s_id_ds.Tables["t_syubetsu"].Clear();
-                                    //s_id_da.Fill(s_id_ds, "t_syubetsu");
                                     if (_seikyu_ds.Tables["seikyu_ds"] != null)
                                         _seikyu_ds.Tables["seikyu_ds"].Clear();
                                     da.Fill(_seikyu_ds, "seikyu_ds");
@@ -3800,6 +3804,7 @@ namespace rk_seikyu
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -3868,7 +3873,6 @@ namespace rk_seikyu
                                                         + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
                                                         + " end"
                                         + ");"
-                                        //+ " order by id"
                                         , m_conn
                                     );
 
@@ -4002,7 +4006,6 @@ namespace rk_seikyu
                                                 + " string_to_array ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "', '/')"
                                                 + " end"
                                                 + " from t_csv;"
-                                                    //+ " order by id"
                                                     , m_conn
                                                     );
 
@@ -4137,12 +4140,6 @@ namespace rk_seikyu
                                     // RowUpdate
                                     da.RowUpdated += new NpgsqlRowUpdatedEventHandler(SeikyuRowUpdated);
 
-                                    //if (c4_ds.Tables["t_seikyu"] != null)
-                                    //    c4_ds.Tables["t_seikyu"].Clear();
-                                    //c4_da.Fill(c4_ds, "t_seikyu");
-                                    //if (s_id_ds.Tables["t_syubetsu"] != null)
-                                    //    s_id_ds.Tables["t_syubetsu"].Clear();
-                                    //s_id_da.Fill(s_id_ds, "t_syubetsu");
                                     if (_shiharai_houhou_ds.Tables["shiharai_houhou_ds"] != null)
                                         _shiharai_houhou_ds.Tables["shiharai_houhou_ds"].Clear();
                                     da.Fill(_shiharai_houhou_ds, "shiharai_houhou_ds");
@@ -4166,6 +4163,7 @@ namespace rk_seikyu
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -4243,8 +4241,6 @@ namespace rk_seikyu
                                                         + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
                                                         + " end"
                                         + ");"
-                                        //+ " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei) and c48 = '1';"
-                                        //+ " order by id"
                                         , m_conn
                                     );
 
@@ -4262,7 +4258,6 @@ namespace rk_seikyu
                                     }
 
                                     // insert
-                                    //NpgsqlTransaction t = m_conn.BeginTransaction();
                                     da.InsertCommand = new NpgsqlCommand(
                                     "insert into t_shinzoku_kankei ("
                                                 + " c1"
@@ -4397,7 +4392,6 @@ namespace rk_seikyu
                                                 + " string_to_array ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "', '/')"
                                                 + " end"
                                                 + " from t_csv;"
-                                                    //+ " order by id"
                                                     , m_conn
                                                     );
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -4615,12 +4609,6 @@ namespace rk_seikyu
                                     // RowUpdate
                                     da.RowUpdated += new NpgsqlRowUpdatedEventHandler(SeikyuRowUpdated);
 
-                                    //if (c4_ds.Tables["t_seikyu"] != null)
-                                    //    c4_ds.Tables["t_seikyu"].Clear();
-                                    //c4_da.Fill(c4_ds, "t_seikyu");
-                                    //if (s_id_ds.Tables["t_syubetsu"] != null)
-                                    //    s_id_ds.Tables["t_syubetsu"].Clear();
-                                    //s_id_da.Fill(s_id_ds, "t_syubetsu");
                                     if (_shinzoku_kankei_ds.Tables["shinzoku_kankei_ds"] != null)
                                         _shinzoku_kankei_ds.Tables["shinzoku_kankei_ds"].Clear();
                                     da.Fill(_shinzoku_kankei_ds, "shinzoku_kankei_ds");
@@ -4667,7 +4655,6 @@ namespace rk_seikyu
             switch (this.dataGridViewSeikyu.Columns[e.ColumnIndex].Name)
             {
                 case "results":
-                    //string input = e.Value.ToString();
                     string input = (string)dataGridViewSeikyu[2, e.RowIndex].Value.ToString();
                     Console.WriteLine("input = " + input);
 
@@ -4733,6 +4720,7 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
                             update_count += da.Update(_seikyu_ds.Tables["seikyu_ds"].Select(null, null, DataViewRowState.Deleted));
                             update_count += da.Update(_seikyu_ds.Tables["seikyu_ds"].Select(null, null, DataViewRowState.ModifiedCurrent));
                             update_count += da.Update(_seikyu_ds.Tables["seikyu_ds"].Select(null, null, DataViewRowState.Added));
@@ -4747,6 +4735,7 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
                             update_count += da.Update(_shiharai_houhou_ds.Tables["shiharai_houhou_ds"].Select(null, null, DataViewRowState.Deleted));
                             update_count += da.Update(_shiharai_houhou_ds.Tables["shiharai_houhou_ds"].Select(null, null, DataViewRowState.ModifiedCurrent));
                             update_count += da.Update(_shiharai_houhou_ds.Tables["shiharai_houhou_ds"].Select(null, null, DataViewRowState.Added));
@@ -4761,7 +4750,7 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
-
+                        case 6:
                             update_count += da.Update(_shinzoku_kankei_ds.Tables["shinzoku_kankei_ds"].Select(null, null, DataViewRowState.Deleted));
                             update_count += da.Update(_shinzoku_kankei_ds.Tables["shinzoku_kankei_ds"].Select(null, null, DataViewRowState.ModifiedCurrent));
                             update_count += da.Update(_shinzoku_kankei_ds.Tables["shinzoku_kankei_ds"].Select(null, null, DataViewRowState.Added));
@@ -4797,6 +4786,7 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
                             try
                             {
                                 //update_count += da.Update(_seikyu_ds.Tables["seikyu_ds"]);
@@ -4829,7 +4819,7 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
-
+                        case 6:
                             try
                             {
                                 //update_count += da.Update(_shiharai_houhou_ds.Tables["shiharai_houhou_ds"]);
@@ -4862,6 +4852,8 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
+
                             try
                             {
                                 //update_count += da.Update(_shinzoku_kankei_ds.Tables["shinzoku_kankei_ds"]);
@@ -4902,6 +4894,8 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
+
                             tblStr = " t_seikyu";
                             Console.WriteLine("tblStr = " + tblStr);
                             dataGridViewSeikyu.Columns[0].HeaderText = "利用者番号";
@@ -4955,6 +4949,8 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
+
                             tblStr = "t_shiharai_houhou";
                             Console.WriteLine("tblStr = " + tblStr);
                             dataGridViewShiharai_houhou.Columns[0].HeaderText = "法人名";
@@ -5024,6 +5020,7 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
 
                             tblStr = " t_shinzoku_kankei";
                             Console.WriteLine("tblStr = " + tblStr);
@@ -5108,6 +5105,8 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
+
                             Console.WriteLine("Case " + cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
@@ -5151,7 +5150,6 @@ namespace rk_seikyu
                                                 + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
                                                 + " end"
                                 + ");"
-                                //+ " order by id"
                                 , m_conn
                             );
 
@@ -5290,6 +5288,8 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
+
                             Console.WriteLine("Case " + cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
@@ -5358,12 +5358,6 @@ namespace rk_seikyu
                                                 + "       when length('" + cmb_tsuki_str + "')=2 then"
                                                 + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
                                                 + " end)"
-                                //+ " and c4_array::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                //                 + " ('" + cmb_nen_str + "' || ', ' || '" + cmb_tsuki_str + "')"
-                                //                 + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                //                 + " ('" + cmb_nen_str + "' || ',' || '" + cmb_tsuki_str + "')"
-
-                                //                 + " end)"
                                 + " order by c5;"
                                 , m_conn
                             );
@@ -5543,6 +5537,8 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
+
                             //MessageBox.Show("Case " + cmb_s_id_int + "!");
                             Console.WriteLine("Case " + cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
@@ -5836,7 +5832,6 @@ namespace rk_seikyu
         {
             if (e.ColumnIndex == -1 || e.RowIndex == -1) return;
 
-            //if (e.Value == null || e.Value == DBNull.Value) return;
             Console.WriteLine("列名 = " + (this.dataGridViewSeikyu.Columns[e.ColumnIndex].Name));
 
 
@@ -5910,6 +5905,8 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
+
                             tblStr = " t_seikyu";
                             Console.WriteLine("tblStr = " + tblStr);
                             dataGridViewSeikyu.Columns[0].HeaderText = "利用者番号";
@@ -5963,6 +5960,8 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
+
                             tblStr = "t_shiharai_houhou";
                             Console.WriteLine("tblStr = " + tblStr);
                             dataGridViewShiharai_houhou.Columns[0].HeaderText = "法人名";
@@ -6032,7 +6031,7 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
-
+                        case 6:
                             tblStr = " t_shinzoku_kankei";
                             Console.WriteLine("tblStr = " + tblStr);
                             dataGridViewShinzoku_kankei.Columns[0].HeaderText = "利用者番号";
@@ -6116,6 +6115,8 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
+
                             Console.WriteLine("Case " + cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
@@ -6298,6 +6299,8 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
+
                             Console.WriteLine("Case " + cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
@@ -6545,6 +6548,8 @@ namespace rk_seikyu
                         case 3:
                         case 4:
                         case 5:
+                        case 6:
+
                             //MessageBox.Show("Case " + cmb_s_id_int + "!");
                             Console.WriteLine("Case " + cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
