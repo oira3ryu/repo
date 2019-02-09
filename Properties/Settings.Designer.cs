@@ -26,8 +26,7 @@ namespace rk_seikyu.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server=10.159.31.249;Port=5433;User Id=rkadmin;Password=yu2;Database=rk_seikyu;Pr" +
-            "eload Reader=true;Encoding=UNICODE;enlist=true;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=127.0.0.1;Port=5433;User Id=rkadmin;Password=yu2;Database=rk_seikyu;")]
         public string PostgresConnect {
             get {
                 return ((string)(this["PostgresConnect"]));

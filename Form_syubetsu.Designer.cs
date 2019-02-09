@@ -291,9 +291,9 @@
 //      private syubetsu syubetsu1;
         private System.Windows.Forms.BindingSource bindingSourceSyubetsu;
         private System.Windows.Forms.DataGridView dataGridViewSyubetsu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn sidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn syubetsuDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn shisetsumeiDataGridViewTextBoxColumn;
