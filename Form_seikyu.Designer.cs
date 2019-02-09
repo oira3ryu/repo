@@ -249,6 +249,11 @@
             this.cmd_serv = new System.Windows.Forms.Button();
             this.cmdNenMod = new System.Windows.Forms.Button();
             this.cmdGyoumu = new System.Windows.Forms.Button();
+            this.o_id_ds1 = new rk_seikyu.o_id_ds();
+            this.dataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataTableTableAdapter = new rk_seikyu.o_id_dsTableAdapters.DataTableTableAdapter();
+            this.tableAdapterManager = new rk_seikyu.o_id_dsTableAdapters.TableAdapterManager();
+            this.cmb_o_id = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.seikyu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorSeikyu)).BeginInit();
             this.bindingNavigatorSeikyu.SuspendLayout();
@@ -274,6 +279,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tsukiBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tsukiBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tsuki)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.o_id_ds1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTableBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // seikyu
@@ -306,7 +313,7 @@
             this.bindingNavigatorSeikyu.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigatorSeikyu.Name = "bindingNavigatorSeikyu";
             this.bindingNavigatorSeikyu.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigatorSeikyu.Size = new System.Drawing.Size(1596, 25);
+            this.bindingNavigatorSeikyu.Size = new System.Drawing.Size(1736, 25);
             this.bindingNavigatorSeikyu.TabIndex = 0;
             this.bindingNavigatorSeikyu.Text = "bindingNavigator1";
             // 
@@ -412,7 +419,7 @@
             // 
             // cmbImport
             // 
-            this.cmbImport.Location = new System.Drawing.Point(325, 133);
+            this.cmbImport.Location = new System.Drawing.Point(326, 160);
             this.cmbImport.Name = "cmbImport";
             this.cmbImport.Size = new System.Drawing.Size(75, 23);
             this.cmbImport.TabIndex = 4;
@@ -426,7 +433,7 @@
             // 
             // cmdClose
             // 
-            this.cmdClose.Location = new System.Drawing.Point(1153, 96);
+            this.cmdClose.Location = new System.Drawing.Point(1154, 123);
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(75, 23);
             this.cmdClose.TabIndex = 5;
@@ -436,7 +443,7 @@
             // 
             // cmdPrn
             // 
-            this.cmdPrn.Location = new System.Drawing.Point(971, 97);
+            this.cmdPrn.Location = new System.Drawing.Point(972, 124);
             this.cmdPrn.Name = "cmdPrn";
             this.cmdPrn.Size = new System.Drawing.Size(75, 23);
             this.cmdPrn.TabIndex = 8;
@@ -447,7 +454,7 @@
             // cmb_s_id
             // 
             this.cmb_s_id.FormattingEnabled = true;
-            this.cmb_s_id.Location = new System.Drawing.Point(420, 78);
+            this.cmb_s_id.Location = new System.Drawing.Point(421, 105);
             this.cmb_s_id.Name = "cmb_s_id";
             this.cmb_s_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_s_id.TabIndex = 9;
@@ -455,7 +462,7 @@
             // 
             // cmdPar
             // 
-            this.cmdPar.Location = new System.Drawing.Point(643, 97);
+            this.cmdPar.Location = new System.Drawing.Point(644, 124);
             this.cmdPar.Name = "cmdPar";
             this.cmdPar.Size = new System.Drawing.Size(75, 23);
             this.cmdPar.TabIndex = 10;
@@ -466,7 +473,7 @@
             // cmb_req_id
             // 
             this.cmb_req_id.FormattingEnabled = true;
-            this.cmb_req_id.Location = new System.Drawing.Point(62, 99);
+            this.cmb_req_id.Location = new System.Drawing.Point(63, 126);
             this.cmb_req_id.Name = "cmb_req_id";
             this.cmb_req_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_req_id.TabIndex = 11;
@@ -475,7 +482,7 @@
             // 
             // cmdSave
             // 
-            this.cmdSave.Location = new System.Drawing.Point(874, 96);
+            this.cmdSave.Location = new System.Drawing.Point(875, 123);
             this.cmdSave.Name = "cmdSave";
             this.cmdSave.Size = new System.Drawing.Size(75, 23);
             this.cmdSave.TabIndex = 14;
@@ -486,7 +493,7 @@
             // cmb_c4
             // 
             this.cmb_c4.FormattingEnabled = true;
-            this.cmb_c4.Location = new System.Drawing.Point(62, 136);
+            this.cmb_c4.Location = new System.Drawing.Point(63, 163);
             this.cmb_c4.Name = "cmb_c4";
             this.cmb_c4.Size = new System.Drawing.Size(121, 20);
             this.cmb_c4.TabIndex = 15;
@@ -527,7 +534,7 @@
             this.id,
             this.time_stamp});
             this.dataGridViewSeikyu.DataSource = this.bindingSourceSeikyu;
-            this.dataGridViewSeikyu.Location = new System.Drawing.Point(25, 170);
+            this.dataGridViewSeikyu.Location = new System.Drawing.Point(26, 197);
             this.dataGridViewSeikyu.Name = "dataGridViewSeikyu";
             this.dataGridViewSeikyu.RowTemplate.Height = 21;
             this.dataGridViewSeikyu.Size = new System.Drawing.Size(1710, 750);
@@ -800,7 +807,7 @@
             this.dataGridViewTextBoxColumn82,
             this.dataGridViewTextBoxColumn83});
             this.dataGridViewShiharai_houhou.DataSource = this.bindingSourceShiharai_houhou;
-            this.dataGridViewShiharai_houhou.Location = new System.Drawing.Point(25, 170);
+            this.dataGridViewShiharai_houhou.Location = new System.Drawing.Point(26, 197);
             this.dataGridViewShiharai_houhou.Name = "dataGridViewShiharai_houhou";
             this.dataGridViewShiharai_houhou.RowTemplate.Height = 21;
             this.dataGridViewShiharai_houhou.Size = new System.Drawing.Size(1710, 750);
@@ -1206,7 +1213,7 @@
             this.dataGridViewTextBoxColumn142,
             this.dataGridViewTextBoxColumn143});
             this.dataGridViewShinzoku_kankei.DataSource = this.bindingSourceShinzoku_kankei;
-            this.dataGridViewShinzoku_kankei.Location = new System.Drawing.Point(25, 170);
+            this.dataGridViewShinzoku_kankei.Location = new System.Drawing.Point(26, 197);
             this.dataGridViewShinzoku_kankei.Name = "dataGridViewShinzoku_kankei";
             this.dataGridViewShinzoku_kankei.RowTemplate.Height = 21;
             this.dataGridViewShinzoku_kankei.Size = new System.Drawing.Size(1710, 750);
@@ -1597,7 +1604,7 @@
             this.bindingNavigatorShiharai_houhou.MovePreviousItem = this.bindingNavigatorMovePreviousItem1;
             this.bindingNavigatorShiharai_houhou.Name = "bindingNavigatorShiharai_houhou";
             this.bindingNavigatorShiharai_houhou.PositionItem = this.bindingNavigatorPositionItem1;
-            this.bindingNavigatorShiharai_houhou.Size = new System.Drawing.Size(1596, 25);
+            this.bindingNavigatorShiharai_houhou.Size = new System.Drawing.Size(1736, 25);
             this.bindingNavigatorShiharai_houhou.TabIndex = 16;
             this.bindingNavigatorShiharai_houhou.Text = "bindingNavigator1";
             // 
@@ -1721,7 +1728,7 @@
             this.bindingNavigatorShinzoku_kankei.MovePreviousItem = this.bindingNavigatorMovePreviousItem2;
             this.bindingNavigatorShinzoku_kankei.Name = "bindingNavigatorShinzoku_kankei";
             this.bindingNavigatorShinzoku_kankei.PositionItem = this.bindingNavigatorPositionItem2;
-            this.bindingNavigatorShinzoku_kankei.Size = new System.Drawing.Size(1596, 25);
+            this.bindingNavigatorShinzoku_kankei.Size = new System.Drawing.Size(1736, 25);
             this.bindingNavigatorShinzoku_kankei.TabIndex = 17;
             this.bindingNavigatorShinzoku_kankei.Text = "bindingNavigator1";
             // 
@@ -1835,7 +1842,7 @@
             this.cmb_nen.DataSource = this.nenBindingSource;
             this.cmb_nen.DisplayMember = "nen";
             this.cmb_nen.FormattingEnabled = true;
-            this.cmb_nen.Location = new System.Drawing.Point(224, 100);
+            this.cmb_nen.Location = new System.Drawing.Point(225, 127);
             this.cmb_nen.Name = "cmb_nen";
             this.cmb_nen.Size = new System.Drawing.Size(58, 20);
             this.cmb_nen.TabIndex = 18;
@@ -1862,7 +1869,7 @@
             this.cmb_tsuki.DataSource = this.tsukiBindingSource1;
             this.cmb_tsuki.DisplayMember = "tsuki";
             this.cmb_tsuki.FormattingEnabled = true;
-            this.cmb_tsuki.Location = new System.Drawing.Point(335, 100);
+            this.cmb_tsuki.Location = new System.Drawing.Point(336, 127);
             this.cmb_tsuki.Name = "cmb_tsuki";
             this.cmb_tsuki.Size = new System.Drawing.Size(58, 20);
             this.cmb_tsuki.TabIndex = 19;
@@ -1887,7 +1894,7 @@
             // cmb_g_id
             // 
             this.cmb_g_id.FormattingEnabled = true;
-            this.cmb_g_id.Location = new System.Drawing.Point(421, 118);
+            this.cmb_g_id.Location = new System.Drawing.Point(422, 145);
             this.cmb_g_id.Name = "cmb_g_id";
             this.cmb_g_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_g_id.TabIndex = 20;
@@ -1895,7 +1902,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(643, 72);
+            this.textBox1.Location = new System.Drawing.Point(644, 99);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 19);
             this.textBox1.TabIndex = 21;
@@ -1903,7 +1910,7 @@
             // 
             // cmd_serv
             // 
-            this.cmd_serv.Location = new System.Drawing.Point(546, 78);
+            this.cmd_serv.Location = new System.Drawing.Point(547, 105);
             this.cmd_serv.Name = "cmd_serv";
             this.cmd_serv.Size = new System.Drawing.Size(37, 20);
             this.cmd_serv.TabIndex = 22;
@@ -1913,7 +1920,7 @@
             // 
             // cmdNenMod
             // 
-            this.cmdNenMod.Location = new System.Drawing.Point(283, 100);
+            this.cmdNenMod.Location = new System.Drawing.Point(284, 127);
             this.cmdNenMod.Name = "cmdNenMod";
             this.cmdNenMod.Size = new System.Drawing.Size(37, 20);
             this.cmdNenMod.TabIndex = 23;
@@ -1923,7 +1930,7 @@
             // 
             // cmdGyoumu
             // 
-            this.cmdGyoumu.Location = new System.Drawing.Point(546, 118);
+            this.cmdGyoumu.Location = new System.Drawing.Point(547, 145);
             this.cmdGyoumu.Name = "cmdGyoumu";
             this.cmdGyoumu.Size = new System.Drawing.Size(37, 20);
             this.cmdGyoumu.TabIndex = 24;
@@ -1931,11 +1938,45 @@
             this.cmdGyoumu.UseVisualStyleBackColor = true;
             this.cmdGyoumu.Click += new System.EventHandler(this.cmdGyoumu_Click);
             // 
+            // o_id_ds1
+            // 
+            this.o_id_ds1.DataSetName = "o_id_ds";
+            this.o_id_ds1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // dataTableBindingSource
+            // 
+            this.dataTableBindingSource.DataMember = "DataTable";
+            this.dataTableBindingSource.DataSource = this.o_id_ds1;
+            // 
+            // dataTableTableAdapter
+            // 
+            this.dataTableTableAdapter.ClearBeforeFill = true;
+            // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.DataTableTableAdapter = this.dataTableTableAdapter;
+            this.tableAdapterManager.UpdateOrder = rk_seikyu.o_id_dsTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            // 
+            // cmb_o_id
+            // 
+            this.cmb_o_id.DataSource = this.dataTableBindingSource;
+            this.cmb_o_id.DisplayMember = "o_name";
+            this.cmb_o_id.FormattingEnabled = true;
+            this.cmb_o_id.Location = new System.Drawing.Point(63, 78);
+            this.cmb_o_id.Name = "cmb_o_id";
+            this.cmb_o_id.Size = new System.Drawing.Size(300, 20);
+            this.cmb_o_id.TabIndex = 24;
+            this.cmb_o_id.ValueMember = "o_id";
+            this.cmb_o_id.SelectedIndexChanged += new System.EventHandler(this.cmb_o_id_SelectedIndexChanged);
+            // 
             // Form_seikyu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1596, 873);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(1621, 898);
+            this.Controls.Add(this.cmb_o_id);
             this.Controls.Add(this.cmdGyoumu);
             this.Controls.Add(this.cmdNenMod);
             this.Controls.Add(this.cmd_serv);
@@ -1989,6 +2030,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tsukiBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tsukiBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tsuki)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.o_id_ds1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTableBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2215,5 +2258,10 @@
         private System.Windows.Forms.Button cmd_serv;
         private System.Windows.Forms.Button cmdNenMod;
         private System.Windows.Forms.Button cmdGyoumu;
+        private o_id_ds o_id_ds1;
+        private System.Windows.Forms.BindingSource dataTableBindingSource;
+        private o_id_dsTableAdapters.DataTableTableAdapter dataTableTableAdapter;
+        private o_id_dsTableAdapters.TableAdapterManager tableAdapterManager;
+        private System.Windows.Forms.ComboBox cmb_o_id;
     }
 }
