@@ -12,7 +12,7 @@
   <xs:element name="shinzoku_kankei_ds" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="shinzoku_kankei_ds" msprop:Generator_UserDSName="shinzoku_kankei_ds">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="shinzoku_kankei_ds" msprop:Generator_TableClassName="shinzoku_kankei_dsDataTable" msprop:Generator_TableVarName="tableshinzoku_kankei_ds" msprop:Generator_TablePropName="_shinzoku_kankei_ds" msprop:Generator_RowDeletingName="shinzoku_kankei_dsRowDeleting" msprop:Generator_RowChangingName="shinzoku_kankei_dsRowChanging" msprop:Generator_RowEvHandlerName="shinzoku_kankei_dsRowChangeEventHandler" msprop:Generator_RowDeletedName="shinzoku_kankei_dsRowDeleted" msprop:Generator_UserTableName="shinzoku_kankei_ds" msprop:Generator_RowChangedName="shinzoku_kankei_dsRowChanged" msprop:Generator_RowEvArgName="shinzoku_kankei_dsRowChangeEvent" msprop:Generator_RowClassName="shinzoku_kankei_dsRow">
+        <xs:element name="shinzoku_kankei_ds" msprop:Generator_TableClassName="shinzoku_kankei_dsDataTable" msprop:Generator_TableVarName="tableshinzoku_kankei_ds" msprop:Generator_RowChangedName="shinzoku_kankei_dsRowChanged" msprop:Generator_TablePropName="_shinzoku_kankei_ds" msprop:Generator_RowDeletingName="shinzoku_kankei_dsRowDeleting" msprop:Generator_RowChangingName="shinzoku_kankei_dsRowChanging" msprop:Generator_RowEvHandlerName="shinzoku_kankei_dsRowChangeEventHandler" msprop:Generator_RowDeletedName="shinzoku_kankei_dsRowDeleted" msprop:Generator_RowClassName="shinzoku_kankei_dsRow" msprop:Generator_UserTableName="shinzoku_kankei_ds" msprop:Generator_RowEvArgName="shinzoku_kankei_dsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="c1" msprop:Generator_ColumnVarNameInTable="columnc1" msprop:Generator_ColumnPropNameInRow="c1" msprop:Generator_ColumnPropNameInTable="c1Column" msprop:Generator_UserColumnName="c1" type="xs:string" minOccurs="0" />
@@ -77,6 +77,7 @@
               <xs:element name="sk_id" msprop:Generator_ColumnVarNameInTable="columnsk_id" msprop:Generator_ColumnPropNameInRow="sk_id" msprop:Generator_ColumnPropNameInTable="sk_idColumn" msprop:Generator_UserColumnName="sk_id" type="xs:string" />
               <xs:element name="c4_array" msprop:Generator_ColumnVarNameInTable="columnc4_array" msprop:Generator_ColumnPropNameInRow="c4_array" msprop:Generator_ColumnPropNameInTable="c4_arrayColumn" msprop:Generator_UserColumnName="c4_array" type="xs:string" minOccurs="0" />
               <xs:element name="g_id" msprop:Generator_ColumnVarNameInTable="columng_id" msprop:Generator_ColumnPropNameInRow="g_id" msprop:Generator_ColumnPropNameInTable="g_idColumn" msprop:Generator_UserColumnName="g_id" type="xs:string" minOccurs="0" />
+              <xs:element name="o_id" msprop:Generator_ColumnVarNameInTable="columno_id" msprop:Generator_ColumnPropNameInRow="o_id" msprop:Generator_ColumnPropNameInTable="o_idColumn" msprop:Generator_UserColumnName="o_id" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

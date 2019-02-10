@@ -458,6 +458,7 @@ namespace rk_seikyu
                                         + ", time_stamp"
                                         + ", r_id"
                                         + ", s_id"
+                                        + ", o_id"
                                         + ", id"
                                         + ", p_id"
                                         + ", req_id"
@@ -533,6 +534,7 @@ namespace rk_seikyu
                                             + ", req_id = :req_id"
                                             + ", s_id = :s_id"
                                             + ", g_id = :g_id"
+                                            + ", o_id = :o_id"
                                             + " where r_id=:r_id;"
                                         , m_conn
                                         );
@@ -563,6 +565,7 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // delete
@@ -673,6 +676,7 @@ namespace rk_seikyu
                                         + ", sh_id"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", p_id"
                                         + ", req_id"
                                         + ", time_stamp"
@@ -759,6 +763,7 @@ namespace rk_seikyu
                                             + ", c49 = :c49"
                                             + ", s_id = :s_id"
                                             + ", g_id = :g_id"
+                                            + ", o_id = :o_id"
                                             + ", p_id = :p_id"
                                             + ", req_id = :req_id"
                                             + ", c4_array = :c4_array"
@@ -816,6 +821,7 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c49", NpgsqlTypes.NpgsqlDbType.Text, 0, "c49", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("p_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "p_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Array | NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -938,6 +944,7 @@ namespace rk_seikyu
                                         + ", c58"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", p_id"
                                         + ", req_id"
                                         + ", time_stamp"
@@ -1034,6 +1041,7 @@ namespace rk_seikyu
                                         + ", c58 = :c58"
                                         + ", s_id = :s_id"
                                         + ", g_id = :g_id"
+                                        + ", o_id = :o_id"
                                         + ", p_id = :p_id"
                                         + ", req_id = :req_id"
                                         + " where sk_id=:sk_id;"
@@ -1099,6 +1107,7 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c58", NpgsqlTypes.NpgsqlDbType.Text, 0, "c58", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("p_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "p_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("sk_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sk_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -1273,6 +1282,7 @@ namespace rk_seikyu
                                         + ", r_id"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", id"
                                         + ", p_id"
                                         + ", req_id"
@@ -1351,6 +1361,7 @@ namespace rk_seikyu
                                         + ", c49"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", sh_id"
                                         + ", p_id"
                                         + ", req_id"
@@ -1440,6 +1451,7 @@ namespace rk_seikyu
                                         + ", c58"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", p_id"
                                         + ", req_id"
                                         + ", time_stamp"
@@ -1499,6 +1511,7 @@ namespace rk_seikyu
                                         e.Row["r_id"] = reader["r_id"];
                                         e.Row["s_id"] = reader["s_id"];
                                         e.Row["g_id"] = reader["g_id"];
+                                        e.Row["o_id"] = reader["o_id"];
                                         e.Row["id"] = reader["id"];
                                         e.Row["p_id"] = reader["p_id"];
                                         e.Row["req_id"] = reader["req_id"];
@@ -1568,6 +1581,7 @@ namespace rk_seikyu
                                         e.Row["sh_id"] = reader["sh_id"];
                                         e.Row["s_id"] = reader["s_id"];
                                         e.Row["g_id"] = reader["g_id"];
+                                        e.Row["o_id"] = reader["o_id"];
                                         e.Row["p_id"] = reader["p_id"];
                                         e.Row["req_id"] = reader["req_id"];
                                         e.Row["time_stamp"] = reader["time_stamp"];
@@ -1646,6 +1660,7 @@ namespace rk_seikyu
                                         e.Row["sk_id"] = reader["sk_id"];
                                         e.Row["s_id"] = reader["s_id"];
                                         e.Row["g_id"] = reader["g_id"];
+                                        e.Row["o_id"] = reader["o_id"];
                                         e.Row["p_id"] = reader["p_id"];
                                         e.Row["req_id"] = reader["req_id"];
                                         e.Row["time_stamp"] = reader["time_stamp"];
@@ -1704,6 +1719,7 @@ namespace rk_seikyu
                                         + ", time_stamp"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", id"
                                         + ", p_id"
                                         + ", req_id"
@@ -1784,6 +1800,7 @@ namespace rk_seikyu
                                         + ", sh_id"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", p_id"
                                         + ", req_id"
                                         + ", time_stamp"
@@ -1872,6 +1889,7 @@ namespace rk_seikyu
                                         + ", sk_id"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", p_id"
                                         + ", req_id"
                                         + ", time_stamp"
@@ -1931,6 +1949,7 @@ namespace rk_seikyu
                                         e.Row["r_id"] = reader["r_id"];
                                         e.Row["s_id"] = reader["s_id"];
                                         e.Row["g_id"] = reader["g_id"];
+                                        e.Row["o_id"] = reader["o_id"];
                                         e.Row["id"] = reader["id"];
                                         e.Row["p_id"] = reader["p_id"];
                                         e.Row["req_id"] = reader["req_id"];
@@ -2000,6 +2019,7 @@ namespace rk_seikyu
                                         e.Row["sh_id"] = reader["sh_id"];
                                         e.Row["s_id"] = reader["s_id"];
                                         e.Row["g_id"] = reader["g_id"];
+                                        e.Row["o_id"] = reader["o_id"];
                                         e.Row["p_id"] = reader["p_id"];
                                         e.Row["req_id"] = reader["req_id"];
                                         e.Row["time_stamp"] = reader["time_stamp"];
@@ -2078,6 +2098,7 @@ namespace rk_seikyu
                                         e.Row["sk_id"] = reader["sk_id"];
                                         e.Row["s_id"] = reader["s_id"];
                                         e.Row["g_id"] = reader["g_id"];
+                                        e.Row["o_id"] = reader["o_id"];
                                         e.Row["p_id"] = reader["p_id"];
                                         e.Row["req_id"] = reader["req_id"];
                                         e.Row["time_stamp"] = reader["time_stamp"];
@@ -2982,6 +3003,11 @@ namespace rk_seikyu
                         tblStr = "t_csv";
 
                         command = new NpgsqlCommand(
+                            "update " + tblStr + " set o_id = " + cmb_o_id_int
+                            , m_conn);
+                        command.ExecuteNonQuery();
+
+                        command = new NpgsqlCommand(
                             "update " + tblStr + " set s_id = " + cmb_s_id_int
                             , m_conn);
                         command.ExecuteNonQuery();
@@ -3171,6 +3197,7 @@ namespace rk_seikyu
                                             + ", c4_array"
                                             + ", s_id"
                                             + ", g_id"
+                                            + ", o_id"
                                             + ", p_id"
                                             + ", req_id"
                                             + ", id"
@@ -3200,6 +3227,7 @@ namespace rk_seikyu
                                             + ", string_to_array (c4, '/') as c4_array"
                                             + ", s_id"
                                             + ", g_id"
+                                            + ", o_id"
                                             + ", p_id"
                                             + ", req_id"
                                             + ", id"
@@ -3304,6 +3332,7 @@ namespace rk_seikyu
                                                 + ", c49"
                                                 + ", s_id"
                                                 + ", g_id"
+                                                + ", o_id"
                                                 + ", p_id"
                                                 + ", req_id"
                                                 + ", c4_array"
@@ -3359,6 +3388,7 @@ namespace rk_seikyu
                                                 + ", coalesce(c49, '') c49"
                                                 + ", s_id"
                                                 + ", g_id"
+                                                + ", o_id"
                                                 + ", p_id"
                                                 + ", req_id"
                                                 + ", case when length('" + cmb_tsuki_str + "')=1 then"
@@ -3367,8 +3397,8 @@ namespace rk_seikyu
                                                 + " string_to_array ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "', '/')"
                                                 + " end"
                                                 // 事業者番号設定
-                                                + " from t_csv where c3 = '0176700250';"
-                                                    //+ " order by id"
+                                                //+ " from t_csv where c3 = '0176700250';"
+                                                + " from t_csv where o_id = " + cmb_o_id_int + ";"
                                                     , m_conn);
                                                 da.InsertCommand.ExecuteNonQuery();
                                             }
@@ -3475,6 +3505,7 @@ namespace rk_seikyu
                                                 + ", c58"
                                                 + ", s_id"
                                                 + ", g_id"
+                                                + ", o_id"
                                                 + ", p_id"
                                                 + ", req_id"
                                                 + ", c4_array"
@@ -3539,6 +3570,7 @@ namespace rk_seikyu
                                                 + ", coalesce(c58, '') c58"
                                                 + ", s_id"
                                                 + ", g_id"
+                                                + ", o_id"
                                                 + ", p_id"
                                                 + ", req_id"
                                                 + ", case when length('" + cmb_tsuki_str + "')=1 then"
@@ -3621,6 +3653,7 @@ namespace rk_seikyu
                                         + ", r_id"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", id"
                                         + ", p_id"
                                         + ", req_id"
@@ -3692,6 +3725,7 @@ namespace rk_seikyu
                                             + ", c4_array"
                                             + ", s_id"
                                             + ", g_id"
+                                            + ", o_id"
                                             + ", p_id"
                                             + ", req_id"
                                             + ", id"
@@ -3721,6 +3755,7 @@ namespace rk_seikyu
                                             + ", string_to_array (:c4, '/') as c4_array"
                                             + ", :s_id"
                                             + ", :g_id"
+                                            + ", :o_id"
                                             + ", :p_id"
                                             + ", :req_id"
                                             + ", :id"
@@ -3755,6 +3790,7 @@ namespace rk_seikyu
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // update
@@ -3788,6 +3824,7 @@ namespace rk_seikyu
                                             + ", req_id = :req_id"
                                             + ", s_id = :s_id"
                                             + ", g_id = :g_id"
+                                            + ", o_id = :o_id"
                                             + " where r_id=:r_id;"
                                         , m_conn
                                         );
@@ -3819,6 +3856,7 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // delete
@@ -3913,6 +3951,7 @@ namespace rk_seikyu
                                         + ", sh_id"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", p_id"
                                         + ", req_id"
                                         + ", time_stamp"
@@ -3996,6 +4035,7 @@ namespace rk_seikyu
                                                 + ", c49"
                                                 + ", s_id"
                                                 + ", g_id"
+                                                + ", o_id"
                                                 + ", p_id"
                                                 + ", req_id"
                                                 + ", c4_array"
@@ -4051,6 +4091,7 @@ namespace rk_seikyu
                                                 + ", coalesce(:c49, '') c49"
                                                 + ", :s_id"
                                                 + ", :g_id"
+                                                + ", :o_id"
                                                 + ", :p_id"
                                                 + ", :req_id"
                                                 + ", case when length('" + cmb_tsuki_str + "')=1 then"
@@ -4116,6 +4157,7 @@ namespace rk_seikyu
                                             + ", c49 = :c49"
                                             + ", s_id = :s_id"
                                             + ", g_id = :g_id"
+                                            + ", o_id = :o_id"
                                             + ", p_id = :p_id"
                                             + ", req_id = :req_id"
                                             + ", time_stamp = :time_stamp"
@@ -4176,6 +4218,7 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("p_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "p_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("sh_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sh_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -4281,6 +4324,7 @@ namespace rk_seikyu
                                         + ", sk_id"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", p_id"
                                         + ", req_id"
                                         + ", time_stamp"
@@ -4373,6 +4417,7 @@ namespace rk_seikyu
                                                 + ", c58"
                                                 + ", s_id"
                                                 + ", g_id"
+                                                + ", o_id"
                                                 + ", p_id"
                                                 + ", req_id"
                                                 + ", c4_array"
@@ -4437,6 +4482,7 @@ namespace rk_seikyu
                                                 + ", coalesce(:c58, '') c58"
                                                 + ", :s_id"
                                                 + ", :g_id"
+                                                + ", :o_id"
                                                 + ", :p_id"
                                                 + ", :req_id"
                                                 + ", case when length('" + cmb_tsuki_str + "')=1 then"
@@ -4509,6 +4555,7 @@ namespace rk_seikyu
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("p_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "p_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("sk_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sk_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -4576,6 +4623,7 @@ namespace rk_seikyu
                                         + ", c58 = :c58"
                                         + ", s_id = :s_id"
                                         + ", g_id = :g_id"
+                                        + ", o_id = :o_id"
                                         + ", p_id = :p_id"
                                         + ", req_id = :req_id"
                                         + ", time_stamp = :time_stamp"
@@ -4645,6 +4693,7 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("p_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "p_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("sk_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sk_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -5191,6 +5240,7 @@ namespace rk_seikyu
                                 + ", r_id"
                                 + ", s_id"
                                 + ", g_id"
+                                + ", o_id"
                                 + ", id"
                                 + ", p_id"
                                 + ", req_id"
@@ -5263,6 +5313,7 @@ namespace rk_seikyu
                                     + ", req_id = :req_id"
                                     + ", s_id = :s_id"
                                     + ", g_id = :g_id"
+                                    + ", o_id = :o_id"
                                     + " where r_id=:r_id;"
                                 , m_conn
                                 );
@@ -5293,6 +5344,7 @@ namespace rk_seikyu
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                             // delete
@@ -5399,6 +5451,7 @@ namespace rk_seikyu
                                 + ", sh_id"
                                 + ", s_id"
                                 + ", g_id"
+                                + ", o_id"
                                 + ", p_id"
                                 + ", req_id"
                                 + ", time_stamp"
@@ -5482,6 +5535,7 @@ namespace rk_seikyu
                                     + ", c49 = :c49"
                                     + ", s_id = :s_id"
                                     + ", g_id = :g_id"
+                                    + ", o_id = :o_id"
                                     + ", p_id = :p_id"
                                     + ", req_id = :req_id"
                                     + ", c4_array = :c4_array"
@@ -5539,6 +5593,7 @@ namespace rk_seikyu
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c49", NpgsqlTypes.NpgsqlDbType.Text, 0, "c49", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("p_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "p_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -5658,6 +5713,7 @@ namespace rk_seikyu
                                 + ", sk_id"
                                 + ", s_id"
                                 + ", g_id"
+                                + ", o_id"
                                 + ", p_id"
                                 + ", req_id"
                                 + ", time_stamp"
@@ -5751,6 +5807,7 @@ namespace rk_seikyu
                                 + ", c58 = :c58"
                                 + ", s_id = :s_id"
                                 + ", g_id = :g_id"
+                                + ", o_id = :o_id"
                                 + ", p_id = :p_id"
                                 + ", req_id = :req_id"
                                 + ", c4_array = :c4_array"
@@ -5817,6 +5874,7 @@ namespace rk_seikyu
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c58", NpgsqlTypes.NpgsqlDbType.Text, 0, "c58", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("p_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "p_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -6201,6 +6259,7 @@ namespace rk_seikyu
                                 + ", r_id"
                                 + ", s_id"
                                 + ", g_id"
+                                + ", o_id"
                                 + ", id"
                                 + ", p_id"
                                 + ", req_id"
@@ -6274,6 +6333,7 @@ namespace rk_seikyu
                                     + ", req_id = :req_id"
                                     + ", s_id = :s_id"
                                     + ", g_id = :g_id"
+                                    + ", o_id = :o_id"
                                     + " where r_id=:r_id;"
                                 , m_conn
                                 );
@@ -6304,6 +6364,7 @@ namespace rk_seikyu
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                             // delete
@@ -6669,6 +6730,7 @@ namespace rk_seikyu
                                 + ", sk_id"
                                 + ", s_id"
                                 + ", g_id"
+                                + ", o_id"
                                 + ", p_id"
                                 + ", req_id"
                                 + ", time_stamp"
@@ -6762,6 +6824,7 @@ namespace rk_seikyu
                                 + ", c58 = :c58"
                                 + ", s_id = :s_id"
                                 + ", g_id = :g_id"
+                                + ", o_id = :o_id"
                                 + ", p_id = :p_id"
                                 + ", req_id = :req_id"
                                 + ", c4_array = :c4_array"
@@ -6828,6 +6891,7 @@ namespace rk_seikyu
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c58", NpgsqlTypes.NpgsqlDbType.Text, 0, "c58", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("p_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "p_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -7165,6 +7229,7 @@ namespace rk_seikyu
                                         + ", r_id"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", id"
                                         + ", p_id"
                                         + ", req_id"
@@ -7240,6 +7305,7 @@ namespace rk_seikyu
                                             + ", req_id = :req_id"
                                             + ", s_id = :s_id"
                                             + ", g_id = :g_id"
+                                            + ", o_id = :o_id"
                                             + " where r_id=:r_id;"
                                         , m_conn
                                         );
@@ -7270,6 +7336,7 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // delete
@@ -7376,6 +7443,7 @@ namespace rk_seikyu
                                         + ", sh_id"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", p_id"
                                         + ", req_id"
                                         + ", time_stamp"
@@ -7462,6 +7530,7 @@ namespace rk_seikyu
                                             + ", c49 = :c49"
                                             + ", s_id = :s_id"
                                             + ", g_id = :g_id"
+                                            + ", o_id = :o_id"
                                             + ", p_id = :p_id"
                                             + ", req_id = :req_id"
                                             + ", c4_array = :c4_array"
@@ -7519,6 +7588,7 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c49", NpgsqlTypes.NpgsqlDbType.Text, 0, "c49", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("p_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "p_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -7889,6 +7959,7 @@ namespace rk_seikyu
                                         + ", r_id"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", id"
                                         + ", p_id"
                                         + ", req_id"
@@ -7964,6 +8035,7 @@ namespace rk_seikyu
                                             + ", req_id = :req_id"
                                             + ", s_id = :s_id"
                                             + ", g_id = :g_id"
+                                            + ", o_id = :o_id"
                                             + " where r_id=:r_id;"
                                         , m_conn
                                         );
@@ -7994,6 +8066,7 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // delete
@@ -8100,6 +8173,7 @@ namespace rk_seikyu
                                         + ", sh_id"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", p_id"
                                         + ", req_id"
                                         + ", time_stamp"
@@ -8186,6 +8260,7 @@ namespace rk_seikyu
                                             + ", c49 = :c49"
                                             + ", s_id = :s_id"
                                             + ", g_id = :g_id"
+                                            + ", o_id = :o_id"
                                             + ", p_id = :p_id"
                                             + ", req_id = :req_id"
                                             + ", c4_array = :c4_array"
@@ -8243,6 +8318,7 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c49", NpgsqlTypes.NpgsqlDbType.Text, 0, "c49", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("p_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "p_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -8362,6 +8438,7 @@ namespace rk_seikyu
                                         + ", sk_id"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", p_id"
                                         + ", req_id"
                                         + ", time_stamp"
@@ -8458,6 +8535,7 @@ namespace rk_seikyu
                                         + ", c58 = :c58"
                                         + ", s_id = :s_id"
                                         + ", g_id = :g_id"
+                                        + ", o_id = :o_id"
                                         + ", p_id = :p_id"
                                         + ", req_id = :req_id"
                                         + ", c4_array = :c4_array"
@@ -8524,6 +8602,7 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c58", NpgsqlTypes.NpgsqlDbType.Text, 0, "c58", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("p_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "p_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -8612,6 +8691,7 @@ namespace rk_seikyu
                                         + ", r_id"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", id"
                                         + ", p_id"
                                         + ", req_id"
@@ -8687,6 +8767,7 @@ namespace rk_seikyu
                                             + ", req_id = :req_id"
                                             + ", s_id = :s_id"
                                             + ", g_id = :g_id"
+                                            + ", o_id = :o_id"
                                             + " where r_id=:r_id;"
                                         , m_conn
                                         );
@@ -8717,6 +8798,7 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // delete
@@ -8823,6 +8905,7 @@ namespace rk_seikyu
                                         + ", sh_id"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", p_id"
                                         + ", req_id"
                                         + ", time_stamp"
@@ -8909,6 +8992,7 @@ namespace rk_seikyu
                                             + ", c49 = :c49"
                                             + ", s_id = :s_id"
                                             + ", g_id = :g_id"
+                                            + ", o_id = :o_id"
                                             + ", p_id = :p_id"
                                             + ", req_id = :req_id"
                                             + ", c4_array = :c4_array"
@@ -8966,6 +9050,7 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c49", NpgsqlTypes.NpgsqlDbType.Text, 0, "c49", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("p_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "p_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -9085,6 +9170,7 @@ namespace rk_seikyu
                                         + ", sk_id"
                                         + ", s_id"
                                         + ", g_id"
+                                        + ", o_id"
                                         + ", p_id"
                                         + ", req_id"
                                         + ", time_stamp"
@@ -9181,6 +9267,7 @@ namespace rk_seikyu
                                         + ", c58 = :c58"
                                         + ", s_id = :s_id"
                                         + ", g_id = :g_id"
+                                        + ", o_id = :o_id"
                                         + ", p_id = :p_id"
                                         + ", req_id = :req_id"
                                         + ", c4_array = :c4_array"
@@ -9247,6 +9334,7 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c58", NpgsqlTypes.NpgsqlDbType.Text, 0, "c58", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("p_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "p_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));

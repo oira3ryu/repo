@@ -12,7 +12,7 @@
   <xs:element name="seikyu" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="seikyu" msprop:Generator_UserDSName="seikyu">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="seikyu" msprop:Generator_TableClassName="seikyuDataTable" msprop:Generator_TableVarName="tableseikyu" msprop:Generator_RowChangedName="seikyuRowChanged" msprop:Generator_TablePropName="_seikyu" msprop:Generator_RowDeletingName="seikyuRowDeleting" msprop:Generator_RowChangingName="seikyuRowChanging" msprop:Generator_RowEvHandlerName="seikyuRowChangeEventHandler" msprop:Generator_RowDeletedName="seikyuRowDeleted" msprop:Generator_RowClassName="seikyuRow" msprop:Generator_UserTableName="seikyu" msprop:Generator_RowEvArgName="seikyuRowChangeEvent">
+        <xs:element name="seikyu" msprop:Generator_TableClassName="seikyuDataTable" msprop:Generator_TableVarName="tableseikyu" msprop:Generator_TablePropName="_seikyu" msprop:Generator_RowDeletingName="seikyuRowDeleting" msprop:Generator_RowChangingName="seikyuRowChanging" msprop:Generator_RowEvHandlerName="seikyuRowChangeEventHandler" msprop:Generator_RowDeletedName="seikyuRowDeleted" msprop:Generator_UserTableName="seikyu" msprop:Generator_RowChangedName="seikyuRowChanged" msprop:Generator_RowEvArgName="seikyuRowChangeEvent" msprop:Generator_RowClassName="seikyuRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="c1" msprop:Generator_ColumnVarNameInTable="columnc1" msprop:Generator_ColumnPropNameInRow="c1" msprop:Generator_ColumnPropNameInTable="c1Column" msprop:Generator_UserColumnName="c1" type="xs:string" minOccurs="0" />
@@ -169,6 +169,7 @@
               <xs:element name="s_c17" msprop:Generator_ColumnVarNameInTable="columns_c17" msprop:Generator_ColumnPropNameInRow="s_c17" msprop:Generator_ColumnPropNameInTable="s_c17Column" msprop:Generator_UserColumnName="s_c17" type="xs:string" minOccurs="0" />
               <xs:element name="s_c7" msprop:Generator_ColumnVarNameInTable="columns_c7" msprop:Generator_ColumnPropNameInRow="s_c7" msprop:Generator_ColumnPropNameInTable="s_c7Column" msprop:Generator_UserColumnName="s_c7" type="xs:string" minOccurs="0" />
               <xs:element name="s_c9" msprop:Generator_ColumnVarNameInTable="columns_c9" msprop:Generator_ColumnPropNameInRow="s_c9" msprop:Generator_ColumnPropNameInTable="s_c9Column" msprop:Generator_UserColumnName="s_c9" type="xs:string" minOccurs="0" />
+              <xs:element name="o_id" msprop:Generator_ColumnVarNameInTable="columno_id" msprop:Generator_ColumnPropNameInRow="o_id" msprop:Generator_ColumnPropNameInTable="o_idColumn" msprop:Generator_UserColumnName="o_id" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
