@@ -71,11 +71,10 @@ namespace rk_seikyu
         public int cmb_req_id_int { get; set; }
 
 
-        public string cmb_c4_str { get; set; }
-        public string cmb_nen_str { get; set; }
-        public string cmb_tsuki_str { get; set; }
-        public string cmb_s_id_str { get; set; }
-        public string cmb_o_id_str { get; set; }
+        public String cmb_c4_str { get; set; }
+        public String cmb_nen_str { get; set; }
+        public String cmb_tsuki_str { get; set; }
+        public String cmb_s_id_str { get; set; }
 
         public int hour { get; set; }
         public int minute { get; set; }
@@ -85,10 +84,19 @@ namespace rk_seikyu
         public int VarMinute { get; set; }
         public int VarSecond { get; set; }
 
+        public string cmb_o_id_str_TEXT { get => cmb_o_id.ToString(); set => cmb_o_id.Text = value; }
+        private static Form_seikyu _form_seikyu_Instance;
+
         public Form_seikyu()
         {
             InitializeComponent();
+            _form_seikyu_Instance = this;
         }
+
+        //Form_seikyuインスタンスを設定、取得する。
+        public static Form_seikyu Form_seikyu_Instance { get => _form_seikyu_Instance; set => _form_seikyu_Instance = value; }
+        //文字列変数cmb_o_id_Textへコンボボックスcmb_o_idの値を設定、取得する。
+        public string cmb_o_id_Text { get => cmb_o_id.SelectedValue.ToString(); set => cmb_o_id.Text = value; }
 
         private void Form_seikyu_Load(object sender, EventArgs e)
         {
@@ -6963,6 +6971,13 @@ namespace rk_seikyu
         {
             cmb_o_id_int = cmb_o_id.SelectedIndex + 1;
             Console.WriteLine("cmb_o_id_int = " + cmb_o_id_int);
+
+            //Form_prn f = new Form_prn();
+
+            ////送り先のフォームのグローバル変数に代入する
+            //_cmb_o_id_str = cmb_o_id_int.ToString();
+            //f.cmb_o_id_str = _cmb_o_id_str;
+            //Console.WriteLine("Form_seikyu_cmb_o_id_str = " + f.cmb_o_id_str);
 
             cmb_s_id_int = cmb_s_id.SelectedIndex + 1;
             Console.WriteLine("cmb_s_id_int = " + cmb_s_id_int);

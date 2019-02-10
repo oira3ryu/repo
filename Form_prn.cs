@@ -62,12 +62,22 @@ namespace rk_seikyu
         public string cmb_nen_str { get; set; }
         public string cmb_tsuki_str { get; set; }
         public string cmb_b_code_str { get; set; }
+        public String cmb_o_id_str;
 
         public string StrDateTime { get; set; }
+
+        private Form_seikyu form_seikyu_Instance;
 
         public Form_prn()
         {
             InitializeComponent();
+
+            //Form_seikyuのインスタンスを取得
+            form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
+            //Form_seikyuのテキストボックス文字列を
+            //Form_prnの文字列変数cmb_o_id_strへ設定
+            cmb_o_id_str = form_seikyu_Instance.cmb_o_id_Text;
+
         }
 
         private void cmdClose_Click(object sender, EventArgs e)
@@ -86,6 +96,9 @@ namespace rk_seikyu
             this.Height = Screen.GetBounds(this).Height - 30;
             this.Top = (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2;
             this.Left = (Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2;
+
+            Console.WriteLine("Form_prn_cmb_o_id_str = " + cmb_o_id_str);
+
 
             nen_da.SelectCommand = new NpgsqlCommand
             (
