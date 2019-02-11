@@ -63,7 +63,7 @@ namespace rk_seikyu
         public string cmb_tsuki_str { get; set; }
         public string cmb_b_code_str { get; set; }
         public String cmb_o_id_str;
-
+        public int cmb_o_id_int { get; set; }
         public string StrDateTime { get; set; }
 
         private Form_seikyu form_seikyu_Instance;
@@ -77,6 +77,19 @@ namespace rk_seikyu
             //Form_seikyuのテキストボックス文字列を
             //Form_prnの文字列変数cmb_o_id_strへ設定
             cmb_o_id_str = form_seikyu_Instance.cmb_o_id_Text;
+
+            //Form_seikyuのコンボボックスcmb_o_idからの変数cmb_o_id_strをint型に変換して1加算
+            int i;
+            if (int.TryParse(cmb_o_id_str, out i))
+            {
+                cmb_o_id_int = i + 1;
+                cmb_o_id_str = cmb_o_id_int.ToString();
+                Console.WriteLine("cmb_o_idからの値は、" + cmb_o_id_str);
+            }
+            else
+            {
+                Console.WriteLine("cmb_o_idからの値を数値に変換できません");
+            }
 
         }
 
@@ -181,8 +194,12 @@ namespace rk_seikyu
                    "select"
                 + " s_id"
                 + ", syubetsu"
+                + ", shisetsumei"
+                + ", o_id"
                 + " from"
                 + " t_syubetsu"
+                + " where o_id = " + cmb_o_id_str
+                //+ " and s_id = '" + cmb_s_id_int + "'"
                 + " order by s_id;",
                 m_conn
             );

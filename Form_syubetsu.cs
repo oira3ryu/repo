@@ -18,13 +18,40 @@ namespace rk_seikyu
         private DataSet ds = new DataSet();
         private DataSet syubetsu_ds = new DataSet();
 
+        private Form_seikyu form_seikyu_Instance;
+
+        public String cmb_o_id_str;
+        public int cmb_o_id_int { get; set; }
+
         public Form_syubetsu()
         {
             InitializeComponent();
+
+            //Form_seikyuのインスタンスを取得
+            form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
+            //Form_seikyuのテキストボックス文字列を
+            //Form_syubetsuの文字列変数cmb_o_id_strへ設定
+            cmb_o_id_str = form_seikyu_Instance.cmb_o_id_Text;
+
+            //Form_seikyuのコンボボックスcmb_o_idからの変数cmb_o_id_strをint型に変換して1加算
+            int i;
+            if (int.TryParse(cmb_o_id_str, out i))
+            {
+                cmb_o_id_int = i + 1;
+                cmb_o_id_str = cmb_o_id_int.ToString();
+                Console.WriteLine("cmb_o_idからの値は、" + cmb_o_id_str);
+            }
+            else
+            {
+                Console.WriteLine("cmb_o_idからの値を数値に変換できません");
+            }
         }
 
         private void Form_syubetsu_Load(object sender, EventArgs e)
         {
+
+            Console.WriteLine("Form_syubetsu_cmb_o_id_str = " + cmb_o_id_str);
+
             dataGridViewSyubetsu.Columns[0].HeaderText = "ID";
             dataGridViewSyubetsu.Columns[1].HeaderText = "種別";
             dataGridViewSyubetsu.Columns[2].HeaderText = "施設名";
@@ -37,6 +64,7 @@ namespace rk_seikyu
                 + ", shisetsumei"
                 + " from"
                 + " t_syubetsu"
+                + " where o_id = " + cmb_o_id_str
                 + " order by s_id;",
                 m_conn
             );
@@ -47,37 +75,47 @@ namespace rk_seikyu
                     "insert into t_syubetsu ("
                 + " syubetsu"
                 + ", shisetsumei"
+                + ", s_id"
+                + ", o_id"
                 + " ) values ("
                 + " :syubetsu"
                 + ", :shisetsumei"
+                + ", :s_id"
+                + ", :o_id"
                 + ")",
                 m_conn
             );
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("syubetsu", NpgsqlTypes.NpgsqlDbType.Text, 0, "syubetsu", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("shisetsumei", NpgsqlTypes.NpgsqlDbType.Text, 0, "shisetsumei", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+            da.InsertCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+            da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
 
             // update
             da.UpdateCommand = new NpgsqlCommand(
                 "update t_syubetsu set"
                 + " syubetsu = :syubetsu"
                 + ", shisetsumei = :shisetsumei"
+                + ", s_id"
                 + " where"
-                + " s_id = :s_id"
+                + " o_id = " + cmb_o_id_str
+                + " and s_id = :s_id"
                 , m_conn
                 );
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("syubetsu", NpgsqlTypes.NpgsqlDbType.Text, 0, "syubetsu", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("shisetsumei", NpgsqlTypes.NpgsqlDbType.Text, 0, "shisetsumei", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
+            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
+            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("ps_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "ps_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
             // delete
             da.DeleteCommand = new NpgsqlCommand
             (
                    "delete from t_syubetsu"
                 + " where"
-                + " s_id=:s_id"
+                + " ps_id=:ps_id"
                 , m_conn
             );
-            da.DeleteCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
+            da.DeleteCommand.Parameters.Add(new NpgsqlParameter("ps_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "ps_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
             // RowUpdate
             da.RowUpdated += new NpgsqlRowUpdatedEventHandler(syubetsuRowUpdated);

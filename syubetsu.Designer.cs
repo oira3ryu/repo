@@ -285,6 +285,10 @@ namespace rk_seikyu {
             
             private global::System.Data.DataColumn columnshisetsumei;
             
+            private global::System.Data.DataColumn columno_id;
+            
+            private global::System.Data.DataColumn columnps_id;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public syubetsuDataTable() {
@@ -344,6 +348,22 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn o_idColumn {
+                get {
+                    return this.columno_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn ps_idColumn {
+                get {
+                    return this.columnps_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -379,12 +399,14 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public syubetsuRow AddsyubetsuRow(string s_id, string syubetsu, string shisetsumei) {
+            public syubetsuRow AddsyubetsuRow(string s_id, string syubetsu, string shisetsumei, string o_id, string ps_id) {
                 syubetsuRow rowsyubetsuRow = ((syubetsuRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         s_id,
                         syubetsu,
-                        shisetsumei};
+                        shisetsumei,
+                        o_id,
+                        ps_id};
                 rowsyubetsuRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowsyubetsuRow);
                 return rowsyubetsuRow;
@@ -392,9 +414,9 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public syubetsuRow FindBys_id(string s_id) {
+            public syubetsuRow FindByps_id(string ps_id) {
                 return ((syubetsuRow)(this.Rows.Find(new object[] {
-                            s_id})));
+                            ps_id})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -417,6 +439,8 @@ namespace rk_seikyu {
                 this.columns_id = base.Columns["s_id"];
                 this.columnsyubetsu = base.Columns["syubetsu"];
                 this.columnshisetsumei = base.Columns["shisetsumei"];
+                this.columno_id = base.Columns["o_id"];
+                this.columnps_id = base.Columns["ps_id"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -428,10 +452,15 @@ namespace rk_seikyu {
                 base.Columns.Add(this.columnsyubetsu);
                 this.columnshisetsumei = new global::System.Data.DataColumn("shisetsumei", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnshisetsumei);
+                this.columno_id = new global::System.Data.DataColumn("o_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columno_id);
+                this.columnps_id = new global::System.Data.DataColumn("ps_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnps_id);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columns_id}, true));
+                                this.columnps_id}, true));
                 this.columns_id.AllowDBNull = false;
-                this.columns_id.Unique = true;
+                this.columnps_id.AllowDBNull = false;
+                this.columnps_id.Unique = true;
                 this.ExtendedProperties.Add("Generator_TablePropName", "_syubetsu");
                 this.ExtendedProperties.Add("Generator_UserTableName", "syubetsu");
             }
@@ -619,6 +648,33 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string o_id {
+                get {
+                    try {
+                        return ((string)(this[this.tablesyubetsu.o_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'syubetsu\' にある列 \'o_id\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tablesyubetsu.o_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string ps_id {
+                get {
+                    return ((string)(this[this.tablesyubetsu.ps_idColumn]));
+                }
+                set {
+                    this[this.tablesyubetsu.ps_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IssyubetsuNull() {
                 return this.IsNull(this.tablesyubetsu.syubetsuColumn);
             }
@@ -639,6 +695,18 @@ namespace rk_seikyu {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetshisetsumeiNull() {
                 this[this.tablesyubetsu.shisetsumeiColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Iso_idNull() {
+                return this.IsNull(this.tablesyubetsu.o_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Seto_idNull() {
+                this[this.tablesyubetsu.o_idColumn] = global::System.Convert.DBNull;
             }
         }
         

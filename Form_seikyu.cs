@@ -84,19 +84,24 @@ namespace rk_seikyu
         public int VarMinute { get; set; }
         public int VarSecond { get; set; }
 
-        public string cmb_o_id_str_TEXT { get => cmb_o_id.ToString(); set => cmb_o_id.Text = value; }
+        public string cmb_o_id_str_TEXT { get => cmb_o_id.SelectedIndex.ToString(); set => cmb_o_id.Text = value; }
         private static Form_seikyu _form_seikyu_Instance;
+        //private Form_seikyu form_seikyu_Instance;
+
+        public String cmb_o_id_str;
 
         public Form_seikyu()
         {
             InitializeComponent();
             _form_seikyu_Instance = this;
+            //this.cmb_o_id.SelectedIndex = 0;
+
         }
 
         //Form_seikyuインスタンスを設定、取得する。
         public static Form_seikyu Form_seikyu_Instance { get => _form_seikyu_Instance; set => _form_seikyu_Instance = value; }
         //文字列変数cmb_o_id_Textへコンボボックスcmb_o_idの値を設定、取得する。
-        public string cmb_o_id_Text { get => cmb_o_id.SelectedValue.ToString(); set => cmb_o_id.Text = value; }
+        public string cmb_o_id_Text { get => cmb_o_id.SelectedIndex.ToString(); set => cmb_o_id.Text = value; }
 
         private void Form_seikyu_Load(object sender, EventArgs e)
         {
@@ -155,10 +160,15 @@ namespace rk_seikyu
             s_id_da.SelectCommand = new NpgsqlCommand
             (
                    "select"
-                  + " s_id"
-                  + ", syubetsu"
-                  + " from t_syubetsu"
-                  + " order by s_id;",
+                + " s_id"
+                + ", syubetsu"
+                + ", shisetsumei"
+                + ", o_id"
+                + " from"
+                + " t_syubetsu"
+                + " where o_id = '" + cmb_o_id_int + "'"
+                + " and s_id = '" + cmb_s_id_int + "'"
+                + " order by s_id;",
                     m_conn
             );
 
@@ -203,7 +213,10 @@ namespace rk_seikyu
                 c4_ds.Tables["t_seikyu"].Clear();
             c4_da.Fill(c4_ds, "t_seikyu");
 
+            if (s_id_ds.Tables["t_syubetsu"] != null)
+                s_id_ds.Tables["t_syubetsu"].Clear();
             s_id_da.Fill(s_id_ds, "t_syubetsu");
+
             g_id_da.Fill(g_id_ds, "t_gyoumu");
 
             req_id_da.Fill(req_id_ds, "t_req");
@@ -1907,7 +1920,6 @@ namespace rk_seikyu
                                         //+ " order by id"
                                         , m_conn
                                     );
-
                                     break;
                             }
                             break;
@@ -2330,7 +2342,6 @@ namespace rk_seikyu
                                 dataGridViewShinzoku_kankei.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                                 dataGridViewShinzoku_kankei.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
                             }
-
                             break;
                     }
                     break;
@@ -3667,7 +3678,11 @@ namespace rk_seikyu
                                         + ", req_id"
                                         + " from"
                                         + " t_seikyu"
-                                        + " where time_stamp = (select max(time_stamp) from t_seikyu where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
+                                        + " where time_stamp = (select max(time_stamp) from t_seikyu"
+                                        + " where s_id::Integer = " + cmb_s_id_int
+                                        + " and g_id::Integer = " + cmb_g_id_int
+                                        + " and o_id::Integer = " + cmb_o_id_int
+                                        //+ " where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
                                                 + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
                                                 + "       when length('" + cmb_tsuki_str + "')=2 then"
@@ -3966,7 +3981,11 @@ namespace rk_seikyu
                                         + ", c4_array"
                                         + " from"
                                         + " t_shiharai_houhou"
-                                        + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
+                                        + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
+                                        + " where s_id::Integer = " + cmb_s_id_int
+                                        + " and g_id::Integer = " + cmb_g_id_int
+                                        + " and o_id::Integer = " + cmb_o_id_int
+                                        //" where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
                                                         + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
                                                         + "       when length('" + cmb_tsuki_str + "')=2 then"
@@ -4339,7 +4358,11 @@ namespace rk_seikyu
                                         + ", c4_array"
                                         + " from"
                                         + " t_shinzoku_kankei"
-                                        + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
+                                        + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
+                                        //+ " where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
+                                        + " where s_id::Integer = " + cmb_s_id_int
+                                        + " and g_id::Integer = " + cmb_g_id_int
+                                        + " and o_id::Integer = " + cmb_o_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
                                                         + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
                                                         + "       when length('" + cmb_tsuki_str + "')=2 then"
@@ -5254,7 +5277,11 @@ namespace rk_seikyu
                                 + ", req_id"
                                 + " from"
                                 + " t_seikyu"
-                                + " where time_stamp = (select max(time_stamp) from t_seikyu where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
+                                + " where time_stamp = (select max(time_stamp) from t_seikyu"
+                                //+ " where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
+                                + " where s_id::Integer = " + cmb_s_id_int
+                                + " and g_id::Integer = " + cmb_g_id_int
+                                + " and o_id::Integer = " + cmb_o_id_int
                                 + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
                                                 + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
                                                 + "       when length('" + cmb_tsuki_str + "')=2 then"
@@ -5466,7 +5493,10 @@ namespace rk_seikyu
                                 + ", c4_array"
                                 + " from"
                                 + " t_shiharai_houhou"
-                                + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
+                                + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
+                                + " where s_id::Integer = " + cmb_s_id_int
+                                + " and g_id::Integer = " + cmb_g_id_int
+                                + " and o_id::Integer = " + cmb_o_id_int
                                 + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
                                                 + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
                                                 + "       when length('" + cmb_tsuki_str + "')=2 then"
@@ -5728,7 +5758,10 @@ namespace rk_seikyu
                                 + ", c4_array"
                                 + " from"
                                 + " t_shinzoku_kankei"
-                                + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
+                                + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
+                                + " where s_id::Integer = " + cmb_s_id_int
+                                + " and g_id::Integer = " + cmb_g_id_int
+                                + " and o_id::Integer = " + cmb_o_id_int
                                 + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
                                                 + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
                                                 + "       when length('" + cmb_tsuki_str + "')=2 then"
@@ -6273,7 +6306,10 @@ namespace rk_seikyu
                                 + ", req_id"
                                 + " from"
                                 + " t_seikyu"
-                                + " where time_stamp = (select max(time_stamp) from t_seikyu where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
+                                + " where time_stamp = (select max(time_stamp) from t_seikyu"
+                                + " where s_id::Integer = " + cmb_s_id_int
+                                + " and g_id::Integer = " + cmb_g_id_int
+                                + " and o_id::Integer = " + cmb_o_id_int
                                 + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
                                                 + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
                                                 + "       when length('" + cmb_tsuki_str + "')=2 then"
@@ -6745,7 +6781,10 @@ namespace rk_seikyu
                                 + ", c4_array"
                                 + " from"
                                 + " t_shinzoku_kankei"
-                                + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
+                                + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
+                                + " where s_id::Integer = " + cmb_s_id_int
+                                + " and g_id::Integer = " + cmb_g_id_int
+                                + " and o_id::Integer = " + cmb_o_id_int
                                 + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
                                                 + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
                                                 + "       when length('" + cmb_tsuki_str + "')=2 then"
@@ -6972,12 +7011,24 @@ namespace rk_seikyu
             cmb_o_id_int = cmb_o_id.SelectedIndex + 1;
             Console.WriteLine("cmb_o_id_int = " + cmb_o_id_int);
 
-            //Form_prn f = new Form_prn();
+            s_id_da.SelectCommand = new NpgsqlCommand
+            (
+                   "select"
+                + " s_id"
+                + ", syubetsu"
+                + ", shisetsumei"
+                + ", o_id"
+                + " from"
+                + " t_syubetsu"
+                + " where o_id = '" + cmb_o_id_int + "'"
+                + " order by s_id;",
+                    m_conn
+            );
 
-            ////送り先のフォームのグローバル変数に代入する
-            //_cmb_o_id_str = cmb_o_id_int.ToString();
-            //f.cmb_o_id_str = _cmb_o_id_str;
-            //Console.WriteLine("Form_seikyu_cmb_o_id_str = " + f.cmb_o_id_str);
+            if (s_id_ds.Tables["t_syubetsu"] != null)
+                s_id_ds.Tables["t_syubetsu"].Clear();
+            s_id_da.Fill(s_id_ds, "t_syubetsu");
+
 
             cmb_s_id_int = cmb_s_id.SelectedIndex + 1;
             Console.WriteLine("cmb_s_id_int = " + cmb_s_id_int);

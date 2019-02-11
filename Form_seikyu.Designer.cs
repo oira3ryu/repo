@@ -254,6 +254,7 @@
             this.dataTableTableAdapter = new rk_seikyu.o_id_dsTableAdapters.DataTableTableAdapter();
             this.tableAdapterManager = new rk_seikyu.o_id_dsTableAdapters.TableAdapterManager();
             this.cmb_o_id = new System.Windows.Forms.ComboBox();
+            this.cmb_o_id_text = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.seikyu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorSeikyu)).BeginInit();
             this.bindingNavigatorSeikyu.SuspendLayout();
@@ -1970,12 +1971,20 @@
             this.cmb_o_id.ValueMember = "o_id";
             this.cmb_o_id.SelectedIndexChanged += new System.EventHandler(this.cmb_o_id_SelectedIndexChanged);
             // 
+            // cmb_o_id_text
+            // 
+            this.cmb_o_id_text.Location = new System.Drawing.Point(422, 79);
+            this.cmb_o_id_text.Name = "cmb_o_id_text";
+            this.cmb_o_id_text.Size = new System.Drawing.Size(100, 19);
+            this.cmb_o_id_text.TabIndex = 25;
+            // 
             // Form_seikyu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1621, 898);
+            this.Controls.Add(this.cmb_o_id_text);
             this.Controls.Add(this.cmb_o_id);
             this.Controls.Add(this.cmdGyoumu);
             this.Controls.Add(this.cmdNenMod);
@@ -2263,5 +2272,6 @@
         private o_id_dsTableAdapters.DataTableTableAdapter dataTableTableAdapter;
         private o_id_dsTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.ComboBox cmb_o_id;
+        private System.Windows.Forms.TextBox cmb_o_id_text;
     }
 }
