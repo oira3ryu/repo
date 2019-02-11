@@ -355,6 +355,7 @@ namespace rk_seikyu
         private void cmb_s_id_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmb_s_id_int = cmb_s_id.SelectedIndex + 1;
+            //cmb_s_id_int = int.Parse(cmb_s_id.SelectedValue.Value.ToString());
             Console.WriteLine("cmb_s_id_int1 = " + cmb_s_id_int);
             cmb_s_id_str = cmb_s_id.Text;
             Console.WriteLine("cmb_s_id_str1 = " + cmb_s_id_str);
@@ -518,7 +519,7 @@ namespace rk_seikyu
                         + ", t_seikyu.id"
                         + " from"
                         + " (((t_seikyu inner join t_syubetsu"
-                        + " on t_seikyu.s_id::integer = t_syubetsu.s_id)"
+                        + " on t_seikyu.s_id::integer = t_syubetsu.s_id and t_seikyu.o_id::integer = t_syubetsu.o_id)"
                         + " inner join t_par on t_seikyu.p_id::integer = t_par.p_id)"
                         + " inner join t_req on t_seikyu.req_id::integer = t_req.req_id)"
                         + " inner join t_syutsuryokubi on t_seikyu.s_id::text = t_syutsuryokubi.s_id"
@@ -725,7 +726,7 @@ namespace rk_seikyu
                         + ", t_seikyu.id"
                         + " from"
                         + " (((t_seikyu inner join t_syubetsu"
-                        + " on t_seikyu.s_id::integer = t_syubetsu.s_id)"
+                        + " on t_seikyu.s_id::integer = t_syubetsu.s_id and t_seikyu.o_id::integer = t_syubetsu.o_id)"
                         + " inner join t_par on t_seikyu.p_id::integer = t_par.p_id)"
                         + " inner join t_req on t_seikyu.req_id::integer = t_req.req_id)"
                         + " inner join t_syutsuryokubi on t_seikyu.s_id::text = t_syutsuryokubi.s_id"
@@ -934,7 +935,7 @@ namespace rk_seikyu
                         + ", to_number(c4_array[2],'99')::text as tsuki"
                         + " from"
                         + " (((t_seikyu inner join t_syubetsu"
-                        + " on t_seikyu.s_id::integer = t_syubetsu.s_id)"
+                        + " on t_seikyu.s_id::integer = t_syubetsu.s_id and t_seikyu.o_id::integer = t_syubetsu.o_id)"
                         + " inner join t_par on t_seikyu.p_id::integer = t_par.p_id)"
                         + " inner join t_req on t_seikyu.req_id::integer = t_req.req_id)"
                         + " inner join t_syutsuryokubi on t_seikyu.s_id::text = t_syutsuryokubi.s_id"

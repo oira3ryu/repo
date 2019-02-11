@@ -6521,7 +6521,10 @@ namespace rk_seikyu
                                 + ", c4_array"
                                 + " from"
                                 + " t_shiharai_houhou"
-                                + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
+                                + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
+                                + " where s_id::Integer = " + cmb_s_id_int
+                                + " and g_id::Integer = " + cmb_g_id_int
+                                + " and o_id::Integer = " + cmb_o_id_int
                                 + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
                                                 + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
                                                 + "       when length('" + cmb_tsuki_str + "')=2 then"
