@@ -799,8 +799,8 @@ namespace rk_seikyu
                             + " and o_id::Integer = " + cmb_o_id_int
                         + ")) s on r.c1 = s.c5 and rtrim(replace(r.c3,substr(r.c3,strpos(r.c3, '('), strpos(r.c3, ')')),'')) = rtrim(replace(s.c6,substr(s.c6,strpos(s.c6, '('), strpos(s.c6, ')')),'')) and r.s_id = s.s_id and r.o_id = s.o_id and s.s_id::Integer = " + cmb_s_id_int
                         + " where"
-                        + " s_id::Integer = " + cmb_s_id_int
-                        + " and o_id::Integer = " + cmb_o_id_int
+                        + " r.s_id::Integer = " + cmb_s_id_int
+                        + " and r.o_id::Integer = " + cmb_o_id_int
                         + " and r.time_stamp = (select max(time_stamp) from t_seikyu where"
                         + " s_id::Integer = " + cmb_s_id_int
                         + " and o_id::Integer = " + cmb_o_id_int
@@ -1352,7 +1352,7 @@ namespace rk_seikyu
                             + " end s_id"
                             + ", a.w_flg"
                             + " from t_seikyu a left join t_shiharai_houhou c"
-                            + " on a.c1 = c.c5 and rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),'')) = rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),'')) and a.s_id = c.s_id"
+                            + " on a.c1 = c.c5 and rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),'')) = rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),'')) and a.s_id = c.s_id and a.o_id = c.o_id"
                             + " where not exists ("
                             + " select 1 from t_seikyu b"
                             + " where c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
@@ -1475,6 +1475,7 @@ namespace rk_seikyu
                         //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c56", NpgsqlTypes.NpgsqlDbType.Text, 0, "c56", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                         //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c57", NpgsqlTypes.NpgsqlDbType.Text, 0, "c57", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                         da.InsertCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                         //da.InsertCommand.Parameters.Add(new NpgsqlParameter("p_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "p_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                         //da.InsertCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
 
@@ -1640,6 +1641,7 @@ namespace rk_seikyu
                     + ", r.c19"
                     + ", r.c22"
                     + ", r.s_id"
+                    + ", r.o_id"
                     + ", r.s_id_str"
                     + ", r.w_flg"
                     + ", r.time_stamp"
@@ -1739,6 +1741,7 @@ namespace rk_seikyu
                     + ", r.c19"
                     + ", r.c22"
                     + ", r.s_id"
+                    + ", r.o_id"
                     + ", r.s_id_str"
                     + ", r.w_flg"
                     + ", r.time_stamp"

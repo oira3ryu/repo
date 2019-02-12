@@ -12,7 +12,7 @@
   <xs:element name="withdrawal_ds" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="withdrawal_ds" msprop:Generator_UserDSName="withdrawal_ds">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="withdrawal_ds" msprop:Generator_TableClassName="withdrawal_dsDataTable" msprop:Generator_TableVarName="tablewithdrawal_ds" msprop:Generator_RowChangedName="withdrawal_dsRowChanged" msprop:Generator_TablePropName="_withdrawal_ds" msprop:Generator_RowDeletingName="withdrawal_dsRowDeleting" msprop:Generator_RowChangingName="withdrawal_dsRowChanging" msprop:Generator_RowEvHandlerName="withdrawal_dsRowChangeEventHandler" msprop:Generator_RowDeletedName="withdrawal_dsRowDeleted" msprop:Generator_RowClassName="withdrawal_dsRow" msprop:Generator_UserTableName="withdrawal_ds" msprop:Generator_RowEvArgName="withdrawal_dsRowChangeEvent">
+        <xs:element name="withdrawal_ds" msprop:Generator_TableClassName="withdrawal_dsDataTable" msprop:Generator_TableVarName="tablewithdrawal_ds" msprop:Generator_TablePropName="_withdrawal_ds" msprop:Generator_RowDeletingName="withdrawal_dsRowDeleting" msprop:Generator_RowChangingName="withdrawal_dsRowChanging" msprop:Generator_RowEvHandlerName="withdrawal_dsRowChangeEventHandler" msprop:Generator_RowDeletedName="withdrawal_dsRowDeleted" msprop:Generator_UserTableName="withdrawal_ds" msprop:Generator_RowChangedName="withdrawal_dsRowChanged" msprop:Generator_RowEvArgName="withdrawal_dsRowChangeEvent" msprop:Generator_RowClassName="withdrawal_dsRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="c3" msprop:Generator_ColumnVarNameInTable="columnc3" msprop:Generator_ColumnPropNameInRow="c3" msprop:Generator_ColumnPropNameInTable="c3Column" msprop:Generator_UserColumnName="c3" type="xs:string" minOccurs="0" />
@@ -37,6 +37,7 @@
               <xs:element name="last_day" msprop:Generator_ColumnVarNameInTable="columnlast_day" msprop:Generator_ColumnPropNameInRow="last_day" msprop:Generator_ColumnPropNameInTable="last_dayColumn" msprop:Generator_UserColumnName="last_day" type="xs:string" minOccurs="0" />
               <xs:element name="c3_mod" msprop:Generator_ColumnVarNameInTable="columnc3_mod" msprop:Generator_ColumnPropNameInRow="c3_mod" msprop:Generator_ColumnPropNameInTable="c3_modColumn" msprop:Generator_UserColumnName="c3_mod" type="xs:string" minOccurs="0" />
               <xs:element name="syubetsu" msprop:Generator_ColumnVarNameInTable="columnsyubetsu" msprop:Generator_ColumnPropNameInRow="syubetsu" msprop:Generator_ColumnPropNameInTable="syubetsuColumn" msprop:Generator_UserColumnName="syubetsu" type="xs:string" minOccurs="0" />
+              <xs:element name="o_id" msprop:Generator_ColumnVarNameInTable="columno_id" msprop:Generator_ColumnPropNameInRow="o_id" msprop:Generator_ColumnPropNameInTable="o_idColumn" msprop:Generator_UserColumnName="o_id" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
