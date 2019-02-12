@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Npgsql;
+using System;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using Npgsql;
-using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.ReportSource;
-using CrystalDecisions.Shared;
 
 namespace rk_seikyu
 {
@@ -355,7 +348,7 @@ namespace rk_seikyu
         private void cmb_s_id_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmb_s_id_int = cmb_s_id.SelectedIndex + 1;
-            //cmb_s_id_int = int.Parse(cmb_s_id.SelectedValue.Value.ToString());
+            //cmb_s_id_int = int.Parse(cmb_s_id.SelectedValue.ToString());
             Console.WriteLine("cmb_s_id_int1 = " + cmb_s_id_int);
             cmb_s_id_str = cmb_s_id.Text;
             Console.WriteLine("cmb_s_id_str1 = " + cmb_s_id_str);
@@ -702,6 +695,7 @@ namespace rk_seikyu
                         + ", c21"
                         + ", c22"
                         + ", t_seikyu.s_id"
+                        + ", t_seikyu.o_id"
                         + ", t_seikyu.p_id"
                         + ", syubetsu"
                         + ", shisetsumei"
@@ -769,6 +763,7 @@ namespace rk_seikyu
                         + ", r.c21"
                         + ", r.c22"
                         + ", r.s_id"
+                        + ", r.o_id"
                         + ", r.p_id"
                         + ", r.syubetsu"
                         + ", r.shisetsumei"
@@ -792,7 +787,7 @@ namespace rk_seikyu
                         + ", r.time_stamp"
                         + ", r.id"
                         + " from r"
-                        + " left join (select c4, c5, c6, c7, c9, c11, c14, c15, c16, c17, c19, s_id, case when c7 = '現金' then '1' when c7 = '引落' then '2' when c7 = '振込' then '2' else '' end 支払方法, time_stamp from t_shiharai_houhou"
+                        + " left join (select c4, c5, c6, c7, c9, c11, c14, c15, c16, c17, c19, s_id, o_id, case when c7 = '現金' then '1' when c7 = '引落' then '2' when c7 = '振込' then '2' else '' end 支払方法, time_stamp from t_shiharai_houhou"
                         + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou where"
                             + " c4_array[1]::text || '/' || c4_array[2]::Text = "
                             + " case when length('" + cmb_tsuki_str + "')=1 then"
@@ -801,10 +796,14 @@ namespace rk_seikyu
                             + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
                             + " end"
                             + " and s_id::Integer = " + cmb_s_id_int
-                        + ")) s on r.c1 = s.c5 and rtrim(replace(r.c3,substr(r.c3,strpos(r.c3, '('), strpos(r.c3, ')')),'')) = rtrim(replace(s.c6,substr(s.c6,strpos(s.c6, '('), strpos(s.c6, ')')),'')) and r.s_id = s.s_id and s.s_id::Integer = " + cmb_s_id_int
+                            + " and o_id::Integer = " + cmb_o_id_int
+                        + ")) s on r.c1 = s.c5 and rtrim(replace(r.c3,substr(r.c3,strpos(r.c3, '('), strpos(r.c3, ')')),'')) = rtrim(replace(s.c6,substr(s.c6,strpos(s.c6, '('), strpos(s.c6, ')')),'')) and r.s_id = s.s_id and r.o_id = s.o_id and s.s_id::Integer = " + cmb_s_id_int
                         + " where"
-                        + " r.s_id::Integer = " + cmb_s_id_int
-                        + " and r.time_stamp = (select max(time_stamp) from t_seikyu where s_id::Integer = " + cmb_s_id_int
+                        + " s_id::Integer = " + cmb_s_id_int
+                        + " and o_id::Integer = " + cmb_o_id_int
+                        + " and r.time_stamp = (select max(time_stamp) from t_seikyu where"
+                        + " s_id::Integer = " + cmb_s_id_int
+                        + " and o_id::Integer = " + cmb_o_id_int
                             + " and c4_array[1]::text || '/' || c4_array[2]::Text = "
                             + " case when length('" + cmb_tsuki_str + "')=1 then"
                             + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
@@ -910,6 +909,7 @@ namespace rk_seikyu
                         + ", c21"
                         + ", c22"
                         + ", t_seikyu.s_id"
+                        + ", t_seikyu.o_id"
                         + ", t_seikyu.p_id"
                         + ", syubetsu"
                         + ", shisetsumei"
@@ -972,15 +972,18 @@ namespace rk_seikyu
                         + ", to_number(c4_array[1],'999')::text as nen"
                         + ", to_number(c4_array[2],'99')::text as tsuki"
                         + " from r"
-                        + " group by c4, s_id, c4_array, req_id, syubetsu, tsuki, time_stamp"
+                        + " group by c4, s_id, o_id, c4_array, req_id, syubetsu, tsuki, time_stamp"
                         + " having c4::Text = case when length('" + cmb_tsuki_str + "')=1 then"
                                         + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
                                         + "       when length('" + cmb_tsuki_str + "')=2 then"
                                         + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
                                         + " end"
                         + " and s_id::Integer = :s_id"
+                        + " and o_id::Integer = :o_id"
                         + " and req_id::Integer = :req_id"
-                        + " and time_stamp = (select max(time_stamp) from t_seikyu where s_id::Integer = :s_id"
+                        + " and time_stamp = (select max(time_stamp) from t_seikyu where"
+                        + " s_id::Integer = :s_id"
+                        + " and o_id::Integer = :o_id"
                         + " and c4::Text = case when length('" + cmb_tsuki_str + "')=1 then"
                                         + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
                                         + "       when length('" + cmb_tsuki_str + "')=2 then"
@@ -1058,6 +1061,7 @@ namespace rk_seikyu
                         + ", t1.c4"
                         + ", t1.c22"
                         + ", t1.s_id"
+                        + ", t1.o_id"
                         + ", t1.req_id"
                         + ", t3.syubetsu"
                         + ", t1.c3"
@@ -1157,15 +1161,17 @@ namespace rk_seikyu
                             //+ ", t5,sy"
                         + ", t9.c25 shiharaisya"
                             //+ ", target_date(to_date((to_number(t5.sy,'999')-12+2000 || '/' || to_number(t5.sm,'99') || '/' || to_number(t5.sd,'99')),'yyyy/mm/dd'))"
-                        + " from ((((((((select id, c1, c3, c4, c4_array, c22, s_id, req_id"
+                        + " from ((((((((select id, c1, c3, c4, c4_array, c22, s_id, o_id, req_id"
                         + " , time_stamp from t_seikyu"
-                        + " where time_stamp = (select max(time_stamp) from t_seikyu where s_id::Integer = " + cmb_s_id_int
+                        + " where time_stamp = (select max(time_stamp) from t_seikyu where"
+                        + " s_id::Integer = " + cmb_s_id_int
+                        + " and o_id::Integer = " + cmb_o_id_int
                         + " and c4 = case when length('" + cmb_tsuki_str + "')=1 then"
                                         + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
                                         + "       when length('" + cmb_tsuki_str + "')=2 then"
                                         + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
                                         + " end)) t1"
-                        + " left join (select c4, c5, c6, c7, c11, c14, c15, c16, c19, s_id, case when c7 = '現金' then '1' when c7 = '引落' then '2' when c7 = '振込' then '2' else '' end 支払方法, time_stamp from t_shiharai_houhou"
+                        + " left join (select c4, c5, c6, c7, c11, c14, c15, c16, c19, s_id, o_id, case when c7 = '現金' then '1' when c7 = '引落' then '2' when c7 = '振込' then '2' else '' end 支払方法, time_stamp from t_shiharai_houhou"
                         + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou where"
                             + " c4_array[1]::text || '/' || c4_array[2]::Text = "
                             + " case when length('" + cmb_tsuki_str + "')=1 then"
@@ -1174,14 +1180,15 @@ namespace rk_seikyu
                             + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
                             + " end"
                             + " and s_id::Integer = " + cmb_s_id_int
-                        + ")) t2 on t1.c1 = t2.c5 and rtrim(replace(t1.c3,substr(t1.c3,strpos(t1.c3, '('), strpos(t1.c3, ')')),'')) = rtrim(replace(t2.c6,substr(t2.c6,strpos(t2.c6, '('), strpos(t2.c6, ')')),'')) and t1.s_id = t2.s_id and t2.s_id::Integer = " + cmb_s_id_int + ")"
-                        + " left join (select s_id, syubetsu from t_syubetsu) t3 on t1.s_id::Integer = t3.s_id)"
+                            + " and o_id::Integer = " + cmb_o_id_int
+                        + ")) t2 on t1.c1 = t2.c5 and rtrim(replace(t1.c3,substr(t1.c3,strpos(t1.c3, '('), strpos(t1.c3, ')')),'')) = rtrim(replace(t2.c6,substr(t2.c6,strpos(t2.c6, '('), strpos(t2.c6, ')')),'')) and t1.s_id = t2.s_id and t1.o_id = t2.o_id and t2.s_id::Integer = " + cmb_s_id_int + ")"
+                        + " left join (select s_id, syubetsu from t_syubetsu) t3 on t1.s_id::Integer = t3.s_id and t1.o_id::Integer = t3.o_id)"
                         + " left join (select rep_id, pt_id, s_id, col0, col1, col2, col3, col4, col5, ac0, ac1, ac2, ac3 from t_rep) t4 on t2.支払方法 = t4.pt_id and t1.s_id = t4.s_id)"
                         + " left join (select bid, b_id, b_code, b_name, sb_name, br_code, br_name, sd, sm, sy from t_bank) t5 on t2.c11 = t5.b_name)"
                         + " left join (select req_id, title1, title2, title3, title4, name1, name2, name3, name4, name5, data6, data7, data8, title4_kana, name2_kana from t_req) t6 on t1.req_id::Integer = t6.req_id)"
                         + " left join (select syutsuryokubi, s_id from t_syutsuryokubi) t7 on t1.s_id = t7.s_id)"
                         + " left join (select bid, b_id, b_code, b_name, sb_name, br_code, br_name, sd from t_bank where b_id = '1') t8 on t2.c11 = t8.b_name)"
-                        + " left join (select c1, c5, c25, c48, s_id from t_shinzoku_kankei where c48 = '1' and time_stamp = (select max(time_stamp) from t_shinzoku_kankei where"
+                        + " left join (select c1, c5, c25, c48, s_id, o_id from t_shinzoku_kankei where c48 = '1' and time_stamp = (select max(time_stamp) from t_shinzoku_kankei where"
                             + " c4_array[1]::text || '/' || c4_array[2]::Text = "
                             + " case when length('" + cmb_tsuki_str + "')=1 then"
                             + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
@@ -1189,7 +1196,10 @@ namespace rk_seikyu
                             + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
                             + " end"
                             + " and s_id::Integer = " + cmb_s_id_int
-                        + " )) t9 on t1.c1 = t9.c1 and t9.s_id::Integer = " + cmb_s_id_int
+                            + " and o_id::Integer = " + cmb_o_id_int
+                        + " )) t9 on t1.c1 = t9.c1"
+                        + " and t9.s_id::Integer = " + cmb_s_id_int
+                        + " and t9.o_id::Integer = " + cmb_o_id_int
                         + " order by t1.id)"
                         + " select"
                         + " 利用者番号"
@@ -1351,6 +1361,7 @@ namespace rk_seikyu
                                                                     + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
                                                                     + " end"
                                                     + " and a.s_id = b.s_id"
+                                                    + " and a.o_id = b.o_id"
                             + " and a.time_stamp < b.time_stamp"
                             + " )"
                             + " and a.c4_array[1]::text || '/' || a.c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
@@ -1366,6 +1377,7 @@ namespace rk_seikyu
                                                                     + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
                                                                     + " end"
                                                    + " and c.s_id = d.s_id"
+                                                   + " and c.o_id = d.o_id"
                             + " and c.time_stamp < d.time_stamp)"
                             + " and c.c4_array[1]::text || '/' || c.c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
                                                                     + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
@@ -1590,14 +1602,16 @@ namespace rk_seikyu
                     + " when '通所型サービス' then '通所型'"
                     + " end s_id_str"
                     + ", a.s_id"
+                    + ", a.o_id"
                     + ", a.time_stamp"
                     + ", a.w_flg"
                     + " from t_seikyu a left join t_shiharai_houhou c"
-                    + " on a.c1 = c.c5 and rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),'')) = rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),'')) and a.s_id = c.s_id and a.w_flg = '1' and c.c9 = '" + cmb_b_code_str + "'"
+                    + " on a.c1 = c.c5 and rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),'')) = rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),'')) and a.s_id = c.s_id and a.o_id = c.o_id and a.w_flg = '1' and c.c9 = '" + cmb_b_code_str + "'"
                     + " where not exists ("
                     + " select 1"
                     + " from t_seikyu b"
                     + " where a.s_id = b.s_id"
+                    + " and a.o_id = b.o_id"
                     + " and a.c4_array = b.c4_array"
                     + " and a.time_stamp < b.time_stamp)"
                     + " and a.c4_array = c.c4_array"
@@ -1605,6 +1619,7 @@ namespace rk_seikyu
                     + " select 1"
                     + " from t_shiharai_houhou d"
                     + " where c.s_id = d.s_id"
+                    + " and c.o_id = d.o_id"
                     + " and c.c4_array = d.c4_array"
                     + " and c.time_stamp < d.time_stamp)"
                     + " and a.c4_array = c.c4_array"
@@ -1687,14 +1702,16 @@ namespace rk_seikyu
                     + " when '通所型サービス' then '通所型'"
                     + " end s_id_str"
                     + ", a.s_id"
+                    + ", a.o_id"
                     + ", a.time_stamp"
                     + ", a.w_flg"
                     + " from t_seikyu a left join t_shiharai_houhou c"
-                    + " on a.c1 = c.c5 and rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),'')) = rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),'')) and a.s_id = c.s_id and a.w_flg = '1' and c.c9 = '" + cmb_b_code_str + "'"
+                    + " on a.c1 = c.c5 and rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),'')) = rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),'')) and a.s_id = c.s_id and a.o_id = c.o_id and a.w_flg = '1' and c.c9 = '" + cmb_b_code_str + "'"
                     + " where not exists ("
                     + " select 1"
                     + " from t_seikyu b"
                     + " where a.s_id = b.s_id"
+                    + " and a.o_id = b.o_id"
                     + " and a.c4_array = b.c4_array"
                     + " and a.time_stamp < b.time_stamp)"
                     + " and a.c4_array = c.c4_array"
@@ -1702,6 +1719,7 @@ namespace rk_seikyu
                     + " select 1"
                     + " from t_shiharai_houhou d"
                     + " where c.s_id = d.s_id"
+                    + " and c.o_id = d.o_id"
                     + " and c.c4_array = d.c4_array"
                     + " and c.time_stamp < d.time_stamp)"
                     + " and a.c4_array = c.c4_array"

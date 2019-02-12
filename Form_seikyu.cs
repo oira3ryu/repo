@@ -5008,13 +5008,14 @@ namespace rk_seikyu
 
         private void cmb_s_id_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             cmb_s_id_int = cmb_s_id.SelectedIndex + 1;
-            Console.WriteLine("cmb_s_id_int = " + cmb_s_id_int);
-
-
-            cmb_s_id_str = cmb_s_id.Text;
-            Console.WriteLine("cmb_s_id_str = " + cmb_s_id_str);
-            textBox1.Text = cmb_s_id_str;
+            if (cmb_s_id.SelectedIndex != -1)
+            {
+                cmb_s_id_str = ((DataRowView)cmb_s_id.SelectedItem).Row["s_id"].ToString();
+            }
+            Console.WriteLine("Form_seikyu_cmb_s_id_str = " + cmb_s_id_str);
+            cmb_o_id_text.Text = cmb_s_id_str;
 
 
             switch (cmb_g_id_int)
