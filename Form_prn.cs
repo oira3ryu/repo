@@ -55,9 +55,11 @@ namespace rk_seikyu
         public string cmb_nen_str { get; set; }
         public string cmb_tsuki_str { get; set; }
         public string cmb_b_code_str { get; set; }
-        public String cmb_o_id_str;
         public int cmb_o_id_int { get; set; }
         public string StrDateTime { get; set; }
+
+        public String cmb_o_id_str;
+        public String cmb_o_id_item;
 
         private Form_seikyu form_seikyu_Instance;
 
@@ -70,6 +72,8 @@ namespace rk_seikyu
             //Form_seikyuのテキストボックス文字列を
             //Form_prnの文字列変数cmb_o_id_strへ設定
             cmb_o_id_str = form_seikyu_Instance.cmb_o_id_Text;
+            cmb_o_id_item = form_seikyu_Instance.cmb_o_id_Item;
+            Console.WriteLine("cmb_o_idからのメンバーは、" + cmb_o_id_item);
 
             //Form_seikyuのコンボボックスcmb_o_idからの変数cmb_o_id_strをint型に変換して1加算
             int i;
@@ -1352,7 +1356,7 @@ namespace rk_seikyu
                             + " end s_id"
                             + ", a.w_flg"
                             + " from t_seikyu a left join t_shiharai_houhou c"
-                            + " on a.c1 = c.c5 and rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),'')) = rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),'')) and a.s_id = c.s_id and a.o_id = c.o_id"
+                            + " on a.c1 = c.c5 and rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),'')) = rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),'')) and a.o_id = c.o_id"
                             + " where not exists ("
                             + " select 1 from t_seikyu b"
                             + " where c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
@@ -1389,6 +1393,8 @@ namespace rk_seikyu
                             + " else"
                                         + " c.c9 = '" + cmb_b_code_str + "'"
                                         + " end"
+                                        + " and a.o_id = '" + cmb_o_id_str + "'"
+                                        //+ " and a.s_id::Integer = " + cmb_s_id_int
                             + " order by a.r_id;"
                                 , m_conn
                             );
@@ -1404,6 +1410,7 @@ namespace rk_seikyu
                                     + ", c19"
                                     + ", c22"
                                     + ", s_id"
+                                    + ", o_id"
                                     + " ) select"
                                     + " r_id"
                                     + ", c3"
@@ -1414,112 +1421,27 @@ namespace rk_seikyu
                                     + ", c19"
                                     + ", c22"
                                     + ", s_id"
+                                    + ", o_id"
                                     + " from t_csv"
                                     + " order by id;"
                                         , m_conn);
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c2", NpgsqlTypes.NpgsqlDbType.Text, 0, "c2", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                         da.InsertCommand.Parameters.Add(new NpgsqlParameter("c3", NpgsqlTypes.NpgsqlDbType.Text, 0, "c3", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                         da.InsertCommand.Parameters.Add(new NpgsqlParameter("c4", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c5", NpgsqlTypes.NpgsqlDbType.Text, 0, "c5", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c6", NpgsqlTypes.NpgsqlDbType.Text, 0, "c6", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c7", NpgsqlTypes.NpgsqlDbType.Text, 0, "c7", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c8", NpgsqlTypes.NpgsqlDbType.Text, 0, "c8", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                         da.InsertCommand.Parameters.Add(new NpgsqlParameter("c9", NpgsqlTypes.NpgsqlDbType.Text, 0, "c9", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c10", NpgsqlTypes.NpgsqlDbType.Text, 0, "c10", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                         da.InsertCommand.Parameters.Add(new NpgsqlParameter("c11", NpgsqlTypes.NpgsqlDbType.Text, 0, "c11", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c12", NpgsqlTypes.NpgsqlDbType.Text, 0, "c12", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c13", NpgsqlTypes.NpgsqlDbType.Text, 0, "c13", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                         da.InsertCommand.Parameters.Add(new NpgsqlParameter("c14", NpgsqlTypes.NpgsqlDbType.Text, 0, "c14", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c15", NpgsqlTypes.NpgsqlDbType.Text, 0, "c15", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c16", NpgsqlTypes.NpgsqlDbType.Text, 0, "c16", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c17", NpgsqlTypes.NpgsqlDbType.Text, 0, "c17", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c18", NpgsqlTypes.NpgsqlDbType.Text, 0, "c18", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                         da.InsertCommand.Parameters.Add(new NpgsqlParameter("c19", NpgsqlTypes.NpgsqlDbType.Text, 0, "c19", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c20", NpgsqlTypes.NpgsqlDbType.Text, 0, "c20", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c21", NpgsqlTypes.NpgsqlDbType.Text, 0, "c21", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                         da.InsertCommand.Parameters.Add(new NpgsqlParameter("c22", NpgsqlTypes.NpgsqlDbType.Text, 0, "c22", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c23", NpgsqlTypes.NpgsqlDbType.Text, 0, "c23", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c24", NpgsqlTypes.NpgsqlDbType.Text, 0, "c24", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c25", NpgsqlTypes.NpgsqlDbType.Text, 0, "c25", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c26", NpgsqlTypes.NpgsqlDbType.Text, 0, "c26", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c27", NpgsqlTypes.NpgsqlDbType.Text, 0, "c27", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c28", NpgsqlTypes.NpgsqlDbType.Text, 0, "c28", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c29", NpgsqlTypes.NpgsqlDbType.Text, 0, "c29", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c30", NpgsqlTypes.NpgsqlDbType.Text, 0, "c30", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c31", NpgsqlTypes.NpgsqlDbType.Text, 0, "c31", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c32", NpgsqlTypes.NpgsqlDbType.Text, 0, "c32", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c33", NpgsqlTypes.NpgsqlDbType.Text, 0, "c33", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c34", NpgsqlTypes.NpgsqlDbType.Text, 0, "c34", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c35", NpgsqlTypes.NpgsqlDbType.Text, 0, "c35", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c36", NpgsqlTypes.NpgsqlDbType.Text, 0, "c36", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c37", NpgsqlTypes.NpgsqlDbType.Text, 0, "c37", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c38", NpgsqlTypes.NpgsqlDbType.Text, 0, "c38", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c39", NpgsqlTypes.NpgsqlDbType.Text, 0, "c39", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c40", NpgsqlTypes.NpgsqlDbType.Text, 0, "c40", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c41", NpgsqlTypes.NpgsqlDbType.Text, 0, "c41", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c42", NpgsqlTypes.NpgsqlDbType.Text, 0, "c42", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c43", NpgsqlTypes.NpgsqlDbType.Text, 0, "c43", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c44", NpgsqlTypes.NpgsqlDbType.Text, 0, "c44", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c45", NpgsqlTypes.NpgsqlDbType.Text, 0, "c45", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c46", NpgsqlTypes.NpgsqlDbType.Text, 0, "c46", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c47", NpgsqlTypes.NpgsqlDbType.Text, 0, "c47", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c48", NpgsqlTypes.NpgsqlDbType.Text, 0, "c48", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c49", NpgsqlTypes.NpgsqlDbType.Text, 0, "c49", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c50", NpgsqlTypes.NpgsqlDbType.Text, 0, "c50", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c51", NpgsqlTypes.NpgsqlDbType.Text, 0, "c51", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c52", NpgsqlTypes.NpgsqlDbType.Text, 0, "c52", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c53", NpgsqlTypes.NpgsqlDbType.Text, 0, "c53", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c54", NpgsqlTypes.NpgsqlDbType.Text, 0, "c54", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c55", NpgsqlTypes.NpgsqlDbType.Text, 0, "c55", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c56", NpgsqlTypes.NpgsqlDbType.Text, 0, "c56", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c57", NpgsqlTypes.NpgsqlDbType.Text, 0, "c57", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                         da.InsertCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                         da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("p_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "p_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
 
                         // update
                         da.UpdateCommand = new NpgsqlCommand(
                                 "update t_seikyu set"
-                            //+ " c3 = :c3"
-                            //+ ", c4 = :c4"
-                            //+ ", c9 = :c9"
-                            //+ ", c11 = :c11"
-                            //+ ", c14 = :c14"
-                            //+ ", c19 = :c19"
-                            //+ ", c22 = :c22"
-                            //+ ", s_id = :s_id"
                                 + " w_flg = :w_flg"
                                 + " where r_id=:r_id;"
                             , m_conn
                             );
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c2", NpgsqlTypes.NpgsqlDbType.Text, 0, "c2", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c3", NpgsqlTypes.NpgsqlDbType.Text, 0, "c3", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c5", NpgsqlTypes.NpgsqlDbType.Text, 0, "c5", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c6", NpgsqlTypes.NpgsqlDbType.Text, 0, "c6", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c7", NpgsqlTypes.NpgsqlDbType.Text, 0, "c7", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c8", NpgsqlTypes.NpgsqlDbType.Text, 0, "c8", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c9", NpgsqlTypes.NpgsqlDbType.Text, 0, "c9", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c10", NpgsqlTypes.NpgsqlDbType.Text, 0, "c10", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c11", NpgsqlTypes.NpgsqlDbType.Text, 0, "c11", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c12", NpgsqlTypes.NpgsqlDbType.Text, 0, "c12", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c13", NpgsqlTypes.NpgsqlDbType.Text, 0, "c13", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c14", NpgsqlTypes.NpgsqlDbType.Text, 0, "c14", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c15", NpgsqlTypes.NpgsqlDbType.Text, 0, "c15", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c16", NpgsqlTypes.NpgsqlDbType.Text, 0, "c16", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c17", NpgsqlTypes.NpgsqlDbType.Text, 0, "c17", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c18", NpgsqlTypes.NpgsqlDbType.Text, 0, "c18", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c19", NpgsqlTypes.NpgsqlDbType.Text, 0, "c19", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c20", NpgsqlTypes.NpgsqlDbType.Text, 0, "c20", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c21", NpgsqlTypes.NpgsqlDbType.Text, 0, "c21", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c22", NpgsqlTypes.NpgsqlDbType.Text, 0, "c22", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Array | NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
                         da.UpdateCommand.Parameters.Add(new NpgsqlParameter("w_flg", NpgsqlTypes.NpgsqlDbType.Integer, 0, "w_flg", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                         da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
@@ -1540,14 +1462,6 @@ namespace rk_seikyu
                         if (withdrawalds.Tables["withdrawal_ds"] != null)
                             withdrawalds.Tables["withdrawal_ds"].Clear();
                         da.Fill(withdrawalds, "withdrawal_ds");
-
-                        //crWithdrawal myReport = new crWithdrawal();
-                        //myReport.SetDataSource(ds);
-
-                        //myReport.SetParameterValue("s_id", cmb_s_id_int.ToString());
-                        //myReport.SetParameterValue("req_id", cmb_req_id_int.ToString());
-
-                        //crvSeikyu.ReportSource = myReport;
 
                         bindingSourceWithdrawal.DataSource = withdrawalds;
                         bindingSourceWithdrawal.DataMember = "withdrawal_ds";
@@ -1615,7 +1529,9 @@ namespace rk_seikyu
                     + " and a.o_id = b.o_id"
                     + " and a.c4_array = b.c4_array"
                     + " and a.time_stamp < b.time_stamp)"
-                    + " and a.c4_array = c.c4_array"
+                                + " and a.s_id = c.s_id"
+                                + " and a.o_id = c.o_id"
+                                + " and a.c4_array = c.c4_array"
                     + " and not exists ("
                     + " select 1"
                     + " from t_shiharai_houhou d"
@@ -1623,7 +1539,9 @@ namespace rk_seikyu
                     + " and c.o_id = d.o_id"
                     + " and c.c4_array = d.c4_array"
                     + " and c.time_stamp < d.time_stamp)"
-                    + " and a.c4_array = c.c4_array"
+                                + " and a.s_id = c.s_id"
+                                + " and a.o_id = c.o_id"
+                                + " and a.c4_array = c.c4_array"
                     + " order by a.s_id, a.c1, a.r_id, a.c4"
                     + ")"
                     + " select"
@@ -1659,17 +1577,7 @@ namespace rk_seikyu
                     NpgsqlDataReader reader = da.SelectCommand.ExecuteReader();
                     reader.Read();
                     e.Row["w_flg"] = reader["w_flg"];
-                    //e.Row["c3"] = reader["c3"];
-                    //e.Row["c4"] = reader["c4"];
-                    //e.Row["c9"] = reader["c9"];
-                    //e.Row["c11"] = reader["c11"];
-                    //e.Row["c14"] = reader["c14"];
-                    //e.Row["c16"] = reader["c16"];
-                    //e.Row["c19"] = reader["c19"];
-                    //e.Row["c22"] = reader["c22"];
-                    //e.Row["time_stamp"] = reader["time_stamp"];
                     e.Row["r_id"] = reader["r_id"];
-                    //e.Row["s_id"] = reader["s_id"];
 
                 }
                 catch (Exception ex)
@@ -1716,7 +1624,9 @@ namespace rk_seikyu
                     + " and a.o_id = b.o_id"
                     + " and a.c4_array = b.c4_array"
                     + " and a.time_stamp < b.time_stamp)"
-                    + " and a.c4_array = c.c4_array"
+                                + " and a.s_id = c.s_id"
+                                + " and a.o_id = c.o_id"
+                                + " and a.c4_array = c.c4_array"
                     + " and not exists ("
                     + " select 1"
                     + " from t_shiharai_houhou d"
@@ -1724,7 +1634,9 @@ namespace rk_seikyu
                     + " and c.o_id = d.o_id"
                     + " and c.c4_array = d.c4_array"
                     + " and c.time_stamp < d.time_stamp)"
-                    + " and a.c4_array = c.c4_array"
+                                + " and a.s_id = c.s_id"
+                                + " and a.o_id = c.o_id"
+                                + " and a.c4_array = c.c4_array"
                     + " order by a.s_id, a.c1, a.r_id, a.c4"
                     + ")"
                     + " select"
@@ -1760,17 +1672,7 @@ namespace rk_seikyu
                 NpgsqlDataReader reader = da.SelectCommand.ExecuteReader();
                 reader.Read();
                 e.Row["w_flg"] = reader["w_flg"];
-                //e.Row["c3"] = reader["c3"];
-                //e.Row["c4"] = reader["c4"];
-                //e.Row["c9"] = reader["c9"];
-                //e.Row["c11"] = reader["c11"];
-                //e.Row["c14"] = reader["c14"];
-                //e.Row["c16"] = reader["c16"];
-                //e.Row["c19"] = reader["c19"];
-                //e.Row["c22"] = reader["c22"];
-                //e.Row["time_stamp"] = reader["time_stamp"];
                 e.Row["r_id"] = reader["r_id"];
-                //e.Row["s_id"] = reader["s_id"];
             }
             catch (Exception ex)
             {
@@ -2127,6 +2029,7 @@ namespace rk_seikyu
                                 + " when '通所型サービス' then '通所型'"
                                 + " end s_id_str"
                                 + ", a.s_id"
+                                + ", a.o_id"
                                 + ", a.time_stamp"
                                 + ", a.w_flg"
                                 + " from t_seikyu a left join t_shiharai_houhou c"
@@ -2135,6 +2038,7 @@ namespace rk_seikyu
                                 + " select 1"
                                 + " from t_seikyu b"
                                 + " where a.s_id = b.s_id"
+                                + " and a.o_id = b.o_id"
                                 + " and a.c4_array = b.c4_array"
                                 + " and a.time_stamp < b.time_stamp)"
                                 + " and a.c4_array = c.c4_array"
@@ -2142,10 +2046,13 @@ namespace rk_seikyu
                                 + " select 1"
                                 + " from t_shiharai_houhou d"
                                 + " where c.s_id = d.s_id"
+                                + " and c.o_id = d.o_id"
                                 + " and c.c4_array = d.c4_array"
                                 + " and c.time_stamp < d.time_stamp)"
+                                + " and a.s_id = c.s_id"
+                                + " and a.o_id = c.o_id"
                                 + " and a.c4_array = c.c4_array"
-                            //+ " order by a.s_id, a.r_id, a.c1, a.c4"
+                                //+ " order by a.s_id, a.r_id, a.c1, a.c4"
                                 + " order by a.r_id"
                                 + ")"
                                 + " select"
@@ -2169,7 +2076,7 @@ namespace rk_seikyu
                                 + ", to_number(concat(to_number(ltrim(left(c4,3)),'999')-12+2000 ,lpad(trim(right(c4,2)),2,'0')),'999999')"
                                 + " from r"
                                 + " where r.w_flg = '1'"
-                            //+ " order by r.s_id, r.r_id, r.c1, to_number(concat(to_number(ltrim(left(r.c4,3)),'999')-12+2000 ,lpad(trim(right(r.c4,2)),2,'0')),'999999')"
+                                //+ " order by r.s_id, r.r_id, r.c1, to_number(concat(to_number(ltrim(left(r.c4,3)),'999')-12+2000 ,lpad(trim(right(r.c4,2)),2,'0')),'999999')"
                                 + " order by r.r_id, to_number(concat(to_number(ltrim(left(r.c4,3)),'999')-12+2000 ,lpad(trim(right(r.c4,2)),2,'0')),'999999')"
                                 + " )"
                                     + " select"
@@ -2189,7 +2096,7 @@ namespace rk_seikyu
                                     + ", h.c22"
                                     + ", h.s_id sort_s_id"
                                     + ", h.s_id_str as s_id"
-                            //+ ", h.s_id"
+                                    //+ ", h.s_id"
                                     + ", h.w_flg"
                                     + ", h.time_stamp"
                                     + ", case when b.sy IS NULL or b.sm IS NULL then" /* 引落年月日自動入力の場合*/
@@ -2271,10 +2178,10 @@ namespace rk_seikyu
                                     + ", s.data6"
                                     + ", s.name3"
                                     + ", x.syubetsu"
+                                    + ", x.shisetsumei"
                             + " from h left join t_bank b"
                             + " on h.c9 = b.b_code, t_req s, t_syubetsu x"
-                            + " where x.s_id = 1"
-                            //+ " order by sort_s_id, h.c1, r_id, to_number(concat(to_number(ltrim(left(h.c4,3)),'999')-12+2000 ,lpad(trim(right(h.c4,2)),2,'0')),'999999')"
+                            + " where x.o_id = " + cmb_o_id_str + " and x.s_id = " + cmb_s_id_int
                             + " order by to_number(concat(to_number(ltrim(left(h.c4,3)),'999')-12+2000 ,lpad(trim(right(h.c4,2)),2,'0')),'999999'), h.r_id"
                             , m_conn
                         );
@@ -2284,6 +2191,7 @@ namespace rk_seikyu
                         da.Fill(withdrawalds, "withdrawal_ds");
                         crWithdrawal myReport = new crWithdrawal();
                         myReport.SetDataSource(withdrawalds);
+                        myReport.SetParameterValue("r_cmb_o_id_item", cmb_o_id_item);  // 指定したパラメータ値をセット
                         crvSeikyu.ReportSource = myReport;
 
                         bindingNavigatorWithdrawal.Visible = false;
@@ -2329,17 +2237,21 @@ namespace rk_seikyu
                                 + " select 1"
                                 + " from t_seikyu b"
                                 + " where a.s_id = b.s_id"
+                                + " and a.o_id = b.o_id"
                                 + " and a.c4_array = b.c4_array"
                                 + " and a.time_stamp < b.time_stamp)"
+                                + " and a.s_id = c.s_id"
+                                + " and a.o_id = c.o_id"
                                 + " and a.c4_array = c.c4_array"
                                 + " and not exists ("
                                 + " select 1"
                                 + " from t_shiharai_houhou d"
                                 + " where c.s_id = d.s_id"
+                                + " and c.o_id = d.o_id"
                                 + " and c.c4_array = d.c4_array"
                                 + " and c.time_stamp < d.time_stamp)"
                                 + " and a.c4_array = c.c4_array"
-                            //+ " order by a.s_id, a.r_id, a.c1, a.c4"
+                                //+ " order by a.s_id, a.r_id, a.c1, a.c4"
                                 + " order by a.r_id"
                                 + ")"
                                 + " select"
@@ -2366,7 +2278,6 @@ namespace rk_seikyu
                                 + ", to_number(concat(to_number(ltrim(left(c4,3)),'999')-12+2000 ,lpad(trim(right(c4,2)),2,'0')),'999999')"
                                 + " from r"
                                 + " where r.w_flg = '1'"
-                            //+ " order by r.s_id, r.r_id, r.c1, to_number(concat(to_number(ltrim(left(r.c4,3)),'999')-12+2000 ,lpad(trim(right(r.c4,2)),2,'0')),'999999')"
                                 + " order by r.r_id, to_number(concat(to_number(ltrim(left(r.c4,3)),'999')-12+2000 ,lpad(trim(right(r.c4,2)),2,'0')),'999999')"
                                 + " )"
                                     + " select"
@@ -2437,8 +2348,7 @@ namespace rk_seikyu
                                     + ", x.syubetsu"
                             + " from h left join t_bank b"
                             + " on h.c9 = b.b_code, t_req s, t_syubetsu x"
-                            + " where x.s_id = 1"
-                            //+ " order by sort_s_id, h.c1, r_id, to_number(concat(to_number(ltrim(left(h.c4,3)),'999')-12+2000 ,lpad(trim(right(h.c4,2)),2,'0')),'999999')"
+                            + " where x.o_id = " + cmb_o_id_str + " and x.s_id = " + cmb_s_id_int
                             + " order by to_number(concat(to_number(ltrim(left(h.c4,3)),'999')-12+2000 ,lpad(trim(right(h.c4,2)),2,'0')),'999999'), h.r_id"
                             , m_conn
                         );
@@ -2449,6 +2359,7 @@ namespace rk_seikyu
 
                         crWithdrawal myReport = new crWithdrawal();
                         myReport.SetDataSource(withdrawalds);
+                        myReport.SetParameterValue("r_cmb_o_id_item", cmb_o_id_item);  // 指定したパラメータ値をセット
                         crvSeikyu.ReportSource = myReport;
 
                         bindingNavigatorWithdrawal.Visible = false;

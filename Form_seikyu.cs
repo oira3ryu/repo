@@ -102,11 +102,10 @@ namespace rk_seikyu
         public static Form_seikyu Form_seikyu_Instance { get => _form_seikyu_Instance; set => _form_seikyu_Instance = value; }
         //文字列変数cmb_o_id_Textへコンボボックスcmb_o_idの値を設定、取得する。
         public string cmb_o_id_Text { get => cmb_o_id.SelectedIndex.ToString(); set => cmb_o_id.Text = value; }
+        public string cmb_o_id_Item { get => cmb_o_id.Text; set => cmb_o_id.Text = value; }
 
         private void Form_seikyu_Load(object sender, EventArgs e)
         {
-            // TODO: このコード行はデータを 'o_id_ds1.DataTable' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
-            //this.dataTableTableAdapter.Fill(this.o_id_ds1.DataTable);
             o_id_da.SelectCommand = new NpgsqlCommand
             (
                     "select"
