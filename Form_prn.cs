@@ -1412,7 +1412,6 @@ namespace rk_seikyu
                                     + ", c19"
                                     + ", c22"
                                     + ", s_id"
-                                    + ", o_id"
                                     + " ) select"
                                     + " r_id"
                                     + ", c3"
@@ -1423,7 +1422,6 @@ namespace rk_seikyu
                                     + ", c19"
                                     + ", c22"
                                     + ", s_id"
-                                    + ", o_id"
                                     + " from t_csv"
                                     + " order by id;"
                                         , m_conn);
@@ -1435,7 +1433,7 @@ namespace rk_seikyu
                         da.InsertCommand.Parameters.Add(new NpgsqlParameter("c19", NpgsqlTypes.NpgsqlDbType.Text, 0, "c19", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                         da.InsertCommand.Parameters.Add(new NpgsqlParameter("c22", NpgsqlTypes.NpgsqlDbType.Text, 0, "c22", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                         da.InsertCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                        //da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
 
                         // update
                         da.UpdateCommand = new NpgsqlCommand(
@@ -1837,7 +1835,7 @@ namespace rk_seikyu
                     + " when '予防通所' then '4'"
                     + " when '予防短期' then '5'"
                     + " when '通所型サービス' then '6'"
-                    + " end"
+                    + " end s_id_str"
                 + " where not exists (select 1 from t_seikyu as s"
                 + " where a.c1 = s.c1 and a.c3 = s.c3 and a.time_stamp < s.time_stamp"
                 + " and s.c4 = case when length('" + cmb_tsuki_str + "')=1 then"
@@ -1874,7 +1872,7 @@ namespace rk_seikyu
                 + ", c16"
                 + ", c19"
                 + ", c22"
-                + ", s_id"
+                + ", s_id_str"
                 + ", w_flg"
                 + " from h"
                 + " where h.w_flg = '1';"
