@@ -320,21 +320,10 @@ namespace rk_seikyu
 
         private void DataGridViewEvent()
         {
-            //dataGridViewWithdrawal.DefaultValuesNeeded += new DataGridViewRowEventHandler(dataGridViewWithdrawal_DefaultValuesNeeded);
-
             dataGridViewWithdrawal.CellMouseMove += new DataGridViewCellMouseEventHandler(dataGridViewWithdrawal_CellMouseMove);
-
-            //dataGridViewWithdrawal.CellValidating += new DataGridViewCellValidatingEventHandler(dataGridViewWithdrawal_CellValidating);
-
-            //dataGridViewWithdrawal.CellEnter += new DataGridViewCellEventHandler(dataGridView_CellEnter);
-
-            //dataGridViewWithdrawal.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(dataGridView_EditingControlShowing);
-
             dataGridViewWithdrawal.CellPainting += new DataGridViewCellPaintingEventHandler(dataGridViewWithdrawal_CellPainting);
-            //dataGridViewWithdrawal.CellFormatting += new DataGridViewCellFormattingEventHandler(dataGridViewWithdrawal_CellFormatting);
-            //dataGridViewWithdrawal.CellValueChanged += new DataGridViewCellEventHandler(dataGridViewWithdrawal_CellValueChanged);
-
         }
+
         private void cmb_req_id_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmb_req_id_int = cmb_req_id.SelectedIndex + 1;
@@ -592,7 +581,9 @@ namespace rk_seikyu
                         + ")) s on r.c1 = s.c5 and rtrim(replace(r.c3,substr(r.c3,strpos(r.c3, '('), strpos(r.c3, ')')),'')) = rtrim(replace(s.c6,substr(s.c6,strpos(s.c6, '('), strpos(s.c6, ')')),'')) and r.s_id = s.s_id and s.s_id::Integer = " + cmb_s_id_int
                         + " where"
                         + " r.s_id::Integer = " + cmb_s_id_int
-                        + " and r.time_stamp = (select max(time_stamp) from t_seikyu where s_id::Integer = " + cmb_s_id_int
+                        + " and r.time_stamp = (select max(time_stamp) from t_seikyu where"
+                            + " s_id::Integer = " + cmb_s_id_int
+                            + " and o_id::Integer = " + cmb_o_id_int
                             + " and c4_array[1]::text || '/' || c4_array[2]::Text = "
                             + " case when length('" + cmb_tsuki_str + "')=1 then"
                             + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
@@ -806,8 +797,8 @@ namespace rk_seikyu
                         + " r.s_id::Integer = " + cmb_s_id_int
                         + " and r.o_id::Integer = " + cmb_o_id_int
                         + " and r.time_stamp = (select max(time_stamp) from t_seikyu where"
-                        + " s_id::Integer = " + cmb_s_id_int
-                        + " and o_id::Integer = " + cmb_o_id_int
+                            + " s_id::Integer = " + cmb_s_id_int
+                            + " and o_id::Integer = " + cmb_o_id_int
                             + " and c4_array[1]::text || '/' || c4_array[2]::Text = "
                             + " case when length('" + cmb_tsuki_str + "')=1 then"
                             + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
@@ -1385,7 +1376,8 @@ namespace rk_seikyu
                                                                     + " end"
                                                    + " and c.s_id = d.s_id"
                                                    + " and c.o_id = d.o_id"
-                            + " and c.time_stamp < d.time_stamp)"
+                            + " and c.time_stamp < d.time_stamp"
+                            + " )"
                             + " and c.c4_array[1]::text || '/' || c.c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
                                                                     + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
                                                                     + "       when length('" + cmb_tsuki_str + "')=2 then"
@@ -1396,7 +1388,7 @@ namespace rk_seikyu
                             + " else"
                                         + " c.c9 = '" + cmb_b_code_str + "'"
                                         + " end"
-                                        + " and a.o_id = '" + cmb_o_id_str + "'"
+                                        + " and a.o_id::Integer = " + cmb_o_id_int
                             + " order by a.r_id;"
                                 , m_conn
                             );
@@ -1664,14 +1656,13 @@ namespace rk_seikyu
                     + ", r.c22"
                     + ", r.s_id"
                     + ", r.o_id"
-                    + ", r.s_id_str"
                     + ", r.w_flg"
                     + ", r.time_stamp"
                     + ", to_number(ltrim(right(c4,2)),'99')"
                     + " from r"
                     + " where r.w_flg = '1'"
                     + " and r.r_id = " + e.Row["r_id"].ToString()
-                    + " order by r.s_id, r.c1, r.r_id, to_number(ltrim(right(r.c4,2)),'99')"
+                    + " order by r.s_id, r.c1, r.r_id, to_number(ltrim(right(r.c4,2)),'99');"
                     , m_conn
                 );
 
@@ -1689,8 +1680,6 @@ namespace rk_seikyu
                 MessageBox.Show(ex.Message);
                 throw;
             }
-
-
         }
 
         private void cmb_prn_id_SelectedIndexChanged(object sender, EventArgs e)
@@ -1827,7 +1816,7 @@ namespace rk_seikyu
                 + " end"
                 + ", a.w_flg"
                 + " from t_seikyu a inner join t_shiharai_houhou b"
-                + " on a.c1=b.c5"
+                + " on a.c1 = b.c5"
                 + " and rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),'')) = rtrim(replace(b.c6,substr(b.c6,strpos(b.c6, '('), strpos(b.c6, ')')),''))"
                 + " and a.s_id = case substr(b.c4,strpos(b.c4, '[')+1, strpos(b.c4, ']')-strpos(b.c4, '[')-1)"
                     + " when '入所' then '1'"
