@@ -158,7 +158,7 @@
             this.cmb_p_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_p_id.TabIndex = 5;
             this.cmb_p_id.Visible = false;
-            this.cmb_p_id.SelectedIndexChanged += new System.EventHandler(this.cmb_p_id_SelectedIndexChanged);
+            this.cmb_p_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_p_id_SelectedIndexChanged);
             // 
             // cmb_req_id
             // 
@@ -168,7 +168,7 @@
             this.cmb_req_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_req_id.TabIndex = 6;
             this.cmb_req_id.Visible = false;
-            this.cmb_req_id.SelectedIndexChanged += new System.EventHandler(this.cmb_req_id_SelectedIndexChanged);
+            this.cmb_req_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_req_id_SelectedIndexChanged);
             // 
             // cmb_s_id
             // 
@@ -177,7 +177,7 @@
             this.cmb_s_id.Name = "cmb_s_id";
             this.cmb_s_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_s_id.TabIndex = 7;
-            this.cmb_s_id.SelectedIndexChanged += new System.EventHandler(this.cmb_s_id_SelectedIndexChanged);
+            this.cmb_s_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_s_id_SelectedIndexChanged);
             // 
             // cmb_c4
             // 
@@ -187,7 +187,7 @@
             this.cmb_c4.Size = new System.Drawing.Size(121, 20);
             this.cmb_c4.TabIndex = 8;
             this.cmb_c4.Visible = false;
-            this.cmb_c4.SelectedIndexChanged += new System.EventHandler(this.cmb_c4_SelectedIndexChanged);
+            this.cmb_c4.SelectedIndexChanged += new System.EventHandler(this.Cmb_c4_SelectedIndexChanged);
             // 
             // dateTimePicker1
             // 
@@ -204,7 +204,7 @@
             this.cmdPrv.TabIndex = 12;
             this.cmdPrv.Text = "表示";
             this.cmdPrv.UseVisualStyleBackColor = true;
-            this.cmdPrv.Click += new System.EventHandler(this.cmdPrv_Click);
+            this.cmdPrv.Click += new System.EventHandler(this.CmdPrv_Click);
             // 
             // cmb_prn_id
             // 
@@ -213,7 +213,7 @@
             this.cmb_prn_id.Name = "cmb_prn_id";
             this.cmb_prn_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_prn_id.TabIndex = 13;
-            this.cmb_prn_id.SelectedIndexChanged += new System.EventHandler(this.cmb_prn_id_SelectedIndexChanged);
+            this.cmb_prn_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_prn_id_SelectedIndexChanged);
             // 
             // cmd_holiday
             // 
@@ -223,7 +223,7 @@
             this.cmd_holiday.TabIndex = 14;
             this.cmd_holiday.Text = "祝日設定";
             this.cmd_holiday.UseVisualStyleBackColor = true;
-            this.cmd_holiday.Click += new System.EventHandler(this.cmd_holiday_Click);
+            this.cmd_holiday.Click += new System.EventHandler(this.Cmd_holiday_Click);
             // 
             // button1
             // 
@@ -233,7 +233,7 @@
             this.button1.TabIndex = 15;
             this.button1.Text = "口座設定";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.cmd_bank_Click);
+            this.button1.Click += new System.EventHandler(this.Cmd_bank_Click);
             // 
             // cmb_nen
             // 
@@ -245,7 +245,7 @@
             this.cmb_nen.Size = new System.Drawing.Size(56, 20);
             this.cmb_nen.TabIndex = 16;
             this.cmb_nen.ValueMember = "n_id";
-            this.cmb_nen.SelectedIndexChanged += new System.EventHandler(this.cmb_nen_SelectedIndexChanged);
+            this.cmb_nen.SelectedIndexChanged += new System.EventHandler(this.Cmb_nen_SelectedIndexChanged);
             // 
             // nenBindingSource
             // 
@@ -267,7 +267,7 @@
             this.cmb_tsuki.Size = new System.Drawing.Size(56, 20);
             this.cmb_tsuki.TabIndex = 17;
             this.cmb_tsuki.ValueMember = "t_id";
-            this.cmb_tsuki.SelectedIndexChanged += new System.EventHandler(this.cmb_tsuki_SelectedIndexChanged);
+            this.cmb_tsuki.SelectedIndexChanged += new System.EventHandler(this.Cmb_tsuki_SelectedIndexChanged);
             // 
             // tsukiBindingSource1
             // 
@@ -323,7 +323,7 @@
             this.bindingNavigatorWithdrawal.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigatorWithdrawal.Name = "bindingNavigatorWithdrawal";
             this.bindingNavigatorWithdrawal.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigatorWithdrawal.Size = new System.Drawing.Size(1579, 25);
+            this.bindingNavigatorWithdrawal.Size = new System.Drawing.Size(1596, 25);
             this.bindingNavigatorWithdrawal.TabIndex = 18;
             this.bindingNavigatorWithdrawal.Text = "bindingNavigator1";
             // 
@@ -419,7 +419,7 @@
             this.cmb_b_code.Name = "cmb_b_code";
             this.cmb_b_code.Size = new System.Drawing.Size(121, 20);
             this.cmb_b_code.TabIndex = 19;
-            this.cmb_b_code.SelectedIndexChanged += new System.EventHandler(this.cmb_b_code_SelectedIndexChanged);
+            this.cmb_b_code.SelectedIndexChanged += new System.EventHandler(this.Cmb_b_code_SelectedIndexChanged);
             // 
             // cmd_Ins
             // 
@@ -429,7 +429,7 @@
             this.cmd_Ins.TabIndex = 20;
             this.cmd_Ins.Text = "保存";
             this.cmd_Ins.UseVisualStyleBackColor = true;
-            this.cmd_Ins.Click += new System.EventHandler(this.cmd_Ins_Click);
+            this.cmd_Ins.Click += new System.EventHandler(this.Cmd_Ins_Click);
             // 
             // syubetsuBindingSource1
             // 
@@ -460,9 +460,10 @@
             this.dataGridViewWithdrawal.RowTemplate.Height = 21;
             this.dataGridViewWithdrawal.Size = new System.Drawing.Size(1246, 834);
             this.dataGridViewWithdrawal.TabIndex = 21;
-            this.dataGridViewWithdrawal.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewWithdrawal_CellClick);
-            this.dataGridViewWithdrawal.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewWithdrawal_CellContentClick);
-            this.dataGridViewWithdrawal.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewWithdrawal_CellMouseMove);
+            this.dataGridViewWithdrawal.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewWithdrawal_CellClick);
+            this.dataGridViewWithdrawal.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewWithdrawal_CellContentClick);
+            this.dataGridViewWithdrawal.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewWithdrawal_CellMouseMove);
+            this.dataGridViewWithdrawal.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewWithdrawal_CellMouseMove);
             this.dataGridViewWithdrawal.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewWithdrawal_CellPainting);
             this.dataGridViewWithdrawal.CurrentCellDirtyStateChanged += new System.EventHandler(this.DataGridViewWithdrawal_CurrentCellDirtyStateChanged);
             // 
@@ -559,7 +560,7 @@
             this.cmdPrnWithdrawal.TabIndex = 22;
             this.cmdPrnWithdrawal.Text = "印刷";
             this.cmdPrnWithdrawal.UseVisualStyleBackColor = true;
-            this.cmdPrnWithdrawal.Click += new System.EventHandler(this.cmdPrnWithdrawal_Click);
+            this.cmdPrnWithdrawal.Click += new System.EventHandler(this.CmdPrnWithdrawal_Click);
             // 
             // textBox1
             // 
@@ -578,7 +579,7 @@
             this.checkBoxAll.TabIndex = 24;
             this.checkBoxAll.UseVisualStyleBackColor = true;
             this.checkBoxAll.Visible = false;
-            this.checkBoxAll.CheckedChanged += new System.EventHandler(this.checkBoxAll_CheckedChanged);
+            this.checkBoxAll.CheckedChanged += new System.EventHandler(this.CheckBoxAll_CheckedChanged);
             // 
             // chk_title
             // 
@@ -589,14 +590,14 @@
             this.chk_title.TabIndex = 25;
             this.chk_title.Text = "請求月を配列にする";
             this.chk_title.UseVisualStyleBackColor = true;
-            this.chk_title.CheckedChanged += new System.EventHandler(this.chk_title_CheckedChanged);
+            this.chk_title.CheckedChanged += new System.EventHandler(this.Chk_title_CheckedChanged);
             // 
             // Form_prn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1596, 865);
+            this.ClientSize = new System.Drawing.Size(1613, 865);
             this.Controls.Add(this.chk_title);
             this.Controls.Add(this.checkBoxAll);
             this.Controls.Add(this.textBox1);

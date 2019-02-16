@@ -59,32 +59,32 @@ namespace rk_seikyu
         private DataSet nends = new DataSet();
         private DataSet tsukids = new DataSet();
 
-        public string ofdstr { get; set; }
-        public string tblStr { get; set; }
-        public string onumStr { get; set; }
+        public string Ofdstr { get; set; }
+        public string TblStr { get; set; }
+        public string OnumStr { get; set; }
 
-        public int cmb_n_id_int { get; set; }
-        public int cmb_t_id_int { get; set; }
-        public int cmb_s_id_int { get; set; }
-        public int cmb_g_id_int { get; set; }
-        public int cmb_o_id_int { get; set; }
-        public int cmb_req_id_int { get; set; }
+        public int Cmb_n_id_int { get; set; }
+        public int Cmb_t_id_int { get; set; }
+        public int Cmb_s_id_int { get; set; }
+        public int Cmb_g_id_int { get; set; }
+        public int Cmb_o_id_int { get; set; }
+        public int Cmb_req_id_int { get; set; }
 
 
-        public String cmb_c4_str { get; set; }
-        public String cmb_nen_str { get; set; }
-        public String cmb_tsuki_str { get; set; }
-        public String cmb_s_id_str { get; set; }
+        public String Cmb_c4_str { get; set; }
+        public String Cmb_nen_str { get; set; }
+        public String Cmb_tsuki_str { get; set; }
+        public String Cmb_s_id_str { get; set; }
 
-        public int hour { get; set; }
-        public int minute { get; set; }
-        public int second { get; set; }
+        public int Hour { get; set; }
+        public int Minute { get; set; }
+        public int Second { get; set; }
 
         public int VarHour { get; set; }
         public int VarMinute { get; set; }
         public int VarSecond { get; set; }
 
-        public string cmb_o_id_str_TEXT { get => cmb_o_id.SelectedIndex.ToString(); set => cmb_o_id.Text = value; }
+        public string Cmb_o_id_str_TEXT { get => cmb_o_id.SelectedIndex.ToString(); set => cmb_o_id.Text = value; }
         private static Form_seikyu _form_seikyu_Instance;
         //private Form_seikyu form_seikyu_Instance;
 
@@ -165,8 +165,8 @@ namespace rk_seikyu
                 + ", o_id"
                 + " from"
                 + " t_syubetsu"
-                + " where o_id = '" + cmb_o_id_int + "'"
-                + " and s_id = '" + cmb_s_id_int + "'"
+                + " where o_id = '" + Cmb_o_id_int + "'"
+                + " and s_id = '" + Cmb_s_id_int + "'"
                 + " order by s_id;",
                     m_conn
             );
@@ -248,11 +248,11 @@ namespace rk_seikyu
             cmb_req_id.DisplayMember = "name1";
             cmb_req_id.ValueMember = "req_id";
 
-            switch (cmb_g_id_int)
+            switch (Cmb_g_id_int)
             {
                 case 1:
-                    tblStr = " t_seikyu";
-                    Console.WriteLine("tblStr = " + tblStr);
+                    TblStr = " t_seikyu";
+                    Console.WriteLine("tblStr = " + TblStr);
                     dataGridViewSeikyu.Columns[0].HeaderText = "利用者番号";
                     dataGridViewSeikyu.Columns[1].HeaderText = "要介護度";
                     dataGridViewSeikyu.Columns[2].HeaderText = "利用者名";
@@ -295,8 +295,8 @@ namespace rk_seikyu
 
                     break;
                 case 2:
-                    tblStr = "t_shiharai_houhou";
-                    Console.WriteLine("tblStr = " + tblStr);
+                    TblStr = "t_shiharai_houhou";
+                    Console.WriteLine("tblStr = " + TblStr);
                     dataGridViewShiharai_houhou.Columns[0].HeaderText = "法人名";
                     dataGridViewShiharai_houhou.Columns[1].HeaderText = "施設名";
                     dataGridViewShiharai_houhou.Columns[2].HeaderText = "事業所番号";
@@ -355,8 +355,8 @@ namespace rk_seikyu
 
                     break;
                 case 3:
-                    tblStr = " t_shinzoku_kankei";
-                    Console.WriteLine("tblStr = " + tblStr);
+                    TblStr = " t_shinzoku_kankei";
+                    Console.WriteLine("tblStr = " + TblStr);
                     dataGridViewShinzoku_kankei.Columns[0].HeaderText = "利用者番号";
                     dataGridViewShinzoku_kankei.Columns[1].HeaderText = "利用者名（姓）";
                     dataGridViewShinzoku_kankei.Columns[2].HeaderText = "利用者名（名）";
@@ -427,16 +427,16 @@ namespace rk_seikyu
 
 
             // 再表示
-            switch (cmb_o_id_int)
+            switch (Cmb_o_id_int)
             {
                 case 1:
-                    Console.WriteLine("Case " + cmb_o_id_int + "!");
+                    Console.WriteLine("Case " + Cmb_o_id_int + "!");
 
-                    switch (cmb_g_id_int)
+                    switch (Cmb_g_id_int)
                     {
                         case 1:
-                            Console.WriteLine("Case " + cmb_g_id_int + "!");
-                            switch (cmb_s_id_int)
+                            Console.WriteLine("Case " + Cmb_g_id_int + "!");
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -445,7 +445,7 @@ namespace rk_seikyu
                                 case 5:
                                 case 6:
 
-                                    Console.WriteLine("Case " + cmb_s_id_int + "!");
+                                    Console.WriteLine("Case " + Cmb_s_id_int + "!");
 
                                     da.SelectCommand = new NpgsqlCommand
                                     (
@@ -462,7 +462,6 @@ namespace rk_seikyu
                                         + ", c10"
                                         + ", c11"
                                         + ", cast(c6 as Integer) + cast(c7 as Integer) + cast(c8 as Integer) + cast(c9 as Integer) + cast(c10 as Integer) + cast(c11 as Integer) c12"
-                                        //+ ", c12"
                                         + ", c13"
                                         + ", c14"
                                         + ", c15"
@@ -473,7 +472,6 @@ namespace rk_seikyu
                                         + ", c20"
                                         + ", c21"
                                         + ", cast(c13 as Integer) + cast(c14 as Integer) + cast(c15 as Integer) + cast(c16 as Integer) + cast(c19 as Integer) c22"
-                                        //+ ", c22"
                                         + ", c4_array"
                                         + ", time_stamp"
                                         + ", r_id"
@@ -485,15 +483,15 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_seikyu"
                                         + " where time_stamp = (select max(time_stamp) from t_seikyu"
-                                        + " where s_id::Integer = " + cmb_s_id_int
-                                        + " and g_id::Integer = " + cmb_g_id_int
-                                        + " and o_id::Integer = " + cmb_o_id_int
-                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                        + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                        + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                        + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
-                                                        + " end)"
-                                        //+ " order by id"
+                                        + " where s_id::Integer = " + Cmb_s_id_int
+                                        + " and g_id::Integer = " + Cmb_g_id_int
+                                        + " and o_id::Integer = " + Cmb_o_id_int
+                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
+                                                        + " end"
+                                        + ");"
                                         , m_conn
                                     );
 
@@ -630,8 +628,8 @@ namespace rk_seikyu
 
                         // 支払方法
                         case 2:
-                            Console.WriteLine("Case " + cmb_g_id_int + "!");
-                            switch (cmb_s_id_int)
+                            Console.WriteLine("Case " + Cmb_g_id_int + "!");
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -640,7 +638,7 @@ namespace rk_seikyu
                                 case 5:
                                 case 6:
 
-                                    Console.WriteLine("Case " + cmb_s_id_int + "!");
+                                    Console.WriteLine("Case " + Cmb_s_id_int + "!");
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -704,13 +702,13 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_shiharai_houhou"
                                         + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
-                                        + " where s_id::Integer = " + cmb_s_id_int
-                                        + " and g_id::Integer = " + cmb_g_id_int
-                                        + " and o_id::Integer = " + cmb_o_id_int
-                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                        + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                        + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                        + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                        + " where s_id::Integer = " + Cmb_s_id_int
+                                        + " and g_id::Integer = " + Cmb_g_id_int
+                                        + " and o_id::Integer = " + Cmb_o_id_int
+                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ");"
                                         , m_conn
@@ -890,8 +888,8 @@ namespace rk_seikyu
                         // 親族関係
                         case 3:
                             //MessageBox.Show("Case " + cmb_s_id_int + "!");
-                            Console.WriteLine("Case " + cmb_g_id_int + "!");
-                            switch (cmb_s_id_int)
+                            Console.WriteLine("Case " + Cmb_g_id_int + "!");
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -900,7 +898,7 @@ namespace rk_seikyu
                                 case 5:
                                 case 6:
 
-                                    Console.WriteLine("Case " + cmb_s_id_int + "!");
+                                    Console.WriteLine("Case " + Cmb_s_id_int + "!");
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -972,16 +970,15 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_shinzoku_kankei"
                                         + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
-                                        + " where s_id::Integer = " + cmb_s_id_int
-                                        + " and g_id::Integer = " + cmb_g_id_int
-                                        + " and o_id::Integer = " + cmb_o_id_int
-                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                        + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                        + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                        + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                        + " where s_id::Integer = " + Cmb_s_id_int
+                                        + " and g_id::Integer = " + Cmb_g_id_int
+                                        + " and o_id::Integer = " + Cmb_o_id_int
+                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ");"
-                                        //+ " order by id"
                                         , m_conn
                                     );
 
@@ -1192,10 +1189,10 @@ namespace rk_seikyu
             int update_count = 0;
             try
             {
-                switch (cmb_g_id_int)
+                switch (Cmb_g_id_int)
                 {
                     case 1:
-                        switch (cmb_s_id_int)
+                        switch (Cmb_s_id_int)
                         {
                             case 1:
                             case 2:
@@ -1211,7 +1208,7 @@ namespace rk_seikyu
                         }
                         break;
                     case 2:
-                        switch (cmb_s_id_int)
+                        switch (Cmb_s_id_int)
                         {
                             case 1:
                             case 2:
@@ -1227,7 +1224,7 @@ namespace rk_seikyu
                         }
                         break;
                     case 3:
-                        switch (cmb_s_id_int)
+                        switch (Cmb_s_id_int)
                         {
                             case 1:
                             case 2:
@@ -1260,10 +1257,10 @@ namespace rk_seikyu
                 if (e.StatementType == System.Data.StatementType.Insert)
                 {
                     // 
-                    switch (cmb_g_id_int)
+                    switch (Cmb_g_id_int)
                     {
                         case 1:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -1318,7 +1315,7 @@ namespace rk_seikyu
                             break;
                         // 支払方法
                         case 2:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -1399,7 +1396,7 @@ namespace rk_seikyu
                             break;
                         // 親族関係
                         case 7:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -1492,10 +1489,10 @@ namespace rk_seikyu
                         NpgsqlDataReader reader = da.SelectCommand.ExecuteReader();
                         reader.Read();
                         // 
-                        switch (cmb_g_id_int)
+                        switch (Cmb_g_id_int)
                         {
                             case 1:
-                                switch (cmb_s_id_int)
+                                switch (Cmb_s_id_int)
                                 {
                                     case 1:
                                     case 2:
@@ -1540,7 +1537,7 @@ namespace rk_seikyu
                                 }
                                 break;
                             case 2:
-                                switch (cmb_s_id_int)
+                                switch (Cmb_s_id_int)
                                 {
                                     case 1:
                                     case 2:
@@ -1610,7 +1607,7 @@ namespace rk_seikyu
                                 }
                                 break;
                             case 3:
-                                switch (cmb_s_id_int)
+                                switch (Cmb_s_id_int)
                                 {
                                     case 1:
                                     case 2:
@@ -1698,10 +1695,10 @@ namespace rk_seikyu
                 }
                 else if (e.StatementType == System.Data.StatementType.Update)
                 {
-                    switch (cmb_g_id_int)
+                    switch (Cmb_g_id_int)
                     {
                         case 1:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -1756,7 +1753,7 @@ namespace rk_seikyu
                             break;
                         // 支払方法
                         case 2:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -1836,7 +1833,7 @@ namespace rk_seikyu
                             break;
                         // 親族関係
                         case 3:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -1929,10 +1926,10 @@ namespace rk_seikyu
                         NpgsqlDataReader reader = da.SelectCommand.ExecuteReader();
                         reader.Read();
                         // 
-                        switch (cmb_g_id_int)
+                        switch (Cmb_g_id_int)
                         {
                             case 1:
-                                switch (cmb_s_id_int)
+                                switch (Cmb_s_id_int)
                                 {
                                     case 1:
                                     case 2:
@@ -1977,7 +1974,7 @@ namespace rk_seikyu
                                 }
                                 break;
                             case 2:
-                                switch (cmb_s_id_int)
+                                switch (Cmb_s_id_int)
                                 {
                                     case 1:
                                     case 2:
@@ -2047,7 +2044,7 @@ namespace rk_seikyu
                                 }
                                 break;
                             case 3:
-                                switch (cmb_s_id_int)
+                                switch (Cmb_s_id_int)
                                 {
                                     case 1:
                                     case 2:
@@ -2138,10 +2135,10 @@ namespace rk_seikyu
 
         private void button1_Click(object sender, EventArgs e)
         {
-            switch (cmb_g_id_int)
+            switch (Cmb_g_id_int)
             {
                 case 1:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -2150,8 +2147,8 @@ namespace rk_seikyu
                         case 5:
                         case 6:
 
-                            tblStr = " t_seikyu";
-                            Console.WriteLine("tblStr = " + tblStr);
+                            TblStr = " t_seikyu";
+                            Console.WriteLine("tblStr = " + TblStr);
                             dataGridViewSeikyu.Columns[0].HeaderText = "利用者番号";
                             dataGridViewSeikyu.Columns[1].HeaderText = "要介護度";
                             dataGridViewSeikyu.Columns[2].HeaderText = "利用者名";
@@ -2196,7 +2193,7 @@ namespace rk_seikyu
                     }
                     break;
                 case 2:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -2205,8 +2202,8 @@ namespace rk_seikyu
                         case 5:
                         case 6:
 
-                            tblStr = "t_shiharai_houhou";
-                            Console.WriteLine("tblStr = " + tblStr);
+                            TblStr = "t_shiharai_houhou";
+                            Console.WriteLine("tblStr = " + TblStr);
                             dataGridViewShiharai_houhou.Columns[0].HeaderText = "法人名";
                             dataGridViewShiharai_houhou.Columns[1].HeaderText = "施設名";
                             dataGridViewShiharai_houhou.Columns[2].HeaderText = "事業所番号";
@@ -2266,7 +2263,7 @@ namespace rk_seikyu
                     }
                     break;
                 case 3:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -2275,8 +2272,8 @@ namespace rk_seikyu
                         case 5:
                         case 6:
 
-                            tblStr = " t_shinzoku_kankei";
-                            Console.WriteLine("tblStr = " + tblStr);
+                            TblStr = " t_shinzoku_kankei";
+                            Console.WriteLine("tblStr = " + TblStr);
                             dataGridViewShinzoku_kankei.Columns[0].HeaderText = "利用者番号";
                             dataGridViewShinzoku_kankei.Columns[1].HeaderText = "利用者名（姓）";
                             dataGridViewShinzoku_kankei.Columns[2].HeaderText = "利用者名（名）";
@@ -2384,10 +2381,10 @@ namespace rk_seikyu
                     }
                 }
 
-                switch (cmb_g_id_int)
+                switch (Cmb_g_id_int)
                 {
                     case 1:
-                        switch (cmb_s_id_int)
+                        switch (Cmb_s_id_int)
                         {
                             case 1:
                             case 2:
@@ -2559,7 +2556,7 @@ namespace rk_seikyu
                         }
                         break;
                     case 2:
-                        switch (cmb_s_id_int)
+                        switch (Cmb_s_id_int)
                         {
                             case 1:
                             case 2:
@@ -2679,8 +2676,8 @@ namespace rk_seikyu
                                     + ", :g_id"
                                     + ", :p_id"
                                     + ", :req_id"
-                                    + ", '" + cmb_nen_str + "'"
-                                    + ", '" + cmb_tsuki_str + "'"
+                                    + ", '" + Cmb_nen_str + "'"
+                                    + ", '" + Cmb_tsuki_str + "'"
                                     + ");"
                                     , m_conn);
                                 da.InsertCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -2741,7 +2738,7 @@ namespace rk_seikyu
                         }
                         break;
                     case 3:
-                        switch (cmb_s_id_int)
+                        switch (Cmb_s_id_int)
                         {
                             case 1:
                             case 2:
@@ -2879,8 +2876,8 @@ namespace rk_seikyu
                                     + ", :g_id"
                                     + ", :p_id"
                                     + ", :req_id"
-                                    + ", '" + cmb_nen_str + "'"
-                                    + ", '" + cmb_tsuki_str + "'"
+                                    + ", '" + Cmb_nen_str + "'"
+                                    + ", '" + Cmb_tsuki_str + "'"
                                     + ");"
                                     , m_conn);
                                 da.InsertCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -2971,9 +2968,9 @@ namespace rk_seikyu
                     MessageBox.Show(ofd.FileName + "が選択されました");
                     String str = ofd.FileName;
                     Console.WriteLine("str: {0}", str);
-                    ofdstr = Path.GetFileName(str);
+                    Ofdstr = Path.GetFileName(str);
                     //ofdstr = Regex.Replace(str, @"[^\d]", string.Empty);
-                    Console.WriteLine("ofdstr: {0}", ofdstr);
+                    Console.WriteLine("ofdstr: {0}", Ofdstr);
                     try
                     {
                         Cursor.Current = Cursors.WaitCursor;
@@ -3018,40 +3015,40 @@ namespace rk_seikyu
                         //ds.Merge(ds2);
                         ds.AcceptChanges();
 
-                        tblStr = "t_csv";
+                        TblStr = "t_csv";
 
                         command = new NpgsqlCommand(
-                            "update " + tblStr + " set o_id = " + cmb_o_id_int
+                            "update " + TblStr + " set o_id = " + Cmb_o_id_int
                             , m_conn);
                         command.ExecuteNonQuery();
 
                         command = new NpgsqlCommand(
-                            "update " + tblStr + " set s_id = " + cmb_s_id_int
+                            "update " + TblStr + " set s_id = " + Cmb_s_id_int
                             , m_conn);
                         command.ExecuteNonQuery();
 
                         command = new NpgsqlCommand(
-                            "update " + tblStr + " set g_id = " + cmb_g_id_int
+                            "update " + TblStr + " set g_id = " + Cmb_g_id_int
                             , m_conn);
                         command.ExecuteNonQuery();
 
                         command = new NpgsqlCommand(
-                            "update " + tblStr + " set p_id = " + 1
+                            "update " + TblStr + " set p_id = " + 1
                             , m_conn);
                         command.ExecuteNonQuery();
 
                         command = new NpgsqlCommand(
-                            "update " + tblStr + " set req_id = " + cmb_req_id_int
+                            "update " + TblStr + " set req_id = " + Cmb_req_id_int
                             , m_conn);
                         command.ExecuteNonQuery();
 
                         // RowUpdate
                         da.RowUpdated += new NpgsqlRowUpdatedEventHandler(SeikyuRowUpdated);
 
-                        switch (cmb_g_id_int)
+                        switch (Cmb_g_id_int)
                         {
                             case 1:
-                                switch (cmb_s_id_int)
+                                switch (Cmb_s_id_int)
                                 {
                                     case 1:
                                     case 2:
@@ -3085,7 +3082,7 @@ namespace rk_seikyu
                                 break;
 
                             case 2:
-                                switch (cmb_s_id_int)
+                                switch (Cmb_s_id_int)
                                 {
                                     case 1:
                                     case 2:
@@ -3122,7 +3119,7 @@ namespace rk_seikyu
                                 break;
 
                             case 3:
-                                switch (cmb_s_id_int)
+                                switch (Cmb_s_id_int)
                                 {
                                     case 1:
                                     case 2:
@@ -3167,13 +3164,12 @@ namespace rk_seikyu
                     {
                         MessageBox.Show(ofd.FileName + "が、インポートされました");
                         Cursor.Current = Cursors.Default;
-                        //m_conn.Close();
                     }
 
-                    switch (cmb_g_id_int)
+                    switch (Cmb_g_id_int)
                     {
                         case 1:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -3254,7 +3250,6 @@ namespace rk_seikyu
                                                 , m_conn);
 
                                             da.InsertCommand.ExecuteNonQuery();
-                                            //t.Commit();
                                         }
 
                                         if (_seikyu_ds.Tables["seikyu_ds"] != null)
@@ -3284,7 +3279,7 @@ namespace rk_seikyu
                             break;
 
                         case 2:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -3409,14 +3404,12 @@ namespace rk_seikyu
                                                 + ", o_id"
                                                 + ", p_id"
                                                 + ", req_id"
-                                                + ", case when length('" + cmb_tsuki_str + "')=1 then"
-                                                + " string_to_array ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "', '/')"
-                                                + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                + " string_to_array ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "', '/')"
+                                                + ", case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + " string_to_array ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "', '/')"
+                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " string_to_array ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "', '/')"
                                                 + " end"
-                                                // 事業者番号設定
-                                                //+ " from t_csv where c3 = '0176700250';"
-                                                + " from t_csv where o_id = " + cmb_o_id_int + ";"
+                                                + " from t_csv where o_id = " + Cmb_o_id_int + ";"
                                                     , m_conn);
                                                 da.InsertCommand.ExecuteNonQuery();
                                             }
@@ -3448,7 +3441,7 @@ namespace rk_seikyu
                             }
                             break;
                         case 3:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -3591,13 +3584,12 @@ namespace rk_seikyu
                                                 + ", o_id"
                                                 + ", p_id"
                                                 + ", req_id"
-                                                + ", case when length('" + cmb_tsuki_str + "')=1 then"
-                                                + " string_to_array ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "', '/')"
-                                                + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                + " string_to_array ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "', '/')"
+                                                + ", case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + " string_to_array ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "', '/')"
+                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " string_to_array ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "', '/')"
                                                 + " end"
                                                 + " from t_csv;"
-                                                    //+ " order by id"
                                                     , m_conn);
                                                 da.InsertCommand.ExecuteNonQuery();
                                             }
@@ -3630,10 +3622,10 @@ namespace rk_seikyu
                     }
 
                     // 再表示
-                    switch (cmb_g_id_int)
+                    switch (Cmb_g_id_int)
                     {
                         case 1:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -3678,17 +3670,16 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_seikyu"
                                         + " where time_stamp = (select max(time_stamp) from t_seikyu"
-                                        + " where s_id::Integer = " + cmb_s_id_int
-                                        + " and g_id::Integer = " + cmb_g_id_int
-                                        + " and o_id::Integer = " + cmb_o_id_int
+                                        + " where s_id::Integer = " + Cmb_s_id_int
+                                        + " and g_id::Integer = " + Cmb_g_id_int
+                                        + " and o_id::Integer = " + Cmb_o_id_int
                                         //+ " where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
-                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                 + " end"
                                         + ");"
-                                        //+ " order by id"
                                         , m_conn
                                     );
 
@@ -3910,7 +3901,7 @@ namespace rk_seikyu
                             break;
                         // 支払方法
                         case 2:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -3981,14 +3972,14 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_shiharai_houhou"
                                         + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
-                                        + " where s_id::Integer = " + cmb_s_id_int
-                                        + " and g_id::Integer = " + cmb_g_id_int
-                                        + " and o_id::Integer = " + cmb_o_id_int
+                                        + " where s_id::Integer = " + Cmb_s_id_int
+                                        + " and g_id::Integer = " + Cmb_g_id_int
+                                        + " and o_id::Integer = " + Cmb_o_id_int
                                         //" where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
-                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                        + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                        + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                        + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ");"
                                         , m_conn
@@ -4120,10 +4111,10 @@ namespace rk_seikyu
                                                 + ", :o_id"
                                                 + ", :p_id"
                                                 + ", :req_id"
-                                                + ", case when length('" + cmb_tsuki_str + "')=1 then"
-                                                + " string_to_array ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "', '/')"
-                                                + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                + " string_to_array ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "', '/')"
+                                                + ", case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + " string_to_array ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "', '/')"
+                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " string_to_array ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "', '/')"
                                                 + " end"
                                                 + " from t_csv;"
                                                     , m_conn
@@ -4278,7 +4269,7 @@ namespace rk_seikyu
                             break;
                         // 親族関係
                         case 3:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -4359,13 +4350,13 @@ namespace rk_seikyu
                                         + " t_shinzoku_kankei"
                                         + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
                                         //+ " where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
-                                        + " where s_id::Integer = " + cmb_s_id_int
-                                        + " and g_id::Integer = " + cmb_g_id_int
-                                        + " and o_id::Integer = " + cmb_o_id_int
-                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                        + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                        + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                        + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                        + " where s_id::Integer = " + Cmb_s_id_int
+                                        + " and g_id::Integer = " + Cmb_g_id_int
+                                        + " and o_id::Integer = " + Cmb_o_id_int
+                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ");"
                                         , m_conn
@@ -4515,10 +4506,10 @@ namespace rk_seikyu
                                                 + ", :o_id"
                                                 + ", :p_id"
                                                 + ", :req_id"
-                                                + ", case when length('" + cmb_tsuki_str + "')=1 then"
-                                                + " string_to_array ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "', '/')"
-                                                + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                + " string_to_array ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "', '/')"
+                                                + ", case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + " string_to_array ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "', '/')"
+                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " string_to_array ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "', '/')"
                                                 + " end"
                                                 + " from t_csv;"
                                                     , m_conn
@@ -4842,10 +4833,10 @@ namespace rk_seikyu
         private void Form_Seikyu_FormClosing(object sender, FormClosingEventArgs e)
         {
             int update_count = 0;
-            switch (cmb_g_id_int)
+            switch (Cmb_g_id_int)
             {
                 case 1:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -4860,7 +4851,7 @@ namespace rk_seikyu
                     }
                     break;
                 case 2:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -4875,7 +4866,7 @@ namespace rk_seikyu
                     }
                     break;
                 case 3:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -4908,10 +4899,10 @@ namespace rk_seikyu
         private void seikyu_ds_OvsToolStripButton_Click(object sender, EventArgs e)
         {
             int update_count = 0;
-            switch (cmb_g_id_int)
+            switch (Cmb_g_id_int)
             {
                 case 1:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -4941,10 +4932,10 @@ namespace rk_seikyu
         private void shiharai_houhou_ds_OvsToolStripButton_Click(object sender, EventArgs e)
         {
             int update_count = 0;
-            switch (cmb_g_id_int)
+            switch (Cmb_g_id_int)
             {
                 case 2:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -4974,10 +4965,10 @@ namespace rk_seikyu
         private void shinzoku_kankei_ds_OvsToolStripButton_Click(object sender, EventArgs e)
         {
             int update_count = 0;
-            switch (cmb_g_id_int)
+            switch (Cmb_g_id_int)
             {
                 case 3:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -5008,19 +4999,19 @@ namespace rk_seikyu
         private void cmb_s_id_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            cmb_s_id_int = cmb_s_id.SelectedIndex + 1;
+            Cmb_s_id_int = cmb_s_id.SelectedIndex + 1;
             if (cmb_s_id.SelectedIndex != -1)
             {
-                cmb_s_id_str = ((DataRowView)cmb_s_id.SelectedItem).Row["s_id"].ToString();
+                Cmb_s_id_str = ((DataRowView)cmb_s_id.SelectedItem).Row["s_id"].ToString();
             }
-            Console.WriteLine("Form_seikyu_cmb_s_id_str = " + cmb_s_id_str);
-            cmb_o_id_text.Text = cmb_s_id_str;
+            Console.WriteLine("Form_seikyu_cmb_s_id_str = " + Cmb_s_id_str);
+            cmb_o_id_text.Text = Cmb_s_id_str;
 
 
-            switch (cmb_g_id_int)
+            switch (Cmb_g_id_int)
             {
                 case 1:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -5029,8 +5020,8 @@ namespace rk_seikyu
                         case 5:
                         case 6:
 
-                            tblStr = " t_seikyu";
-                            Console.WriteLine("tblStr = " + tblStr);
+                            TblStr = " t_seikyu";
+                            Console.WriteLine("tblStr = " + TblStr);
                             dataGridViewSeikyu.Columns[0].HeaderText = "利用者番号";
                             dataGridViewSeikyu.Columns[1].HeaderText = "要介護度";
                             dataGridViewSeikyu.Columns[2].HeaderText = "利用者名";
@@ -5075,7 +5066,7 @@ namespace rk_seikyu
                     }
                     break;
                 case 2:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -5084,8 +5075,8 @@ namespace rk_seikyu
                         case 5:
                         case 6:
 
-                            tblStr = "t_shiharai_houhou";
-                            Console.WriteLine("tblStr = " + tblStr);
+                            TblStr = "t_shiharai_houhou";
+                            Console.WriteLine("tblStr = " + TblStr);
                             dataGridViewShiharai_houhou.Columns[0].HeaderText = "法人名";
                             dataGridViewShiharai_houhou.Columns[1].HeaderText = "施設名";
                             dataGridViewShiharai_houhou.Columns[2].HeaderText = "事業所番号";
@@ -5146,7 +5137,7 @@ namespace rk_seikyu
                     }
                     break;
                 case 3:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -5155,8 +5146,8 @@ namespace rk_seikyu
                         case 5:
                         case 6:
 
-                            tblStr = " t_shinzoku_kankei";
-                            Console.WriteLine("tblStr = " + tblStr);
+                            TblStr = " t_shinzoku_kankei";
+                            Console.WriteLine("tblStr = " + TblStr);
                             dataGridViewShinzoku_kankei.Columns[0].HeaderText = "利用者番号";
                             dataGridViewShinzoku_kankei.Columns[1].HeaderText = "利用者名（姓）";
                             dataGridViewShinzoku_kankei.Columns[2].HeaderText = "利用者名（名）";
@@ -5228,10 +5219,10 @@ namespace rk_seikyu
             }
 
             // 再表示
-            switch (cmb_g_id_int)
+            switch (Cmb_g_id_int)
             {
                 case 1:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -5240,7 +5231,7 @@ namespace rk_seikyu
                         case 5:
                         case 6:
 
-                            Console.WriteLine("Case " + cmb_s_id_int + "!");
+                            Console.WriteLine("Case " + Cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
                                 "select"
@@ -5279,13 +5270,13 @@ namespace rk_seikyu
                                 + " t_seikyu"
                                 + " where time_stamp = (select max(time_stamp) from t_seikyu"
                                 //+ " where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
-                                + " where s_id::Integer = " + cmb_s_id_int
-                                + " and g_id::Integer = " + cmb_g_id_int
-                                + " and o_id::Integer = " + cmb_o_id_int
-                                + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                + " where s_id::Integer = " + Cmb_s_id_int
+                                + " and g_id::Integer = " + Cmb_g_id_int
+                                + " and o_id::Integer = " + Cmb_o_id_int
+                                + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                 + " end"
                                 + ");"
                                 , m_conn
@@ -5421,7 +5412,7 @@ namespace rk_seikyu
 
                 // 支払方法
                 case 2:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -5430,7 +5421,7 @@ namespace rk_seikyu
                         case 5:
                         case 6:
 
-                            Console.WriteLine("Case " + cmb_s_id_int + "!");
+                            Console.WriteLine("Case " + Cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
                                 "select"
@@ -5494,13 +5485,13 @@ namespace rk_seikyu
                                 + " from"
                                 + " t_shiharai_houhou"
                                 + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
-                                + " where s_id::Integer = " + cmb_s_id_int
-                                + " and g_id::Integer = " + cmb_g_id_int
-                                + " and o_id::Integer = " + cmb_o_id_int
-                                + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                + " where s_id::Integer = " + Cmb_s_id_int
+                                + " and g_id::Integer = " + Cmb_g_id_int
+                                + " and o_id::Integer = " + Cmb_o_id_int
+                                + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                 + " end)"
                                 + " order by c5;"
                                 , m_conn
@@ -5676,7 +5667,7 @@ namespace rk_seikyu
 
                 // 親族関係
                 case 3:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -5686,7 +5677,7 @@ namespace rk_seikyu
                         case 6:
 
                             //MessageBox.Show("Case " + cmb_s_id_int + "!");
-                            Console.WriteLine("Case " + cmb_s_id_int + "!");
+                            Console.WriteLine("Case " + Cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
                                 "select"
@@ -5759,13 +5750,13 @@ namespace rk_seikyu
                                 + " from"
                                 + " t_shinzoku_kankei"
                                 + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
-                                + " where s_id::Integer = " + cmb_s_id_int
-                                + " and g_id::Integer = " + cmb_g_id_int
-                                + " and o_id::Integer = " + cmb_o_id_int
-                                + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                + " where s_id::Integer = " + Cmb_s_id_int
+                                + " and g_id::Integer = " + Cmb_g_id_int
+                                + " and o_id::Integer = " + Cmb_o_id_int
+                                + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                 + " end"
                                 + ")"
                                 + " order by c5"
@@ -5962,8 +5953,8 @@ namespace rk_seikyu
 
         private void cmb_req_id_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmb_req_id_int = cmb_req_id.SelectedIndex + 1;
-            Console.WriteLine("cmb_req_id_int = " + cmb_req_id_int);
+            Cmb_req_id_int = cmb_req_id.SelectedIndex + 1;
+            Console.WriteLine("cmb_req_id_int = " + Cmb_req_id_int);
         }
 
         private void cmdPrn_Click(object sender, EventArgs e)
@@ -6033,24 +6024,24 @@ namespace rk_seikyu
 
         private void cmb_nen_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmb_nen_str = cmb_nen.Text;
-            Console.WriteLine("cmb_nen_str = " + cmb_nen_str);
+            Cmb_nen_str = cmb_nen.Text;
+            Console.WriteLine("cmb_nen_str = " + Cmb_nen_str);
         }
 
         private void cmb_tsuki_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmb_tsuki_str = cmb_tsuki.Text;
-            Console.WriteLine("cmb_tsuki_str = " + cmb_tsuki_str);
+            Cmb_tsuki_str = cmb_tsuki.Text;
+            Console.WriteLine("cmb_tsuki_str = " + Cmb_tsuki_str);
         }
 
         private void cmb_g_id_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmb_g_id_int = cmb_g_id.SelectedIndex + 1;
-            Console.WriteLine("cmb_g_id_int = " + cmb_g_id_int);
-            switch (cmb_g_id_int)
+            Cmb_g_id_int = cmb_g_id.SelectedIndex + 1;
+            Console.WriteLine("cmb_g_id_int = " + Cmb_g_id_int);
+            switch (Cmb_g_id_int)
             {
                 case 1:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -6059,8 +6050,8 @@ namespace rk_seikyu
                         case 5:
                         case 6:
 
-                            tblStr = " t_seikyu";
-                            Console.WriteLine("tblStr = " + tblStr);
+                            TblStr = " t_seikyu";
+                            Console.WriteLine("tblStr = " + TblStr);
                             dataGridViewSeikyu.Columns[0].HeaderText = "利用者番号";
                             dataGridViewSeikyu.Columns[1].HeaderText = "要介護度";
                             dataGridViewSeikyu.Columns[2].HeaderText = "利用者名";
@@ -6105,7 +6096,7 @@ namespace rk_seikyu
                     }
                     break;
                 case 2:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -6114,8 +6105,8 @@ namespace rk_seikyu
                         case 5:
                         case 6:
 
-                            tblStr = "t_shiharai_houhou";
-                            Console.WriteLine("tblStr = " + tblStr);
+                            TblStr = "t_shiharai_houhou";
+                            Console.WriteLine("tblStr = " + TblStr);
                             dataGridViewShiharai_houhou.Columns[0].HeaderText = "法人名";
                             dataGridViewShiharai_houhou.Columns[1].HeaderText = "施設名";
                             dataGridViewShiharai_houhou.Columns[2].HeaderText = "事業所番号";
@@ -6176,7 +6167,7 @@ namespace rk_seikyu
                     }
                     break;
                 case 3:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -6184,8 +6175,8 @@ namespace rk_seikyu
                         case 4:
                         case 5:
                         case 6:
-                            tblStr = " t_shinzoku_kankei";
-                            Console.WriteLine("tblStr = " + tblStr);
+                            TblStr = " t_shinzoku_kankei";
+                            Console.WriteLine("tblStr = " + TblStr);
                             dataGridViewShinzoku_kankei.Columns[0].HeaderText = "利用者番号";
                             dataGridViewShinzoku_kankei.Columns[1].HeaderText = "利用者名（姓）";
                             dataGridViewShinzoku_kankei.Columns[2].HeaderText = "利用者名（名）";
@@ -6257,10 +6248,10 @@ namespace rk_seikyu
             }
 
             // 再表示
-            switch (cmb_g_id_int)
+            switch (Cmb_g_id_int)
             {
                 case 1:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -6269,7 +6260,7 @@ namespace rk_seikyu
                         case 5:
                         case 6:
 
-                            Console.WriteLine("Case " + cmb_s_id_int + "!");
+                            Console.WriteLine("Case " + Cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
                                 "select"
@@ -6307,13 +6298,13 @@ namespace rk_seikyu
                                 + " from"
                                 + " t_seikyu"
                                 + " where time_stamp = (select max(time_stamp) from t_seikyu"
-                                + " where s_id::Integer = " + cmb_s_id_int
-                                + " and g_id::Integer = " + cmb_g_id_int
-                                + " and o_id::Integer = " + cmb_o_id_int
-                                + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                + " where s_id::Integer = " + Cmb_s_id_int
+                                + " and g_id::Integer = " + Cmb_g_id_int
+                                + " and o_id::Integer = " + Cmb_o_id_int
+                                + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                 + " end"
                                 + ");"
                                 //+ " order by id"
@@ -6450,7 +6441,7 @@ namespace rk_seikyu
 
                 // 支払方法
                 case 2:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -6459,7 +6450,7 @@ namespace rk_seikyu
                         case 5:
                         case 6:
 
-                            Console.WriteLine("Case " + cmb_s_id_int + "!");
+                            Console.WriteLine("Case " + Cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
                                 "select"
@@ -6522,13 +6513,13 @@ namespace rk_seikyu
                                 + " from"
                                 + " t_shiharai_houhou"
                                 + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
-                                + " where s_id::Integer = " + cmb_s_id_int
-                                + " and g_id::Integer = " + cmb_g_id_int
-                                + " and o_id::Integer = " + cmb_o_id_int
-                                + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                + " where s_id::Integer = " + Cmb_s_id_int
+                                + " and g_id::Integer = " + Cmb_g_id_int
+                                + " and o_id::Integer = " + Cmb_o_id_int
+                                + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                 + " end)"
                                 + " order by c5;"
                                 , m_conn
@@ -6702,7 +6693,7 @@ namespace rk_seikyu
 
                 // 親族関係
                 case 3:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -6712,7 +6703,7 @@ namespace rk_seikyu
                         case 6:
 
                             //MessageBox.Show("Case " + cmb_s_id_int + "!");
-                            Console.WriteLine("Case " + cmb_s_id_int + "!");
+                            Console.WriteLine("Case " + Cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
                                 "select"
@@ -6785,13 +6776,13 @@ namespace rk_seikyu
                                 + " from"
                                 + " t_shinzoku_kankei"
                                 + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
-                                + " where s_id::Integer = " + cmb_s_id_int
-                                + " and g_id::Integer = " + cmb_g_id_int
-                                + " and o_id::Integer = " + cmb_o_id_int
-                                + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                + " where s_id::Integer = " + Cmb_s_id_int
+                                + " and g_id::Integer = " + Cmb_g_id_int
+                                + " and o_id::Integer = " + Cmb_o_id_int
+                                + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                 + " end"
                                 + ")"
                                 + " order by c5"
@@ -7011,8 +7002,8 @@ namespace rk_seikyu
 
         private void cmb_o_id_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmb_o_id_int = cmb_o_id.SelectedIndex + 1;
-            Console.WriteLine("cmb_o_id_int = " + cmb_o_id_int);
+            Cmb_o_id_int = cmb_o_id.SelectedIndex + 1;
+            Console.WriteLine("cmb_o_id_int = " + Cmb_o_id_int);
 
             s_id_da.SelectCommand = new NpgsqlCommand
             (
@@ -7023,7 +7014,7 @@ namespace rk_seikyu
                 + ", o_id"
                 + " from"
                 + " t_syubetsu"
-                + " where o_id = '" + cmb_o_id_int + "'"
+                + " where o_id = '" + Cmb_o_id_int + "'"
                 + " order by s_id;",
                     m_conn
             );
@@ -7033,18 +7024,18 @@ namespace rk_seikyu
             s_id_da.Fill(s_id_ds, "t_syubetsu");
 
 
-            cmb_s_id_int = cmb_s_id.SelectedIndex + 1;
-            Console.WriteLine("cmb_s_id_int = " + cmb_s_id_int);
+            Cmb_s_id_int = cmb_s_id.SelectedIndex + 1;
+            Console.WriteLine("cmb_s_id_int = " + Cmb_s_id_int);
 
-            cmb_s_id_str = cmb_s_id.Text;
-            Console.WriteLine("cmb_s_id_str = " + cmb_s_id_str);
-            textBox1.Text = cmb_s_id_str;
+            Cmb_s_id_str = cmb_s_id.Text;
+            Console.WriteLine("cmb_s_id_str = " + Cmb_s_id_str);
+            textBox1.Text = Cmb_s_id_str;
 
 
-            switch (cmb_g_id_int)
+            switch (Cmb_g_id_int)
             {
                 case 1:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -7053,8 +7044,8 @@ namespace rk_seikyu
                         case 5:
                         case 6:
 
-                            tblStr = " t_seikyu";
-                            Console.WriteLine("tblStr = " + tblStr);
+                            TblStr = " t_seikyu";
+                            Console.WriteLine("tblStr = " + TblStr);
                             dataGridViewSeikyu.Columns[0].HeaderText = "利用者番号";
                             dataGridViewSeikyu.Columns[1].HeaderText = "要介護度";
                             dataGridViewSeikyu.Columns[2].HeaderText = "利用者名";
@@ -7099,7 +7090,7 @@ namespace rk_seikyu
                     }
                     break;
                 case 2:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -7108,8 +7099,8 @@ namespace rk_seikyu
                         case 5:
                         case 6:
 
-                            tblStr = "t_shiharai_houhou";
-                            Console.WriteLine("tblStr = " + tblStr);
+                            TblStr = "t_shiharai_houhou";
+                            Console.WriteLine("tblStr = " + TblStr);
                             dataGridViewShiharai_houhou.Columns[0].HeaderText = "法人名";
                             dataGridViewShiharai_houhou.Columns[1].HeaderText = "施設名";
                             dataGridViewShiharai_houhou.Columns[2].HeaderText = "事業所番号";
@@ -7170,7 +7161,7 @@ namespace rk_seikyu
                     }
                     break;
                 case 3:
-                    switch (cmb_s_id_int)
+                    switch (Cmb_s_id_int)
                     {
                         case 1:
                         case 2:
@@ -7179,8 +7170,8 @@ namespace rk_seikyu
                         case 5:
                         case 6:
 
-                            tblStr = " t_shinzoku_kankei";
-                            Console.WriteLine("tblStr = " + tblStr);
+                            TblStr = " t_shinzoku_kankei";
+                            Console.WriteLine("tblStr = " + TblStr);
                             dataGridViewShinzoku_kankei.Columns[0].HeaderText = "利用者番号";
                             dataGridViewShinzoku_kankei.Columns[1].HeaderText = "利用者名（姓）";
                             dataGridViewShinzoku_kankei.Columns[2].HeaderText = "利用者名（名）";
@@ -7252,13 +7243,13 @@ namespace rk_seikyu
             }
 
             // 再表示
-            switch (cmb_o_id_int)
+            switch (Cmb_o_id_int)
             {
                 case 1:
-                    switch (cmb_g_id_int)
+                    switch (Cmb_g_id_int)
                     {
                         case 1:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -7267,7 +7258,7 @@ namespace rk_seikyu
                                 case 5:
                                 case 6:
 
-                                    Console.WriteLine("Case " + cmb_s_id_int + "!");
+                                    Console.WriteLine("Case " + Cmb_s_id_int + "!");
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -7305,13 +7296,13 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_seikyu"
                                         + " where time_stamp = (select max(time_stamp) from t_seikyu"
-                                        + " where s_id::Integer = " + cmb_s_id_int
-                                        + " and g_id::Integer = " + cmb_g_id_int
-                                        + " and o_id::Integer = " + cmb_o_id_int
-                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                        + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                        + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                        + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                        + " where s_id::Integer = " + Cmb_s_id_int
+                                        + " and g_id::Integer = " + Cmb_g_id_int
+                                        + " and o_id::Integer = " + Cmb_o_id_int
+                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ");"
                                         , m_conn
@@ -7447,7 +7438,7 @@ namespace rk_seikyu
 
                         // 支払方法
                         case 2:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -7456,7 +7447,7 @@ namespace rk_seikyu
                                 case 5:
                                 case 6:
 
-                                    Console.WriteLine("Case " + cmb_s_id_int + "!");
+                                    Console.WriteLine("Case " + Cmb_s_id_int + "!");
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -7520,13 +7511,13 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_shiharai_houhou"
                                         + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
-                                        + " where s_id::Integer = " + cmb_s_id_int
-                                        + " and g_id::Integer = " + cmb_g_id_int
-                                        + " and o_id::Integer = " + cmb_o_id_int
-                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                        + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                        + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                        + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                        + " where s_id::Integer = " + Cmb_s_id_int
+                                        + " and g_id::Integer = " + Cmb_g_id_int
+                                        + " and o_id::Integer = " + Cmb_o_id_int
+                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end)"
                                         + " order by c5;"
                                         , m_conn
@@ -7702,7 +7693,7 @@ namespace rk_seikyu
 
                         // 親族関係
                         case 3:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -7712,7 +7703,7 @@ namespace rk_seikyu
                                 case 6:
 
                                     //MessageBox.Show("Case " + cmb_s_id_int + "!");
-                                    Console.WriteLine("Case " + cmb_s_id_int + "!");
+                                    Console.WriteLine("Case " + Cmb_s_id_int + "!");
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -7784,13 +7775,13 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_shinzoku_kankei"
                                         + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
-                                        + " where s_id::Integer = " + cmb_s_id_int
-                                        + " and g_id::Integer = " + cmb_g_id_int
-                                        + " and o_id::Integer = " + cmb_o_id_int
-                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                        + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                        + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                        + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                        + " where s_id::Integer = " + Cmb_s_id_int
+                                        + " and g_id::Integer = " + Cmb_g_id_int
+                                        + " and o_id::Integer = " + Cmb_o_id_int
+                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ")"
                                         + " order by c5"
@@ -7985,10 +7976,10 @@ namespace rk_seikyu
 
                 //
                 case 2:
-                    switch (cmb_g_id_int)
+                    switch (Cmb_g_id_int)
                     {
                         case 1:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -7997,7 +7988,7 @@ namespace rk_seikyu
                                 case 5:
                                 case 6:
 
-                                    Console.WriteLine("Case " + cmb_s_id_int + "!");
+                                    Console.WriteLine("Case " + Cmb_s_id_int + "!");
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -8035,13 +8026,13 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_seikyu"
                                         + " where time_stamp = (select max(time_stamp) from t_seikyu"
-                                        + " where s_id::Integer = " + cmb_s_id_int
-                                        + " and g_id::Integer = " + cmb_g_id_int
-                                        + " and o_id::Integer = " + cmb_o_id_int
-                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                        + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                        + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                        + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                        + " where s_id::Integer = " + Cmb_s_id_int
+                                        + " and g_id::Integer = " + Cmb_g_id_int
+                                        + " and o_id::Integer = " + Cmb_o_id_int
+                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ");"
                                         , m_conn
@@ -8177,7 +8168,7 @@ namespace rk_seikyu
 
                         // 支払方法
                         case 2:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -8186,7 +8177,7 @@ namespace rk_seikyu
                                 case 5:
                                 case 6:
 
-                                    Console.WriteLine("Case " + cmb_s_id_int + "!");
+                                    Console.WriteLine("Case " + Cmb_s_id_int + "!");
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -8250,13 +8241,13 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_shiharai_houhou"
                                         + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
-                                        + " where s_id::Integer = " + cmb_s_id_int
-                                        + " and g_id::Integer = " + cmb_g_id_int
-                                        + " and o_id::Integer = " + cmb_o_id_int
-                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                        + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                        + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                        + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                        + " where s_id::Integer = " + Cmb_s_id_int
+                                        + " and g_id::Integer = " + Cmb_g_id_int
+                                        + " and o_id::Integer = " + Cmb_o_id_int
+                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end)"
                                         + " order by c5;"
                                         , m_conn
@@ -8432,7 +8423,7 @@ namespace rk_seikyu
 
                         // 親族関係
                         case 3:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -8442,7 +8433,7 @@ namespace rk_seikyu
                                 case 6:
 
                                     //MessageBox.Show("Case " + cmb_s_id_int + "!");
-                                    Console.WriteLine("Case " + cmb_s_id_int + "!");
+                                    Console.WriteLine("Case " + Cmb_s_id_int + "!");
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -8515,13 +8506,13 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_shinzoku_kankei"
                                         + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
-                                        + " where s_id::Integer = " + cmb_s_id_int
-                                        + " and g_id::Integer = " + cmb_g_id_int
-                                        + " and o_id::Integer = " + cmb_o_id_int
-                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                        + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                        + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                        + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                        + " where s_id::Integer = " + Cmb_s_id_int
+                                        + " and g_id::Integer = " + Cmb_g_id_int
+                                        + " and o_id::Integer = " + Cmb_o_id_int
+                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ")"
                                         + " order by c5"
@@ -8717,10 +8708,10 @@ namespace rk_seikyu
                     break;
                 //
                 case 3:
-                    switch (cmb_g_id_int)
+                    switch (Cmb_g_id_int)
                     {
                         case 1:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -8729,7 +8720,7 @@ namespace rk_seikyu
                                 case 5:
                                 case 6:
 
-                                    Console.WriteLine("Case " + cmb_s_id_int + "!");
+                                    Console.WriteLine("Case " + Cmb_s_id_int + "!");
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -8767,13 +8758,13 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_seikyu"
                                         + " where time_stamp = (select max(time_stamp) from t_seikyu"
-                                        + " where s_id::Integer = " + cmb_s_id_int
-                                        + " and g_id::Integer = " + cmb_g_id_int
-                                        + " and o_id::Integer = " + cmb_o_id_int
-                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                        + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                        + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                        + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                        + " where s_id::Integer = " + Cmb_s_id_int
+                                        + " and g_id::Integer = " + Cmb_g_id_int
+                                        + " and o_id::Integer = " + Cmb_o_id_int
+                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ");"
                                         , m_conn
@@ -8909,7 +8900,7 @@ namespace rk_seikyu
 
                         // 支払方法
                         case 2:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -8918,7 +8909,7 @@ namespace rk_seikyu
                                 case 5:
                                 case 6:
 
-                                    Console.WriteLine("Case " + cmb_s_id_int + "!");
+                                    Console.WriteLine("Case " + Cmb_s_id_int + "!");
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -8982,13 +8973,13 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_shiharai_houhou"
                                         + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
-                                        + " where s_id::Integer = " + cmb_s_id_int
-                                        + " and g_id::Integer = " + cmb_g_id_int
-                                        + " and o_id::Integer = " + cmb_o_id_int
-                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                        + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                        + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                        + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                        + " where s_id::Integer = " + Cmb_s_id_int
+                                        + " and g_id::Integer = " + Cmb_g_id_int
+                                        + " and o_id::Integer = " + Cmb_o_id_int
+                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end)"
                                         + " order by c5;"
                                         , m_conn
@@ -9164,7 +9155,7 @@ namespace rk_seikyu
 
                         // 親族関係
                         case 3:
-                            switch (cmb_s_id_int)
+                            switch (Cmb_s_id_int)
                             {
                                 case 1:
                                 case 2:
@@ -9174,7 +9165,7 @@ namespace rk_seikyu
                                 case 6:
 
                                     //MessageBox.Show("Case " + cmb_s_id_int + "!");
-                                    Console.WriteLine("Case " + cmb_s_id_int + "!");
+                                    Console.WriteLine("Case " + Cmb_s_id_int + "!");
                                     da.SelectCommand = new NpgsqlCommand
                                     (
                                         "select"
@@ -9247,13 +9238,13 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_shinzoku_kankei"
                                         + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
-                                        + " where s_id::Integer = " + cmb_s_id_int
-                                        + " and g_id::Integer = " + cmb_g_id_int
-                                        + " and o_id::Integer = " + cmb_o_id_int
-                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + cmb_tsuki_str + "')=1 then"
-                                                        + " ('" + cmb_nen_str + "' || '/ ' || '" + cmb_tsuki_str + "')"
-                                                        + "       when length('" + cmb_tsuki_str + "')=2 then"
-                                                        + " ('" + cmb_nen_str + "' || '/' || '" + cmb_tsuki_str + "')"
+                                        + " where s_id::Integer = " + Cmb_s_id_int
+                                        + " and g_id::Integer = " + Cmb_g_id_int
+                                        + " and o_id::Integer = " + Cmb_o_id_int
+                                        + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ")"
                                         + " order by c5"
