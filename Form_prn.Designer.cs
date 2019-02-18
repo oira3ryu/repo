@@ -323,7 +323,7 @@
             this.bindingNavigatorWithdrawal.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigatorWithdrawal.Name = "bindingNavigatorWithdrawal";
             this.bindingNavigatorWithdrawal.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigatorWithdrawal.Size = new System.Drawing.Size(1596, 25);
+            this.bindingNavigatorWithdrawal.Size = new System.Drawing.Size(1604, 25);
             this.bindingNavigatorWithdrawal.TabIndex = 18;
             this.bindingNavigatorWithdrawal.Text = "bindingNavigator1";
             // 
@@ -464,8 +464,10 @@
             this.dataGridViewWithdrawal.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewWithdrawal_CellContentClick);
             this.dataGridViewWithdrawal.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewWithdrawal_CellMouseMove);
             this.dataGridViewWithdrawal.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewWithdrawal_CellMouseMove);
-            this.dataGridViewWithdrawal.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewWithdrawal_CellPainting);
+            this.dataGridViewWithdrawal.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DataGridViewWithdrawal_CellPainting);
+            this.dataGridViewWithdrawal.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewWithdrawal_CellValueChanged);
             this.dataGridViewWithdrawal.CurrentCellDirtyStateChanged += new System.EventHandler(this.DataGridViewWithdrawal_CurrentCellDirtyStateChanged);
+            this.dataGridViewWithdrawal.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewWithdrawal_CellValueChanged);
             // 
             // wflgDataGridViewTextBoxColumn
             // 
@@ -597,7 +599,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1613, 865);
+            this.ClientSize = new System.Drawing.Size(1621, 865);
             this.Controls.Add(this.chk_title);
             this.Controls.Add(this.checkBoxAll);
             this.Controls.Add(this.textBox1);
