@@ -109,7 +109,6 @@ namespace rk_seikyu
 
             Console.WriteLine("Form_prn_cmb_o_id_str = " + cmb_o_id_str);
 
-
             nen_da.SelectCommand = new NpgsqlCommand
             (
                    "select"
@@ -1597,7 +1596,9 @@ namespace rk_seikyu
                     reader.Read();
                     e.Row["w_flg"] = reader["w_flg"];
                     e.Row["r_id"] = reader["r_id"];
-
+                    reader.Close();
+                    reader.Close();
+                    //Dispose();
                 }
                 catch (Exception ex)
                 {
@@ -1698,6 +1699,8 @@ namespace rk_seikyu
                 reader.Read();
                 e.Row["w_flg"] = reader["w_flg"];
                 e.Row["r_id"] = reader["r_id"];
+                reader.Close();
+                //Dispose();
             }
             catch (Exception ex)
             {

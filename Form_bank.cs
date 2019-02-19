@@ -53,7 +53,7 @@ namespace rk_seikyu
                 + " t_bank"
                 + " order by b_id;",
                 m_conn
-            );
+                );
 
             // insert
             da.InsertCommand = new NpgsqlCommand
@@ -90,6 +90,8 @@ namespace rk_seikyu
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("sd", NpgsqlTypes.NpgsqlDbType.Text, 0, "sd", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("sm", NpgsqlTypes.NpgsqlDbType.Text, 0, "sm", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("sy", NpgsqlTypes.NpgsqlDbType.Text, 0, "sy", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+            m_conn.Close();
+
 
             // update
             da.UpdateCommand = new NpgsqlCommand(
@@ -203,6 +205,8 @@ namespace rk_seikyu
 						e.Row["sd"] = reader["sd"];
                         e.Row["sm"] = reader["sm"];
                         e.Row["sy"] = reader["sy"];
+                        reader.Close();
+                        cmd.Dispose();
                     }
                     catch (Exception ex)
                     {
@@ -245,6 +249,8 @@ namespace rk_seikyu
 						e.Row["sd"] = reader["sd"];
                         e.Row["sm"] = reader["sm"];
                         e.Row["sy"] = reader["sy"];
+                        reader.Close();
+                        cmd.Dispose();
                     }
                     catch (Exception ex)
                     {
