@@ -1179,8 +1179,8 @@ namespace rk_seikyu
 
         private void DataGridViewEvent()
         {
-            dataGridViewSeikyu.CellMouseMove += new DataGridViewCellMouseEventHandler(dataGridViewSeikyu_CellMouseMove);
-            dataGridViewSeikyu.CellPainting += new DataGridViewCellPaintingEventHandler(dataGridViewSeikyu_CellPainting);
+            dataGridViewSeikyu.CellMouseMove += new DataGridViewCellMouseEventHandler(DataGridViewSeikyu_CellMouseMove);
+            dataGridViewSeikyu.CellPainting += new DataGridViewCellPaintingEventHandler(DataGridViewSeikyu_CellPainting);
             dataGridViewSeikyu.CellValueChanged += new DataGridViewCellEventHandler(dataGridViewSeikyu_CellValueChanged);
         }
 
@@ -2133,7 +2133,7 @@ namespace rk_seikyu
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             switch (Cmb_g_id_int)
             {
@@ -3440,6 +3440,7 @@ namespace rk_seikyu
                                     break;
                             }
                             break;
+
                         case 3:
                             switch (Cmb_s_id_int)
                             {
@@ -3673,7 +3674,6 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        //+ " where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                 + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                                 + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -3899,6 +3899,7 @@ namespace rk_seikyu
                                     break;
                             }
                             break;
+
                         // 支払方法
                         case 2:
                             switch (Cmb_s_id_int)
@@ -3975,7 +3976,6 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        //" where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                         + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                                         + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -4267,6 +4267,7 @@ namespace rk_seikyu
                                     break;
                             }
                             break;
+
                         // 親族関係
                         case 3:
                             switch (Cmb_s_id_int)
@@ -4349,7 +4350,6 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_shinzoku_kankei"
                                         + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
-                                        //+ " where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
@@ -4767,7 +4767,7 @@ namespace rk_seikyu
 
         }
 
-        private void dataGridViewSeikyu_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
+        private void DataGridViewSeikyu_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
         {
             if (e == null) return;
 
@@ -4794,7 +4794,7 @@ namespace rk_seikyu
 
         }
 
-        private void dataGridViewSeikyu_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        private void DataGridViewSeikyu_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridViewCellStyle dcs = new DataGridViewCellStyle();
             dcs.BackColor = Color.Yellow;
@@ -4812,7 +4812,7 @@ namespace rk_seikyu
             }
         }
 
-        private void dataGridViewSeikyu_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        private void DataGridViewSeikyu_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.ColumnIndex < 0 && e.RowIndex >= 0)
             {
@@ -4850,6 +4850,7 @@ namespace rk_seikyu
                             break;
                     }
                     break;
+
                 case 2:
                     switch (Cmb_s_id_int)
                     {
@@ -4865,6 +4866,7 @@ namespace rk_seikyu
                             break;
                     }
                     break;
+
                 case 3:
                     switch (Cmb_s_id_int)
                     {
@@ -4890,13 +4892,13 @@ namespace rk_seikyu
             }
         }
 
-        private void cmdClose_Click(object sender, EventArgs e)
+        private void CmdClose_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
-        private void seikyu_ds_OvsToolStripButton_Click(object sender, EventArgs e)
+        private void Seikyu_ds_OvsToolStripButton_Click(object sender, EventArgs e)
         {
             int update_count = 0;
             switch (Cmb_g_id_int)
@@ -4912,7 +4914,6 @@ namespace rk_seikyu
                         case 6:
                             try
                             {
-                                //update_count += da.Update(_seikyu_ds.Tables["seikyu_ds"]);
                                 update_count += da.Update(_seikyu_ds.Tables["seikyu_ds"].Select(null, null, DataViewRowState.Deleted));
                                 update_count += da.Update(_seikyu_ds.Tables["seikyu_ds"].Select(null, null, DataViewRowState.ModifiedCurrent));
                                 update_count += da.Update(_seikyu_ds.Tables["seikyu_ds"].Select(null, null, DataViewRowState.Added));
@@ -4929,7 +4930,7 @@ namespace rk_seikyu
             }
         }
 
-        private void shiharai_houhou_ds_OvsToolStripButton_Click(object sender, EventArgs e)
+        private void Shiharai_houhou_ds_OvsToolStripButton_Click(object sender, EventArgs e)
         {
             int update_count = 0;
             switch (Cmb_g_id_int)
@@ -4945,7 +4946,6 @@ namespace rk_seikyu
                         case 6:
                             try
                             {
-                                //update_count += da.Update(_shiharai_houhou_ds.Tables["shiharai_houhou_ds"]);
                                 update_count += da.Update(_shiharai_houhou_ds.Tables["shiharai_houhou_ds"].Select(null, null, DataViewRowState.Deleted));
                                 update_count += da.Update(_shiharai_houhou_ds.Tables["shiharai_houhou_ds"].Select(null, null, DataViewRowState.ModifiedCurrent));
                                 update_count += da.Update(_shiharai_houhou_ds.Tables["shiharai_houhou_ds"].Select(null, null, DataViewRowState.Added));
@@ -4962,7 +4962,7 @@ namespace rk_seikyu
             }
         }
 
-        private void shinzoku_kankei_ds_OvsToolStripButton_Click(object sender, EventArgs e)
+        private void Shinzoku_kankei_ds_OvsToolStripButton_Click(object sender, EventArgs e)
         {
             int update_count = 0;
             switch (Cmb_g_id_int)
@@ -4979,7 +4979,6 @@ namespace rk_seikyu
 
                             try
                             {
-                                //update_count += da.Update(_shinzoku_kankei_ds.Tables["shinzoku_kankei_ds"]);
                                 update_count += da.Update(_shinzoku_kankei_ds.Tables["shinzoku_kankei_ds"].Select(null, null, DataViewRowState.Deleted));
                                 update_count += da.Update(_shinzoku_kankei_ds.Tables["shinzoku_kankei_ds"].Select(null, null, DataViewRowState.ModifiedCurrent));
                                 update_count += da.Update(_shinzoku_kankei_ds.Tables["shinzoku_kankei_ds"].Select(null, null, DataViewRowState.Added));
@@ -4996,9 +4995,8 @@ namespace rk_seikyu
             }
         }
 
-        private void cmb_s_id_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cmb_s_id_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             Cmb_s_id_int = cmb_s_id.SelectedIndex + 1;
             if (cmb_s_id.SelectedIndex != -1)
             {
@@ -5132,10 +5130,10 @@ namespace rk_seikyu
                                 dataGridViewShiharai_houhou.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                                 dataGridViewShiharai_houhou.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
                             }
-
                             break;
                     }
                     break;
+
                 case 3:
                     switch (Cmb_s_id_int)
                     {
@@ -5269,7 +5267,6 @@ namespace rk_seikyu
                                 + " from"
                                 + " t_seikyu"
                                 + " where time_stamp = (select max(time_stamp) from t_seikyu"
-                                //+ " where s_id::Integer = " + cmb_s_id_int + " and g_id::Integer = " + cmb_g_id_int
                                 + " where s_id::Integer = " + Cmb_s_id_int
                                 + " and g_id::Integer = " + Cmb_g_id_int
                                 + " and o_id::Integer = " + Cmb_o_id_int
@@ -5676,7 +5673,6 @@ namespace rk_seikyu
                         case 5:
                         case 6:
 
-                            //MessageBox.Show("Case " + cmb_s_id_int + "!");
                             Console.WriteLine("Case " + Cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
@@ -5759,7 +5755,7 @@ namespace rk_seikyu
                                                 + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                 + " end"
                                 + ")"
-                                + " order by c5"
+                                + " order by c5;"
                                 , m_conn
                             );
 
@@ -5951,20 +5947,20 @@ namespace rk_seikyu
             }
         }
 
-        private void cmb_req_id_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cmb_req_id_SelectedIndexChanged(object sender, EventArgs e)
         {
             Cmb_req_id_int = cmb_req_id.SelectedIndex + 1;
-            Console.WriteLine("cmb_req_id_int = " + Cmb_req_id_int);
+            Console.WriteLine("Cmb_req_id_int = " + Cmb_req_id_int);
         }
 
-        private void cmdPrn_Click(object sender, EventArgs e)
+        private void CmdPrn_Click(object sender, EventArgs e)
         {
             Form_prn Form = new Form_prn();
             Form.WindowState = FormWindowState.Maximized;
             Form.ShowDialog();
         }
 
-        private void cmdPar_Click(object sender, EventArgs e)
+        private void CmdPar_Click(object sender, EventArgs e)
         {
             Form_chg Form = new Form_chg();
             Form.WindowState = FormWindowState.Maximized;
@@ -6022,19 +6018,19 @@ namespace rk_seikyu
             }
         }
 
-        private void cmb_nen_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cmb_nen_SelectedIndexChanged(object sender, EventArgs e)
         {
             Cmb_nen_str = cmb_nen.Text;
             Console.WriteLine("cmb_nen_str = " + Cmb_nen_str);
         }
 
-        private void cmb_tsuki_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cmb_tsuki_SelectedIndexChanged(object sender, EventArgs e)
         {
             Cmb_tsuki_str = cmb_tsuki.Text;
             Console.WriteLine("cmb_tsuki_str = " + Cmb_tsuki_str);
         }
 
-        private void cmb_g_id_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cmb_g_id_SelectedIndexChanged(object sender, EventArgs e)
         {
             Cmb_g_id_int = cmb_g_id.SelectedIndex + 1;
             Console.WriteLine("cmb_g_id_int = " + Cmb_g_id_int);
@@ -6091,10 +6087,10 @@ namespace rk_seikyu
                                     dataGridViewSeikyu.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
                                 }
                             }
-
                             break;
                     }
                     break;
+
                 case 2:
                     switch (Cmb_s_id_int)
                     {
@@ -6166,6 +6162,7 @@ namespace rk_seikyu
                             break;
                     }
                     break;
+
                 case 3:
                     switch (Cmb_s_id_int)
                     {
@@ -6175,6 +6172,7 @@ namespace rk_seikyu
                         case 4:
                         case 5:
                         case 6:
+
                             TblStr = " t_shinzoku_kankei";
                             Console.WriteLine("tblStr = " + TblStr);
                             dataGridViewShinzoku_kankei.Columns[0].HeaderText = "利用者番号";
@@ -6241,7 +6239,6 @@ namespace rk_seikyu
                                 dataGridViewShinzoku_kankei.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                                 dataGridViewShinzoku_kankei.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
                             }
-
                             break;
                     }
                     break;
@@ -6702,7 +6699,6 @@ namespace rk_seikyu
                         case 5:
                         case 6:
 
-                            //MessageBox.Show("Case " + cmb_s_id_int + "!");
                             Console.WriteLine("Case " + Cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
@@ -6785,7 +6781,7 @@ namespace rk_seikyu
                                                 + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                 + " end"
                                 + ")"
-                                + " order by c5"
+                                + " order by c5;"
                                 , m_conn
                             );
 
@@ -6977,14 +6973,14 @@ namespace rk_seikyu
             }
         }
 
-        private void cmdSyubetsu_Click(object sender, EventArgs e)
+        private void CmdSyubetsu_Click(object sender, EventArgs e)
         {
             Form_syubetsu Form = new Form_syubetsu();
             Form.WindowState = FormWindowState.Maximized;
             Form.ShowDialog();
         }
 
-        private void cmdNenMod_Click(object sender, EventArgs e)
+        private void CmdNenMod_Click(object sender, EventArgs e)
         {
             Form_nen Form = new Form_nen();
             Form.WindowState = FormWindowState.Maximized;
@@ -6992,15 +6988,14 @@ namespace rk_seikyu
 
         }
 
-        private void cmdGyoumu_Click(object sender, EventArgs e)
+        private void CmdGyoumu_Click(object sender, EventArgs e)
         {
             Form_gyoumu Form = new Form_gyoumu();
             Form.WindowState = FormWindowState.Maximized;
             Form.ShowDialog();
-
         }
 
-        private void cmb_o_id_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cmb_o_id_SelectedIndexChanged(object sender, EventArgs e)
         {
             Cmb_o_id_int = cmb_o_id.SelectedIndex + 1;
             Console.WriteLine("cmb_o_id_int = " + Cmb_o_id_int);
@@ -7030,7 +7025,6 @@ namespace rk_seikyu
             Cmb_s_id_str = cmb_s_id.Text;
             Console.WriteLine("cmb_s_id_str = " + Cmb_s_id_str);
             textBox1.Text = Cmb_s_id_str;
-
 
             switch (Cmb_g_id_int)
             {
@@ -7156,7 +7150,6 @@ namespace rk_seikyu
                                 dataGridViewShiharai_houhou.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                                 dataGridViewShiharai_houhou.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
                             }
-
                             break;
                     }
                     break;
@@ -7784,7 +7777,7 @@ namespace rk_seikyu
                                                         + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ")"
-                                        + " order by c5"
+                                        + " order by c5;"
                                         , m_conn
                                     );
 
@@ -8515,7 +8508,7 @@ namespace rk_seikyu
                                                         + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ")"
-                                        + " order by c5"
+                                        + " order by c5;"
                                         , m_conn
                                     );
 
@@ -9247,7 +9240,7 @@ namespace rk_seikyu
                                                         + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ")"
-                                        + " order by c5"
+                                        + " order by c5;"
                                         , m_conn
                                     );
 
@@ -9438,7 +9431,6 @@ namespace rk_seikyu
                             break;
                     }
                     break;
-
             }
         }
     }

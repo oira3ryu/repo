@@ -411,7 +411,7 @@
             this.seikyu_ds_OvsToolStripButton.Name = "seikyu_ds_OvsToolStripButton";
             this.seikyu_ds_OvsToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.seikyu_ds_OvsToolStripButton.Text = "上書き保存(&S)";
-            this.seikyu_ds_OvsToolStripButton.Click += new System.EventHandler(this.seikyu_ds_OvsToolStripButton_Click);
+            this.seikyu_ds_OvsToolStripButton.Click += new System.EventHandler(this.Seikyu_ds_OvsToolStripButton_Click);
             // 
             // nen
             // 
@@ -426,7 +426,7 @@
             this.cmbImport.TabIndex = 4;
             this.cmbImport.Text = "CSV取込";
             this.cmbImport.UseVisualStyleBackColor = true;
-            this.cmbImport.Click += new System.EventHandler(this.button1_Click);
+            this.cmbImport.Click += new System.EventHandler(this.Button1_Click);
             // 
             // openFileDialog1
             // 
@@ -440,7 +440,7 @@
             this.cmdClose.TabIndex = 5;
             this.cmdClose.Text = "閉じる";
             this.cmdClose.UseVisualStyleBackColor = true;
-            this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
+            this.cmdClose.Click += new System.EventHandler(this.CmdClose_Click);
             // 
             // cmdPrn
             // 
@@ -450,7 +450,7 @@
             this.cmdPrn.TabIndex = 8;
             this.cmdPrn.Text = "印　刷";
             this.cmdPrn.UseVisualStyleBackColor = true;
-            this.cmdPrn.Click += new System.EventHandler(this.cmdPrn_Click);
+            this.cmdPrn.Click += new System.EventHandler(this.CmdPrn_Click);
             // 
             // cmb_s_id
             // 
@@ -459,7 +459,7 @@
             this.cmb_s_id.Name = "cmb_s_id";
             this.cmb_s_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_s_id.TabIndex = 9;
-            this.cmb_s_id.SelectedIndexChanged += new System.EventHandler(this.cmb_s_id_SelectedIndexChanged);
+            this.cmb_s_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_s_id_SelectedIndexChanged);
             // 
             // cmdPar
             // 
@@ -469,7 +469,7 @@
             this.cmdPar.TabIndex = 10;
             this.cmdPar.Text = "項目設定";
             this.cmdPar.UseVisualStyleBackColor = true;
-            this.cmdPar.Click += new System.EventHandler(this.cmdPar_Click);
+            this.cmdPar.Click += new System.EventHandler(this.CmdPar_Click);
             // 
             // cmb_req_id
             // 
@@ -479,7 +479,7 @@
             this.cmb_req_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_req_id.TabIndex = 11;
             this.cmb_req_id.Visible = false;
-            this.cmb_req_id.SelectedIndexChanged += new System.EventHandler(this.cmb_req_id_SelectedIndexChanged);
+            this.cmb_req_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_req_id_SelectedIndexChanged);
             // 
             // cmdSave
             // 
@@ -1702,7 +1702,7 @@
             this.shiharai_houhou_ds_OvsToolStripButton1.Name = "shiharai_houhou_ds_OvsToolStripButton1";
             this.shiharai_houhou_ds_OvsToolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.shiharai_houhou_ds_OvsToolStripButton1.Text = "上書き保存(&S)";
-            this.shiharai_houhou_ds_OvsToolStripButton1.Click += new System.EventHandler(this.shiharai_houhou_ds_OvsToolStripButton_Click);
+            this.shiharai_houhou_ds_OvsToolStripButton1.Click += new System.EventHandler(this.Shiharai_houhou_ds_OvsToolStripButton_Click);
             // 
             // bindingNavigatorShinzoku_kankei
             // 
@@ -1826,7 +1826,7 @@
             this.shinzoku_kanke_ds_OvsToolStripButton2.Name = "shinzoku_kanke_ds_OvsToolStripButton2";
             this.shinzoku_kanke_ds_OvsToolStripButton2.Size = new System.Drawing.Size(23, 22);
             this.shinzoku_kanke_ds_OvsToolStripButton2.Text = "上書き保存(&S)";
-            this.shinzoku_kanke_ds_OvsToolStripButton2.Click += new System.EventHandler(this.shinzoku_kankei_ds_OvsToolStripButton_Click);
+            this.shinzoku_kanke_ds_OvsToolStripButton2.Click += new System.EventHandler(this.Shinzoku_kankei_ds_OvsToolStripButton_Click);
             // 
             // nen1
             // 
@@ -1848,7 +1848,7 @@
             this.cmb_nen.Size = new System.Drawing.Size(58, 20);
             this.cmb_nen.TabIndex = 18;
             this.cmb_nen.ValueMember = "n_id";
-            this.cmb_nen.SelectedIndexChanged += new System.EventHandler(this.cmb_nen_SelectedIndexChanged);
+            this.cmb_nen.SelectedIndexChanged += new System.EventHandler(this.Cmb_nen_SelectedIndexChanged);
             // 
             // nenBindingSource1
             // 
@@ -1875,7 +1875,7 @@
             this.cmb_tsuki.Size = new System.Drawing.Size(58, 20);
             this.cmb_tsuki.TabIndex = 19;
             this.cmb_tsuki.ValueMember = "t_id";
-            this.cmb_tsuki.SelectedIndexChanged += new System.EventHandler(this.cmb_tsuki_SelectedIndexChanged);
+            this.cmb_tsuki.SelectedIndexChanged += new System.EventHandler(this.Cmb_tsuki_SelectedIndexChanged);
             // 
             // tsukiBindingSource1
             // 
@@ -1899,7 +1899,7 @@
             this.cmb_g_id.Name = "cmb_g_id";
             this.cmb_g_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_g_id.TabIndex = 20;
-            this.cmb_g_id.SelectedIndexChanged += new System.EventHandler(this.cmb_g_id_SelectedIndexChanged);
+            this.cmb_g_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_g_id_SelectedIndexChanged);
             // 
             // textBox1
             // 
@@ -1917,7 +1917,7 @@
             this.cmd_serv.TabIndex = 22;
             this.cmd_serv.Text = "設定";
             this.cmd_serv.UseVisualStyleBackColor = true;
-            this.cmd_serv.Click += new System.EventHandler(this.cmdSyubetsu_Click);
+            this.cmd_serv.Click += new System.EventHandler(this.CmdSyubetsu_Click);
             // 
             // cmdNenMod
             // 
@@ -1927,7 +1927,7 @@
             this.cmdNenMod.TabIndex = 23;
             this.cmdNenMod.Text = "設定";
             this.cmdNenMod.UseVisualStyleBackColor = true;
-            this.cmdNenMod.Click += new System.EventHandler(this.cmdNenMod_Click);
+            this.cmdNenMod.Click += new System.EventHandler(this.CmdNenMod_Click);
             // 
             // cmdGyoumu
             // 
@@ -1937,7 +1937,7 @@
             this.cmdGyoumu.TabIndex = 24;
             this.cmdGyoumu.Text = "設定";
             this.cmdGyoumu.UseVisualStyleBackColor = true;
-            this.cmdGyoumu.Click += new System.EventHandler(this.cmdGyoumu_Click);
+            this.cmdGyoumu.Click += new System.EventHandler(this.CmdGyoumu_Click);
             // 
             // o_id_ds1
             // 
@@ -1969,7 +1969,7 @@
             this.cmb_o_id.Size = new System.Drawing.Size(300, 20);
             this.cmb_o_id.TabIndex = 24;
             this.cmb_o_id.ValueMember = "o_id";
-            this.cmb_o_id.SelectedIndexChanged += new System.EventHandler(this.cmb_o_id_SelectedIndexChanged);
+            this.cmb_o_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_o_id_SelectedIndexChanged);
             // 
             // cmb_o_id_text
             // 

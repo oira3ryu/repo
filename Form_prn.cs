@@ -1597,7 +1597,6 @@ namespace rk_seikyu
                     e.Row["w_flg"] = reader["w_flg"];
                     e.Row["r_id"] = reader["r_id"];
                     reader.Close();
-                    reader.Close();
                     //Dispose();
                 }
                 catch (Exception ex)
@@ -1813,107 +1812,6 @@ namespace rk_seikyu
                 return;
             }
             MessageBox.Show(update_count.ToString() + "件、保存しました。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            //da.SelectCommand = new NpgsqlCommand
-            //(
-            //    "with recursive h as ("
-            //    + "select"
-            //    + " a.r_id"
-            //    + ", a.c1"
-            //    + ", b.c5"
-            //    + ", a.c3"
-            //    + ", rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),'')) c3_mod"
-            //    + ", a.c4"
-            //    + ", rtrim(replace(b.c6,substr(b.c6,strpos(b.c6, '('), strpos(b.c6, ')')),'')) c6_mod"
-            //    + ", b.c6"
-            //    + ", b.c9"
-            //    + ", b.c11"
-            //    + ", b.c14"
-            //    + ", b.c16"
-            //    + ", b.c19"
-            //    + ", a.c22"
-            //    + ", b.c4_array"
-            //    + ", case substr(b.c4,strpos(b.c4, '[')+1, strpos(b.c4, ']')-strpos(b.c4, '[')-1)"
-            //    + " when '入所' then '入所'"
-            //    + " when '介護通所' then '通所'"
-            //    + " when '介護短期' then '短期'"
-            //    + " when '予防通所' then '予防通所'"
-            //    + " when '予防短期' then '予防短期'"
-            //    + " when '通所型サービス' then '通所型'"
-            //    + " end"
-            //    + ", a.s_id"
-            //    + ", a.o_id"
-            //    + ", a.w_flg"
-            //    + " from t_seikyu a inner join t_shiharai_houhou b"
-            //    + " on a.c1 = b.c5"
-            //    + " and rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),'')) = rtrim(replace(b.c6,substr(b.c6,strpos(b.c6, '('), strpos(b.c6, ')')),''))"
-            //    + " and a.s_id = case substr(b.c4,strpos(b.c4, '[')+1, strpos(b.c4, ']')-strpos(b.c4, '[')-1)"
-            //        + " when '入所' then '1'"
-            //        + " when '介護通所' then '1'"
-            //        + " when '介護短期' then '3'"
-            //        + " when '予防通所' then '2'"
-            //        + " when '予防短期' then '5'"
-            //        + " when '通所型サービス' then '3'"
-            //        + " end"
-            //    + " where not exists (select 1 from t_seikyu as s"
-            //    + " where a.c1 = s.c1 and a.c3 = s.c3 and a.time_stamp < s.time_stamp"
-            //    + " and s.c4 = case when length('" + Cmb_tsuki_str + "')=1 then"
-            //                    + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-            //                    + "       when length('" + Cmb_tsuki_str + "')=2 then"
-            //                    + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-            //                    + " end)"
-            //    + " and not exists (select 1 from t_shiharai_houhou as r"
-            //    + " where b.c5 = r.c5 and b.c6 = r.c6 and b.time_stamp < r.time_stamp"
-            //    + " and r.c4_array[1]::text || '/' || r.c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-            //                    + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-            //                    + "       when length('" + Cmb_tsuki_str + "')=2 then"
-            //                    + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-            //                    + " end)"
-            //    + " and a.c4_array[1]::text || '/' || a.c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-            //                    + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-            //                    + "       when length('" + Cmb_tsuki_str + "')=2 then"
-            //                    + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-            //                    + " end"
-            //    + " and b.c4_array[1]::text || '/' || b.c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-            //                    + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-            //                    + "       when length('" + Cmb_tsuki_str + "')=2 then"
-            //                    + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-            //                    + " end"
-            //    + " and b.c9 = '" + Cmb_b_code_str + "'"
-            //    + " order by a.r_id)"
-            //    + " select"
-            //    + " r_id"
-            //    + ", c1"
-            //    + ", c3"
-            //    + ", c4"
-            //    + ", c9"
-            //    + ", c11"
-            //    + ", c14"
-            //    + ", c16"
-            //    + ", c19"
-            //    + ", c22"
-            //    + ", s_id"
-            //    + ", o_id"
-            //    + ", w_flg"
-            //    + " from h"
-            //    + " where h.w_flg = '1';"
-            //    , m_conn
-            //    );
-
-            //if (ds.Tables["withdrawal_ds"] != null)
-            //    ds.Tables["withdrawal_ds"].Clear();
-            //da.Fill(ds, "withdrawal_ds");
-
-            //bindingSourceWithdrawal.DataSource = withdrawalds;
-            //bindingSourceWithdrawal.DataMember = "withdrawal_ds";
-
-            //bindingNavigatorWithdrawal.BindingSource = bindingSourceWithdrawal;
-
-            //dataGridViewWithdrawal.AutoGenerateColumns = false;
-
-            //dataGridViewWithdrawal.DataSource = bindingSourceWithdrawal;
-
-            //dataGridViewWithdrawal.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
 
         private void DataGridViewWithdrawal_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
