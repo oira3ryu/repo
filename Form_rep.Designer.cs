@@ -111,7 +111,7 @@
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(37, 22);
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(29, 22);
             this.bindingNavigatorCountItem.Text = "/ {0}";
             this.bindingNavigatorCountItem.ToolTipText = "項目の総数";
             // 
@@ -306,7 +306,7 @@
             this.cmdClose.TabIndex = 2;
             this.cmdClose.Text = "閉じる";
             this.cmdClose.UseVisualStyleBackColor = true;
-            this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
+            this.cmdClose.Click += new System.EventHandler(this.CmdClose_Click);
             // 
             // cmb_n_id
             // 
@@ -316,16 +316,16 @@
             this.cmb_n_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_n_id.TabIndex = 3;
             this.cmb_n_id.Visible = false;
-            this.cmb_n_id.SelectedIndexChanged += new System.EventHandler(this.cmb_n_id_SelectedIndexChanged);
+            this.cmb_n_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_n_id_SelectedIndexChanged);
             // 
             // cmb_s_id
             // 
             this.cmb_s_id.FormattingEnabled = true;
-            this.cmb_s_id.Location = new System.Drawing.Point(12, 122);
+            this.cmb_s_id.Location = new System.Drawing.Point(14, 122);
             this.cmb_s_id.Name = "cmb_s_id";
             this.cmb_s_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_s_id.TabIndex = 4;
-            this.cmb_s_id.SelectedIndexChanged += new System.EventHandler(this.cmb_s_id_SelectedIndexChanged);
+            this.cmb_s_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_s_id_SelectedIndexChanged);
             // 
             // cmb_t_id
             // 
@@ -335,7 +335,7 @@
             this.cmb_t_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_t_id.TabIndex = 5;
             this.cmb_t_id.Visible = false;
-            this.cmb_t_id.SelectedIndexChanged += new System.EventHandler(this.cmb_s_id_SelectedIndexChanged);
+            this.cmb_t_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_s_id_SelectedIndexChanged);
             // 
             // cmdSave
             // 
@@ -345,7 +345,7 @@
             this.cmdSave.TabIndex = 6;
             this.cmdSave.Text = "更新";
             this.cmdSave.UseVisualStyleBackColor = true;
-            this.cmdSave.Click += new System.EventHandler(this.cmdSave_Click);
+            this.cmdSave.Click += new System.EventHandler(this.CmdSave_Click);
             // 
             // cmb_pt_id
             // 
@@ -354,7 +354,7 @@
             this.cmb_pt_id.Name = "cmb_pt_id";
             this.cmb_pt_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_pt_id.TabIndex = 7;
-            this.cmb_pt_id.SelectedIndexChanged += new System.EventHandler(this.cmb_pt_id_SelectedIndexChanged);
+            this.cmb_pt_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_pt_id_SelectedIndexChanged);
             // 
             // Form_rep
             // 

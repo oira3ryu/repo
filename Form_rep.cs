@@ -53,14 +53,42 @@ namespace rk_seikyu
         public int VarHour { get; set; }
         public int VarMinute { get; set; }
         public int VarSecond { get; set; }
+        public int Cmb_o_id_int { get; set; }
+
+        public string cmb_o_id_str;
+        public string cmb_o_id_item;
+
+        private Form_seikyu form_seikyu_Instance;
 
         public Form_rep()
         {
             InitializeComponent();
+
+            //Form_seikyuのインスタンスを取得
+            form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
+            //Form_seikyuのテキストボックス文字列を
+            //Form_prnの文字列変数cmb_o_id_strへ設定
+            cmb_o_id_str = form_seikyu_Instance.cmb_o_id_Text;
+            cmb_o_id_item = form_seikyu_Instance.cmb_o_id_Item;
+            Console.WriteLine("cmb_o_idからのメンバーは、" + cmb_o_id_item);
+
+            //Form_seikyuのコンボボックスcmb_o_idからの変数cmb_o_id_strをint型に変換して1加算
+            int i;
+            if (int.TryParse(cmb_o_id_str, out i))
+            {
+                Cmb_o_id_int = i + 1;
+                cmb_o_id_str = Cmb_o_id_int.ToString();
+                Console.WriteLine("cmb_o_idからの値は、" + cmb_o_id_str);
+            }
+            else
+            {
+                Console.WriteLine("cmb_o_idからの値を数値に変換できません");
+            }
         }
 
         private void Form_rep_Load(object sender, EventArgs e)
         {
+            Console.WriteLine("Form_rep_cmb_o_id_str = " + cmb_o_id_str);
 
             dataGridViewRep.Columns[0].HeaderText = "ID";
             dataGridViewRep.Columns[1].HeaderText = "種別ID";
@@ -81,6 +109,7 @@ namespace rk_seikyu
                 "select"
 				 + " pt_id"
 				 + ", s_id"
+                 + ", o_id"
 				 + ", col0"
 				 + ", col1"
 				 + ", col2"
@@ -94,7 +123,8 @@ namespace rk_seikyu
 				 + ", rep_id"
                  + " from"
                  + " t_rep"
-                 + " where s_id::Integer = :s_id"
+                 + " where s_id::Integer = " + Cmb_s_id_int
+                 + " and o_id::Integer = " + cmb_o_id_str
                  + " and pt_id::Integer = :pt_id"
                  + " order by rep_id"
                 ,m_conn
@@ -214,7 +244,7 @@ namespace rk_seikyu
             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("rep_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "rep_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
             // RowUpdate
-            da.RowUpdated += new NpgsqlRowUpdatedEventHandler(repRowUpdated);
+            da.RowUpdated += new NpgsqlRowUpdatedEventHandler(RepRowUpdated);
 
             n_id_da.SelectCommand = new NpgsqlCommand
             (
@@ -239,11 +269,15 @@ namespace rk_seikyu
             s_id_da.SelectCommand = new NpgsqlCommand
             (
                    "select"
-                  + " s_id"
-                  + ", syubetsu"
-                  + " from t_syubetsu"
-                  + " where s_id < 6"
-                  + " order by s_id",
+                + " s_id"
+                + ", syubetsu"
+                + ", shisetsumei"
+                + ", o_id"
+                + " from"
+                + " t_syubetsu"
+                + " where o_id = " + cmb_o_id_str
+                //+ " and s_id = '" + Cmb_s_id_int + "'"
+                + " order by s_id;",
                     m_conn
             );
 
@@ -294,20 +328,11 @@ namespace rk_seikyu
 
         private void DataGridViewEvent()
         {
-            //dataGridViewRep.DefaultValuesNeeded += new DataGridViewRowEventHandler(dataGridViewRep_DefaultValuesNeeded);
-
-            dataGridViewRep.CellMouseMove += new DataGridViewCellMouseEventHandler(dataGridViewRep_CellMouseMove);
-
-            //dataGridViewRep.CellValidating += new DataGridViewCellValidatingEventHandler(dataGridViewRep_CellValidating);
-
-            //dataGridViewRep.CellEnter += new DataGridViewCellEventHandler(dataGridView_CellEnter);
-
-            //dataGridViewRep.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(dataGridView_EditingControlShowing);
-
-            dataGridViewRep.CellPainting += new DataGridViewCellPaintingEventHandler(dataGridViewRep_CellPainting);
+            dataGridViewRep.CellMouseMove += new DataGridViewCellMouseEventHandler(DataGridViewRep_CellMouseMove);
+            dataGridViewRep.CellPainting += new DataGridViewCellPaintingEventHandler(DataGridViewRep_CellPainting);
         }
 
-        private void cmdSave_Click(object sender, EventArgs e)
+        private void CmdSave_Click(object sender, EventArgs e)
         {
             int update_count = 0;
             try
@@ -324,7 +349,7 @@ namespace rk_seikyu
             MessageBox.Show(update_count.ToString() + "件、保存しました。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void repRowUpdated(Object sender, NpgsqlRowUpdatedEventArgs e)
+        private void RepRowUpdated(Object sender, NpgsqlRowUpdatedEventArgs e)
         {
             if (e.Status == UpdateStatus.Continue)
             {
@@ -427,7 +452,7 @@ namespace rk_seikyu
             }
         }
 
-        private void dataGridViewRep_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
+        private void DataGridViewRep_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
         {
             if (e == null) return;
 
@@ -455,7 +480,7 @@ namespace rk_seikyu
         }
 
 
-        private void dataGridViewRep_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DataGridViewRep_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.ColumnIndex == -1 || e.RowIndex == -1) return;
 
@@ -471,7 +496,7 @@ namespace rk_seikyu
             }
         }
 
-        private void dataGridViewRep_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        private void DataGridViewRep_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridViewCellStyle dcs = new DataGridViewCellStyle();
             dcs.BackColor = Color.Yellow;
@@ -489,7 +514,7 @@ namespace rk_seikyu
             }
         }
 
-        private void dataGridViewRep_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        private void DataGridViewRep_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.ColumnIndex < 0 && e.RowIndex >= 0)
             {
@@ -507,25 +532,25 @@ namespace rk_seikyu
             }
         }
 
-        private void cmdClose_Click(object sender, EventArgs e)
+        private void CmdClose_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
-        private void cmb_n_id_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cmb_n_id_SelectedIndexChanged(object sender, EventArgs e)
         {
             Cmb_n_id_int = cmb_n_id.SelectedIndex + 1;
             Console.WriteLine("cmb_n_id_int = " + Cmb_n_id_int);
         }
 
-        private void cmb_t_id_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cmb_t_id_SelectedIndexChanged(object sender, EventArgs e)
         {
             Cmb_t_id_int = cmb_t_id.SelectedIndex + 1;
             Console.WriteLine("cmb_t_id_int = " + Cmb_t_id_int);
         }
 
-        private void cmb_s_id_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cmb_s_id_SelectedIndexChanged(object sender, EventArgs e)
         {
             Cmb_s_id_int = cmb_s_id.SelectedIndex + 1;
             Console.WriteLine("cmb_s_id_int = " + Cmb_s_id_int);
@@ -535,6 +560,7 @@ namespace rk_seikyu
                 "select"
                  + " pt_id"
                  + ", s_id"
+                 + ", o_id "
                  + ", col0"
                  + ", col1"
                  + ", col2"
@@ -548,7 +574,8 @@ namespace rk_seikyu
                  + ", rep_id"
                  + " from"
                  + " t_rep"
-                 + " where s_id::Integer = :s_id"
+                 + " where s_id::Integer = " + Cmb_s_id_int
+                 + " and o_id::Integer = " + cmb_o_id_str
                  + " and pt_id::Integer = :pt_id"
                  + " order by rep_id"
                 , m_conn
@@ -668,7 +695,7 @@ namespace rk_seikyu
             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("rep_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "rep_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
             // RowUpdate
-            da.RowUpdated += new NpgsqlRowUpdatedEventHandler(repRowUpdated);
+            da.RowUpdated += new NpgsqlRowUpdatedEventHandler(RepRowUpdated);
 
             //n_id_da.SelectCommand = new NpgsqlCommand
             //(
@@ -731,16 +758,15 @@ namespace rk_seikyu
 
             DataGridViewEvent();
 
-
         }
 
-        private void cmdPrn_Click(object sender, EventArgs e)
+        private void CmdPrn_Click(object sender, EventArgs e)
         {
             Form_prn Form = new Form_prn();
             Form.ShowDialog();
         }
 
-        private void cmb_pt_id_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cmb_pt_id_SelectedIndexChanged(object sender, EventArgs e)
         {
             Cmb_pt_id_int = cmb_pt_id.SelectedIndex + 1;
             Console.WriteLine("cmb_pt_id_int = " + Cmb_pt_id_int);
@@ -764,6 +790,7 @@ namespace rk_seikyu
                  + " from"
                  + " t_rep"
                  + " where s_id::Integer = :s_id"
+                 + " and o_id::Integer = " + cmb_o_id_str
                  + " and pt_id::Integer = :pt_id"
                  + " order by rep_id"
                 , m_conn
@@ -883,7 +910,7 @@ namespace rk_seikyu
             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("rep_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "rep_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
             // RowUpdate
-            da.RowUpdated += new NpgsqlRowUpdatedEventHandler(repRowUpdated);
+            da.RowUpdated += new NpgsqlRowUpdatedEventHandler(RepRowUpdated);
 
             //n_id_da.SelectCommand = new NpgsqlCommand
             //(

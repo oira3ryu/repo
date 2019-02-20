@@ -489,7 +489,7 @@
             this.cmdSave.TabIndex = 14;
             this.cmdSave.Text = "保　存";
             this.cmdSave.UseVisualStyleBackColor = true;
-            this.cmdSave.Click += new System.EventHandler(this.cmdSave_Click);
+            this.cmdSave.Click += new System.EventHandler(this.CmdSave_Click);
             // 
             // cmb_c4
             // 

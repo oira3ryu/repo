@@ -292,8 +292,8 @@ namespace rk_seikyu
                             dataGridViewSeikyu.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
                         }
                     }
-
                     break;
+
                 case 2:
                     TblStr = "t_shiharai_houhou";
                     Console.WriteLine("tblStr = " + TblStr);
@@ -352,8 +352,8 @@ namespace rk_seikyu
                         dataGridViewShiharai_houhou.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                         dataGridViewShiharai_houhou.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
                     }
-
                     break;
+
                 case 3:
                     TblStr = " t_shinzoku_kankei";
                     Console.WriteLine("tblStr = " + TblStr);
@@ -421,10 +421,8 @@ namespace rk_seikyu
                         dataGridViewShinzoku_kankei.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                         dataGridViewShinzoku_kankei.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
                     }
-
                     break;
             }
-
 
             // 再表示
             switch (Cmb_o_id_int)
@@ -1184,7 +1182,7 @@ namespace rk_seikyu
             dataGridViewSeikyu.CellValueChanged += new DataGridViewCellEventHandler(dataGridViewSeikyu_CellValueChanged);
         }
 
-        private void cmdSave_Click(object sender, EventArgs e)
+        private void CmdSave_Click(object sender, EventArgs e)
         {
             int update_count = 0;
             try
@@ -1207,6 +1205,7 @@ namespace rk_seikyu
                                 break;
                         }
                         break;
+
                     case 2:
                         switch (Cmb_s_id_int)
                         {
@@ -1223,6 +1222,7 @@ namespace rk_seikyu
                                 break;
                         }
                         break;
+
                     case 3:
                         switch (Cmb_s_id_int)
                         {
@@ -1306,13 +1306,13 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_seikyu"
                                         + " where r_id=currval('t_seikyu_r_id_seq');"
-                                        //+ " order by id"
                                         , m_conn
                                     );
 
                                     break;
                             }
                             break;
+
                         // 支払方法
                         case 2:
                             switch (Cmb_s_id_int)
@@ -1387,13 +1387,13 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_shiharai_houhou"
                                         + " where sh_id=currval('t_shiharai_houhou_sh_id_seq');"
-                                        //+ " order by id"
                                         , m_conn
                                     );
 
                                     break;
                             }
                             break;
+
                         // 親族関係
                         case 7:
                             switch (Cmb_s_id_int)
@@ -1476,7 +1476,6 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_shinzoku_kankei"
                                         + " where sk_id=currval('t_shizoku_kankei_sk_id_seq');"
-                                        //+ " order by id"
                                         , m_conn
                                     );
                                     break;
@@ -1536,6 +1535,7 @@ namespace rk_seikyu
                                         break;
                                 }
                                 break;
+
                             case 2:
                                 switch (Cmb_s_id_int)
                                 {
@@ -1606,6 +1606,7 @@ namespace rk_seikyu
                                         break;
                                 }
                                 break;
+
                             case 3:
                                 switch (Cmb_s_id_int)
                                 {
@@ -1744,13 +1745,14 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_seikyu"
                                         + " where r_id=" + e.Row["r_id"].ToString()
-                                        //+ " order by id"
+                                        + ";"
                                         , m_conn
                                     );
 
                                     break;
                             }
                             break;
+
                         // 支払方法
                         case 2:
                             switch (Cmb_s_id_int)
@@ -1824,13 +1826,14 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_shiharai_houhou"
                                         + " where sh_id=" + e.Row["sh_id"].ToString()
-                                        //+ " order by id"
+                                        + ";"
                                         , m_conn
                                     );
 
                                     break;
                             }
                             break;
+
                         // 親族関係
                         case 3:
                             switch (Cmb_s_id_int)
@@ -1913,7 +1916,7 @@ namespace rk_seikyu
                                         + " from"
                                         + " t_shinzoku_kankei"
                                         + " where sk_id=" + e.Row["sk_id"].ToString()
-                                        //+ " order by id"
+                                        + ";"
                                         , m_conn
                                     );
                                     break;
@@ -1973,6 +1976,7 @@ namespace rk_seikyu
                                         break;
                                 }
                                 break;
+
                             case 2:
                                 switch (Cmb_s_id_int)
                                 {
@@ -2043,6 +2047,7 @@ namespace rk_seikyu
                                         break;
                                 }
                                 break;
+
                             case 3:
                                 switch (Cmb_s_id_int)
                                 {
@@ -2192,6 +2197,7 @@ namespace rk_seikyu
                             break;
                     }
                     break;
+
                 case 2:
                     switch (Cmb_s_id_int)
                     {
@@ -2262,6 +2268,7 @@ namespace rk_seikyu
                             break;
                     }
                     break;
+
                 case 3:
                     switch (Cmb_s_id_int)
                     {
@@ -2555,6 +2562,7 @@ namespace rk_seikyu
                                 break;
                         }
                         break;
+
                     case 2:
                         switch (Cmb_s_id_int)
                         {
@@ -2737,6 +2745,7 @@ namespace rk_seikyu
                                 break;
                         }
                         break;
+
                     case 3:
                         switch (Cmb_s_id_int)
                         {
