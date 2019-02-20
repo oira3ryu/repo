@@ -65,7 +65,7 @@
             this.cmdNenSave.TabIndex = 0;
             this.cmdNenSave.Text = "更新";
             this.cmdNenSave.UseVisualStyleBackColor = true;
-            this.cmdNenSave.Click += new System.EventHandler(this.cmdNenSave_Click);
+            this.cmdNenSave.Click += new System.EventHandler(this.CmdNenSave_Click);
             // 
             // cmdClose
             // 
@@ -75,7 +75,7 @@
             this.cmdClose.TabIndex = 1;
             this.cmdClose.Text = "閉じる";
             this.cmdClose.UseVisualStyleBackColor = true;
-            this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
+            this.cmdClose.Click += new System.EventHandler(this.CmdClose_Click);
             // 
             // nen
             // 

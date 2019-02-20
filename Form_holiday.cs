@@ -92,7 +92,7 @@ namespace rk_seikyu
             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("h_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "h_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
             // RowUpdate
-            da.RowUpdated += new NpgsqlRowUpdatedEventHandler(holidayRowUpdated);
+            da.RowUpdated += new NpgsqlRowUpdatedEventHandler(HolidayRowUpdated);
 
 
             //if (ds.Tables["t_holiday"] != null)
@@ -152,7 +152,7 @@ namespace rk_seikyu
             MessageBox.Show(update_count.ToString() + "件、保存しました。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void holidayRowUpdated(Object sender, NpgsqlRowUpdatedEventArgs e)
+        private void HolidayRowUpdated(Object sender, NpgsqlRowUpdatedEventArgs e)
         {
             if (e.Status == UpdateStatus.Continue)
             {
@@ -177,6 +177,7 @@ namespace rk_seikyu
                         e.Row["h_id"] = reader["h_id"];
                         e.Row["holiday"] = reader["holiday"];
                         e.Row["h_name"] = reader["h_name"];
+                        reader.Close();
                     }
                     catch (Exception ex)
                     {
@@ -205,6 +206,7 @@ namespace rk_seikyu
                         e.Row["h_id"] = reader["h_id"];
                         e.Row["holiday"] = reader["holiday"];
                         e.Row["h_name"] = reader["h_name"];
+                        reader.Close();
                     }
                     catch (Exception ex)
                     {
@@ -215,13 +217,13 @@ namespace rk_seikyu
             }
         }
 
-        private void cmb_year_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cmb_year_SelectedIndexChanged(object sender, EventArgs e)
         {
             //cmb_year_str = cmb_year.Text;
             //Console.WriteLine("cmb_year_str  = " + cmb_year_str);
             System.Data.DataRowView view_year = (DataRowView)this.cmb_year.SelectedItem;
             Console.WriteLine("view_year  = " + view_year);
-            cmb_year_str = view_year.Row.ItemArray[0].ToString();
+            Cmb_year_str = view_year.Row.ItemArray[0].ToString();
 
             da.SelectCommand = new NpgsqlCommand
             (
@@ -231,7 +233,7 @@ namespace rk_seikyu
                 + ", h_name"
                 + " from"
                 + " t_holiday"
-                + " where DATE_PART('YEAR',holiday) = '" + cmb_year_str + "'"
+                + " where DATE_PART('YEAR',holiday) = '" + Cmb_year_str + "'"
                 + " order by holiday;",
                 m_conn
 
@@ -256,7 +258,7 @@ namespace rk_seikyu
 
         }
 
-        private void cmdClose_Click(object sender, EventArgs e)
+        private void CmdClose_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -279,6 +281,6 @@ namespace rk_seikyu
             }
         } 
 
-        public object cmb_year_str { get; set; }
+        public object Cmb_year_str { get; set; }
     }
 }

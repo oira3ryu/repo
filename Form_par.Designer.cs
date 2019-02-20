@@ -292,7 +292,7 @@
             this.cmdClose.TabIndex = 5;
             this.cmdClose.Text = "閉じる";
             this.cmdClose.UseVisualStyleBackColor = true;
-            this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
+            this.cmdClose.Click += new System.EventHandler(this.CmdClose_Click);
             // 
             // cmdParSave
             // 

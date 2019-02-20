@@ -35,14 +35,14 @@ namespace rk_seikyu
         private DataSet Cmbds = new DataSet();
         private DataSet dupds = new DataSet();
 
-        public string ofdstr { get; set; }
-        public int cmb_n_id_int { get; set; }
-        public int cmb_t_id_int { get; set; }
-        public int cmb_s_id_int { get; set; }
+        public string Ofdstr { get; set; }
+        public int Cmb_n_id_int { get; set; }
+        public int Cmb_t_id_int { get; set; }
+        public int Cmb_s_id_int { get; set; }
 
-        public int hour { get; set; }
-        public int minute { get; set; }
-        public int second { get; set; }
+        public int Hour { get; set; }
+        public int Minute { get; set; }
+        public int Second { get; set; }
 
         public int VarHour { get; set; }
         public int VarMinute { get; set; }
@@ -195,17 +195,8 @@ namespace rk_seikyu
 
         private void DataGridViewEvent()
         {
-            //dataGridViewPar.DefaultValuesNeeded += new DataGridViewRowEventHandler(dataGridViewPar_DefaultValuesNeeded);
-
-            dataGridViewPar.CellMouseMove += new DataGridViewCellMouseEventHandler(dataGridViewPar_CellMouseMove);
-
-            //dataGridViewPar.CellValidating += new DataGridViewCellValidatingEventHandler(dataGridViewPar_CellValidating);
-
-            //dataGridViewPar.CellEnter += new DataGridViewCellEventHandler(dataGridView_CellEnter);
-
-            //dataGridViewPar.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(dataGridView_EditingControlShowing);
-
-            dataGridViewPar.CellPainting += new DataGridViewCellPaintingEventHandler(dataGridViewPar_CellPainting);
+            dataGridViewPar.CellMouseMove += new DataGridViewCellMouseEventHandler(DataGridViewPar_CellMouseMove);
+            dataGridViewPar.CellPainting += new DataGridViewCellPaintingEventHandler(DataGridViewPar_CellPainting);
         }
 
         private void cmdParSave_Click(object sender, EventArgs e)
@@ -256,6 +247,7 @@ namespace rk_seikyu
                         e.Row["content1"] = reader["content1"];
                         e.Row["content2"] = reader["content2"];
                         e.Row["content3"] = reader["content3"];
+                        reader.Close();
                     }
                     catch (Exception ex)
                     {
@@ -290,6 +282,7 @@ namespace rk_seikyu
                         e.Row["content1"] = reader["content1"];
                         e.Row["content2"] = reader["content2"];
                         e.Row["content3"] = reader["content3"];
+                        reader.Close();
                     }
                     catch (Exception ex)
                     {
@@ -300,7 +293,7 @@ namespace rk_seikyu
             }
         }
 
-        private void dataGridViewPar_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
+        private void DataGridViewPar_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
         {
             if (e == null) return;
 
@@ -327,7 +320,7 @@ namespace rk_seikyu
             }
         }
 
-        private void dataGridViewPar_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DataGridViewPar_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.ColumnIndex == -1 || e.RowIndex == -1) return;
 
@@ -343,7 +336,7 @@ namespace rk_seikyu
             }
         }
 
-        private void dataGridViewPar_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        private void DataGridViewPar_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridViewCellStyle dcs = new DataGridViewCellStyle();
             dcs.BackColor = Color.Yellow;
@@ -361,7 +354,7 @@ namespace rk_seikyu
             }
         }
 
-        private void dataGridViewPar_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        private void DataGridViewPar_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.ColumnIndex < 0 && e.RowIndex >= 0)
             {
@@ -379,28 +372,28 @@ namespace rk_seikyu
             }
         }
 
-        private void cmdClose_Click(object sender, EventArgs e)
+        private void CmdClose_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
-        private void cmb_n_id_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cmb_n_id_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmb_n_id_int = cmb_n_id.SelectedIndex + 1;
-            Console.WriteLine("cmb_n_id_int = " + cmb_n_id_int);
+            Cmb_n_id_int = cmb_n_id.SelectedIndex + 1;
+            Console.WriteLine("cmb_n_id_int = " + Cmb_n_id_int);
         }
 
-        private void cmb_t_id_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cmb_t_id_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmb_t_id_int = cmb_t_id.SelectedIndex + 1;
-            Console.WriteLine("cmb_t_id_int = " + cmb_t_id_int);
+            Cmb_t_id_int = cmb_t_id.SelectedIndex + 1;
+            Console.WriteLine("cmb_t_id_int = " + Cmb_t_id_int);
         }
 
-        private void cmb_s_id_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cmb_s_id_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmb_s_id_int = cmb_s_id.SelectedIndex + 1;
-            Console.WriteLine("cmb_s_id_int = " + cmb_s_id_int);
+            Cmb_s_id_int = cmb_s_id.SelectedIndex + 1;
+            Console.WriteLine("cmb_s_id_int = " + Cmb_s_id_int);
         }
 
         private void cmdPrn_Click(object sender, EventArgs e)

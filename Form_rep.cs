@@ -394,6 +394,7 @@ namespace rk_seikyu
                         e.Row["ac2"] = reader["ac2"];
                         e.Row["ac3"] = reader["ac3"];
                         e.Row["rep_id"] = reader["rep_id"];
+                        reader.Close();
                     }
                     catch (Exception ex)
                     {
@@ -442,6 +443,7 @@ namespace rk_seikyu
                         e.Row["ac2"] = reader["ac2"];
                         e.Row["ac3"] = reader["ac3"];
                         e.Row["rep_id"] = reader["rep_id"];
+                        reader.Close();
                     }
                     catch (Exception ex)
                     {
@@ -827,6 +829,7 @@ namespace rk_seikyu
                  "insert into t_rep ("
                  + " pt_id"
                  + ", s_id"
+                 + ", o_id"
                  + ", col0"
                  + ", col1"
                  + ", col2"
@@ -840,6 +843,7 @@ namespace rk_seikyu
                     + " ) values ("
                  + " :pt_id"
                  + ", :s_id"
+                 + "," + cmb_o_id_str
                  + ", :col0"
                  + ", :col1"
                  + ", :col2"

@@ -243,7 +243,7 @@
             this.cmdReqSave.TabIndex = 2;
             this.cmdReqSave.Text = "保存";
             this.cmdReqSave.UseVisualStyleBackColor = true;
-            this.cmdReqSave.Click += new System.EventHandler(this.cmdReqSave_Click);
+            this.cmdReqSave.Click += new System.EventHandler(this.CmdReqSave_Click);
             // 
             // cmdClose
             // 
@@ -253,7 +253,7 @@
             this.cmdClose.TabIndex = 3;
             this.cmdClose.Text = "閉じる";
             this.cmdClose.UseVisualStyleBackColor = true;
-            this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
+            this.cmdClose.Click += new System.EventHandler(this.CmdClose_Click);
             // 
             // dataGridViewTextBoxColumn17
             // 

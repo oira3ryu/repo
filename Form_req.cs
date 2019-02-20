@@ -177,7 +177,7 @@ namespace rk_seikyu
             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
             // RowUpdate
-            da.RowUpdated += new NpgsqlRowUpdatedEventHandler(reqRowUpdated);
+            da.RowUpdated += new NpgsqlRowUpdatedEventHandler(ReqRowUpdated);
 
             da.Fill(ds, "req_ds");
 
@@ -195,7 +195,7 @@ namespace rk_seikyu
             bindingNavigatorReq.Visible = true;
 
         }
-        private void cmdReqSave_Click(object sender, EventArgs e)
+        private void CmdReqSave_Click(object sender, EventArgs e)
         {
             int update_count = 0;
             try
@@ -212,7 +212,7 @@ namespace rk_seikyu
             MessageBox.Show(update_count.ToString() + "件、保存しました。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void reqRowUpdated(Object sender, NpgsqlRowUpdatedEventArgs e)
+        private void ReqRowUpdated(Object sender, NpgsqlRowUpdatedEventArgs e)
         {
             if (e.Status == UpdateStatus.Continue)
             {
@@ -263,6 +263,7 @@ namespace rk_seikyu
                         e.Row["data8"] = reader["data8"];
                         e.Row["data9"] = reader["data9"];
                         e.Row["data10"] = reader["data10"];
+                        reader.Close();
                     }
                     catch (Exception ex)
                     {
@@ -317,6 +318,7 @@ namespace rk_seikyu
                         e.Row["data8"] = reader["data8"];
                         e.Row["data9"] = reader["data9"];
                         e.Row["data10"] = reader["data10"];
+                        reader.Close();
                     }
                     catch (Exception ex)
                     {
@@ -327,7 +329,7 @@ namespace rk_seikyu
             }
         }
 
-        private void cmdClose_Click(object sender, EventArgs e)
+        private void CmdClose_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Close();

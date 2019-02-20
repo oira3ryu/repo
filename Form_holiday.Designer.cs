@@ -233,7 +233,7 @@
             this.cmb_year.Name = "cmb_year";
             this.cmb_year.Size = new System.Drawing.Size(121, 20);
             this.cmb_year.TabIndex = 2;
-            this.cmb_year.SelectedIndexChanged += new System.EventHandler(this.cmb_year_SelectedIndexChanged);
+            this.cmb_year.SelectedIndexChanged += new System.EventHandler(this.Cmb_year_SelectedIndexChanged);
             // 
             // cmdHoliday
             // 
@@ -253,7 +253,7 @@
             this.cmdClose.TabIndex = 4;
             this.cmdClose.Text = "閉じる";
             this.cmdClose.UseVisualStyleBackColor = true;
-            this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
+            this.cmdClose.Click += new System.EventHandler(this.CmdClose_Click);
             // 
             // Form_holiday
             // 

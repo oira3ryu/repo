@@ -69,7 +69,7 @@
             this.cmdSyubetsuSave.TabIndex = 1;
             this.cmdSyubetsuSave.Text = "更新";
             this.cmdSyubetsuSave.UseVisualStyleBackColor = true;
-            this.cmdSyubetsuSave.Click += new System.EventHandler(this.cmdSyubetsuSave_Click);
+            this.cmdSyubetsuSave.Click += new System.EventHandler(this.CmdSyubetsuSave_Click);
             // 
             // cmdClose
             // 
@@ -79,7 +79,7 @@
             this.cmdClose.TabIndex = 2;
             this.cmdClose.Text = "閉じる";
             this.cmdClose.UseVisualStyleBackColor = true;
-            this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
+            this.cmdClose.Click += new System.EventHandler(this.CmdClose_Click);
             // 
             // bindingNavigatorSyubetsu
             // 

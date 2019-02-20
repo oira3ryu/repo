@@ -118,7 +118,7 @@ namespace rk_seikyu
             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("ps_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "ps_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
             // RowUpdate
-            da.RowUpdated += new NpgsqlRowUpdatedEventHandler(syubetsuRowUpdated);
+            da.RowUpdated += new NpgsqlRowUpdatedEventHandler(SyubetsuRowUpdated);
 
             da.Fill(ds, "syubetsu");
 
@@ -136,7 +136,7 @@ namespace rk_seikyu
             bindingNavigatorSyubetsu.Visible = true;
 
         }
-        private void cmdSyubetsuSave_Click(object sender, EventArgs e)
+        private void CmdSyubetsuSave_Click(object sender, EventArgs e)
         {
             int update_count = 0;
             try
@@ -153,7 +153,7 @@ namespace rk_seikyu
             MessageBox.Show(update_count.ToString() + "件、保存しました。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void syubetsuRowUpdated(Object sender, NpgsqlRowUpdatedEventArgs e)
+        private void SyubetsuRowUpdated(Object sender, NpgsqlRowUpdatedEventArgs e)
         {
             if (e.Status == UpdateStatus.Continue)
             {
@@ -178,6 +178,7 @@ namespace rk_seikyu
                         e.Row["s_id"] = reader["s_id"];
                         e.Row["syubetsu"] = reader["syubetsu"];
                         e.Row["shisetsumei"] = reader["shisetsumei"];
+                        reader.Close();
                     }
                     catch (Exception ex)
                     {
@@ -206,6 +207,7 @@ namespace rk_seikyu
                         e.Row["s_id"] = reader["s_id"];
                         e.Row["syubetsu"] = reader["syubetsu"];
                         e.Row["shisetsumei"] = reader["shisetsumei"];
+                        reader.Close();
                     }
                     catch (Exception ex)
                     {
@@ -216,7 +218,7 @@ namespace rk_seikyu
             }
         }
 
-        private void cmdClose_Click(object sender, EventArgs e)
+        private void CmdClose_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -239,12 +241,12 @@ namespace rk_seikyu
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void Label1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void Label2_Click(object sender, EventArgs e)
         {
 
         }
