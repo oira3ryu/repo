@@ -40,15 +40,15 @@ namespace rk_seikyu
         private DataSet Cmbds = new DataSet();
         private DataSet dupds = new DataSet();
 
-        public string ofdstr { get; set; }
-        public int cmb_n_id_int { get; set; }
-        public int cmb_t_id_int { get; set; }
-        public int cmb_s_id_int { get; set; }
-        public int cmb_pt_id_int { get; set; }
+        public string Ofdstr { get; set; }
+        public int Cmb_n_id_int { get; set; }
+        public int Cmb_t_id_int { get; set; }
+        public int Cmb_s_id_int { get; set; }
+        public int Cmb_pt_id_int { get; set; }
 
-        public int hour { get; set; }
-        public int minute { get; set; }
-        public int second { get; set; }
+        public int Hour { get; set; }
+        public int Minute { get; set; }
+        public int Second { get; set; }
 
         public int VarHour { get; set; }
         public int VarMinute { get; set; }
@@ -515,20 +515,20 @@ namespace rk_seikyu
 
         private void cmb_n_id_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmb_n_id_int = cmb_n_id.SelectedIndex + 1;
-            Console.WriteLine("cmb_n_id_int = " + cmb_n_id_int);
+            Cmb_n_id_int = cmb_n_id.SelectedIndex + 1;
+            Console.WriteLine("cmb_n_id_int = " + Cmb_n_id_int);
         }
 
         private void cmb_t_id_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmb_t_id_int = cmb_t_id.SelectedIndex + 1;
-            Console.WriteLine("cmb_t_id_int = " + cmb_t_id_int);
+            Cmb_t_id_int = cmb_t_id.SelectedIndex + 1;
+            Console.WriteLine("cmb_t_id_int = " + Cmb_t_id_int);
         }
 
         private void cmb_s_id_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmb_s_id_int = cmb_s_id.SelectedIndex + 1;
-            Console.WriteLine("cmb_s_id_int = " + cmb_s_id_int);
+            Cmb_s_id_int = cmb_s_id.SelectedIndex + 1;
+            Console.WriteLine("cmb_s_id_int = " + Cmb_s_id_int);
 
             da.SelectCommand = new NpgsqlCommand
             (
@@ -742,8 +742,8 @@ namespace rk_seikyu
 
         private void cmb_pt_id_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmb_pt_id_int = cmb_pt_id.SelectedIndex + 1;
-            Console.WriteLine("cmb_pt_id_int = " + cmb_pt_id_int);
+            Cmb_pt_id_int = cmb_pt_id.SelectedIndex + 1;
+            Console.WriteLine("cmb_pt_id_int = " + Cmb_pt_id_int);
 
             da.SelectCommand = new NpgsqlCommand
             (
