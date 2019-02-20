@@ -41,6 +41,7 @@ namespace rk_seikyu
             dataGridViewReq.Columns[14].HeaderText = "口座番号";
             dataGridViewReq.Columns[15].HeaderText = "予備";
             dataGridViewReq.Columns[16].HeaderText = "予備";
+
             da.SelectCommand = new NpgsqlCommand
             (
                    "select"
