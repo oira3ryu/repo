@@ -1061,6 +1061,7 @@ namespace rk_seikyu
                         + ", t1.c22"
                         + ", t1.s_id"
                         + ", t1.o_id"
+                        + ", t3.o_id"
                         + ", t1.req_id"
                         + ", t3.syubetsu"
                         + ", t1.c3"
@@ -1180,7 +1181,7 @@ namespace rk_seikyu
                             + " and s_id::Integer = " + Cmb_s_id_int
                             + " and o_id::Integer = " + Cmb_o_id_int
                         + ")) t2 on t1.c1 = t2.c5 and rtrim(replace(t1.c3,substr(t1.c3,strpos(t1.c3, '('), strpos(t1.c3, ')')),'')) = rtrim(replace(t2.c6,substr(t2.c6,strpos(t2.c6, '('), strpos(t2.c6, ')')),'')) and t1.s_id = t2.s_id and t1.o_id = t2.o_id and t2.s_id::Integer = " + Cmb_s_id_int + ")"
-                        + " left join (select s_id, syubetsu from t_syubetsu) t3 on t1.s_id::Integer = t3.s_id and t1.o_id::Integer = t3.o_id)"
+                        + " left join (select s_id, o_id syubetsu from t_syubetsu) t3 on t1.s_id::Integer = t3.s_id and t1.o_id::Integer = t3.o_id)"
                         + " left join (select rep_id, pt_id, s_id, col0, col1, col2, col3, col4, col5, ac0, ac1, ac2, ac3 from t_rep) t4 on t2.支払方法 = t4.pt_id and t1.s_id = t4.s_id)"
                         + " left join (select bid, b_id, b_code, b_name, sb_name, br_code, br_name, sd, sm, sy from t_bank) t5 on t2.c11 = t5.b_name)"
                         + " left join (select req_id, title1, title2, title3, title4, name1, name2, name3, name4, name5, data6, data7, data8, title4_kana, name2_kana from t_req) t6 on t1.req_id::Integer = t6.req_id)"
