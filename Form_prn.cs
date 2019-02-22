@@ -940,7 +940,7 @@ namespace rk_seikyu
                         + " inner join t_syutsuryokubi on t_seikyu.s_id::text = t_syutsuryokubi.s_id"
                         + " order by c1"
                         + ")"
-                        + "select"
+                        + " select"
                         + " c4"
                         + ", c4_array"
                         + ", syubetsu"
@@ -978,11 +978,11 @@ namespace rk_seikyu
                                         + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                         + " end"
                         + " and s_id::Integer = :s_id"
-                        + " and o_id::Integer = :o_id"
+                        + " and o_id::Integer = " + Cmb_o_id_int
                         + " and req_id::Integer = :req_id"
                         + " and time_stamp = (select max(time_stamp) from t_seikyu where"
                         + " s_id::Integer = :s_id"
-                        + " and o_id::Integer = :o_id"
+                        + " and o_id::Integer = " + Cmb_o_id_int
                         + " and c4::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                         + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                         + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -1048,6 +1048,7 @@ namespace rk_seikyu
                         crvSeikyu.Visible = true;
                     }
                     break;
+
                 case 4: // 納入案内
                     {
                         da.SelectCommand = new NpgsqlCommand
@@ -1061,7 +1062,6 @@ namespace rk_seikyu
                         + ", t1.c22"
                         + ", t1.s_id"
                         + ", t1.o_id"
-                        + ", t3.o_id"
                         + ", t1.req_id"
                         + ", t3.syubetsu"
                         + ", t1.c3"
@@ -1181,8 +1181,8 @@ namespace rk_seikyu
                             + " and s_id::Integer = " + Cmb_s_id_int
                             + " and o_id::Integer = " + Cmb_o_id_int
                         + ")) t2 on t1.c1 = t2.c5 and rtrim(replace(t1.c3,substr(t1.c3,strpos(t1.c3, '('), strpos(t1.c3, ')')),'')) = rtrim(replace(t2.c6,substr(t2.c6,strpos(t2.c6, '('), strpos(t2.c6, ')')),'')) and t1.s_id = t2.s_id and t1.o_id = t2.o_id and t2.s_id::Integer = " + Cmb_s_id_int + ")"
-                        + " left join (select s_id, o_id syubetsu from t_syubetsu) t3 on t1.s_id::Integer = t3.s_id and t1.o_id::Integer = t3.o_id)"
-                        + " left join (select rep_id, pt_id, s_id, col0, col1, col2, col3, col4, col5, ac0, ac1, ac2, ac3 from t_rep) t4 on t2.支払方法 = t4.pt_id and t1.s_id = t4.s_id)"
+                        + " left join (select s_id, o_id, syubetsu from t_syubetsu) t3 on t1.s_id::Integer = t3.s_id and t1.o_id::Integer = t3.o_id)"
+                        + " left join (select rep_id, pt_id, s_id, o_id, col0, col1, col2, col3, col4, col5, ac0, ac1, ac2, ac3 from t_rep) t4 on t2.支払方法 = t4.pt_id and t1.s_id = t4.s_id and t1.o_id::Text = t4.o_id)"
                         + " left join (select bid, b_id, b_code, b_name, sb_name, br_code, br_name, sd, sm, sy from t_bank) t5 on t2.c11 = t5.b_name)"
                         + " left join (select req_id, title1, title2, title3, title4, name1, name2, name3, name4, name5, data6, data7, data8, title4_kana, name2_kana from t_req) t6 on t1.req_id::Integer = t6.req_id)"
                         + " left join (select syutsuryokubi, s_id from t_syutsuryokubi) t7 on t1.s_id = t7.s_id)"
@@ -1208,6 +1208,7 @@ namespace rk_seikyu
                         + ", c4"
                         + ", c22"
                         + ", s_id"
+                        + ", o_id"
                         + ", req_id"
                         + ", syubetsu"
                         + ", 利用者名"
@@ -1393,8 +1394,7 @@ namespace rk_seikyu
                             + " else"
                                         + " c.c9 = '" + Cmb_b_code_str + "'"
                                         + " end"
-                                        //+ " and a.o_id = '" + cmb_o_id_str + "'"
-                                        //+ " and a.s_id = '" + Cmb_s_id_str + "'"
+                            + " and a.o_id = '" + cmb_o_id_str + "'"
                             + " order by a.r_id;"
                                 , m_conn
                             );
@@ -2001,6 +2001,7 @@ namespace rk_seikyu
                                 + ", r.c22"
                                 + ", r.s_id"
                                 + ", r.s_id_str"
+                                + ", r.o_id"
                                 + ", r.w_flg"
                                 + ", r.time_stamp"
                                 + ", to_number(concat(to_number(ltrim(left(c4,3)),'999')-12+2000 ,lpad(trim(right(c4,2)),2,'0')),'999999')"
@@ -2106,7 +2107,9 @@ namespace rk_seikyu
                                     + ", x.shisetsumei"
                             + " from h left join t_bank b"
                             + " on h.c9 = b.b_code, t_req s, t_syubetsu x"
-                            + " where x.o_id = '" + cmb_o_id_str + "' and x.s_id = '" + Cmb_s_id_int + "'"
+                            + " where x.o_id = h.o_id"
+                            + " and x.s_id = h.s_id::Integer"
+                            + " and x.o_id::Text = '" + Cmb_o_id_int + "'"
                             + " order by to_number(concat(to_number(ltrim(left(h.c4,3)),'999')-12+2000 ,lpad(trim(right(h.c4,2)),2,'0')),'999999'), h.r_id;"
                             , m_conn
                         );
@@ -2154,6 +2157,7 @@ namespace rk_seikyu
                                 + " when '通所型サービス' then '通所型'"
                                 + " end s_id_str"
                                 + ", a.s_id"
+                                + ", a.o_id"
                                 + ", a.time_stamp"
                                 + ", a.w_flg"
                                 + " from t_seikyu a left join t_shiharai_houhou c"
@@ -2221,6 +2225,7 @@ namespace rk_seikyu
                                     + ", h.c22"
                                     + ", h.s_id sort_s_id"
                                     + ", h.s_id_str as s_id"
+                                    + ", h.o_id"
                                     + ", h.w_flg"
                                     + ", h.time_stamp"
                                     + ", case when b.sy IS NULL or b.sm IS NULL then" /* 引落年月日自動入力の場合*/
@@ -2271,7 +2276,9 @@ namespace rk_seikyu
                                     + ", x.syubetsu"
                             + " from h left join t_bank b"
                             + " on h.c9 = b.b_code, t_req s, t_syubetsu x"
-                            + " where x.o_id = '" + cmb_o_id_str + "' and x.s_id = '" + Cmb_s_id_int + "'"
+                            + " where x.o_id = h.o_id"
+                            + " and x.s_id = h.s_id::Integer"
+                            + " and x.o_id::Text = '" + Cmb_o_id_int + "'"
                             + " order by to_number(concat(to_number(ltrim(left(h.c4,3)),'999')-12+2000 ,lpad(trim(right(h.c4,2)),2,'0')),'999999'), h.r_id;"
                         , m_conn
                         );
