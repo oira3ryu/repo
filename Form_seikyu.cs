@@ -1500,6 +1500,7 @@ namespace rk_seikyu
                                     case 5:
                                     case 6:
 
+                                        reader.Read();
                                         e.Row["c1"] = reader["c1"];
                                         e.Row["c2"] = reader["c2"];
                                         e.Row["c3"] = reader["c3"];
@@ -1531,7 +1532,7 @@ namespace rk_seikyu
                                         e.Row["id"] = reader["id"];
                                         e.Row["p_id"] = reader["p_id"];
                                         e.Row["req_id"] = reader["req_id"];
-
+                                        reader.Close();
                                         break;
                                 }
                                 break;
@@ -1546,6 +1547,7 @@ namespace rk_seikyu
                                     case 5:
                                     case 6:
 
+                                        reader.Read();
                                         e.Row["c1"] = reader["c1"];
                                         e.Row["c2"] = reader["c2"];
                                         e.Row["c3"] = reader["c3"];
@@ -1602,7 +1604,7 @@ namespace rk_seikyu
                                         e.Row["p_id"] = reader["p_id"];
                                         e.Row["req_id"] = reader["req_id"];
                                         e.Row["time_stamp"] = reader["time_stamp"];
-
+                                        reader.Close();
                                         break;
                                 }
                                 break;
@@ -1617,6 +1619,7 @@ namespace rk_seikyu
                                     case 5:
                                     case 6:
 
+                                        reader.Read();
                                         e.Row["c1"] = reader["c1"];
                                         e.Row["c2"] = reader["c2"];
                                         e.Row["c3"] = reader["c3"];
@@ -1682,7 +1685,7 @@ namespace rk_seikyu
                                         e.Row["p_id"] = reader["p_id"];
                                         e.Row["req_id"] = reader["req_id"];
                                         e.Row["time_stamp"] = reader["time_stamp"];
-
+                                        reader.Close();
                                         break;
                                 }
                                 break;
@@ -1941,6 +1944,7 @@ namespace rk_seikyu
                                     case 5:
                                     case 6:
 
+                                        reader.Read();
                                         e.Row["c1"] = reader["c1"];
                                         e.Row["c2"] = reader["c2"];
                                         e.Row["c3"] = reader["c3"];
@@ -1972,7 +1976,7 @@ namespace rk_seikyu
                                         e.Row["id"] = reader["id"];
                                         e.Row["p_id"] = reader["p_id"];
                                         e.Row["req_id"] = reader["req_id"];
-
+                                        reader.Close();
                                         break;
                                 }
                                 break;
@@ -1987,6 +1991,7 @@ namespace rk_seikyu
                                     case 5:
                                     case 6:
 
+                                        reader.Read();
                                         e.Row["c1"] = reader["c1"];
                                         e.Row["c2"] = reader["c2"];
                                         e.Row["c3"] = reader["c3"];
@@ -2043,7 +2048,7 @@ namespace rk_seikyu
                                         e.Row["p_id"] = reader["p_id"];
                                         e.Row["req_id"] = reader["req_id"];
                                         e.Row["time_stamp"] = reader["time_stamp"];
-
+                                        reader.Close();
                                         break;
                                 }
                                 break;
@@ -2058,6 +2063,7 @@ namespace rk_seikyu
                                     case 5:
                                     case 6:
 
+                                        reader.Read();
                                         e.Row["c1"] = reader["c1"];
                                         e.Row["c2"] = reader["c2"];
                                         e.Row["c3"] = reader["c3"];
@@ -2123,7 +2129,7 @@ namespace rk_seikyu
                                         e.Row["p_id"] = reader["p_id"];
                                         e.Row["req_id"] = reader["req_id"];
                                         e.Row["time_stamp"] = reader["time_stamp"];
-
+                                        reader.Close();
                                         break;
                                 }
                                 break;

@@ -1358,6 +1358,7 @@ namespace rk_seikyu
                             + " and rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),'')) = rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),''))"
                             + " and a.o_id = c.o_id"
                             + " and a.s_id = c.s_id"
+                            + " and a.o_id = '" + cmb_o_id_str + "'"
                             + " where not exists ("
                             + " select 1 from t_seikyu b"
                             + " where c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
@@ -1368,7 +1369,7 @@ namespace rk_seikyu
                                                     + " and a.s_id = b.s_id"
                                                     + " and a.o_id = b.o_id"
                             + " and a.time_stamp < b.time_stamp"
-                            + " )"
+                            + ")"
                             + " and a.c4_array[1]::text || '/' || a.c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                                     + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                                                     + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -1383,7 +1384,8 @@ namespace rk_seikyu
                                                                     + " end"
                                                    + " and c.s_id = d.s_id"
                                                    + " and c.o_id = d.o_id"
-                            + " and c.time_stamp < d.time_stamp)"
+                            + " and c.time_stamp < d.time_stamp"
+                            + ")"
                             + " and c.c4_array[1]::text || '/' || c.c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                                     + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                                                     + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -1394,7 +1396,9 @@ namespace rk_seikyu
                             + " else"
                                         + " c.c9 = '" + Cmb_b_code_str + "'"
                                         + " end"
-                            + " and a.o_id = '" + cmb_o_id_str + "'"
+                            //+ " and a.s_id = c.s_id"
+                            //+ " and a.o_id = c.o_id"
+                            //+ " and a.o_id = '" + cmb_o_id_str + "'"
                             + " order by a.r_id;"
                                 , m_conn
                             );
@@ -2110,6 +2114,7 @@ namespace rk_seikyu
                             + " where x.o_id = h.o_id"
                             + " and x.s_id = h.s_id::Integer"
                             + " and x.o_id::Text = '" + Cmb_o_id_int + "'"
+                            + " and s.o_id::Text = '" + Cmb_o_id_int + "'"
                             + " order by to_number(concat(to_number(ltrim(left(h.c4,3)),'999')-12+2000 ,lpad(trim(right(h.c4,2)),2,'0')),'999999'), h.r_id;"
                             , m_conn
                         );
@@ -2279,6 +2284,7 @@ namespace rk_seikyu
                             + " where x.o_id = h.o_id"
                             + " and x.s_id = h.s_id::Integer"
                             + " and x.o_id::Text = '" + Cmb_o_id_int + "'"
+                            + " and s.o_id::Text = '" + Cmb_o_id_int + "'"
                             + " order by to_number(concat(to_number(ltrim(left(h.c4,3)),'999')-12+2000 ,lpad(trim(right(h.c4,2)),2,'0')),'999999'), h.r_id;"
                         , m_conn
                         );

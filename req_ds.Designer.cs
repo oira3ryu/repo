@@ -313,6 +313,8 @@ namespace rk_seikyu {
             
             private global::System.Data.DataColumn columnreq_id;
             
+            private global::System.Data.DataColumn columno_id;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public req_dsDataTable() {
@@ -484,6 +486,14 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn o_idColumn {
+                get {
+                    return this.columno_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -536,7 +546,8 @@ namespace rk_seikyu {
                         string data8, 
                         string data9, 
                         string data10, 
-                        int req_id) {
+                        int req_id, 
+                        string o_id) {
                 req_dsRow rowreq_dsRow = ((req_dsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         title1,
@@ -555,7 +566,8 @@ namespace rk_seikyu {
                         data8,
                         data9,
                         data10,
-                        req_id};
+                        req_id,
+                        o_id};
                 rowreq_dsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowreq_dsRow);
                 return rowreq_dsRow;
@@ -602,6 +614,7 @@ namespace rk_seikyu {
                 this.columndata9 = base.Columns["data9"];
                 this.columndata10 = base.Columns["data10"];
                 this.columnreq_id = base.Columns["req_id"];
+                this.columno_id = base.Columns["o_id"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -641,6 +654,8 @@ namespace rk_seikyu {
                 base.Columns.Add(this.columndata10);
                 this.columnreq_id = new global::System.Data.DataColumn("req_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnreq_id);
+                this.columno_id = new global::System.Data.DataColumn("o_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columno_id);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnreq_id}, true));
                 this.columnreq_id.AllowDBNull = false;
@@ -1056,6 +1071,22 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string o_id {
+                get {
+                    try {
+                        return ((string)(this[this.tablereq_ds.o_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'req_ds\' にある列 \'o_id\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tablereq_ds.o_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool Istitle1Null() {
                 return this.IsNull(this.tablereq_ds.title1Column);
             }
@@ -1244,6 +1275,18 @@ namespace rk_seikyu {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void Setdata10Null() {
                 this[this.tablereq_ds.data10Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Iso_idNull() {
+                return this.IsNull(this.tablereq_ds.o_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Seto_idNull() {
+                this[this.tablereq_ds.o_idColumn] = global::System.Convert.DBNull;
             }
         }
         
