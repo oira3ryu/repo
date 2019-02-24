@@ -486,7 +486,7 @@ namespace rk_seikyu
                                         + " and o_id::Integer = " + Cmb_o_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                         + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " when length('" + Cmb_tsuki_str + "')=2 then"
                                                         + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ");"
@@ -705,7 +705,7 @@ namespace rk_seikyu
                                         + " and o_id::Integer = " + Cmb_o_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                         + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " when length('" + Cmb_tsuki_str + "')=2 then"
                                                         + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ");"
@@ -973,7 +973,7 @@ namespace rk_seikyu
                                         + " and o_id::Integer = " + Cmb_o_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                         + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " when length('" + Cmb_tsuki_str + "')=2 then"
                                                         + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ");"
@@ -3421,7 +3421,7 @@ namespace rk_seikyu
                                                 + ", req_id"
                                                 + ", case when length('" + Cmb_tsuki_str + "')=1 then"
                                                 + " string_to_array ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "', '/')"
-                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " when length('" + Cmb_tsuki_str + "')=2 then"
                                                 + " string_to_array ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "', '/')"
                                                 + " end"
                                                 + " from t_csv where o_id = " + Cmb_o_id_int + ";"
@@ -3602,7 +3602,7 @@ namespace rk_seikyu
                                                 + ", req_id"
                                                 + ", case when length('" + Cmb_tsuki_str + "')=1 then"
                                                 + " string_to_array ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "', '/')"
-                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " when length('" + Cmb_tsuki_str + "')=2 then"
                                                 + " string_to_array ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "', '/')"
                                                 + " end"
                                                 + " from t_csv;"
@@ -3691,7 +3691,7 @@ namespace rk_seikyu
                                         + " and o_id::Integer = " + Cmb_o_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                 + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " when length('" + Cmb_tsuki_str + "')=2 then"
                                                 + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                 + " end"
                                         + ");"
@@ -3993,7 +3993,7 @@ namespace rk_seikyu
                                         + " and o_id::Integer = " + Cmb_o_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                         + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " when length('" + Cmb_tsuki_str + "')=2 then"
                                                         + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ");"
@@ -4128,7 +4128,7 @@ namespace rk_seikyu
                                                 + ", :req_id"
                                                 + ", case when length('" + Cmb_tsuki_str + "')=1 then"
                                                 + " string_to_array ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "', '/')"
-                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " when length('" + Cmb_tsuki_str + "')=2 then"
                                                 + " string_to_array ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "', '/')"
                                                 + " end"
                                                 + " from t_csv;"
@@ -4370,7 +4370,7 @@ namespace rk_seikyu
                                         + " and o_id::Integer = " + Cmb_o_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                         + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " when length('" + Cmb_tsuki_str + "')=2 then"
                                                         + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ");"
@@ -5286,10 +5286,10 @@ namespace rk_seikyu
                                 + " and g_id::Integer = " + Cmb_g_id_int
                                 + " and o_id::Integer = " + Cmb_o_id_int
                                 + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                                + " end"
+                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
+                                        + " end"
                                 + ");"
                                 , m_conn
                             );
@@ -5501,10 +5501,10 @@ namespace rk_seikyu
                                 + " and g_id::Integer = " + Cmb_g_id_int
                                 + " and o_id::Integer = " + Cmb_o_id_int
                                 + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                                + " end)"
+                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
+                                        + " end)"
                                 + " order by c5;"
                                 , m_conn
                             );
@@ -5765,10 +5765,10 @@ namespace rk_seikyu
                                 + " and g_id::Integer = " + Cmb_g_id_int
                                 + " and o_id::Integer = " + Cmb_o_id_int
                                 + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                                + " end"
+                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
+                                        + " end"
                                 + ")"
                                 + " order by c5;"
                                 , m_conn
@@ -6314,10 +6314,10 @@ namespace rk_seikyu
                                 + " and g_id::Integer = " + Cmb_g_id_int
                                 + " and o_id::Integer = " + Cmb_o_id_int
                                 + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                                + " end"
+                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
+                                        + " end"
                                 + ");"
                                 //+ " order by id"
                                 , m_conn
@@ -6529,10 +6529,10 @@ namespace rk_seikyu
                                 + " and g_id::Integer = " + Cmb_g_id_int
                                 + " and o_id::Integer = " + Cmb_o_id_int
                                 + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                                + " end)"
+                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                        + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
+                                        + " end)"
                                 + " order by c5;"
                                 , m_conn
                             );
@@ -6791,10 +6791,10 @@ namespace rk_seikyu
                                 + " and g_id::Integer = " + Cmb_g_id_int
                                 + " and o_id::Integer = " + Cmb_o_id_int
                                 + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                                + " end"
+                                        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
+                                        + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
+                                        + " end"
                                 + ")"
                                 + " order by c5;"
                                 , m_conn
@@ -7309,7 +7309,7 @@ namespace rk_seikyu
                                         + " and o_id::Integer = " + Cmb_o_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                         + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " when length('" + Cmb_tsuki_str + "')=2 then"
                                                         + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ");"
@@ -7524,7 +7524,7 @@ namespace rk_seikyu
                                         + " and o_id::Integer = " + Cmb_o_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                         + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " when length('" + Cmb_tsuki_str + "')=2 then"
                                                         + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end)"
                                         + " order by c5;"
@@ -7788,7 +7788,7 @@ namespace rk_seikyu
                                         + " and o_id::Integer = " + Cmb_o_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                         + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " when length('" + Cmb_tsuki_str + "')=2 then"
                                                         + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ")"
@@ -8039,7 +8039,7 @@ namespace rk_seikyu
                                         + " and o_id::Integer = " + Cmb_o_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                         + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " when length('" + Cmb_tsuki_str + "')=2 then"
                                                         + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ");"
@@ -8254,7 +8254,7 @@ namespace rk_seikyu
                                         + " and o_id::Integer = " + Cmb_o_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                         + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " when length('" + Cmb_tsuki_str + "')=2 then"
                                                         + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end)"
                                         + " order by c5;"
@@ -8519,7 +8519,7 @@ namespace rk_seikyu
                                         + " and o_id::Integer = " + Cmb_o_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                         + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " when length('" + Cmb_tsuki_str + "')=2 then"
                                                         + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ")"
@@ -8771,7 +8771,7 @@ namespace rk_seikyu
                                         + " and o_id::Integer = " + Cmb_o_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                         + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " when length('" + Cmb_tsuki_str + "')=2 then"
                                                         + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ");"
@@ -8986,7 +8986,7 @@ namespace rk_seikyu
                                         + " and o_id::Integer = " + Cmb_o_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                         + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " when length('" + Cmb_tsuki_str + "')=2 then"
                                                         + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end)"
                                         + " order by c5;"
@@ -9251,7 +9251,7 @@ namespace rk_seikyu
                                         + " and o_id::Integer = " + Cmb_o_id_int
                                         + " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                                         + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                        + " when length('" + Cmb_tsuki_str + "')=2 then"
                                                         + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
                                                         + " end"
                                         + ")"
