@@ -86,7 +86,6 @@ namespace rk_seikyu
 
         public string Cmb_o_id_str_TEXT { get => cmb_o_id.SelectedIndex.ToString(); set => cmb_o_id.Text = value; }
         private static Form_seikyu _form_seikyu_Instance;
-        //private Form_seikyu form_seikyu_Instance;
 
         public String cmb_o_id_str;
 
@@ -94,7 +93,6 @@ namespace rk_seikyu
         {
             InitializeComponent();
             _form_seikyu_Instance = this;
-            //this.cmb_o_id.SelectedIndex = 0;
 
         }
 
@@ -545,7 +543,7 @@ namespace rk_seikyu
                                             + ", c20 = :c20"
                                             + ", c21 = :c21"
                                             + ", c22 = :c22"
-                                            + ", c4_array = :c4_array"
+                                            //+ ", c4_array = :c4_array"
                                             + ", id = :id"
                                             + ", req_id = :req_id"
                                             + ", s_id = :s_id"
@@ -576,7 +574,7 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c20", NpgsqlTypes.NpgsqlDbType.Text, 0, "c20", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c21", NpgsqlTypes.NpgsqlDbType.Text, 0, "c21", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c22", NpgsqlTypes.NpgsqlDbType.Text, 0, "c22", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Array | NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Array | NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -2961,15 +2959,26 @@ namespace rk_seikyu
 
                 DataTable dt = ds.Tables[0];
 
-                OpenFileDialog ofd = new OpenFileDialog();
+                //OpenFileDialog ofd = new OpenFileDialog();
 
-                ofd.FileName = "*.csv";
-                ofd.Filter = "CSVファイル(*.csv)|*.csv|すべてのファイル(*.*)|*.*";
-                ofd.FilterIndex = 2;
-                ofd.Title = "開くファイルを選択してください";
-                ofd.RestoreDirectory = true;
-                ofd.CheckFileExists = true;
-                ofd.CheckPathExists = true;
+                //ofd.FileName = "*.csv";
+                //ofd.Filter = "CSVファイル(*.csv)|*.csv|すべてのファイル(*.*)|*.*";
+                //ofd.FilterIndex = 2;
+                //ofd.Title = "開くファイルを選択してください";
+                //ofd.RestoreDirectory = true;
+                //ofd.CheckFileExists = true;
+                //ofd.CheckPathExists = true;
+
+                OpenFileDialog ofd = new OpenFileDialog
+                {
+                    FileName = "*.csv",
+                    Filter = "CSVファイル(*.csv)|*.csv|すべてのファイル(*.*)|*.*",
+                    FilterIndex = 2,
+                    Title = "開くファイルを選択してください",
+                    RestoreDirectory = true,
+                    CheckFileExists = true,
+                    CheckPathExists = true
+                };
 
                 DialogResult btn = ofd.ShowDialog();
                 if (btn == System.Windows.Forms.DialogResult.OK)
@@ -3217,7 +3226,9 @@ namespace rk_seikyu
                                             + ", c20"
                                             + ", c21"
                                             + ", c22"
-                                            + ", c4_array"
+                                            + ", c4_y"
+                                            + ", c4_m"
+                                            //+ ", c4_array"
                                             + ", s_id"
                                             + ", g_id"
                                             + ", o_id"
@@ -3247,7 +3258,9 @@ namespace rk_seikyu
                                             + ", c20"
                                             + ", c21"
                                             + ", c22"
-                                            + ", string_to_array (c4, '/') as c4_array"
+                                            + ", substr(c4, 1, strpos(c4, '/') - 1) as c4_y"
+                                            + ", substr(c4,strpos(c4, '/')+1,length(c4)) as c4_m"
+                                            //+ ", string_to_array (c4, '/') as c4_array"
                                             + ", s_id"
                                             + ", g_id"
                                             + ", o_id"
@@ -3357,6 +3370,8 @@ namespace rk_seikyu
                                                 + ", o_id"
                                                 + ", p_id"
                                                 + ", req_id"
+                                                + ", c4_y"
+                                                + ", c4_m"
                                                 + ", c4_array"
                                                 + " ) select"
                                                 + " coalesce(c1, '') c1"
@@ -3413,11 +3428,13 @@ namespace rk_seikyu
                                                 + ", o_id"
                                                 + ", p_id"
                                                 + ", req_id"
-                                                + ", case when length('" + Cmb_tsuki_str + "')=1 then"
-                                                + " string_to_array ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "', '/')"
-                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                                + " string_to_array ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "', '/')"
-                                                + " end"
+                                                + ", substr(c4, 1, strpos(c4, '/') - 1) as c4_y"
+                                                + ", substr(c4,strpos(c4, '/')+1,length(c4)) as c4_m"
+                                                //+ ", case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                //+ " string_to_array ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "', '/')"
+                                                //+ "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                //+ " string_to_array ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "', '/')"
+                                                //+ " end"
                                                 + " from t_csv where o_id = " + Cmb_o_id_int + ";"
                                                     , m_conn);
                                                 da.InsertCommand.ExecuteNonQuery();
