@@ -484,8 +484,8 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = '" + Cmb_nen_str
-                                        + " and c4_m = '" + Cmb_tsuki_str
+                                        + " and c4_y = " + Cmb_nen_str
+                                        + " and c4_m = " + Cmb_tsuki_str
                                         //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                         //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                         //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -709,8 +709,8 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = '" + Cmb_nen_str
-                                        + " and c4_m = '" + Cmb_tsuki_str
+                                        + " and c4_y = " + Cmb_nen_str
+                                        + " and c4_m = " + Cmb_tsuki_str
                                         //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                         //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                         //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -985,8 +985,8 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = '" + Cmb_nen_str
-                                        + " and c4_m = '" + Cmb_tsuki_str
+                                        + " and c4_y = " + Cmb_nen_str
+                                        + " and c4_m = " + Cmb_tsuki_str
                                         //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                         //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                         //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -1544,7 +1544,9 @@ namespace rk_seikyu
                                         e.Row["c20"] = reader["c20"];
                                         e.Row["c21"] = reader["c21"];
                                         e.Row["c22"] = reader["c22"];
-                                        e.Row["c4_array"] = reader["c4_array"];
+                                        e.Row["c4_y"] = reader["c4_y"];
+                                        e.Row["c4_m"] = reader["c4_m"];
+                                        //e.Row["c4_array"] = reader["c4_array"];
                                         e.Row["time_stamp"] = reader["time_stamp"];
                                         e.Row["r_id"] = reader["r_id"];
                                         e.Row["s_id"] = reader["s_id"];
@@ -1755,7 +1757,9 @@ namespace rk_seikyu
                                         + ", c20"
                                         + ", c21"
                                         + ", c22"
-                                        + ", c4_array"
+                                        + ", c4_y"
+                                        + ", c4_m"
+                                        //+ ", c4_array"
                                         + ", time_stamp"
                                         + ", s_id"
                                         + ", g_id"
@@ -1985,7 +1989,9 @@ namespace rk_seikyu
                                         e.Row["c20"] = reader["c20"];
                                         e.Row["c21"] = reader["c21"];
                                         e.Row["c22"] = reader["c22"];
-                                        e.Row["c4_array"] = reader["c4_array"];
+                                        e.Row["c4_y"] = reader["c4_y"];
+                                        e.Row["c4_m"] = reader["c4_m"];
+                                        //e.Row["c4_array"] = reader["c4_array"];
                                         e.Row["time_stamp"] = reader["time_stamp"];
                                         e.Row["r_id"] = reader["r_id"];
                                         e.Row["s_id"] = reader["s_id"];
@@ -6418,8 +6424,8 @@ namespace rk_seikyu
                                 + " where s_id::Integer = " + Cmb_s_id_int
                                 + " and g_id::Integer = " + Cmb_g_id_int
                                 + " and o_id::Integer = " + Cmb_o_id_int
-                                + " and c4_y = '" + Cmb_nen_str
-                                + " and c4_m = '" + Cmb_tsuki_str
+                                + " and c4_y::Text = " + Cmb_nen_str
+                                + " and c4_m::Text = " + Cmb_tsuki_str
                         //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                 //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                 //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -6641,8 +6647,8 @@ namespace rk_seikyu
                                 + " where s_id::Integer = " + Cmb_s_id_int
                                 + " and g_id::Integer = " + Cmb_g_id_int
                                 + " and o_id::Integer = " + Cmb_o_id_int
-                                + " and c4_y = '" + Cmb_nen_str
-                                + " and c4_m = '" + Cmb_tsuki_str
+                                + " and c4_y = " + Cmb_nen_str
+                                + " and c4_m = " + Cmb_tsuki_str
                                 //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                 //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                 //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -6912,8 +6918,8 @@ namespace rk_seikyu
                                 + " where s_id::Integer = " + Cmb_s_id_int
                                 + " and g_id::Integer = " + Cmb_g_id_int
                                 + " and o_id::Integer = " + Cmb_o_id_int
-                                + " and c4_y = '" + Cmb_nen_str
-                                + " and c4_m = '" + Cmb_tsuki_str
+                                + " and c4_y = " + Cmb_nen_str
+                                + " and c4_m = " + Cmb_tsuki_str
                                 //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                 //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                 //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -7437,8 +7443,8 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = '" + Cmb_nen_str
-                                        + " and c4_m = '" + Cmb_tsuki_str
+                                        + " and c4_y = " + Cmb_nen_str
+                                        + " and c4_m = " + Cmb_tsuki_str
                                         //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                         //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                         //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -7660,8 +7666,8 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = '" + Cmb_nen_str
-                                        + " and c4_m = '" + Cmb_tsuki_str
+                                        + " and c4_y = " + Cmb_nen_str
+                                        + " and c4_m = " + Cmb_tsuki_str
                                         //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                         //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                         //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -7933,8 +7939,8 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = '" + Cmb_nen_str
-                                        + " and c4_m = '" + Cmb_tsuki_str
+                                        + " and c4_y = " + Cmb_nen_str
+                                        + " and c4_m = " + Cmb_tsuki_str
                                         //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                         //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                         //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -8192,8 +8198,8 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = '" + Cmb_nen_str
-                                        + " and c4_m = '" + Cmb_tsuki_str
+                                        + " and c4_y = " + Cmb_nen_str
+                                        + " and c4_m = " + Cmb_tsuki_str
                                         //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                         //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                         //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -8415,8 +8421,8 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = '" + Cmb_nen_str
-                                        + " and c4_m = '" + Cmb_tsuki_str
+                                        + " and c4_y = " + Cmb_nen_str
+                                        + " and c4_m = " + Cmb_tsuki_str
                                         //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                         //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                         //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -8689,8 +8695,8 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = '" + Cmb_nen_str
-                                        + " and c4_m = '" + Cmb_tsuki_str
+                                        + " and c4_y = " + Cmb_nen_str
+                                        + " and c4_m = " + Cmb_tsuki_str
                                         //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                         //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                         //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -8949,8 +8955,8 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = '" + Cmb_nen_str
-                                        + " and c4_m = '" + Cmb_tsuki_str
+                                        + " and c4_y = " + Cmb_nen_str
+                                        + " and c4_m = " + Cmb_tsuki_str
                                         //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                         //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                         //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -9172,8 +9178,8 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = '" + Cmb_nen_str
-                                        + " and c4_m = '" + Cmb_tsuki_str
+                                        + " and c4_y = " + Cmb_nen_str
+                                        + " and c4_m = " + Cmb_tsuki_str
                                         //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                         //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                         //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
@@ -9446,8 +9452,8 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = '" + Cmb_nen_str
-                                        + " and c4_m = '" + Cmb_tsuki_str
+                                        + " and c4_y = " + Cmb_nen_str
+                                        + " and c4_m = " + Cmb_tsuki_str
                                         //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
                                         //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
                                         //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
