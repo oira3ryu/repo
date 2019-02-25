@@ -12,7 +12,7 @@
   <xs:element name="withdrawal_ds" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="withdrawal_ds" msprop:Generator_UserDSName="withdrawal_ds">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="withdrawal_ds" msprop:Generator_TableClassName="withdrawal_dsDataTable" msprop:Generator_TableVarName="tablewithdrawal_ds" msprop:Generator_TablePropName="_withdrawal_ds" msprop:Generator_RowDeletingName="withdrawal_dsRowDeleting" msprop:Generator_RowChangingName="withdrawal_dsRowChanging" msprop:Generator_RowEvHandlerName="withdrawal_dsRowChangeEventHandler" msprop:Generator_RowDeletedName="withdrawal_dsRowDeleted" msprop:Generator_UserTableName="withdrawal_ds" msprop:Generator_RowChangedName="withdrawal_dsRowChanged" msprop:Generator_RowEvArgName="withdrawal_dsRowChangeEvent" msprop:Generator_RowClassName="withdrawal_dsRow">
+        <xs:element name="withdrawal_ds" msprop:Generator_TableClassName="withdrawal_dsDataTable" msprop:Generator_TableVarName="tablewithdrawal_ds" msprop:Generator_RowChangedName="withdrawal_dsRowChanged" msprop:Generator_TablePropName="_withdrawal_ds" msprop:Generator_RowDeletingName="withdrawal_dsRowDeleting" msprop:Generator_RowChangingName="withdrawal_dsRowChanging" msprop:Generator_RowEvHandlerName="withdrawal_dsRowChangeEventHandler" msprop:Generator_RowDeletedName="withdrawal_dsRowDeleted" msprop:Generator_RowClassName="withdrawal_dsRow" msprop:Generator_UserTableName="withdrawal_ds" msprop:Generator_RowEvArgName="withdrawal_dsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="c3" msprop:Generator_ColumnVarNameInTable="columnc3" msprop:Generator_ColumnPropNameInRow="c3" msprop:Generator_ColumnPropNameInTable="c3Column" msprop:Generator_UserColumnName="c3" type="xs:string" minOccurs="0" />
@@ -40,6 +40,8 @@
               <xs:element name="o_id" msprop:Generator_ColumnVarNameInTable="columno_id" msprop:Generator_ColumnPropNameInRow="o_id" msprop:Generator_ColumnPropNameInTable="o_idColumn" msprop:Generator_UserColumnName="o_id" type="xs:string" minOccurs="0" />
               <xs:element name="shisetsumei" msprop:Generator_ColumnVarNameInTable="columnshisetsumei" msprop:Generator_ColumnPropNameInRow="shisetsumei" msprop:Generator_ColumnPropNameInTable="shisetsumeiColumn" msprop:Generator_UserColumnName="shisetsumei" type="xs:string" minOccurs="0" />
               <xs:element name="s_id_str" msprop:Generator_ColumnVarNameInTable="columns_id_str" msprop:Generator_ColumnPropNameInRow="s_id_str" msprop:Generator_ColumnPropNameInTable="s_id_strColumn" msprop:Generator_UserColumnName="s_id_str" type="xs:string" minOccurs="0" />
+              <xs:element name="c4_y" msprop:Generator_ColumnVarNameInTable="columnc4_y" msprop:Generator_ColumnPropNameInRow="c4_y" msprop:Generator_ColumnPropNameInTable="c4_yColumn" msprop:Generator_UserColumnName="c4_y" type="xs:string" minOccurs="0" />
+              <xs:element name="c4_m" msprop:Generator_ColumnVarNameInTable="columnc4_m" msprop:Generator_ColumnPropNameInRow="c4_m" msprop:Generator_ColumnPropNameInTable="c4_mColumn" msprop:Generator_UserColumnName="c4_m" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

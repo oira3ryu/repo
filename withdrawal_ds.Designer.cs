@@ -329,6 +329,10 @@ namespace rk_seikyu {
             
             private global::System.Data.DataColumn columns_id_str;
             
+            private global::System.Data.DataColumn columnc4_y;
+            
+            private global::System.Data.DataColumn columnc4_m;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public withdrawal_dsDataTable() {
@@ -564,6 +568,22 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn c4_yColumn {
+                get {
+                    return this.columnc4_y;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn c4_mColumn {
+                get {
+                    return this.columnc4_m;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -624,7 +644,9 @@ namespace rk_seikyu {
                         string syubetsu, 
                         string o_id, 
                         string shisetsumei, 
-                        string s_id_str) {
+                        string s_id_str, 
+                        string c4_y, 
+                        string c4_m) {
                 withdrawal_dsRow rowwithdrawal_dsRow = ((withdrawal_dsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         c3,
@@ -651,7 +673,9 @@ namespace rk_seikyu {
                         syubetsu,
                         o_id,
                         shisetsumei,
-                        s_id_str};
+                        s_id_str,
+                        c4_y,
+                        c4_m};
                 rowwithdrawal_dsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowwithdrawal_dsRow);
                 return rowwithdrawal_dsRow;
@@ -706,6 +730,8 @@ namespace rk_seikyu {
                 this.columno_id = base.Columns["o_id"];
                 this.columnshisetsumei = base.Columns["shisetsumei"];
                 this.columns_id_str = base.Columns["s_id_str"];
+                this.columnc4_y = base.Columns["c4_y"];
+                this.columnc4_m = base.Columns["c4_m"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -761,6 +787,10 @@ namespace rk_seikyu {
                 base.Columns.Add(this.columnshisetsumei);
                 this.columns_id_str = new global::System.Data.DataColumn("s_id_str", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columns_id_str);
+                this.columnc4_y = new global::System.Data.DataColumn("c4_y", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnc4_y);
+                this.columnc4_m = new global::System.Data.DataColumn("c4_m", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnc4_m);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnr_id}, true));
                 this.columnr_id.AllowDBNull = false;
@@ -1304,6 +1334,38 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string c4_y {
+                get {
+                    try {
+                        return ((string)(this[this.tablewithdrawal_ds.c4_yColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'withdrawal_ds\' にある列 \'c4_y\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tablewithdrawal_ds.c4_yColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string c4_m {
+                get {
+                    try {
+                        return ((string)(this[this.tablewithdrawal_ds.c4_mColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'withdrawal_ds\' にある列 \'c4_m\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tablewithdrawal_ds.c4_mColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool Isc3Null() {
                 return this.IsNull(this.tablewithdrawal_ds.c3Column);
             }
@@ -1588,6 +1650,30 @@ namespace rk_seikyu {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void Sets_id_strNull() {
                 this[this.tablewithdrawal_ds.s_id_strColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isc4_yNull() {
+                return this.IsNull(this.tablewithdrawal_ds.c4_yColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setc4_yNull() {
+                this[this.tablewithdrawal_ds.c4_yColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isc4_mNull() {
+                return this.IsNull(this.tablewithdrawal_ds.c4_mColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setc4_mNull() {
+                this[this.tablewithdrawal_ds.c4_mColumn] = global::System.Convert.DBNull;
             }
         }
         
