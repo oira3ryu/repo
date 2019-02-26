@@ -470,7 +470,6 @@ namespace rk_seikyu
                                         + ", cast(c13 as Integer) + cast(c14 as Integer) + cast(c15 as Integer) + cast(c16 as Integer) + cast(c19 as Integer) c22"
                                         + ", c4_y"
                                         + ", c4_m"
-                                        //+ ", c4_array"
                                         + ", time_stamp"
                                         + ", r_id"
                                         + ", s_id"
@@ -484,13 +483,12 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = " + Cmb_nen_str
-                                        + " and c4_m = " + Cmb_tsuki_str
-                                        //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                        //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                        //                + " end"
+                                        + " and c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " '' || '" + Cmb_tsuki_str + "'"
+                                        + " end"
                                         + ");"
                                         , m_conn
                                     );
@@ -549,7 +547,6 @@ namespace rk_seikyu
                                             + ", c22 = :c22"
                                             + ", c4_y = :c4_y"
                                             + ", c4_m = :c4_m"
-                                            //+ ", c4_array = :c4_array"
                                             + ", id = :id"
                                             + ", req_id = :req_id"
                                             + ", s_id = :s_id"
@@ -582,7 +579,6 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c22", NpgsqlTypes.NpgsqlDbType.Text, 0, "c22", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Array | NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -710,12 +706,11 @@ namespace rk_seikyu
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
                                         + " and c4_y = " + Cmb_nen_str
-                                        + " and c4_m = " + Cmb_tsuki_str
-                                        //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                        //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                        //                + " end"
+                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " '' || '" + Cmb_tsuki_str + "'"
+                                        + " end"
                                         + ");"
                                         , m_conn
                                     );
@@ -792,7 +787,6 @@ namespace rk_seikyu
                                             + ", req_id = :req_id"
                                             + ", c4_y = :c4_y"
                                             + ", c4_m = :c4_m"
-                                            //+ ", c4_array = :c4_array"
                                             + " where sh_id=:sh_id;"
                                         , m_conn
                                         );
@@ -852,7 +846,6 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Array | NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("sh_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sh_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // delete
@@ -897,7 +890,6 @@ namespace rk_seikyu
 
                         // 親族関係
                         case 3:
-                            //MessageBox.Show("Case " + cmb_s_id_int + "!");
                             Console.WriteLine("Case " + Cmb_g_id_int + "!");
                             switch (Cmb_s_id_int)
                             {
@@ -978,7 +970,6 @@ namespace rk_seikyu
                                         + ", c4_y"
                                         + ", c4_m"
                                         + ", time_stamp"
-                                        //+ ", c4_array"
                                         + " from"
                                         + " t_shinzoku_kankei"
                                         + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
@@ -986,12 +977,11 @@ namespace rk_seikyu
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
                                         + " and c4_y = " + Cmb_nen_str
-                                        + " and c4_m = " + Cmb_tsuki_str
-                                        //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                        //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                        //                + " end"
+                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " '' || '" + Cmb_tsuki_str + "'"
+                                        + " end"
                                         + ");"
                                         , m_conn
                                     );
@@ -1312,7 +1302,6 @@ namespace rk_seikyu
                                         + ", c22"
                                         + ", c4_y"
                                         + ", c4_m"
-                                        //+ ", c4_array"
                                         + ", time_stamp"
                                         + ", r_id"
                                         + ", s_id"
@@ -1402,7 +1391,6 @@ namespace rk_seikyu
                                         + ", req_id"
                                         + ", c4_y"
                                         + ", c4_m"
-                                        //+ ", c4_array"
                                         + ", time_stamp"
                                         + " from"
                                         + " t_shiharai_houhou"
@@ -1546,7 +1534,6 @@ namespace rk_seikyu
                                         e.Row["c22"] = reader["c22"];
                                         e.Row["c4_y"] = reader["c4_y"];
                                         e.Row["c4_m"] = reader["c4_m"];
-                                        //e.Row["c4_array"] = reader["c4_array"];
                                         e.Row["time_stamp"] = reader["time_stamp"];
                                         e.Row["r_id"] = reader["r_id"];
                                         e.Row["s_id"] = reader["s_id"];
@@ -1759,7 +1746,6 @@ namespace rk_seikyu
                                         + ", c22"
                                         + ", c4_y"
                                         + ", c4_m"
-                                        //+ ", c4_array"
                                         + ", time_stamp"
                                         + ", s_id"
                                         + ", g_id"
@@ -1991,7 +1977,6 @@ namespace rk_seikyu
                                         e.Row["c22"] = reader["c22"];
                                         e.Row["c4_y"] = reader["c4_y"];
                                         e.Row["c4_m"] = reader["c4_m"];
-                                        //e.Row["c4_array"] = reader["c4_array"];
                                         e.Row["time_stamp"] = reader["time_stamp"];
                                         e.Row["r_id"] = reader["r_id"];
                                         e.Row["s_id"] = reader["s_id"];
@@ -2989,16 +2974,6 @@ namespace rk_seikyu
 
                 DataTable dt = ds.Tables[0];
 
-                //OpenFileDialog ofd = new OpenFileDialog();
-
-                //ofd.FileName = "*.csv";
-                //ofd.Filter = "CSVファイル(*.csv)|*.csv|すべてのファイル(*.*)|*.*";
-                //ofd.FilterIndex = 2;
-                //ofd.Title = "開くファイルを選択してください";
-                //ofd.RestoreDirectory = true;
-                //ofd.CheckFileExists = true;
-                //ofd.CheckPathExists = true;
-
                 OpenFileDialog ofd = new OpenFileDialog
                 {
                     FileName = "*.csv",
@@ -3227,11 +3202,8 @@ namespace rk_seikyu
                                 case 6:
                                     try
                                     {
-                                        //m_conn.Open();
-                                        //NpgsqlTransaction t = m_conn.BeginTransaction();
                                         Cursor.Current = Cursors.WaitCursor;
                                         {
-                                            //command = new NpgsqlCommand(
                                             da.InsertCommand = new NpgsqlCommand(
                                             "insert into t_seikyu ("
                                             + " c1"
@@ -3258,7 +3230,6 @@ namespace rk_seikyu
                                             + ", c22"
                                             + ", c4_y"
                                             + ", c4_m"
-                                            //+ ", c4_array"
                                             + ", s_id"
                                             + ", g_id"
                                             + ", o_id"
@@ -3290,7 +3261,6 @@ namespace rk_seikyu
                                             + ", c22"
                                             + ", substr(c4, 1, strpos(c4, '/') - 1) as c4_y"
                                             + ", substr(c4,strpos(c4, '/')+1,length(c4)) as c4_m"
-                                            //+ ", string_to_array (c4, '/') as c4_array"
                                             + ", s_id"
                                             + ", g_id"
                                             + ", o_id"
@@ -3402,7 +3372,6 @@ namespace rk_seikyu
                                                 + ", req_id"
                                                 + ", c4_y"
                                                 + ", c4_m"
-                                                //+ ", c4_array"
                                                 + " ) select"
                                                 + " coalesce(c1, '') c1"
                                                 + ", coalesce(c2, '') c2"
@@ -3458,13 +3427,12 @@ namespace rk_seikyu
                                                 + ", o_id"
                                                 + ", p_id"
                                                 + ", req_id"
-                                                + ", '" + Cmb_nen_str
-                                                + ", '" + Cmb_tsuki_str
-                                                //+ ", case when length('" + Cmb_tsuki_str + "')=1 then"
-                                                //+ " string_to_array ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "', '/')"
-                                                //+ "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                                //+ " string_to_array ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "', '/')"
-                                                //+ " end"
+                                                + ", '" + Cmb_nen_str + "'"
+                                                + ", case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " '' || '" + Cmb_tsuki_str + "'"
+                                                + " end"
                                                 + " from t_csv where o_id = " + Cmb_o_id_int + ";"
                                                     , m_conn);
                                                 da.InsertCommand.ExecuteNonQuery();
@@ -3578,7 +3546,6 @@ namespace rk_seikyu
                                                 + ", req_id"
                                                 + ", c4_y"
                                                 + ", c4_m"
-                                                //+ ", c4_array"
                                                 + " ) select"
                                                 + " coalesce(c1, '') c1"
                                                 + ", coalesce(c2, '') c2"
@@ -3643,13 +3610,12 @@ namespace rk_seikyu
                                                 + ", o_id"
                                                 + ", p_id"
                                                 + ", req_id"
-                                                + ", '" + Cmb_nen_str
-                                                + ", '" + Cmb_tsuki_str
-                                                //+ ", case when length('" + Cmb_tsuki_str + "')=1 then"
-                                                //+ " string_to_array ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "', '/')"
-                                                //+ "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                                //+ " string_to_array ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "', '/')"
-                                                //+ " end"
+                                                + ", '" + Cmb_nen_str + "'"
+                                                + ", case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " '' || '" + Cmb_tsuki_str + "'"
+                                                + " end"
                                                 + " from t_csv;"
                                                     , m_conn);
                                                 da.InsertCommand.ExecuteNonQuery();
@@ -3721,7 +3687,6 @@ namespace rk_seikyu
                                         + ", c22"
                                         + ", c4_y"
                                         + ", c4_m"
-                                        //+ ", c4_array"
                                         + ", time_stamp"
                                         + ", r_id"
                                         + ", s_id"
@@ -3736,13 +3701,12 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = '" + Cmb_nen_str
-                                        + " and c4_m = '" + Cmb_tsuki_str
-                                        //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                        //        + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                        //        + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                        //        + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                        //        + " end"
+                                        + " and c4_y = '" + Cmb_nen_str + "'"
+                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " '' || '" + Cmb_tsuki_str + "'"
+                                        + " end"
                                         + ");"
                                         , m_conn
                                     );
@@ -3801,7 +3765,6 @@ namespace rk_seikyu
                                             + ", c22"
                                             + ", c4_y"
                                             + ", c4_m"
-                                            //+ ", c4_array"
                                             + ", s_id"
                                             + ", g_id"
                                             + ", o_id"
@@ -3833,7 +3796,6 @@ namespace rk_seikyu
                                             + ", :c22"
                                             + ", :c4_y"
                                             + ", :c4_m"
-                                            //+ ", string_to_array (:c4, '/') as c4_array"
                                             + ", :s_id"
                                             + ", :g_id"
                                             + ", :o_id"
@@ -3867,13 +3829,12 @@ namespace rk_seikyu
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("c22", NpgsqlTypes.NpgsqlDbType.Text, 0, "c22", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("time_stamp", NpgsqlTypes.NpgsqlDbType.TimestampTz, 0, "time_stamp", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // update
@@ -3903,7 +3864,6 @@ namespace rk_seikyu
                                             + ", c22 = :c22"
                                             + ", c4_y = :c4_y"
                                             + ", c4_m = :c4_m"
-                                            //+ ", c4_array = :c4_array"
                                             + ", time_stamp = :time_stamp"
                                             + ", id = :id"
                                             + ", req_id = :req_id"
@@ -3937,13 +3897,12 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c22", NpgsqlTypes.NpgsqlDbType.Text, 0, "c22", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("time_stamp", NpgsqlTypes.NpgsqlDbType.TimestampTz, 0, "time_stamp", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // delete
@@ -4045,20 +4004,18 @@ namespace rk_seikyu
                                         + ", time_stamp"
                                         + ", c4_y"
                                         + ", c4_m"
-                                        //+ ", c4_array"
                                         + " from"
                                         + " t_shiharai_houhou"
                                         + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = '" + Cmb_nen_str
-                                        + " and c4_m = '" + Cmb_tsuki_str
-                                        //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                        //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                        //                + " end"
+                                        + " and c4_y = '" + Cmb_nen_str + "'"
+                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " '' || '" + Cmb_tsuki_str + "'"
+                                        + " end"
                                         + ");"
                                         , m_conn
                                     );
@@ -4135,7 +4092,6 @@ namespace rk_seikyu
                                                 + ", req_id"
                                                 + ", c4_y"
                                                 + ", c4_m"
-                                                //+ ", c4_array"
                                                 + " ) select"
                                                 + " coalesce(:c1, '') c1"
                                                 + ", coalesce(:c2, '') c2"
@@ -4191,13 +4147,12 @@ namespace rk_seikyu
                                                 + ", :o_id"
                                                 + ", :p_id"
                                                 + ", :req_id"
-                                                + ", '" + Cmb_nen_str
-                                                + ", '" + Cmb_tsuki_str
-                                                //+ ", case when length('" + Cmb_tsuki_str + "')=1 then"
-                                                //+ " string_to_array ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "', '/')"
-                                                //+ "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                                //+ " string_to_array ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "', '/')"
-                                                //+ " end"
+                                                + ", '" + Cmb_nen_str + "'"
+                                                + ", case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " '' || '" + Cmb_tsuki_str + "'"
+                                                + " end"
                                                 + " from t_csv;"
                                                     , m_conn
                                                     );
@@ -4262,7 +4217,6 @@ namespace rk_seikyu
                                             + ", time_stamp = :time_stamp"
                                             + ", c4_y = :c4_y"
                                             + ", c4_m = :c4_m"
-                                            //+ ", c4_array = :c4_array"
                                             + " where sh_id=:sh_id;"
                                         , m_conn
                                         );
@@ -4433,20 +4387,18 @@ namespace rk_seikyu
                                         + ", c4_y"
                                         + ", c4_m"
                                         + ", time_stamp"
-                                        //+ ", c4_array"
                                         + " from"
                                         + " t_shinzoku_kankei"
                                         + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = '" + Cmb_nen_str
-                                        + " and c4_m = '" + Cmb_tsuki_str
-                                        //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                        //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                        //                + " end"
+                                        + " and c4_y = '" + Cmb_nen_str + "'"
+                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " '' || '" + Cmb_tsuki_str + "'"
+                                        + " end"
                                         + ");"
                                         , m_conn
                                     );
@@ -4532,7 +4484,6 @@ namespace rk_seikyu
                                                 + ", req_id"
                                                 + ", c4_y"
                                                 + ", c4_m"
-                                                //+ ", c4_array"
                                                 + " ) select"
                                                 + " coalesce(:c1, '') c1"
                                                 + ", coalesce(:c2, '') c2"
@@ -4597,13 +4548,12 @@ namespace rk_seikyu
                                                 + ", :o_id"
                                                 + ", :p_id"
                                                 + ", :req_id"
-                                                + ", '" + Cmb_nen_str
-                                                + ", '" + Cmb_tsuki_str
-                                                //+ ", case when length('" + Cmb_tsuki_str + "')=1 then"
-                                                //+ " string_to_array ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "', '/')"
-                                                //+ "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                                //+ " string_to_array ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "', '/')"
-                                                //+ " end"
+                                                + ", '" + Cmb_nen_str + "'"
+                                                + ", case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " '' || '" + Cmb_tsuki_str + "'"
+                                                + " end"
                                                 + " from t_csv;"
                                                     , m_conn
                                                     );
@@ -4668,7 +4618,6 @@ namespace rk_seikyu
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("time_stamp", NpgsqlTypes.NpgsqlDbType.TimestampTz, 0, "time_stamp", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    //da.InsertCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -4745,7 +4694,6 @@ namespace rk_seikyu
                                         + ", c4_y = :c4_y"
                                         + ", c4_m = :c4_m"
                                         + ", time_stamp = :time_stamp"
-                                        //+ ", c4_array = :c4_array"
                                         + " where sk_id=:sk_id;"
                                         , m_conn
                                         );
@@ -4810,7 +4758,6 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("time_stamp", NpgsqlTypes.NpgsqlDbType.TimestampTz, 0, "time_stamp", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -5356,7 +5303,6 @@ namespace rk_seikyu
                                 + ", c22"
                                 + ", c4_y"
                                 + ", c4_m"
-                                //+ ", c4_array"
                                 + ", time_stamp"
                                 + ", r_id"
                                 + ", s_id"
@@ -5371,13 +5317,12 @@ namespace rk_seikyu
                                 + " where s_id::Integer = " + Cmb_s_id_int
                                 + " and g_id::Integer = " + Cmb_g_id_int
                                 + " and o_id::Integer = " + Cmb_o_id_int
-                                + " and c4_y = '" + Cmb_nen_str
-                                + " and c4_m = '" + Cmb_tsuki_str
-                                //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                //                + " end"
+                                + " and c4_y = '" + Cmb_nen_str + "'"
+                                + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                + " ' ' || '" + Cmb_tsuki_str + "'"
+                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                + " '' || '" + Cmb_tsuki_str + "'"
+                                + " end"
                                 + ");"
                                 , m_conn
                             );
@@ -5436,7 +5381,6 @@ namespace rk_seikyu
                                     + ", c22 = :c22"
                                     + ", c4_y = :c4_y"
                                     + ", c4_m = :c4_m"
-                                    //+ ", c4_array = :c4_array"
                                     + ", id = :id"
                                     + ", req_id = :req_id"
                                     + ", s_id = :s_id"
@@ -5469,7 +5413,6 @@ namespace rk_seikyu
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c22", NpgsqlTypes.NpgsqlDbType.Text, 0, "c22", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -5587,20 +5530,18 @@ namespace rk_seikyu
                                 + ", c4_y"
                                 + ", c4_m"
                                 + ", time_stamp"
-                                //+ ", c4_array"
                                 + " from"
                                 + " t_shiharai_houhou"
                                 + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
                                 + " where s_id::Integer = " + Cmb_s_id_int
                                 + " and g_id::Integer = " + Cmb_g_id_int
                                 + " and o_id::Integer = " + Cmb_o_id_int
-                                + " and c4_y = '" + Cmb_nen_str
-                                + " and c4_m = '" + Cmb_tsuki_str
-                                //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                //                + " end"
+                                + " and c4_y = '" + Cmb_nen_str + "'"
+                                + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                + " ' ' || '" + Cmb_tsuki_str + "'"
+                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                + " '' || '" + Cmb_tsuki_str + "'"
+                                + " end"
                                 + ")"
                                 + " order by c5;"
                                 , m_conn
@@ -5678,7 +5619,6 @@ namespace rk_seikyu
                                     + ", req_id = :req_id"
                                     + ", c4_y = :c4_y"
                                     + ", c4_m = :c4_m"
-                                    //+ ", c4_array = :c4_array"
                                     + " where sh_id=:sh_id;"
                                 , m_conn
                                 );
@@ -5738,7 +5678,6 @@ namespace rk_seikyu
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("sh_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sh_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                             // delete
@@ -5860,20 +5799,18 @@ namespace rk_seikyu
                                 + ", c4_y"
                                 + ", c4_m"
                                 + ", time_stamp"
-                                //+ ", c4_array"
                                 + " from"
                                 + " t_shinzoku_kankei"
                                 + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
                                 + " where s_id::Integer = " + Cmb_s_id_int
                                 + " and g_id::Integer = " + Cmb_g_id_int
                                 + " and o_id::Integer = " + Cmb_o_id_int
-                                + " and c4_y = '" + Cmb_nen_str
-                                + " and c4_m = '" + Cmb_tsuki_str
-                                //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                //                + " end"
+                                + " and c4_y = '" + Cmb_nen_str + "'"
+                                + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                + " ' ' || '" + Cmb_tsuki_str + "'"
+                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                + " '' || '" + Cmb_tsuki_str + "'"
+                                + " end"
                                 + ")"
                                 + " order by c5;"
                                 , m_conn
@@ -5960,7 +5897,6 @@ namespace rk_seikyu
                                 + ", req_id = :req_id"
                                 + ", c4_y = :c4_y"
                                 + ", c4_m = :c4_m"
-                                //+ ", c4_array = :c4_array"
                                 + " where sk_id=:sk_id;"
                                 , m_conn
                                 );
@@ -6029,7 +5965,6 @@ namespace rk_seikyu
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("sk_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sk_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                             // delete
@@ -6409,7 +6344,6 @@ namespace rk_seikyu
                                 + ", c22"
                                 + ", c4_y"
                                 + ", c4_m"
-                                //+ ", c4_array"
                                 + ", time_stamp"
                                 + ", r_id"
                                 + ", s_id"
@@ -6424,15 +6358,13 @@ namespace rk_seikyu
                                 + " where s_id::Integer = " + Cmb_s_id_int
                                 + " and g_id::Integer = " + Cmb_g_id_int
                                 + " and o_id::Integer = " + Cmb_o_id_int
-                                + " and c4_y::Text = " + Cmb_nen_str
-                                + " and c4_m::Text = " + Cmb_tsuki_str
-                        //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                //                + " end"
+                                + " and c4_y::Text = '" + Cmb_nen_str + "'"
+                                + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                + " ' ' || '" + Cmb_tsuki_str + "'"
+                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                + " '' || '" + Cmb_tsuki_str + "'"
+                                + " end"
                                 + ");"
-                                //+ " order by id"
                                 , m_conn
                             );
 
@@ -6490,7 +6422,6 @@ namespace rk_seikyu
                                     + ", c22 = :c22"
                                     + ", c4_y = :c4_y"
                                     + ", c4_m = :c4_m"
-                                    //+ ", c4_array = :c4_array"
                                     + ", id = :id"
                                     + ", req_id = :req_id"
                                     + ", s_id = :s_id"
@@ -6523,7 +6454,6 @@ namespace rk_seikyu
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c22", NpgsqlTypes.NpgsqlDbType.Text, 0, "c22", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -6640,20 +6570,18 @@ namespace rk_seikyu
                                 + ", c4_y"
                                 + ", c4_m"
                                 + ", time_stamp"
-                                //+ ", c4_array"
                                 + " from"
                                 + " t_shiharai_houhou"
                                 + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
                                 + " where s_id::Integer = " + Cmb_s_id_int
                                 + " and g_id::Integer = " + Cmb_g_id_int
                                 + " and o_id::Integer = " + Cmb_o_id_int
-                                + " and c4_y = " + Cmb_nen_str
-                                + " and c4_m = " + Cmb_tsuki_str
-                                //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                //                + " end"
+                                + " and c4_y::Text = '" + Cmb_nen_str + "'"
+                                + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                + " ' ' || '" + Cmb_tsuki_str + "'"
+                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                + " '' || '" + Cmb_tsuki_str + "'"
+                                + " end"
                                 + ")"
                                 + " order by c5;"
                                 , m_conn
@@ -6730,7 +6658,6 @@ namespace rk_seikyu
                                     + ", req_id = :req_id"
                                     + ", c4_y = :c4_y"
                                     + ", c4_m = :c4_m"
-                                    //+ ", c4_array = :c4_array"
                                     + " where sh_id=:sh_id;"
                                 , m_conn
                                 );
@@ -6789,7 +6716,6 @@ namespace rk_seikyu
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("sh_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sh_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                             // delete
@@ -6911,20 +6837,18 @@ namespace rk_seikyu
                                 + ", c4_y"
                                 + ", c4_m"
                                 + ", time_stamp"
-                                //+ ", c4_array"
                                 + " from"
                                 + " t_shinzoku_kankei"
                                 + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
                                 + " where s_id::Integer = " + Cmb_s_id_int
                                 + " and g_id::Integer = " + Cmb_g_id_int
                                 + " and o_id::Integer = " + Cmb_o_id_int
-                                + " and c4_y = " + Cmb_nen_str
-                                + " and c4_m = " + Cmb_tsuki_str
-                                //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                //                + " end"
+                                + " and c4_y::Text = '" + Cmb_nen_str + "'"
+                                + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                + " ' ' || '" + Cmb_tsuki_str + "'"
+                                + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                + " '' || '" + Cmb_tsuki_str + "'"
+                                + " end"
                                 + ")"
                                 + " order by c5;"
                                 , m_conn
@@ -7011,7 +6935,6 @@ namespace rk_seikyu
                                 + ", req_id = :req_id"
                                 + ", c4_y = :c4_y"
                                 + ", c4_m = :c4_m"
-                                //+ ", c4_array = :c4_array"
                                 + " where sk_id=:sk_id;"
                                 , m_conn
                                 );
@@ -7080,7 +7003,6 @@ namespace rk_seikyu
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("sk_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sk_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                             // delete
@@ -7428,7 +7350,6 @@ namespace rk_seikyu
                                         + ", c22"
                                         + ", c4_y"
                                         + ", c4_m"
-                                        //+ ", c4_array"
                                         + ", time_stamp"
                                         + ", r_id"
                                         + ", s_id"
@@ -7443,13 +7364,12 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = " + Cmb_nen_str
-                                        + " and c4_m = " + Cmb_tsuki_str
-                                        //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                        //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                        //                + " end"
+                                        + " and c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " '' || '" + Cmb_tsuki_str + "'"
+                                        + " end"
                                         + ");"
                                         , m_conn
                                     );
@@ -7508,7 +7428,6 @@ namespace rk_seikyu
                                             + ", c22 = :c22"
                                             + ", c4_y = :c4_y"
                                             + ", c4_m = :c4_m"
-                                            //+ ", c4_array = :c4_array"
                                             + ", id = :id"
                                             + ", req_id = :req_id"
                                             + ", s_id = :s_id"
@@ -7541,7 +7460,6 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c22", NpgsqlTypes.NpgsqlDbType.Text, 0, "c22", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -7659,20 +7577,18 @@ namespace rk_seikyu
                                         + ", c4_y"
                                         + ", c4_m"
                                         + ", time_stamp"
-                                        //+ ", c4_array"
                                         + " from"
                                         + " t_shiharai_houhou"
                                         + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = " + Cmb_nen_str
-                                        + " and c4_m = " + Cmb_tsuki_str
-                                        //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                        //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                        //                + " end"
+                                        + " and c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " '' || '" + Cmb_tsuki_str + "'"
+                                        + " end"
                                         + ")"
                                         + " order by c5;"
                                         , m_conn
@@ -7750,7 +7666,6 @@ namespace rk_seikyu
                                             + ", req_id = :req_id"
                                             + ", c4_y = :c4_y"
                                             + ", c4_m = :c4_m"
-                                            //+ ", c4_array = :c4_array"
                                             + " where sh_id=:sh_id;"
                                         , m_conn
                                         );
@@ -7810,7 +7725,6 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("sh_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sh_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // delete
@@ -7932,20 +7846,18 @@ namespace rk_seikyu
                                         + ", c4_y"
                                         + ", c4_m"
                                         + ", time_stamp"
-                                        //+ ", c4_array"
                                         + " from"
                                         + " t_shinzoku_kankei"
                                         + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = " + Cmb_nen_str
-                                        + " and c4_m = " + Cmb_tsuki_str
-                                        //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                        //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                        //                + " end"
+                                        + " and c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " '' || '" + Cmb_tsuki_str + "'"
+                                        + " end"
                                         + ")"
                                         + " order by c5;"
                                         , m_conn
@@ -8031,7 +7943,6 @@ namespace rk_seikyu
                                         + ", req_id = :req_id"
                                         + ", c4_y = :c4_y"
                                         + ", c4_m = :c4_m"
-                                        //+ ", c4_array = :c4_array"
                                         + " where sk_id=:sk_id;"
                                         , m_conn
                                         );
@@ -8099,7 +8010,6 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("sk_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sk_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // delete
@@ -8183,7 +8093,6 @@ namespace rk_seikyu
                                         + ", c22"
                                         + ", c4_y"
                                         + ", c4_m"
-                                        //+ ", c4_array"
                                         + ", time_stamp"
                                         + ", r_id"
                                         + ", s_id"
@@ -8198,13 +8107,12 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = " + Cmb_nen_str
-                                        + " and c4_m = " + Cmb_tsuki_str
-                                        //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                        //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                        //                + " end"
+                                        + " and c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " '' || '" + Cmb_tsuki_str + "'"
+                                        + " end"
                                         + ");"
                                         , m_conn
                                     );
@@ -8263,7 +8171,6 @@ namespace rk_seikyu
                                             + ", c22 = :c22"
                                             + ", c4_y = :c4_y"
                                             + ", c4_m = :c4_m"
-                                            //+ ", c4_array = :c4_array"
                                             + ", id = :id"
                                             + ", req_id = :req_id"
                                             + ", s_id = :s_id"
@@ -8296,7 +8203,6 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c22", NpgsqlTypes.NpgsqlDbType.Text, 0, "c22", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -8414,20 +8320,18 @@ namespace rk_seikyu
                                         + ", c4_y"
                                         + ", c4_m"
                                         + ", time_stamp"
-                                        //+ ", c4_array"
                                         + " from"
                                         + " t_shiharai_houhou"
                                         + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = " + Cmb_nen_str
-                                        + " and c4_m = " + Cmb_tsuki_str
-                                        //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                        //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                        //                + " end"
+                                        + " and c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " '' || '" + Cmb_tsuki_str + "'"
+                                        + " end"
                                         + ")"
                                         + " order by c5;"
                                         , m_conn
@@ -8505,7 +8409,6 @@ namespace rk_seikyu
                                             + ", req_id = :req_id"
                                             + ", c4_y = :c4_y"
                                             + ", c4_m = :c4_m"
-                                            //+ ", c4_array = :c4_array"
                                             + " where sh_id=:sh_id;"
                                         , m_conn
                                         );
@@ -8565,7 +8468,6 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("sh_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sh_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // delete
@@ -8688,20 +8590,18 @@ namespace rk_seikyu
                                         + ", c4_y"
                                         + ", c4_m"
                                         + ", time_stamp"
-                                        //+ ", c4_array"
                                         + " from"
                                         + " t_shinzoku_kankei"
                                         + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = " + Cmb_nen_str
-                                        + " and c4_m = " + Cmb_tsuki_str
-                                        //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                        //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                        //                + " end"
+                                        + " and c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " '' || '" + Cmb_tsuki_str + "'"
+                                        + " end"
                                         + ")"
                                         + " order by c5;"
                                         , m_conn
@@ -8788,7 +8688,6 @@ namespace rk_seikyu
                                         + ", req_id = :req_id"
                                         + ", c4_y = :c4_y"
                                         + ", c4_m = :c4_m"
-                                        //+ ", c4_array = :c4_array"
                                         + " where sk_id=:sk_id;"
                                         , m_conn
                                         );
@@ -8857,7 +8756,6 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("sk_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sk_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // delete
@@ -8940,7 +8838,6 @@ namespace rk_seikyu
                                         + ", c22"
                                         + ", c4_y"
                                         + ", c4_m"
-                                        //+ ", c4_array"
                                         + ", time_stamp"
                                         + ", r_id"
                                         + ", s_id"
@@ -8955,13 +8852,12 @@ namespace rk_seikyu
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = " + Cmb_nen_str
-                                        + " and c4_m = " + Cmb_tsuki_str
-                                        //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                        //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                        //                + " end"
+                                        + " and c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " '' || '" + Cmb_tsuki_str + "'"
+                                        + " end"
                                         + ");"
                                         , m_conn
                                     );
@@ -9020,7 +8916,6 @@ namespace rk_seikyu
                                             + ", c22 = :c22"
                                             + ", c4_y = :c4_y"
                                             + ", c4_m = :c4_m"
-                                            //+ ", c4_array = :c4_array"
                                             + ", id = :id"
                                             + ", req_id = :req_id"
                                             + ", s_id = :s_id"
@@ -9053,7 +8948,6 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c22", NpgsqlTypes.NpgsqlDbType.Text, 0, "c22", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -9171,20 +9065,18 @@ namespace rk_seikyu
                                         + ", c4_y"
                                         + ", c4_m"
                                         + ", time_stamp"
-                                        //+ ", c4_array"
                                         + " from"
                                         + " t_shiharai_houhou"
                                         + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = " + Cmb_nen_str
-                                        + " and c4_m = " + Cmb_tsuki_str
-                                        //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                        //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                        //                + " end"
+                                        + " and c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " '' || '" + Cmb_tsuki_str + "'"
+                                        + " end"
                                         + ")"
                                         + " order by c5;"
                                         , m_conn
@@ -9262,7 +9154,6 @@ namespace rk_seikyu
                                             + ", req_id = :req_id"
                                             + ", c4_y = :c4_y"
                                             + ", c4_m = :c4_m"
-                                            //+ ", c4_array = :c4_array"
                                             + " where sh_id=:sh_id;"
                                         , m_conn
                                         );
@@ -9322,7 +9213,6 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("sh_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sh_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // delete
@@ -9445,20 +9335,18 @@ namespace rk_seikyu
                                         + ", c4_y"
                                         + ", c4_m"
                                         + ", time_stamp"
-                                        //+ ", c4_array"
                                         + " from"
                                         + " t_shinzoku_kankei"
                                         + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = " + Cmb_nen_str
-                                        + " and c4_m = " + Cmb_tsuki_str
-                                        //+ " and c4_array[1]::text || '/' || c4_array[2]::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/ ' || '" + Cmb_tsuki_str + "')"
-                                        //                + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                        //                + " ('" + Cmb_nen_str + "' || '/' || '" + Cmb_tsuki_str + "')"
-                                        //                + " end"
+                                        + " and c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
+                                        + " '' || '" + Cmb_tsuki_str + "'"
+                                        + " end"
                                         + ")"
                                         + " order by c5;"
                                         , m_conn
@@ -9545,7 +9433,6 @@ namespace rk_seikyu
                                         + ", req_id = :req_id"
                                         + ", c4_y = :c4_y"
                                         + ", c4_m = :c4_m"
-                                        //+ ", c4_array = :c4_array"
                                         + " where sk_id=:sk_id;"
                                         , m_conn
                                         );
@@ -9614,7 +9501,6 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_array", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_array", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("sk_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sk_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // delete
