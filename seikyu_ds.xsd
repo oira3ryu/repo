@@ -12,7 +12,7 @@
   <xs:element name="seikyu_ds" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="seikyu_ds" msprop:Generator_UserDSName="seikyu_ds">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="seikyu_ds" msprop:Generator_TableClassName="seikyu_dsDataTable" msprop:Generator_TableVarName="tableseikyu_ds" msprop:Generator_RowChangedName="seikyu_dsRowChanged" msprop:Generator_TablePropName="_seikyu_ds" msprop:Generator_RowDeletingName="seikyu_dsRowDeleting" msprop:Generator_RowChangingName="seikyu_dsRowChanging" msprop:Generator_RowEvHandlerName="seikyu_dsRowChangeEventHandler" msprop:Generator_RowDeletedName="seikyu_dsRowDeleted" msprop:Generator_RowClassName="seikyu_dsRow" msprop:Generator_UserTableName="seikyu_ds" msprop:Generator_RowEvArgName="seikyu_dsRowChangeEvent">
+        <xs:element name="seikyu_ds" msprop:Generator_TableClassName="seikyu_dsDataTable" msprop:Generator_TableVarName="tableseikyu_ds" msprop:Generator_TablePropName="_seikyu_ds" msprop:Generator_RowDeletingName="seikyu_dsRowDeleting" msprop:Generator_RowChangingName="seikyu_dsRowChanging" msprop:Generator_RowEvHandlerName="seikyu_dsRowChangeEventHandler" msprop:Generator_RowDeletedName="seikyu_dsRowDeleted" msprop:Generator_UserTableName="seikyu_ds" msprop:Generator_RowChangedName="seikyu_dsRowChanged" msprop:Generator_RowEvArgName="seikyu_dsRowChangeEvent" msprop:Generator_RowClassName="seikyu_dsRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="c1" msprop:Generator_ColumnVarNameInTable="columnc1" msprop:Generator_ColumnPropNameInRow="c1" msprop:Generator_ColumnPropNameInTable="c1Column" msprop:Generator_UserColumnName="c1" type="xs:string" minOccurs="0" />
@@ -44,6 +44,8 @@
               <xs:element name="c4_array" msprop:Generator_ColumnVarNameInTable="columnc4_array" msprop:Generator_ColumnPropNameInRow="c4_array" msprop:Generator_ColumnPropNameInTable="c4_arrayColumn" msprop:Generator_UserColumnName="c4_array" type="xs:string" minOccurs="0" />
               <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:string" minOccurs="0" />
               <xs:element name="time_stamp" msprop:Generator_ColumnVarNameInTable="columntime_stamp" msprop:Generator_ColumnPropNameInRow="time_stamp" msprop:Generator_ColumnPropNameInTable="time_stampColumn" msprop:Generator_UserColumnName="time_stamp" type="xs:string" minOccurs="0" />
+              <xs:element name="c4_y" msprop:Generator_ColumnVarNameInTable="columnc4_y" msprop:Generator_ColumnPropNameInRow="c4_y" msprop:Generator_ColumnPropNameInTable="c4_yColumn" msprop:Generator_UserColumnName="c4_y" type="xs:string" minOccurs="0" />
+              <xs:element name="c4_m" msprop:Generator_ColumnVarNameInTable="columnc4_m" msprop:Generator_ColumnPropNameInRow="c4_m" msprop:Generator_ColumnPropNameInTable="c4_mColumn" msprop:Generator_UserColumnName="c4_m" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
