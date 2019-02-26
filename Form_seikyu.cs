@@ -1542,7 +1542,7 @@ namespace rk_seikyu
                                         e.Row["id"] = reader["id"];
                                         e.Row["p_id"] = reader["p_id"];
                                         e.Row["req_id"] = reader["req_id"];
-
+                                        reader.Close();
                                         break;
                                 }
                                 break;
@@ -1613,7 +1613,7 @@ namespace rk_seikyu
                                         e.Row["p_id"] = reader["p_id"];
                                         e.Row["req_id"] = reader["req_id"];
                                         e.Row["time_stamp"] = reader["time_stamp"];
-
+                                        reader.Close();
                                         break;
                                 }
                                 break;
@@ -1693,7 +1693,7 @@ namespace rk_seikyu
                                         e.Row["p_id"] = reader["p_id"];
                                         e.Row["req_id"] = reader["req_id"];
                                         e.Row["time_stamp"] = reader["time_stamp"];
-
+                                        reader.Close();
                                         break;
                                 }
                                 break;
@@ -1985,7 +1985,7 @@ namespace rk_seikyu
                                         e.Row["id"] = reader["id"];
                                         e.Row["p_id"] = reader["p_id"];
                                         e.Row["req_id"] = reader["req_id"];
-
+                                        reader.Close();
                                         break;
                                 }
                                 break;
@@ -2056,7 +2056,7 @@ namespace rk_seikyu
                                         e.Row["p_id"] = reader["p_id"];
                                         e.Row["req_id"] = reader["req_id"];
                                         e.Row["time_stamp"] = reader["time_stamp"];
-
+                                        reader.Close();
                                         break;
                                 }
                                 break;
@@ -2136,7 +2136,7 @@ namespace rk_seikyu
                                         e.Row["p_id"] = reader["p_id"];
                                         e.Row["req_id"] = reader["req_id"];
                                         e.Row["time_stamp"] = reader["time_stamp"];
-
+                                        reader.Close();
                                         break;
                                 }
                                 break;
@@ -6458,7 +6458,7 @@ namespace rk_seikyu
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                             // delete
