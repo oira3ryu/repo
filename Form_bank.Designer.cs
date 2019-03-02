@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_bank));
             this.bindingNavigatorBank = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingSourceBank = new System.Windows.Forms.BindingSource(this.components);
+            this.bank = new rk_seikyu.bank();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -44,11 +46,6 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.bankBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.dataGridViewBank = new System.Windows.Forms.DataGridView();
-            this.cmdBankSave = new System.Windows.Forms.Button();
-            this.cmdClose = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.bindingSourceBank = new System.Windows.Forms.BindingSource(this.components);
-            this.bank = new rk_seikyu.bank();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,12 +56,15 @@
             this.sy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmdBankSave = new System.Windows.Forms.Button();
+            this.cmdClose = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorBank)).BeginInit();
             this.bindingNavigatorBank.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBank)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceBank)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bank)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBank)).BeginInit();
             this.SuspendLayout();
             // 
             // bindingNavigatorBank
@@ -106,10 +106,20 @@
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "新規追加";
             // 
+            // bindingSourceBank
+            // 
+            this.bindingSourceBank.DataMember = "bank";
+            this.bindingSourceBank.DataSource = this.bank;
+            // 
+            // bank
+            // 
+            this.bank.DataSetName = "bank";
+            this.bank.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(38, 22);
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(29, 22);
             this.bindingNavigatorCountItem.Text = "/ {0}";
             this.bindingNavigatorCountItem.ToolTipText = "項目の総数";
             // 
@@ -213,46 +223,6 @@
             this.dataGridViewBank.Size = new System.Drawing.Size(841, 138);
             this.dataGridViewBank.TabIndex = 1;
             // 
-            // cmdBankSave
-            // 
-            this.cmdBankSave.Location = new System.Drawing.Point(65, 106);
-            this.cmdBankSave.Name = "cmdBankSave";
-            this.cmdBankSave.Size = new System.Drawing.Size(75, 23);
-            this.cmdBankSave.TabIndex = 2;
-            this.cmdBankSave.Text = "更新";
-            this.cmdBankSave.UseVisualStyleBackColor = true;
-            this.cmdBankSave.Click += new System.EventHandler(this.cmdBankSave_Click);
-            // 
-            // cmdClose
-            // 
-            this.cmdClose.Location = new System.Drawing.Point(65, 204);
-            this.cmdClose.Name = "cmdClose";
-            this.cmdClose.Size = new System.Drawing.Size(75, 23);
-            this.cmdClose.TabIndex = 3;
-            this.cmdClose.Text = "閉じる";
-            this.cmdClose.UseVisualStyleBackColor = true;
-            this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(842, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(235, 12);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "※引落日が月末の場合は99を設定してください。";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // bindingSourceBank
-            // 
-            this.bindingSourceBank.DataMember = "bank";
-            this.bindingSourceBank.DataSource = this.bank;
-            // 
-            // bank
-            // 
-            this.bank.DataSetName = "bank";
-            this.bank.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "bid";
@@ -314,6 +284,36 @@
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             this.dataGridViewTextBoxColumn8.ToolTipText = "※引落日が月末の場合は99を設定してください。";
             // 
+            // cmdBankSave
+            // 
+            this.cmdBankSave.Location = new System.Drawing.Point(65, 106);
+            this.cmdBankSave.Name = "cmdBankSave";
+            this.cmdBankSave.Size = new System.Drawing.Size(75, 23);
+            this.cmdBankSave.TabIndex = 2;
+            this.cmdBankSave.Text = "更新";
+            this.cmdBankSave.UseVisualStyleBackColor = true;
+            this.cmdBankSave.Click += new System.EventHandler(this.cmdBankSave_Click);
+            // 
+            // cmdClose
+            // 
+            this.cmdClose.Location = new System.Drawing.Point(65, 150);
+            this.cmdClose.Name = "cmdClose";
+            this.cmdClose.Size = new System.Drawing.Size(75, 23);
+            this.cmdClose.TabIndex = 3;
+            this.cmdClose.Text = "閉じる";
+            this.cmdClose.UseVisualStyleBackColor = true;
+            this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(842, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(235, 12);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "※引落日が月末の場合は99を設定してください。";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -343,9 +343,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorBank)).EndInit();
             this.bindingNavigatorBank.ResumeLayout(false);
             this.bindingNavigatorBank.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBank)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceBank)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bank)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBank)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

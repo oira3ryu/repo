@@ -135,7 +135,7 @@ namespace rk_seikyu
             //dataGridViewHoliday.CellPainting += new DataGridViewCellPaintingEventHandler(dataGridViewHoliday_CellPainting);
         }
 
-        private void cmdHolidaySave_Click(object sender, EventArgs e)
+        private void CmdHolidaySave_Click(object sender, EventArgs e)
         {
             int update_count = 0;
             try

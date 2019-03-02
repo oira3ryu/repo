@@ -141,6 +141,12 @@
       <DependentUpon>crWithdrawal.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Form_gengou.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_gengou.Designer.cs">
+      <DependentUpon>Form_gengou.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_bank.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +248,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>req_ds.xsd</DependentUpon>
     </Compile>
+    <Compile Include="gengou_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gengou_ds.xsd</DependentUpon>
+    </Compile>
     <Compile Include="seikyu.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -281,6 +292,9 @@
     <EmbeddedResource Include="crWithdrawal.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crWithdrawal.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_gengou.resx">
+      <DependentUpon>Form_gengou.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_bank.resx">
       <DependentUpon>Form_bank.cs</DependentUpon>
@@ -428,6 +442,17 @@
     </None>
     <None Include="req_ds.xss">
       <DependentUpon>req_ds.xsd</DependentUpon>
+    </None>
+    <None Include="gengou_ds.xsc">
+      <DependentUpon>gengou_ds.xsd</DependentUpon>
+    </None>
+    <None Include="gengou_ds.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>gengou_ds.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="gengou_ds.xss">
+      <DependentUpon>gengou_ds.xsd</DependentUpon>
     </None>
     <None Include="seikyu.xsc">
       <DependentUpon>seikyu.xsd</DependentUpon>

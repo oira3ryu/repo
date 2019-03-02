@@ -243,7 +243,7 @@
             this.cmdHoliday.TabIndex = 3;
             this.cmdHoliday.Text = "更新";
             this.cmdHoliday.UseVisualStyleBackColor = true;
-            this.cmdHoliday.Click += new System.EventHandler(this.cmdHolidaySave_Click);
+            this.cmdHoliday.Click += new System.EventHandler(this.CmdHolidaySave_Click);
             // 
             // cmdClose
             // 

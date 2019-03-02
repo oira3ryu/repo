@@ -30,32 +30,45 @@
         {
             this.cmdClose = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rb_req = new System.Windows.Forms.RadioButton();
             this.rb_rep = new System.Windows.Forms.RadioButton();
             this.rb_par = new System.Windows.Forms.RadioButton();
-            this.rb_req = new System.Windows.Forms.RadioButton();
+            this.rb_gengou = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmdClose
             // 
-            this.cmdClose.Location = new System.Drawing.Point(108, 207);
+            this.cmdClose.Location = new System.Drawing.Point(111, 219);
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(75, 23);
             this.cmdClose.TabIndex = 2;
             this.cmdClose.Text = "OK";
             this.cmdClose.UseVisualStyleBackColor = true;
-            this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
+            this.cmdClose.Click += new System.EventHandler(this.CmdClose_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.rb_gengou);
             this.groupBox1.Controls.Add(this.rb_req);
             this.groupBox1.Controls.Add(this.rb_rep);
             this.groupBox1.Controls.Add(this.rb_par);
-            this.groupBox1.Location = new System.Drawing.Point(42, 49);
+            this.groupBox1.Location = new System.Drawing.Point(45, 29);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 143);
+            this.groupBox1.Size = new System.Drawing.Size(200, 172);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
+            // 
+            // rb_req
+            // 
+            this.rb_req.AutoSize = true;
+            this.rb_req.Location = new System.Drawing.Point(22, 96);
+            this.rb_req.Name = "rb_req";
+            this.rb_req.Size = new System.Drawing.Size(119, 16);
+            this.rb_req.TabIndex = 4;
+            this.rb_req.TabStop = true;
+            this.rb_req.Text = "納付共通項目設定";
+            this.rb_req.UseVisualStyleBackColor = true;
             // 
             // rb_rep
             // 
@@ -79,17 +92,16 @@
             this.rb_par.Text = "納付書表示項目設定";
             this.rb_par.UseVisualStyleBackColor = true;
             // 
-            // rb_req
+            // rb_gengou
             // 
-            this.rb_req.AutoSize = true;
-            this.rb_req.Location = new System.Drawing.Point(22, 96);
-            this.rb_req.Name = "rb_req";
-            this.rb_req.Size = new System.Drawing.Size(119, 16);
-            this.rb_req.TabIndex = 4;
-            this.rb_req.TabStop = true;
-            this.rb_req.Text = "納付共通項目設定";
-            this.rb_req.UseVisualStyleBackColor = true;
-            this.rb_req.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.rb_gengou.AutoSize = true;
+            this.rb_gengou.Location = new System.Drawing.Point(22, 127);
+            this.rb_gengou.Name = "rb_gengou";
+            this.rb_gengou.Size = new System.Drawing.Size(97, 16);
+            this.rb_gengou.TabIndex = 5;
+            this.rb_gengou.TabStop = true;
+            this.rb_gengou.Text = "元号マスタ設定";
+            this.rb_gengou.UseVisualStyleBackColor = true;
             // 
             // Form_chg
             // 
@@ -113,5 +125,6 @@
         private System.Windows.Forms.RadioButton rb_rep;
         private System.Windows.Forms.RadioButton rb_par;
         private System.Windows.Forms.RadioButton rb_req;
+        private System.Windows.Forms.RadioButton rb_gengou;
     }
 }

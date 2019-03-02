@@ -43,5 +43,16 @@ namespace rk_seikyu.Properties {
                 return ((string)(this["rk_seikyuConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Port=5433;Host=127.0.0.1;Database=rk_seikyu;Username=rkadmin;Password=yu2;Persist" +
+            " Security Info=True")]
+        public string rk_seikyuConnectionString1 {
+            get {
+                return ((string)(this["rk_seikyuConnectionString1"]));
+            }
+        }
     }
 }
