@@ -12,7 +12,7 @@
   <xs:element name="seikyu" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="seikyu" msprop:Generator_UserDSName="seikyu">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="seikyu" msprop:Generator_TableClassName="seikyuDataTable" msprop:Generator_TableVarName="tableseikyu" msprop:Generator_TablePropName="_seikyu" msprop:Generator_RowDeletingName="seikyuRowDeleting" msprop:Generator_RowChangingName="seikyuRowChanging" msprop:Generator_RowEvHandlerName="seikyuRowChangeEventHandler" msprop:Generator_RowDeletedName="seikyuRowDeleted" msprop:Generator_UserTableName="seikyu" msprop:Generator_RowChangedName="seikyuRowChanged" msprop:Generator_RowEvArgName="seikyuRowChangeEvent" msprop:Generator_RowClassName="seikyuRow">
+        <xs:element name="seikyu" msprop:Generator_TableClassName="seikyuDataTable" msprop:Generator_TableVarName="tableseikyu" msprop:Generator_RowChangedName="seikyuRowChanged" msprop:Generator_TablePropName="_seikyu" msprop:Generator_RowDeletingName="seikyuRowDeleting" msprop:Generator_RowChangingName="seikyuRowChanging" msprop:Generator_RowEvHandlerName="seikyuRowChangeEventHandler" msprop:Generator_RowDeletedName="seikyuRowDeleted" msprop:Generator_RowClassName="seikyuRow" msprop:Generator_UserTableName="seikyu" msprop:Generator_RowEvArgName="seikyuRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="c1" msprop:Generator_ColumnVarNameInTable="columnc1" msprop:Generator_ColumnPropNameInRow="c1" msprop:Generator_ColumnPropNameInTable="c1Column" msprop:Generator_UserColumnName="c1" type="xs:string" minOccurs="0" />
@@ -173,6 +173,7 @@
               <xs:element name="c4_y" msprop:Generator_ColumnVarNameInTable="columnc4_y" msprop:Generator_ColumnPropNameInRow="c4_y" msprop:Generator_ColumnPropNameInTable="c4_yColumn" msprop:Generator_UserColumnName="c4_y" type="xs:string" minOccurs="0" />
               <xs:element name="c4_m" msprop:Generator_ColumnVarNameInTable="columnc4_m" msprop:Generator_ColumnPropNameInRow="c4_m" msprop:Generator_ColumnPropNameInTable="c4_mColumn" msprop:Generator_UserColumnName="c4_m" type="xs:string" minOccurs="0" />
               <xs:element name="diff" msprop:Generator_ColumnVarNameInTable="columndiff" msprop:Generator_ColumnPropNameInRow="diff" msprop:Generator_ColumnPropNameInTable="diffColumn" msprop:Generator_UserColumnName="diff" type="xs:string" minOccurs="0" />
+              <xs:element name="c4_ym" msprop:Generator_ColumnVarNameInTable="columnc4_ym" msprop:Generator_ColumnPropNameInRow="c4_ym" msprop:Generator_ColumnPropNameInTable="c4_ymColumn" msprop:Generator_UserColumnName="c4_ym" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

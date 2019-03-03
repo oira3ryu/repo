@@ -595,6 +595,8 @@ namespace rk_seikyu {
             
             private global::System.Data.DataColumn columndiff;
             
+            private global::System.Data.DataColumn columnc4_ym;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public seikyuDataTable() {
@@ -1894,6 +1896,14 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn c4_ymColumn {
+                get {
+                    return this.columnc4_ym;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2087,7 +2097,8 @@ namespace rk_seikyu {
                         string o_id, 
                         string c4_y, 
                         string c4_m, 
-                        string diff) {
+                        string diff, 
+                        string c4_ym) {
                 seikyuRow rowseikyuRow = ((seikyuRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         c1,
@@ -2247,7 +2258,8 @@ namespace rk_seikyu {
                         o_id,
                         c4_y,
                         c4_m,
-                        diff};
+                        diff,
+                        c4_ym};
                 rowseikyuRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowseikyuRow);
                 return rowseikyuRow;
@@ -2435,6 +2447,7 @@ namespace rk_seikyu {
                 this.columnc4_y = base.Columns["c4_y"];
                 this.columnc4_m = base.Columns["c4_m"];
                 this.columndiff = base.Columns["diff"];
+                this.columnc4_ym = base.Columns["c4_ym"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2756,6 +2769,8 @@ namespace rk_seikyu {
                 base.Columns.Add(this.columnc4_m);
                 this.columndiff = new global::System.Data.DataColumn("diff", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndiff);
+                this.columnc4_ym = new global::System.Data.DataColumn("c4_ym", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnc4_ym);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AllowDBNull = false;
@@ -5427,6 +5442,22 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string c4_ym {
+                get {
+                    try {
+                        return ((string)(this[this.tableseikyu.c4_ymColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'seikyu\' にある列 \'c4_ym\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableseikyu.c4_ymColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool Isc1Null() {
                 return this.IsNull(this.tableseikyu.c1Column);
             }
@@ -7307,6 +7338,18 @@ namespace rk_seikyu {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetdiffNull() {
                 this[this.tableseikyu.diffColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isc4_ymNull() {
+                return this.IsNull(this.tableseikyu.c4_ymColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setc4_ymNull() {
+                this[this.tableseikyu.c4_ymColumn] = global::System.Convert.DBNull;
             }
         }
         
