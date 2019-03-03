@@ -72,6 +72,10 @@
             this.cmd_Ins = new System.Windows.Forms.Button();
             this.syubetsuBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewWithdrawal = new System.Windows.Forms.DataGridView();
+            this.cmdPrnWithdrawal = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.checkBoxAll = new System.Windows.Forms.CheckBox();
+            this.chk_title = new System.Windows.Forms.CheckBox();
             this.wflgDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.c3DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.c19DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,10 +89,6 @@
             this.ridDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timestampDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.last_day = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmdPrnWithdrawal = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.checkBoxAll = new System.Windows.Forms.CheckBox();
-            this.chk_title = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nenBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tsukiBindingSource1)).BeginInit();
@@ -323,7 +323,7 @@
             this.bindingNavigatorWithdrawal.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigatorWithdrawal.Name = "bindingNavigatorWithdrawal";
             this.bindingNavigatorWithdrawal.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigatorWithdrawal.Size = new System.Drawing.Size(1604, 25);
+            this.bindingNavigatorWithdrawal.Size = new System.Drawing.Size(1587, 25);
             this.bindingNavigatorWithdrawal.TabIndex = 18;
             this.bindingNavigatorWithdrawal.Text = "bindingNavigator1";
             // 
@@ -469,6 +469,46 @@
             this.dataGridViewWithdrawal.CurrentCellDirtyStateChanged += new System.EventHandler(this.DataGridViewWithdrawal_CurrentCellDirtyStateChanged);
             this.dataGridViewWithdrawal.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewWithdrawal_CellValueChanged);
             // 
+            // cmdPrnWithdrawal
+            // 
+            this.cmdPrnWithdrawal.Location = new System.Drawing.Point(89, 505);
+            this.cmdPrnWithdrawal.Name = "cmdPrnWithdrawal";
+            this.cmdPrnWithdrawal.Size = new System.Drawing.Size(75, 23);
+            this.cmdPrnWithdrawal.TabIndex = 22;
+            this.cmdPrnWithdrawal.Text = "印刷";
+            this.cmdPrnWithdrawal.UseVisualStyleBackColor = true;
+            this.cmdPrnWithdrawal.Click += new System.EventHandler(this.CmdPrnWithdrawal_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(44, 155);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 19);
+            this.textBox1.TabIndex = 23;
+            this.textBox1.Visible = false;
+            // 
+            // checkBoxAll
+            // 
+            this.checkBoxAll.AutoSize = true;
+            this.checkBoxAll.Location = new System.Drawing.Point(301, 30);
+            this.checkBoxAll.Name = "checkBoxAll";
+            this.checkBoxAll.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxAll.TabIndex = 24;
+            this.checkBoxAll.UseVisualStyleBackColor = true;
+            this.checkBoxAll.Visible = false;
+            this.checkBoxAll.CheckedChanged += new System.EventHandler(this.CheckBoxAll_CheckedChanged);
+            // 
+            // chk_title
+            // 
+            this.chk_title.AutoSize = true;
+            this.chk_title.Location = new System.Drawing.Point(84, 547);
+            this.chk_title.Name = "chk_title";
+            this.chk_title.Size = new System.Drawing.Size(121, 16);
+            this.chk_title.TabIndex = 25;
+            this.chk_title.Text = "請求月を配列にする";
+            this.chk_title.UseVisualStyleBackColor = true;
+            this.chk_title.CheckedChanged += new System.EventHandler(this.Chk_title_CheckedChanged);
+            // 
             // wflgDataGridViewTextBoxColumn
             // 
             this.wflgDataGridViewTextBoxColumn.DataPropertyName = "w_flg";
@@ -492,8 +532,8 @@
             // 
             // c4DataGridViewTextBoxColumn
             // 
-            this.c4DataGridViewTextBoxColumn.DataPropertyName = "c4";
-            this.c4DataGridViewTextBoxColumn.HeaderText = "c4";
+            this.c4DataGridViewTextBoxColumn.DataPropertyName = "c4_ym";
+            this.c4DataGridViewTextBoxColumn.HeaderText = "c4_ym";
             this.c4DataGridViewTextBoxColumn.Name = "c4DataGridViewTextBoxColumn";
             // 
             // c9DataGridViewTextBoxColumn
@@ -554,52 +594,12 @@
             this.last_day.HeaderText = "last_day";
             this.last_day.Name = "last_day";
             // 
-            // cmdPrnWithdrawal
-            // 
-            this.cmdPrnWithdrawal.Location = new System.Drawing.Point(89, 505);
-            this.cmdPrnWithdrawal.Name = "cmdPrnWithdrawal";
-            this.cmdPrnWithdrawal.Size = new System.Drawing.Size(75, 23);
-            this.cmdPrnWithdrawal.TabIndex = 22;
-            this.cmdPrnWithdrawal.Text = "印刷";
-            this.cmdPrnWithdrawal.UseVisualStyleBackColor = true;
-            this.cmdPrnWithdrawal.Click += new System.EventHandler(this.CmdPrnWithdrawal_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(44, 155);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 19);
-            this.textBox1.TabIndex = 23;
-            this.textBox1.Visible = false;
-            // 
-            // checkBoxAll
-            // 
-            this.checkBoxAll.AutoSize = true;
-            this.checkBoxAll.Location = new System.Drawing.Point(301, 30);
-            this.checkBoxAll.Name = "checkBoxAll";
-            this.checkBoxAll.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxAll.TabIndex = 24;
-            this.checkBoxAll.UseVisualStyleBackColor = true;
-            this.checkBoxAll.Visible = false;
-            this.checkBoxAll.CheckedChanged += new System.EventHandler(this.CheckBoxAll_CheckedChanged);
-            // 
-            // chk_title
-            // 
-            this.chk_title.AutoSize = true;
-            this.chk_title.Location = new System.Drawing.Point(84, 547);
-            this.chk_title.Name = "chk_title";
-            this.chk_title.Size = new System.Drawing.Size(121, 16);
-            this.chk_title.TabIndex = 25;
-            this.chk_title.Text = "請求月を配列にする";
-            this.chk_title.UseVisualStyleBackColor = true;
-            this.chk_title.CheckedChanged += new System.EventHandler(this.Chk_title_CheckedChanged);
-            // 
             // Form_prn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1621, 865);
+            this.ClientSize = new System.Drawing.Size(1604, 865);
             this.Controls.Add(this.chk_title);
             this.Controls.Add(this.checkBoxAll);
             this.Controls.Add(this.textBox1);
@@ -692,6 +692,8 @@
         private System.Windows.Forms.DataGridView dataGridViewWithdrawal;
         private System.Windows.Forms.Button cmdPrnWithdrawal;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.CheckBox checkBoxAll;
+        private System.Windows.Forms.CheckBox chk_title;
         private System.Windows.Forms.DataGridViewCheckBoxColumn wflgDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn c3DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn c19DataGridViewTextBoxColumn;
@@ -705,7 +707,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ridDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn timestampDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn last_day;
-        private System.Windows.Forms.CheckBox checkBoxAll;
-        private System.Windows.Forms.CheckBox chk_title;
     }
 }
