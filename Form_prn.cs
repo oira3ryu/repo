@@ -1094,7 +1094,7 @@ namespace rk_seikyu
                                 + " inner join t_par on t_seikyu.p_id::integer = t_par.p_id)"
                                 + " inner join t_req on t_seikyu.req_id::integer = t_req.req_id)"
                                 + " inner join t_syutsuryokubi on t_seikyu.s_id::text = t_syutsuryokubi.s_id)"
-                                + " inner join t_gengou on substr(c4_y,1,1) = t_gengou.g_name"
+                                + " inner join t_gengou on substr(t_seikyu.c4_y,1,1) = t_gengou.g_name"
                                 + " order by c1"
                                 + ")"// r
                             + " select"
