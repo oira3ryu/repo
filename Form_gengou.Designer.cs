@@ -285,7 +285,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.BindingSource bindingSourceGengou;
         private System.Windows.Forms.DataGridView dataGridViewGengou;
-        private gengou_ds gengou_ds;
         private System.Windows.Forms.DataGridViewTextBoxColumn gg_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn gengou;
         private System.Windows.Forms.DataGridViewTextBoxColumn g_name;
