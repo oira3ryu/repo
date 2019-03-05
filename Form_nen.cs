@@ -90,7 +90,15 @@ namespace rk_seikyu
 
             bindingNavigatorNen.Visible = true;
 
+            DataGridViewEvent();
         }
+
+        private void DataGridViewEvent()
+        {
+            dataGridViewNen.CellMouseMove += new DataGridViewCellMouseEventHandler(DataGridViewNen_CellMouseMove);
+            dataGridViewNen.CellPainting += new DataGridViewCellPaintingEventHandler(DataGridViewNen_CellPainting);
+        }
+
         private void CmdNenSave_Click(object sender, EventArgs e)
         {
             int update_count = 0;
@@ -200,6 +208,43 @@ namespace rk_seikyu
         private void Label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+
+        private void DataGridViewNen_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewCellStyle dcs = new DataGridViewCellStyle();
+            dcs.BackColor = Color.Yellow;
+
+            DataGridView dgv = (DataGridView)sender;
+
+            for (int rowIndex = 0; rowIndex < dgv.Rows.Count; rowIndex++)
+            {
+                dgv.Rows[rowIndex].DefaultCellStyle = null;
+            }
+
+            if (e.RowIndex >= 0)
+            {
+                dgv.Rows[e.RowIndex].DefaultCellStyle = dcs;
+            }
+        }
+
+        private void DataGridViewNen_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.ColumnIndex < 0 && e.RowIndex >= 0)
+            {
+                e.Paint(e.ClipBounds, DataGridViewPaintParts.All);
+
+                Rectangle indexRect = e.CellBounds;
+                indexRect.Inflate(-2, -2);
+                TextRenderer.DrawText(e.Graphics,
+                    (e.RowIndex + 1).ToString(),
+                    e.CellStyle.Font,
+                    indexRect,
+                    e.CellStyle.ForeColor,
+                    TextFormatFlags.Right | TextFormatFlags.VerticalCenter);
+                e.Handled = true;
+            }
         }
     }
 }

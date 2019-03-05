@@ -292,7 +292,7 @@
             this.cmdBankSave.TabIndex = 2;
             this.cmdBankSave.Text = "更新";
             this.cmdBankSave.UseVisualStyleBackColor = true;
-            this.cmdBankSave.Click += new System.EventHandler(this.cmdBankSave_Click);
+            this.cmdBankSave.Click += new System.EventHandler(this.CmdBankSave_Click);
             // 
             // cmdClose
             // 
@@ -302,7 +302,7 @@
             this.cmdClose.TabIndex = 3;
             this.cmdClose.Text = "閉じる";
             this.cmdClose.UseVisualStyleBackColor = true;
-            this.cmdClose.Click += new System.EventHandler(this.cmdClose_Click);
+            this.cmdClose.Click += new System.EventHandler(this.CmdClose_Click);
             // 
             // label1
             // 
@@ -312,7 +312,7 @@
             this.label1.Size = new System.Drawing.Size(235, 12);
             this.label1.TabIndex = 4;
             this.label1.Text = "※引落日が月末の場合は99を設定してください。";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.label1.Click += new System.EventHandler(this.Label1_Click);
             // 
             // label2
             // 
@@ -323,7 +323,7 @@
             this.label2.Size = new System.Drawing.Size(85, 12);
             this.label2.TabIndex = 5;
             this.label2.Text = "引落日について";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.label2.Click += new System.EventHandler(this.Label2_Click);
             // 
             // Form_bank
             // 

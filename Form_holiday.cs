@@ -118,21 +118,13 @@ namespace rk_seikyu
             cmb_year.DisplayMember = "year";
             cmb_year.ValueMember = "year";
 
+            DataGridViewEvent();
         }
 
         private void DataGridViewEvent()
         {
-            //dataGridViewHoliday.DefaultValuesNeeded += new DataGridViewRowEventHandler(dataGridViewHoliday_DefaultValuesNeeded);
-
-            //dataGridViewHoliday.CellMouseMove += new DataGridViewCellMouseEventHandler(dataGridViewHoliday_CellMouseMove);
-
-            //dataGridViewHoliday.CellValidating += new DataGridViewCellValidatingEventHandler(dataGridViewHoliday_CellValidating);
-
-            //dataGridViewHoliday.CellEnter += new DataGridViewCellEventHandler(dataGridView_CellEnter);
-
-            //dataGridViewHoliday.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(dataGridView_EditingControlShowing);
-
-            //dataGridViewHoliday.CellPainting += new DataGridViewCellPaintingEventHandler(dataGridViewHoliday_CellPainting);
+            dataGridViewHoliday.CellMouseMove += new DataGridViewCellMouseEventHandler(DataGridViewHoliday_CellMouseMove);
+            dataGridViewHoliday.CellPainting += new DataGridViewCellPaintingEventHandler(DataGridViewHoliday_CellPainting);
         }
 
         private void CmdHolidaySave_Click(object sender, EventArgs e)
@@ -279,7 +271,43 @@ namespace rk_seikyu
                         break;
                 }
             }
-        } 
+        }
+
+        private void DataGridViewHoliday_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewCellStyle dcs = new DataGridViewCellStyle();
+            dcs.BackColor = Color.Yellow;
+
+            DataGridView dgv = (DataGridView)sender;
+
+            for (int rowIndex = 0; rowIndex < dgv.Rows.Count; rowIndex++)
+            {
+                dgv.Rows[rowIndex].DefaultCellStyle = null;
+            }
+
+            if (e.RowIndex >= 0)
+            {
+                dgv.Rows[e.RowIndex].DefaultCellStyle = dcs;
+            }
+        }
+
+        private void DataGridViewHoliday_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.ColumnIndex < 0 && e.RowIndex >= 0)
+            {
+                e.Paint(e.ClipBounds, DataGridViewPaintParts.All);
+
+                Rectangle indexRect = e.CellBounds;
+                indexRect.Inflate(-2, -2);
+                TextRenderer.DrawText(e.Graphics,
+                    (e.RowIndex + 1).ToString(),
+                    e.CellStyle.Font,
+                    indexRect,
+                    e.CellStyle.ForeColor,
+                    TextFormatFlags.Right | TextFormatFlags.VerticalCenter);
+                e.Handled = true;
+            }
+        }
 
         public object Cmb_year_str { get; set; }
     }

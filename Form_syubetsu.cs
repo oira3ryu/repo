@@ -135,7 +135,15 @@ namespace rk_seikyu
 
             bindingNavigatorSyubetsu.Visible = true;
 
+            DataGridViewEvent();
         }
+
+        private void DataGridViewEvent()
+        {
+            dataGridViewSyubetsu.CellMouseMove += new DataGridViewCellMouseEventHandler(DataGridViewSyubetsu_CellMouseMove);
+            dataGridViewSyubetsu.CellPainting += new DataGridViewCellPaintingEventHandler(DataGridViewSyubetsu_CellPainting);
+        }
+
         private void CmdSyubetsuSave_Click(object sender, EventArgs e)
         {
             int update_count = 0;
@@ -238,6 +246,42 @@ namespace rk_seikyu
                         e.Cancel = true;
                         break;
                 }
+            }
+        }
+
+        private void DataGridViewSyubetsu_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewCellStyle dcs = new DataGridViewCellStyle();
+            dcs.BackColor = Color.Yellow;
+
+            DataGridView dgv = (DataGridView)sender;
+
+            for (int rowIndex = 0; rowIndex < dgv.Rows.Count; rowIndex++)
+            {
+                dgv.Rows[rowIndex].DefaultCellStyle = null;
+            }
+
+            if (e.RowIndex >= 0)
+            {
+                dgv.Rows[e.RowIndex].DefaultCellStyle = dcs;
+            }
+        }
+
+        private void DataGridViewSyubetsu_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.ColumnIndex < 0 && e.RowIndex >= 0)
+            {
+                e.Paint(e.ClipBounds, DataGridViewPaintParts.All);
+
+                Rectangle indexRect = e.CellBounds;
+                indexRect.Inflate(-2, -2);
+                TextRenderer.DrawText(e.Graphics,
+                    (e.RowIndex + 1).ToString(),
+                    e.CellStyle.Font,
+                    indexRect,
+                    e.CellStyle.ForeColor,
+                    TextFormatFlags.Right | TextFormatFlags.VerticalCenter);
+                e.Handled = true;
             }
         }
 

@@ -131,7 +131,7 @@ namespace rk_seikyu
             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("bid", NpgsqlTypes.NpgsqlDbType.Integer, 0, "bid", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
             // RowUpdate
-            da.RowUpdated += new NpgsqlRowUpdatedEventHandler(bankRowUpdated);
+            da.RowUpdated += new NpgsqlRowUpdatedEventHandler(BankRowUpdated);
 
             da.Fill(ds, "bank");
 
@@ -148,8 +148,16 @@ namespace rk_seikyu
 
             bindingNavigatorBank.Visible = true;
 
+            DataGridViewEvent();
         }
-        private void cmdBankSave_Click(object sender, EventArgs e)
+
+        private void DataGridViewEvent()
+        {
+            dataGridViewBank.CellMouseMove += new DataGridViewCellMouseEventHandler(DataGridViewBank_CellMouseMove);
+            dataGridViewBank.CellPainting += new DataGridViewCellPaintingEventHandler(DataGridViewBank_CellPainting);
+        }
+
+        private void CmdBankSave_Click(object sender, EventArgs e)
         {
             int update_count = 0;
             try
@@ -166,7 +174,7 @@ namespace rk_seikyu
             MessageBox.Show(update_count.ToString() + "件、保存しました。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void bankRowUpdated(Object sender, NpgsqlRowUpdatedEventArgs e)
+        private void BankRowUpdated(Object sender, NpgsqlRowUpdatedEventArgs e)
         {
             if (e.Status == UpdateStatus.Continue)
             {
@@ -261,7 +269,7 @@ namespace rk_seikyu
             }
         }
 
-        private void cmdClose_Click(object sender, EventArgs e)
+        private void CmdClose_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -282,14 +290,50 @@ namespace rk_seikyu
                         break;
                 }
             }
-        } 
+        }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void DataGridViewBank_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewCellStyle dcs = new DataGridViewCellStyle();
+            dcs.BackColor = Color.Yellow;
+
+            DataGridView dgv = (DataGridView)sender;
+
+            for (int rowIndex = 0; rowIndex < dgv.Rows.Count; rowIndex++)
+            {
+                dgv.Rows[rowIndex].DefaultCellStyle = null;
+            }
+
+            if (e.RowIndex >= 0)
+            {
+                dgv.Rows[e.RowIndex].DefaultCellStyle = dcs;
+            }
+        }
+
+        private void DataGridViewBank_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.ColumnIndex < 0 && e.RowIndex >= 0)
+            {
+                e.Paint(e.ClipBounds, DataGridViewPaintParts.All);
+
+                Rectangle indexRect = e.CellBounds;
+                indexRect.Inflate(-2, -2);
+                TextRenderer.DrawText(e.Graphics,
+                    (e.RowIndex + 1).ToString(),
+                    e.CellStyle.Font,
+                    indexRect,
+                    e.CellStyle.ForeColor,
+                    TextFormatFlags.Right | TextFormatFlags.VerticalCenter);
+                e.Handled = true;
+            }
+        }
+
+        private void Label1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void Label2_Click(object sender, EventArgs e)
         {
 
         }
