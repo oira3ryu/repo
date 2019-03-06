@@ -99,8 +99,8 @@ namespace rk_seikyu
         //Form_seikyuインスタンスを設定、取得する。
         public static Form_seikyu Form_seikyu_Instance { get => _form_seikyu_Instance; set => _form_seikyu_Instance = value; }
         //文字列変数cmb_o_id_Textへコンボボックスcmb_o_idの値を設定、取得する。
-        public string cmb_o_id_Text { get => cmb_o_id.SelectedIndex.ToString(); set => cmb_o_id.Text = value; }
-        public string cmb_o_id_Item { get => cmb_o_id.Text; set => cmb_o_id.Text = value; }
+        public string Cmb_o_id_Text { get => cmb_o_id.SelectedIndex.ToString(); set => cmb_o_id.Text = value; }
+        public string Cmb_o_id_Item { get => cmb_o_id.Text; set => cmb_o_id.Text = value; }
 
         private void Form_seikyu_Load(object sender, EventArgs e)
         {

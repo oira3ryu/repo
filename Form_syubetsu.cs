@@ -31,7 +31,7 @@ namespace rk_seikyu
             form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
             //Form_seikyuのテキストボックス文字列を
             //Form_syubetsuの文字列変数cmb_o_id_strへ設定
-            cmb_o_id_str = form_seikyu_Instance.cmb_o_id_Text;
+            cmb_o_id_str = form_seikyu_Instance.Cmb_o_id_Text;
 
             //Form_seikyuのコンボボックスcmb_o_idからの変数cmb_o_id_strをint型に変換して1加算
             int i;

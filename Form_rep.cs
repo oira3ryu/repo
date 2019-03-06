@@ -68,8 +68,8 @@ namespace rk_seikyu
             form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
             //Form_seikyuのテキストボックス文字列を
             //Form_prnの文字列変数cmb_o_id_strへ設定
-            cmb_o_id_str = form_seikyu_Instance.cmb_o_id_Text;
-            cmb_o_id_item = form_seikyu_Instance.cmb_o_id_Item;
+            cmb_o_id_str = form_seikyu_Instance.Cmb_o_id_Text;
+            cmb_o_id_item = form_seikyu_Instance.Cmb_o_id_Item;
             Console.WriteLine("cmb_o_idからのメンバーは、" + cmb_o_id_item);
 
             //Form_seikyuのコンボボックスcmb_o_idからの変数cmb_o_id_strをint型に変換して1加算

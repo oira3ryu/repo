@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_seikyu));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.seikyu = new rk_seikyu.seikyu();
             this.bindingNavigatorSeikyu = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
@@ -569,8 +569,8 @@
             // c5
             // 
             this.c5.DataPropertyName = "c5";
-            dataGridViewCellStyle1.NullValue = null;
-            this.c5.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.NullValue = null;
+            this.c5.DefaultCellStyle = dataGridViewCellStyle5;
             this.c5.HeaderText = "c5";
             this.c5.Name = "c5";
             // 
@@ -721,9 +721,9 @@
             // time_stamp
             // 
             this.time_stamp.DataPropertyName = "time_stamp";
-            dataGridViewCellStyle2.Format = "G";
-            dataGridViewCellStyle2.NullValue = null;
-            this.time_stamp.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Format = "G";
+            dataGridViewCellStyle6.NullValue = null;
+            this.time_stamp.DefaultCellStyle = dataGridViewCellStyle6;
             this.time_stamp.HeaderText = "time_stamp";
             this.time_stamp.Name = "time_stamp";
             this.time_stamp.Visible = false;
@@ -1977,13 +1977,14 @@
             this.cmb_o_id_text.Name = "cmb_o_id_text";
             this.cmb_o_id_text.Size = new System.Drawing.Size(100, 19);
             this.cmb_o_id_text.TabIndex = 25;
+            this.cmb_o_id_text.Visible = false;
             // 
             // Form_seikyu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1621, 898);
+            this.ClientSize = new System.Drawing.Size(1604, 881);
             this.Controls.Add(this.cmb_o_id_text);
             this.Controls.Add(this.cmb_o_id);
             this.Controls.Add(this.cmdGyoumu);
@@ -2254,7 +2255,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn time_stamp;
         private nen nen1;
         private System.Windows.Forms.BindingSource nenBindingSource;
-        private System.Windows.Forms.ComboBox cmb_nen;
         private System.Windows.Forms.BindingSource nenBindingSource1;
         private System.Windows.Forms.BindingSource nenBindingSource2;
         private System.Windows.Forms.BindingSource nenBindingSource3;
@@ -2273,5 +2273,6 @@
         private o_id_dsTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.ComboBox cmb_o_id;
         private System.Windows.Forms.TextBox cmb_o_id_text;
+        internal System.Windows.Forms.ComboBox cmb_nen;
     }
 }

@@ -71,8 +71,8 @@ namespace rk_seikyu
             form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
             //Form_seikyuのテキストボックス文字列を
             //Form_prnの文字列変数cmb_o_id_strへ設定
-            cmb_o_id_str = form_seikyu_Instance.cmb_o_id_Text;
-            cmb_o_id_item = form_seikyu_Instance.cmb_o_id_Item;
+            cmb_o_id_str = form_seikyu_Instance.Cmb_o_id_Text;
+            cmb_o_id_item = form_seikyu_Instance.Cmb_o_id_Item;
             Console.WriteLine("cmb_o_idからのメンバーは、" + cmb_o_id_item);
 
             //Form_seikyuのコンボボックスcmb_o_idからの変数cmb_o_id_strをint型に変換して1加算
@@ -1375,7 +1375,13 @@ namespace rk_seikyu
                         + " '' || '" + Cmb_tsuki_str + "'"
                         + " end"
                         + " )) a"
-                        + " left join (select c4, c5, c6, c7, c11, c14, c15, c16, c19, s_id, o_id, case when c7 = '現金' then '1' when c7 = '引落' then '2' when c7 = '振込' then '2' else '' end 支払方法, time_stamp from t_shiharai_houhou"
+                        + " left join (select c4, c5, c6, c7, c11, c14, c15, c16, c19, s_id, o_id,"
+                        + " case when c7 = '現金' then '1'"
+                            + " when c7 = Null then '1'"
+                            + " when c7 = '引落' then '2'"
+                            + " when c7 = '振込' then '2'"
+                            + " else '' end 支払方法"
+                        + ", time_stamp from t_shiharai_houhou"
                         + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou where"
                             + " c4_y::Text = '" + Cmb_nen_str + "'"
                             + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
