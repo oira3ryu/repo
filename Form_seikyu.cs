@@ -2999,8 +2999,10 @@ namespace rk_seikyu
 
                         // 構造化テキストファイルの解析に使用するメソッドとプロパティを提供するクラス
                         // ※Microsoft.VisualBasic.FileIO.TextFieldParser を使用する
-                        TextFieldParser tfp = new TextFieldParser(str, Encoding.GetEncoding(932));
-                        tfp.Delimiters = new string[] { "," };
+                        TextFieldParser tfp = new TextFieldParser(str, Encoding.GetEncoding(932))
+                        {
+                            Delimiters = new string[] { "," }
+                        };
                         string[] colheaders = tfp.ReadFields(); // 1行読み込み
 
                         ArrayList list = new ArrayList();
