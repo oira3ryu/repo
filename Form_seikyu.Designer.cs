@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_seikyu));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.seikyu = new rk_seikyu.seikyu();
             this.bindingNavigatorSeikyu = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
@@ -255,6 +255,7 @@
             this.tableAdapterManager = new rk_seikyu.o_id_dsTableAdapters.TableAdapterManager();
             this.cmb_o_id = new System.Windows.Forms.ComboBox();
             this.cmb_o_id_text = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.seikyu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorSeikyu)).BeginInit();
             this.bindingNavigatorSeikyu.SuspendLayout();
@@ -569,8 +570,8 @@
             // c5
             // 
             this.c5.DataPropertyName = "c5";
-            dataGridViewCellStyle5.NullValue = null;
-            this.c5.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle3.NullValue = null;
+            this.c5.DefaultCellStyle = dataGridViewCellStyle3;
             this.c5.HeaderText = "c5";
             this.c5.Name = "c5";
             // 
@@ -721,9 +722,9 @@
             // time_stamp
             // 
             this.time_stamp.DataPropertyName = "time_stamp";
-            dataGridViewCellStyle6.Format = "G";
-            dataGridViewCellStyle6.NullValue = null;
-            this.time_stamp.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle4.Format = "G";
+            dataGridViewCellStyle4.NullValue = null;
+            this.time_stamp.DefaultCellStyle = dataGridViewCellStyle4;
             this.time_stamp.HeaderText = "time_stamp";
             this.time_stamp.Name = "time_stamp";
             this.time_stamp.Visible = false;
@@ -1979,12 +1980,20 @@
             this.cmb_o_id_text.TabIndex = 25;
             this.cmb_o_id_text.Visible = false;
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(369, 78);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(30, 19);
+            this.textBox2.TabIndex = 26;
+            // 
             // Form_seikyu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1604, 881);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.cmb_o_id_text);
             this.Controls.Add(this.cmb_o_id);
             this.Controls.Add(this.cmdGyoumu);
@@ -2274,5 +2283,6 @@
         private System.Windows.Forms.ComboBox cmb_o_id;
         private System.Windows.Forms.TextBox cmb_o_id_text;
         internal System.Windows.Forms.ComboBox cmb_nen;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
