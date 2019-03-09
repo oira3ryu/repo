@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="settings_ds" targetNamespace="http://tempuri.org/settings_ds.xsd" xmlns:mstns="http://tempuri.org/settings_ds.xsd" xmlns="http://tempuri.org/settings_ds.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="rk_seikyuConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="rk_seikyuConnectionString1 (Settings)" PropertyReference="ApplicationSettings.rk_seikyu.Properties.Settings.GlobalReference.Default.rk_seikyuConnectionString1" Provider="Npgsql" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="settings_ds" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="settings_ds" msprop:Generator_UserDSName="settings_ds">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="settings_ds" msprop:Generator_TableClassName="settings_dsDataTable" msprop:Generator_TableVarName="tablesettings_ds" msprop:Generator_TablePropName="_settings_ds" msprop:Generator_RowDeletingName="settings_dsRowDeleting" msprop:Generator_RowChangingName="settings_dsRowChanging" msprop:Generator_RowEvHandlerName="settings_dsRowChangeEventHandler" msprop:Generator_RowDeletedName="settings_dsRowDeleted" msprop:Generator_UserTableName="settings_ds" msprop:Generator_RowChangedName="settings_dsRowChanged" msprop:Generator_RowEvArgName="settings_dsRowChangeEvent" msprop:Generator_RowClassName="settings_dsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:string" />
+              <xs:element name="o_id_val" msprop:Generator_ColumnVarNameInTable="columno_id_val" msprop:Generator_ColumnPropNameInRow="o_id_val" msprop:Generator_ColumnPropNameInTable="o_id_valColumn" msprop:Generator_UserColumnName="o_id_val" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:settings_ds" />
+      <xs:field xpath="mstns:id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

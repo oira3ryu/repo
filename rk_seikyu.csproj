@@ -34,7 +34,7 @@
     <SccLocalPath>Svn</SccLocalPath>
     <SccAuxPath>Svn</SccAuxPath>
     <SccProvider>SubversionScc</SccProvider>
-	<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -260,6 +260,11 @@
       <DependentUpon>seikyu.xsd</DependentUpon>
     </Compile>
     <Compile Include="seikyu_ds.Designer.cs" />
+    <Compile Include="settings_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>settings_ds.xsd</DependentUpon>
+    </Compile>
     <Compile Include="shiharai_houhou_ds.Designer.cs" />
     <Compile Include="shinzoku_kankei_ds.Designer.cs" />
     <Compile Include="syubetsu.Designer.cs">
@@ -476,6 +481,17 @@
     </None>
     <None Include="seikyu_ds.xss">
       <DependentUpon>seikyu_ds.xsd</DependentUpon>
+    </None>
+    <None Include="settings_ds.xsc">
+      <DependentUpon>settings_ds.xsd</DependentUpon>
+    </None>
+    <None Include="settings_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>settings_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="settings_ds.xss">
+      <DependentUpon>settings_ds.xsd</DependentUpon>
     </None>
     <None Include="shiharai_houhou_ds.xsc">
       <DependentUpon>shiharai_houhou_ds.xsd</DependentUpon>

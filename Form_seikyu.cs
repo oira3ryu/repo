@@ -36,7 +36,7 @@ namespace rk_seikyu
         private NpgsqlDataAdapter nen_da = new NpgsqlDataAdapter();
         private NpgsqlDataAdapter tsuki_da = new NpgsqlDataAdapter();
         private NpgsqlDataAdapter o_id_da = new NpgsqlDataAdapter();
-
+        private NpgsqlDataAdapter settings_da = new NpgsqlDataAdapter();
 
         private DataSet _seikyu_ds = new DataSet();
         private DataSet _shiharai_houhou_ds = new DataSet();
@@ -50,6 +50,7 @@ namespace rk_seikyu
         private DataSet req_id_ds = new DataSet();
         private DataSet c4_ds = new DataSet();
         private DataSet o_id_ds = new DataSet();
+        private DataSet settings_ds = new DataSet();
 
         private DataSet Cntds = new DataSet();
         private DataSet CntMends = new DataSet();
@@ -106,7 +107,7 @@ namespace rk_seikyu
         {
             o_id_da.SelectCommand = new NpgsqlCommand
             (
-                    "select"
+                    "SELECT"
                 + " o_id"
                 + ", o_number"
                 + ", o_name"
@@ -115,73 +116,73 @@ namespace rk_seikyu
                 + ", o_phone_number"
                 + ", o_manager"
                 + ", o_stuff"
-                + " from"
+                + " FROM"
                 + " t_office"
-                + " order by o_id;",
+                + " ORDER BY o_id;",
                 m_conn
             );
 
             nen_da.SelectCommand = new NpgsqlCommand
             (
-                   "select"
+                   "SELECT"
                 + " n_id"
                 + ", nen"
-                + " from"
+                + " FROM"
                 + " t_nen"
-                + " order by n_id;",
+                + " ORDER BY n_id;",
                 m_conn
             );
 
             tsuki_da.SelectCommand = new NpgsqlCommand
             (
-                   "select"
+                   "SELECT"
                 + " t_id"
                 + ", tsuki"
-                + " from"
+                + " FROM"
                 + " t_tsuki"
-                + " order by t_id;",
+                + " ORDER BY t_id;",
                 m_conn
             );
 
             c4_da.SelectCommand = new NpgsqlCommand
             (
-                   "select"
+                   "SELECT"
                 + " distinct"
                 + " c4"
-                + " from"
+                + " FROM"
                 + " t_seikyu"
-                + " order by c4;",
+                + " ORDER BY c4;",
                 m_conn
             );
 
             s_id_da.SelectCommand = new NpgsqlCommand
             (
-                   "select"
+                   "SELECT"
                 + " s_id"
                 + ", syubetsu"
                 + ", shisetsumei"
                 + ", o_id"
-                + " from"
+                + " FROM"
                 + " t_syubetsu"
-                + " where o_id = '" + Cmb_o_id_int + "'"
-                + " and s_id = '" + Cmb_s_id_int + "'"
-                + " order by s_id;",
+                + " WHERE o_id = '" + Cmb_o_id_int + "'"
+                + " AND s_id = '" + Cmb_s_id_int + "'"
+                + " ORDER BY s_id;",
                     m_conn
             );
 
             g_id_da.SelectCommand = new NpgsqlCommand
             (
-                   "select"
+                   "SELECT"
                   + " g_id"
                   + ", gyoumu"
-                  + " from t_gyoumu"
-                  + " order by g_id;",
+                  + " FROM t_gyoumu"
+                  + " ORDER BY g_id;",
                     m_conn
             );
 
             req_id_da.SelectCommand = new NpgsqlCommand
             (
-                   "select"
+                   "SELECT"
                   + " req_id"
                   + ", title1"
                   + ", title2"
@@ -189,8 +190,8 @@ namespace rk_seikyu
                   + ", title3"
                   + ", title4"
                   + ", name2"
-                  + " from t_req"
-                  + " order by req_id;",
+                  + " FROM t_req"
+                  + " ORDER BY req_id;",
                     m_conn
             );
 
@@ -445,7 +446,7 @@ namespace rk_seikyu
 
                                     da.SelectCommand = new NpgsqlCommand
                                     (
-                                        "select"
+                                        "SELECT"
                                         + " c1"
                                         + ", c2"
                                         + ", c3"
@@ -477,18 +478,18 @@ namespace rk_seikyu
                                         + ", id"
                                         + ", p_id"
                                         + ", req_id"
-                                        + " from"
+                                        + " FROM"
                                         + " t_seikyu"
-                                        + " where time_stamp = (select max(time_stamp) from t_seikyu"
-                                        + " where s_id::Integer = " + Cmb_s_id_int
-                                        + " and g_id::Integer = " + Cmb_g_id_int
-                                        + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y::Text = '" + Cmb_nen_str + "'"
-                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                        + " ' ' || '" + Cmb_tsuki_str + "'"
-                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                        + " '' || '" + Cmb_tsuki_str + "'"
-                                        + " end"
+                                        + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_seikyu"
+                                        + " WHERE s_id::Integer = " + Cmb_s_id_int
+                                        + " AND g_id::Integer = " + Cmb_g_id_int
+                                        + " AND o_id::Integer = " + Cmb_o_id_int
+                                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
+                                                            + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                            + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
+                                                            + " '' || '" + Cmb_tsuki_str + "'"
+                                                            + " END"
                                         + ");"
                                         , m_conn
                                     );
@@ -522,7 +523,7 @@ namespace rk_seikyu
 
                                     // update
                                     da.UpdateCommand = new NpgsqlCommand(
-                                            "update t_seikyu set"
+                                            "UPDATE t_seikyu SET"
                                             + " c1 = :c1"
                                             + ", c2 = :c2"
                                             + ", c3 = :c3"
@@ -552,7 +553,7 @@ namespace rk_seikyu
                                             + ", s_id = :s_id"
                                             + ", g_id = :g_id"
                                             + ", o_id = :o_id"
-                                            + " where r_id=:r_id;"
+                                            + " WHERE r_id=:r_id;"
                                         , m_conn
                                         );
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -589,9 +590,9 @@ namespace rk_seikyu
                                     // delete
                                     da.DeleteCommand = new NpgsqlCommand
                                     (
-                                           "delete from t_seikyu"
-                                        + " where"
-                                        + " r_id=:r_id;"
+                                           "DELETE FROM t_seikyu"
+                                        + " WHERE"
+                                        + " r_id = :r_id;"
                                         , m_conn
                                     );
                                     da.DeleteCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -641,7 +642,7 @@ namespace rk_seikyu
                                     Console.WriteLine("Case " + Cmb_s_id_int + "!");
                                     da.SelectCommand = new NpgsqlCommand
                                     (
-                                        "select"
+                                        "SELECT"
                                         + " c1"
                                         + ", c2"
                                         + ", c3"
@@ -698,18 +699,18 @@ namespace rk_seikyu
                                         + ", p_id"
                                         + ", req_id"
                                         + ", time_stamp"
-                                        + " from"
+                                        + " FROM"
                                         + " t_shiharai_houhou"
-                                        + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
+                                        + " where time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou"
                                         + " where s_id::Integer = " + Cmb_s_id_int
-                                        + " and g_id::Integer = " + Cmb_g_id_int
-                                        + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = " + Cmb_nen_str
-                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                        + " ' ' || '" + Cmb_tsuki_str + "'"
-                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                        + " '' || '" + Cmb_tsuki_str + "'"
-                                        + " end"
+                                        + " AND g_id::Integer = " + Cmb_g_id_int
+                                        + " AND o_id::Integer = " + Cmb_o_id_int
+                                        + " AND c4_y = " + Cmb_nen_str
+                                        + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
+                                                            + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                            + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
+                                                            + " '' || '" + Cmb_tsuki_str + "'"
+                                                            + " END"
                                         + ");"
                                         , m_conn
                                     );
@@ -729,7 +730,7 @@ namespace rk_seikyu
 
                                     // update
                                     da.UpdateCommand = new NpgsqlCommand(
-                                            "update t_shiharai_houhou set"
+                                            "UPDATE t_shiharai_houhou SET"
                                             + " c1 = :c1"
                                             + ", c2 = :c2"
                                             + ", c3 = :c3"
@@ -786,7 +787,7 @@ namespace rk_seikyu
                                             + ", req_id = :req_id"
                                             + ", c4_y = :c4_y"
                                             + ", c4_m = :c4_m"
-                                            + " where sh_id=:sh_id;"
+                                            + " WHERE sh_id = :sh_id;"
                                         , m_conn
                                         );
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -850,9 +851,9 @@ namespace rk_seikyu
                                     // delete
                                     da.DeleteCommand = new NpgsqlCommand
                                     (
-                                           "delete from t_shiharai_houhou"
-                                        + " where"
-                                        + " sh_id=:sh_id;"
+                                           "DELETE FROM t_shiharai_houhou"
+                                        + " WHERE"
+                                        + " sh_id = :sh_id;"
                                         , m_conn
                                     );
                                     da.DeleteCommand.Parameters.Add(new NpgsqlParameter("sh_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sh_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -902,7 +903,7 @@ namespace rk_seikyu
                                     Console.WriteLine("Case " + Cmb_s_id_int + "!");
                                     da.SelectCommand = new NpgsqlCommand
                                     (
-                                        "select"
+                                        "SELECT"
                                         + " c1"
                                         + ", c2"
                                         + ", c3"
@@ -969,18 +970,18 @@ namespace rk_seikyu
                                         + ", c4_y"
                                         + ", c4_m"
                                         + ", time_stamp"
-                                        + " from"
+                                        + " FROM"
                                         + " t_shinzoku_kankei"
-                                        + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
-                                        + " where s_id::Integer = " + Cmb_s_id_int
-                                        + " and g_id::Integer = " + Cmb_g_id_int
-                                        + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = " + Cmb_nen_str
-                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
-                                        + " ' ' || '" + Cmb_tsuki_str + "'"
-                                        + "       when length('" + Cmb_tsuki_str + "')=2 then"
-                                        + " '' || '" + Cmb_tsuki_str + "'"
-                                        + " end"
+                                        + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_shinzoku_kankei"
+                                        + " WHERE s_id::Integer = " + Cmb_s_id_int
+                                        + " AND g_id::Integer = " + Cmb_g_id_int
+                                        + " AND o_id::Integer = " + Cmb_o_id_int
+                                        + " AND c4_y = " + Cmb_nen_str
+                                        + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
+                                                            + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                            + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
+                                                            + " '' || '" + Cmb_tsuki_str + "'"
+                                                            + " END"
                                         + ");"
                                         , m_conn
                                     );
@@ -1000,7 +1001,7 @@ namespace rk_seikyu
 
                                     // update
                                     da.UpdateCommand = new NpgsqlCommand(
-                                    "update t_shinzoku_kankei set"
+                                    "UPDATE t_shinzoku_kankei SET"
                                         + " c1 = :c1"
                                         + ", c2 = :c2"
                                         + ", c3 = :c3"
@@ -1064,7 +1065,7 @@ namespace rk_seikyu
                                         + ", o_id = :o_id"
                                         + ", p_id = :p_id"
                                         + ", req_id = :req_id"
-                                        + " where sk_id=:sk_id;"
+                                        + " WHERE sk_id=:sk_id;"
                                         , m_conn
                                         );
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -1135,9 +1136,9 @@ namespace rk_seikyu
                                     // delete
                                     da.DeleteCommand = new NpgsqlCommand
                                     (
-                                           "delete from t_shinzoku_kankei"
-                                        + " where"
-                                        + " sk_id=:sk_id;"
+                                           "DELETE FROM t_shinzoku_kankei"
+                                        + " WHERE"
+                                        + " sk_id = :sk_id;"
                                         , m_conn
                                     );
                                     da.DeleteCommand.Parameters.Add(new NpgsqlParameter("skz_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "skz_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -1276,7 +1277,7 @@ namespace rk_seikyu
 
                                     da.SelectCommand = new NpgsqlCommand
                                     (
-                                        "select"
+                                        "SELECT"
                                         + " c1"
                                         + ", c2"
                                         + ", c3"
@@ -1309,9 +1310,9 @@ namespace rk_seikyu
                                         + ", id"
                                         + ", p_id"
                                         + ", req_id"
-                                        + " from"
+                                        + " FROM"
                                         + " t_seikyu"
-                                        + " where r_id=currval('t_seikyu_r_id_seq');"
+                                        + " WHERE r_id=currval('t_seikyu_r_id_seq');"
                                         , m_conn
                                     );
 
@@ -1332,7 +1333,7 @@ namespace rk_seikyu
 
                                     da.SelectCommand = new NpgsqlCommand
                                     (
-                                        "select"
+                                        "SELECT"
                                         + " c1"
                                         + ", c2"
                                         + ", c3"
@@ -1391,9 +1392,9 @@ namespace rk_seikyu
                                         + ", c4_y"
                                         + ", c4_m"
                                         + ", time_stamp"
-                                        + " from"
+                                        + " FROM"
                                         + " t_shiharai_houhou"
-                                        + " where sh_id=currval('t_shiharai_houhou_sh_id_seq');"
+                                        + " WHERE sh_id=currval('t_shiharai_houhou_sh_id_seq');"
                                         , m_conn
                                     );
 
@@ -1414,7 +1415,7 @@ namespace rk_seikyu
 
                                     da.SelectCommand = new NpgsqlCommand
                                     (
-                                        "select"
+                                        "SELECT"
                                         + " c1"
                                         + ", c2"
                                         + ", c3"
@@ -1482,9 +1483,9 @@ namespace rk_seikyu
                                         + ", c4_m"
                                         + ", time_stamp"
                                         + ", sk_id"
-                                        + " from"
+                                        + " FROM"
                                         + " t_shinzoku_kankei"
-                                        + " where sk_id=currval('t_shizoku_kankei_sk_id_seq');"
+                                        + " WHERE sk_id=currval('t_shizoku_kankei_sk_id_seq');"
                                         , m_conn
                                     );
                                     break;
@@ -1720,7 +1721,7 @@ namespace rk_seikyu
 
                                     da.SelectCommand = new NpgsqlCommand
                                     (
-                                        "select"
+                                        "SELECT"
                                         + " c1"
                                         + ", c2"
                                         + ", c3"
@@ -1753,9 +1754,9 @@ namespace rk_seikyu
                                         + ", p_id"
                                         + ", req_id"
                                         + ", r_id"
-                                        + " from"
+                                        + " FROM"
                                         + " t_seikyu"
-                                        + " where r_id=" + e.Row["r_id"].ToString()
+                                        + " WHERE r_id=" + e.Row["r_id"].ToString()
                                         + ";"
                                         , m_conn
                                     );
@@ -1777,7 +1778,7 @@ namespace rk_seikyu
 
                                     da.SelectCommand = new NpgsqlCommand
                                     (
-                                        "select"
+                                        "SELECT"
                                         + " c1"
                                         + ", c2"
                                         + ", c3"
@@ -1834,9 +1835,9 @@ namespace rk_seikyu
                                         + ", p_id"
                                         + ", req_id"
                                         + ", time_stamp"
-                                        + " from"
+                                        + " FROM"
                                         + " t_shiharai_houhou"
-                                        + " where sh_id=" + e.Row["sh_id"].ToString()
+                                        + " WHERE sh_id=" + e.Row["sh_id"].ToString()
                                         + ";"
                                         , m_conn
                                     );
@@ -1858,7 +1859,7 @@ namespace rk_seikyu
 
                                     da.SelectCommand = new NpgsqlCommand
                                     (
-                                        "select"
+                                        "SELECT"
                                         + " c1"
                                         + ", c2"
                                         + ", c3"
@@ -1924,9 +1925,9 @@ namespace rk_seikyu
                                         + ", p_id"
                                         + ", req_id"
                                         + ", time_stamp"
-                                        + " from"
+                                        + " FROM"
                                         + " t_shinzoku_kankei"
-                                        + " where sk_id=" + e.Row["sk_id"].ToString()
+                                        + " WHERE sk_id=" + e.Row["sk_id"].ToString()
                                         + ";"
                                         , m_conn
                                     );
@@ -2370,16 +2371,16 @@ namespace rk_seikyu
                 DataSet Newds = new DataSet();
 
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(
-                    "select"
+                    "SELECT"
                     + " *"
-                    + " from "
+                    + " FROM "
                     + " t_csv"
                     , m_conn);
 
                 NpgsqlCommand command = new NpgsqlCommand(
-                    "select"
+                    "SELECT"
                     + " count(*)"
-                    + " from "
+                    + " FROM "
                     + " t_csv"
                     , m_conn);
 
@@ -2392,8 +2393,8 @@ namespace rk_seikyu
                     if (rcnt > 0)
                     {
                         command = new NpgsqlCommand(
-                        "delete"
-                    + " from "
+                        "DELETE"
+                    + " FROM "
                     + " t_csv"
                         , m_conn);
                         command.ExecuteNonQuery();
@@ -2413,7 +2414,7 @@ namespace rk_seikyu
                             case 6:
 
                                 da.InsertCommand = new NpgsqlCommand(
-                                    "insert into t_csv ("
+                                    "INSERT INTO t_csv ("
                                     + " c1"
                                     + ", c2"
                                     + ", c3"
@@ -2465,7 +2466,7 @@ namespace rk_seikyu
                                     + ", c49"
                                     + ", s_id"
                                     + ", g_id"
-                                    + " ) values ("
+                                    + " ) VALUES ("
                                     + " :c1"
                                     + ", :c2"
                                     + ", :c3"
@@ -2586,7 +2587,7 @@ namespace rk_seikyu
                             case 6:
 
                                 da.InsertCommand = new NpgsqlCommand(
-                                    "insert into t_csv ("
+                                    "INSERT INTO t_csv ("
                                     + " c1"
                                     + ", c2"
                                     + ", c3"
@@ -2642,7 +2643,7 @@ namespace rk_seikyu
                                     + ", req_id"
                                     + ", nen"
                                     + ", tsuki"
-                                    + " ) values ("
+                                    + " ) VALUES ("
                                     + " :c1"
                                     + ", :c2"
                                     + ", :c3"
@@ -2769,7 +2770,7 @@ namespace rk_seikyu
                             case 6:
 
                                 da.InsertCommand = new NpgsqlCommand(
-                                    "insert into t_csv ("
+                                    "INSERT INTO t_csv ("
                                     + " c1"
                                     + ", c2"
                                     + ", c3"
@@ -2834,7 +2835,7 @@ namespace rk_seikyu
                                     + ", req_id"
                                     + ", nen"
                                     + ", tsuki"
-                                    + " ) values ("
+                                    + " ) VALUES ("
                                     + " :c1"
                                     + ", :c2"
                                     + ", :c3"
@@ -3042,27 +3043,27 @@ namespace rk_seikyu
                         TblStr = "t_csv";
 
                         command = new NpgsqlCommand(
-                            "update " + TblStr + " set o_id = " + Cmb_o_id_int
+                            "UPDATE " + TblStr + " SET o_id = " + Cmb_o_id_int
                             , m_conn);
                         command.ExecuteNonQuery();
 
                         command = new NpgsqlCommand(
-                            "update " + TblStr + " set s_id = " + Cmb_s_id_int
+                            "UPDATE " + TblStr + " SET s_id = " + Cmb_s_id_int
                             , m_conn);
                         command.ExecuteNonQuery();
 
                         command = new NpgsqlCommand(
-                            "update " + TblStr + " set g_id = " + Cmb_g_id_int
+                            "UPDATE " + TblStr + " SET g_id = " + Cmb_g_id_int
                             , m_conn);
                         command.ExecuteNonQuery();
 
                         command = new NpgsqlCommand(
-                            "update " + TblStr + " set p_id = " + 1
+                            "UPDATE " + TblStr + " SET p_id = " + 1
                             , m_conn);
                         command.ExecuteNonQuery();
 
                         command = new NpgsqlCommand(
-                            "update " + TblStr + " set req_id = " + Cmb_req_id_int
+                            "UPDATE " + TblStr + " SET req_id = " + Cmb_req_id_int
                             , m_conn);
                         command.ExecuteNonQuery();
 
@@ -3206,7 +3207,7 @@ namespace rk_seikyu
                                         Cursor.Current = Cursors.WaitCursor;
                                         {
                                             da.InsertCommand = new NpgsqlCommand(
-                                            "insert into t_seikyu ("
+                                            "INSERT INTO t_seikyu ("
                                             + " c1"
                                             + ", c2"
                                             + ", c3"
@@ -3237,7 +3238,7 @@ namespace rk_seikyu
                                             + ", p_id"
                                             + ", req_id"
                                             + ", id"
-                                            + " ) select"
+                                            + " ) SELECT"
                                             + " c1"
                                             + ", c2"
                                             + ", c3"
@@ -3263,19 +3264,19 @@ namespace rk_seikyu
                                             //+ ", substr(c4, 1, strpos(c4, '/') - 1) as c4_y"
                                             //+ ", substr(c4,strpos(c4, '/')+1,length(c4)) as c4_m"
                                             + ", '" + Cmb_nen_str + "' c4_y"
-                                            + ", case when length('" + Cmb_tsuki_str + "')=1 then"
+                                            + ", CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                 + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                                + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                 + " '' || '" + Cmb_tsuki_str + "'"
-                                                + " end  c4_m"
+                                                + " END  c4_m"
                                             + ", s_id"
                                             + ", g_id"
                                             + ", o_id"
                                             + ", p_id"
                                             + ", req_id"
                                             + ", id"
-                                            + " from t_csv"
-                                            + " order by id;"
+                                            + " FROM t_csv"
+                                            + " ORDER BY id;"
                                                 , m_conn);
 
                                             da.InsertCommand.ExecuteNonQuery();
@@ -3322,7 +3323,7 @@ namespace rk_seikyu
                                             Cursor.Current = Cursors.WaitCursor;
                                             {
                                                 da.InsertCommand = new NpgsqlCommand(
-                                                "insert into t_shiharai_houhou ("
+                                                "INSERT INTO t_shiharai_houhou ("
                                                 + " c1"
                                                 + ", c2"
                                                 + ", c3"
@@ -3379,7 +3380,7 @@ namespace rk_seikyu
                                                 + ", req_id"
                                                 + ", c4_y"
                                                 + ", c4_m"
-                                                + " ) select"
+                                                + " ) SELECT"
                                                 + " coalesce(c1, '') c1"
                                                 + ", coalesce(c2, '') c2"
                                                 + ", coalesce(c3, '') c3"
@@ -3435,12 +3436,12 @@ namespace rk_seikyu
                                                 + ", p_id"
                                                 + ", req_id"
                                                 + ", '" + Cmb_nen_str + "'"
-                                                + ", case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + ", CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                    + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                                    + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                     + " '' || '" + Cmb_tsuki_str + "'"
-                                                    + " end"
-                                                + " from t_csv where o_id = " + Cmb_o_id_int + ";"
+                                                    + " END"
+                                                + " FROM t_csv WHERE o_id = " + Cmb_o_id_int + ";"
                                                     , m_conn);
                                                 da.InsertCommand.ExecuteNonQuery();
                                             }
@@ -3487,7 +3488,7 @@ namespace rk_seikyu
                                             Cursor.Current = Cursors.WaitCursor;
                                             {
                                                 da.InsertCommand = new NpgsqlCommand(
-                                                "insert into t_shinzoku_kankei ("
+                                                "INSERT INTO t_shinzoku_kankei ("
                                                 + " c1"
                                                 + ", c2"
                                                 + ", c3"
@@ -3553,7 +3554,7 @@ namespace rk_seikyu
                                                 + ", req_id"
                                                 + ", c4_y"
                                                 + ", c4_m"
-                                                + " ) select"
+                                                + " ) SELECT"
                                                 + " coalesce(c1, '') c1"
                                                 + ", coalesce(c2, '') c2"
                                                 + ", coalesce(c3, '') c3"
@@ -3618,12 +3619,12 @@ namespace rk_seikyu
                                                 + ", p_id"
                                                 + ", req_id"
                                                 + ", '" + Cmb_nen_str + "'"
-                                                + ", case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + ", CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                    + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                                    + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                     + " '' || '" + Cmb_tsuki_str + "'"
-                                                    + " end"
-                                                + " from t_csv;"
+                                                    + " END"
+                                                + " FROM t_csv;"
                                                     , m_conn);
                                                 da.InsertCommand.ExecuteNonQuery();
                                             }
@@ -3669,7 +3670,7 @@ namespace rk_seikyu
                                 case 6:
                                     da.SelectCommand = new NpgsqlCommand
                                     (
-                                        "select"
+                                        "SELECT"
                                         + " c1"
                                         + ", c2"
                                         + ", c3"
@@ -3702,18 +3703,18 @@ namespace rk_seikyu
                                         + ", id"
                                         + ", p_id"
                                         + ", req_id"
-                                        + " from"
+                                        + " FROM"
                                         + " t_seikyu"
-                                        + " where time_stamp = (select max(time_stamp) from t_seikyu"
-                                        + " where s_id::Integer = " + Cmb_s_id_int
-                                        + " and g_id::Integer = " + Cmb_g_id_int
-                                        + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = '" + Cmb_nen_str + "'"
-                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_seikyu"
+                                        + " WHERE s_id::Integer = " + Cmb_s_id_int
+                                        + " AND g_id::Integer = " + Cmb_g_id_int
+                                        + " AND o_id::Integer = " + Cmb_o_id_int
+                                        + " AND c4_y = '" + Cmb_nen_str + "'"
+                                        + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                            + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                                            + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                             + " '' || '" + Cmb_tsuki_str + "'"
-                                                            + " end"
+                                                            + " END"
                                         + ");"
                                         , m_conn
                                     );
@@ -3747,7 +3748,7 @@ namespace rk_seikyu
 
                                     // insert
                                     da.InsertCommand = new NpgsqlCommand(
-                                    "insert into t_seikyu ("
+                                    "INSERT INTO t_seikyu ("
                                             + " c1"
                                             + ", c2"
                                             + ", c3"
@@ -3778,7 +3779,7 @@ namespace rk_seikyu
                                             + ", p_id"
                                             + ", req_id"
                                             + ", id"
-                                            + " ) select"
+                                            + " ) SELECT"
                                             + " :c1"
                                             + ", :c2"
                                             + ", :c3"
@@ -3809,7 +3810,7 @@ namespace rk_seikyu
                                             + ", :p_id"
                                             + ", :req_id"
                                             + ", :id"
-                                            + " from t_csv;"
+                                            + " FROM t_csv;"
                                                 , m_conn
                                                 );
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -3846,7 +3847,7 @@ namespace rk_seikyu
 
                                     // update
                                     da.UpdateCommand = new NpgsqlCommand(
-                                            "update t_seikyu set"
+                                            "UPDATE t_seikyu SET"
                                             + " c1 = :c1"
                                             + ", c2 = :c2"
                                             + ", c3 = :c3"
@@ -3877,7 +3878,7 @@ namespace rk_seikyu
                                             + ", s_id = :s_id"
                                             + ", g_id = :g_id"
                                             + ", o_id = :o_id"
-                                            + " where r_id=:r_id;"
+                                            + " WHERE r_id=:r_id;"
                                         , m_conn
                                         );
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -3915,9 +3916,9 @@ namespace rk_seikyu
                                     // delete
                                     da.DeleteCommand = new NpgsqlCommand
                                     (
-                                           "delete from t_seikyu"
-                                        + " where"
-                                        + " r_id=:r_id;"
+                                           "DELETE FROM t_seikyu"
+                                        + " WHERE"
+                                        + " r_id = :r_id;"
                                         , m_conn
                                     );
                                     da.DeleteCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -3952,7 +3953,7 @@ namespace rk_seikyu
                                 case 6:
                                     da.SelectCommand = new NpgsqlCommand
                                     (
-                                        "select"
+                                        "SELECT"
                                         + " c1"
                                         + ", c2"
                                         + ", c3"
@@ -4011,18 +4012,18 @@ namespace rk_seikyu
                                         + ", time_stamp"
                                         + ", c4_y"
                                         + ", c4_m"
-                                        + " from"
+                                        + " FROM"
                                         + " t_shiharai_houhou"
-                                        + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
-                                        + " where s_id::Integer = " + Cmb_s_id_int
-                                        + " and g_id::Integer = " + Cmb_g_id_int
-                                        + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = '" + Cmb_nen_str + "'"
-                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou"
+                                        + " WHERE s_id::Integer = " + Cmb_s_id_int
+                                        + " AND g_id::Integer = " + Cmb_g_id_int
+                                        + " AND o_id::Integer = " + Cmb_o_id_int
+                                        + " AND c4_y = '" + Cmb_nen_str + "'"
+                                        + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                            + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                                            + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                             + " '' || '" + Cmb_tsuki_str + "'"
-                                                            + " end"
+                                                            + " END"
                                         + ");"
                                         , m_conn
                                     );
@@ -4042,7 +4043,7 @@ namespace rk_seikyu
 
                                     // insert
                                     da.InsertCommand = new NpgsqlCommand(
-                                    "insert into t_shiharai_houhou ("
+                                    "INSERT INTO t_shiharai_houhou ("
                                                 + " c1"
                                                 + ", c2"
                                                 + ", c3"
@@ -4099,7 +4100,7 @@ namespace rk_seikyu
                                                 + ", req_id"
                                                 + ", c4_y"
                                                 + ", c4_m"
-                                                + " ) select"
+                                                + " ) SELECT"
                                                 + " coalesce(:c1, '') c1"
                                                 + ", coalesce(:c2, '') c2"
                                                 + ", coalesce(:c3, '') c3"
@@ -4155,18 +4156,18 @@ namespace rk_seikyu
                                                 + ", :p_id"
                                                 + ", :req_id"
                                                 + ", '" + Cmb_nen_str + "'"
-                                                + ", case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + ", CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                    + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                                    + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                     + " '' || '" + Cmb_tsuki_str + "'"
-                                                    + " end"
-                                                + " from t_csv;"
+                                                    + " END"
+                                                + " FROM t_csv;"
                                                     , m_conn
                                                     );
 
                                     // update
                                     da.UpdateCommand = new NpgsqlCommand(
-                                            "update t_shiharai_houhou set"
+                                            "UPDATE t_shiharai_houhou SET"
                                             + " c1 = :c1"
                                             + ", c2 = :c2"
                                             + ", c3 = :c3"
@@ -4224,7 +4225,7 @@ namespace rk_seikyu
                                             + ", time_stamp = :time_stamp"
                                             + ", c4_y = :c4_y"
                                             + ", c4_m = :c4_m"
-                                            + " where sh_id=:sh_id;"
+                                            + " WHERE sh_id=:sh_id;"
                                         , m_conn
                                         );
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -4289,9 +4290,9 @@ namespace rk_seikyu
                                     // delete
                                     da.DeleteCommand = new NpgsqlCommand
                                     (
-                                           "delete from t_shiharai_houhou"
-                                        + " where"
-                                        + " sh_id=:sh_id;"
+                                           "DELETE FROM t_shiharai_houhou"
+                                        + " WHERE"
+                                        + " sh_id = :sh_id;"
                                         , m_conn
                                     );
                                     da.DeleteCommand.Parameters.Add(new NpgsqlParameter("sh_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sh_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -4326,7 +4327,7 @@ namespace rk_seikyu
                                 case 6:
                                     da.SelectCommand = new NpgsqlCommand
                                     (
-                                        "select"
+                                        "SELECT"
                                         + " c1"
                                         + ", c2"
                                         + ", c3"
@@ -4394,18 +4395,18 @@ namespace rk_seikyu
                                         + ", c4_y"
                                         + ", c4_m"
                                         + ", time_stamp"
-                                        + " from"
+                                        + " FROM"
                                         + " t_shinzoku_kankei"
-                                        + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
-                                        + " where s_id::Integer = " + Cmb_s_id_int
-                                        + " and g_id::Integer = " + Cmb_g_id_int
-                                        + " and o_id::Integer = " + Cmb_o_id_int
-                                        + " and c4_y = '" + Cmb_nen_str + "'"
-                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_shinzoku_kankei"
+                                        + " WHERE s_id::Integer = " + Cmb_s_id_int
+                                        + " AND g_id::Integer = " + Cmb_g_id_int
+                                        + " AND o_id::Integer = " + Cmb_o_id_int
+                                        + " AND c4_y = '" + Cmb_nen_str + "'"
+                                        + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                            + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                                            + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                             + " '' || '" + Cmb_tsuki_str + "'"
-                                                            + " end"
+                                                            + " END"
                                         + ");"
                                         , m_conn
                                     );
@@ -4425,7 +4426,7 @@ namespace rk_seikyu
 
                                     // insert
                                     da.InsertCommand = new NpgsqlCommand(
-                                    "insert into t_shinzoku_kankei ("
+                                    "INSERT INTO t_shinzoku_kankei ("
                                                 + " c1"
                                                 + ", c2"
                                                 + ", c3"
@@ -4491,7 +4492,7 @@ namespace rk_seikyu
                                                 + ", req_id"
                                                 + ", c4_y"
                                                 + ", c4_m"
-                                                + " ) select"
+                                                + " ) SELECT"
                                                 + " coalesce(:c1, '') c1"
                                                 + ", coalesce(:c2, '') c2"
                                                 + ", coalesce(:c3, '') c3"
@@ -4556,12 +4557,12 @@ namespace rk_seikyu
                                                 + ", :p_id"
                                                 + ", :req_id"
                                                 + ", '" + Cmb_nen_str + "'"
-                                                + ", case when length('" + Cmb_tsuki_str + "')=1 then"
+                                                + ", CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                    + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                                    + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                     + " '' || '" + Cmb_tsuki_str + "'"
-                                                    + " end"
-                                                + " from t_csv;"
+                                                    + " END"
+                                                + " FROM t_csv;"
                                                     , m_conn
                                                     );
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -4634,7 +4635,7 @@ namespace rk_seikyu
 
                                     // update
                                     da.UpdateCommand = new NpgsqlCommand(
-                                        "update t_shinzoku_kankei set"
+                                        "UPDATE t_shinzoku_kankei SET"
                                         + " c1 = :c1"
                                         + ", c2 = :c2"
                                         + ", c3 = :c3"
@@ -4701,7 +4702,7 @@ namespace rk_seikyu
                                         + ", c4_y = :c4_y"
                                         + ", c4_m = :c4_m"
                                         + ", time_stamp = :time_stamp"
-                                        + " where sk_id=:sk_id;"
+                                        + " WHERE sk_id=:sk_id;"
                                         , m_conn
                                         );
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -4775,8 +4776,8 @@ namespace rk_seikyu
                                     // delete
                                     da.DeleteCommand = new NpgsqlCommand
                                     (
-                                           "delete from t_shinzoku_kankei"
-                                        + " where"
+                                           "DELETE FROM t_shinzoku_kankei"
+                                        + " WHERE"
                                         + " sk_id=:sk_id;"
                                         , m_conn
                                     );
@@ -5285,7 +5286,7 @@ namespace rk_seikyu
                             Console.WriteLine("Case " + Cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
-                                "select"
+                                "SELECT"
                                 + " c1"
                                 + ", c2"
                                 + ", c3"
@@ -5318,18 +5319,18 @@ namespace rk_seikyu
                                 + ", id"
                                 + ", p_id"
                                 + ", req_id"
-                                + " from"
+                                + " FROM"
                                 + " t_seikyu"
-                                + " where time_stamp = (select max(time_stamp) from t_seikyu"
-                                + " where s_id::Integer = " + Cmb_s_id_int
-                                + " and g_id::Integer = " + Cmb_g_id_int
-                                + " and o_id::Integer = " + Cmb_o_id_int
-                                + " and c4_y = '" + Cmb_nen_str + "'"
-                                + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_seikyu"
+                                + " WHERE s_id::Integer = " + Cmb_s_id_int
+                                + " AND g_id::Integer = " + Cmb_g_id_int
+                                + " AND o_id::Integer = " + Cmb_o_id_int
+                                + " AND c4_y = '" + Cmb_nen_str + "'"
+                                + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                    + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                                    + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                     + " '' || '" + Cmb_tsuki_str + "'"
-                                                    + " end"
+                                                    + " END"
                                 + ");"
                                 , m_conn
                             );
@@ -5363,7 +5364,7 @@ namespace rk_seikyu
 
                             // update
                             da.UpdateCommand = new NpgsqlCommand(
-                                    "update t_seikyu set"
+                                    "UPDATE t_seikyu SET"
                                     + " c1 = :c1"
                                     + ", c2 = :c2"
                                     + ", c3 = :c3"
@@ -5393,7 +5394,7 @@ namespace rk_seikyu
                                     + ", s_id = :s_id"
                                     + ", g_id = :g_id"
                                     + ", o_id = :o_id"
-                                    + " where r_id=:r_id;"
+                                    + " WHERE r_id=:r_id;"
                                 , m_conn
                                 );
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -5430,9 +5431,9 @@ namespace rk_seikyu
                             // delete
                             da.DeleteCommand = new NpgsqlCommand
                             (
-                                   "delete from t_seikyu"
-                                + " where"
-                                + " r_id=:r_id;"
+                                   "DELETE FROM t_seikyu"
+                                + " WHERE"
+                                + " r_id = :r_id;"
                                 , m_conn
                             );
                             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -5478,7 +5479,7 @@ namespace rk_seikyu
                             Console.WriteLine("Case " + Cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
-                                "select"
+                                "SELECT"
                                 + " c1"
                                 + ", c2"
                                 + ", c3"
@@ -5537,20 +5538,20 @@ namespace rk_seikyu
                                 + ", c4_y"
                                 + ", c4_m"
                                 + ", time_stamp"
-                                + " from"
+                                + " FROM"
                                 + " t_shiharai_houhou"
-                                + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
-                                + " where s_id::Integer = " + Cmb_s_id_int
-                                + " and g_id::Integer = " + Cmb_g_id_int
-                                + " and o_id::Integer = " + Cmb_o_id_int
-                                + " and c4_y = '" + Cmb_nen_str + "'"
-                                + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou"
+                                + " WHERE s_id::Integer = " + Cmb_s_id_int
+                                + " AND g_id::Integer = " + Cmb_g_id_int
+                                + " AND o_id::Integer = " + Cmb_o_id_int
+                                + " AND c4_y = '" + Cmb_nen_str + "'"
+                                + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                    + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                                    + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                     + " '' || '" + Cmb_tsuki_str + "'"
-                                                    + " end"
+                                                    + " END"
                                 + ")"
-                                + " order by c5;"
+                                + " ORDER BY c5;"
                                 , m_conn
                             );
 
@@ -5569,7 +5570,7 @@ namespace rk_seikyu
 
                             // update
                             da.UpdateCommand = new NpgsqlCommand(
-                                    "update t_shiharai_houhou set"
+                                    "UPDATE t_shiharai_houhou SET"
                                     + " c1 = :c1"
                                     + ", c2 = :c2"
                                     + ", c3 = :c3"
@@ -5626,7 +5627,7 @@ namespace rk_seikyu
                                     + ", req_id = :req_id"
                                     + ", c4_y = :c4_y"
                                     + ", c4_m = :c4_m"
-                                    + " where sh_id=:sh_id;"
+                                    + " WHERE sh_id=:sh_id;"
                                 , m_conn
                                 );
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -5690,9 +5691,9 @@ namespace rk_seikyu
                             // delete
                             da.DeleteCommand = new NpgsqlCommand
                             (
-                                   "delete from t_shiharai_houhou"
-                                + " where"
-                                + " sh_id=:sh_id;"
+                                   "DELETE FROM t_shiharai_houhou"
+                                + " WHERE"
+                                + " sh_id = :sh_id;"
                                 , m_conn
                             );
                             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("sh_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sh_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -5738,7 +5739,7 @@ namespace rk_seikyu
                             Console.WriteLine("Case " + Cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
-                                "select"
+                                "SELECT"
                                 + " c1"
                                 + ", c2"
                                 + ", c3"
@@ -5806,20 +5807,20 @@ namespace rk_seikyu
                                 + ", c4_y"
                                 + ", c4_m"
                                 + ", time_stamp"
-                                + " from"
+                                + " FROM"
                                 + " t_shinzoku_kankei"
-                                + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
-                                + " where s_id::Integer = " + Cmb_s_id_int
-                                + " and g_id::Integer = " + Cmb_g_id_int
-                                + " and o_id::Integer = " + Cmb_o_id_int
-                                + " and c4_y = '" + Cmb_nen_str + "'"
-                                + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_shinzoku_kankei"
+                                + " WHERE s_id::Integer = " + Cmb_s_id_int
+                                + " AND g_id::Integer = " + Cmb_g_id_int
+                                + " AND o_id::Integer = " + Cmb_o_id_int
+                                + " AND c4_y = '" + Cmb_nen_str + "'"
+                                + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                    + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                                    + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
                                                     + " '' || '" + Cmb_tsuki_str + "'"
-                                                    + " end"
+                                                    + " END"
                                 + ")"
-                                + " order by c5;"
+                                + " ORDER BY c5;"
                                 , m_conn
                             );
 
@@ -5838,7 +5839,7 @@ namespace rk_seikyu
 
                             // update
                             da.UpdateCommand = new NpgsqlCommand(
-                                    "update t_shinzoku_kankei set"
+                                "UPDATE t_shinzoku_kankei SET"
                                 + " c1 = :c1"
                                 + ", c2 = :c2"
                                 + ", c3 = :c3"
@@ -5904,7 +5905,7 @@ namespace rk_seikyu
                                 + ", req_id = :req_id"
                                 + ", c4_y = :c4_y"
                                 + ", c4_m = :c4_m"
-                                + " where sk_id=:sk_id;"
+                                + " WHERE sk_id=:sk_id;"
                                 , m_conn
                                 );
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -5977,7 +5978,7 @@ namespace rk_seikyu
                             // delete
                             da.DeleteCommand = new NpgsqlCommand
                             (
-                                   "delete from t_shinzoku_kankei"
+                                   "delete FROM t_shinzoku_kankei"
                                 + " where"
                                 + " sk_id=:sk_id;"
                                 , m_conn
@@ -6330,7 +6331,7 @@ namespace rk_seikyu
                             Console.WriteLine("Case " + Cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
-                                "select"
+                                "SELECT"
                                 + " c1"
                                 + ", c2"
                                 + ", c3"
@@ -6363,18 +6364,18 @@ namespace rk_seikyu
                                 + ", id"
                                 + ", p_id"
                                 + ", req_id"
-                                + " from"
+                                + " FROM"
                                 + " t_seikyu"
-                                + " where time_stamp = (select max(time_stamp) from t_seikyu"
-                                + " where s_id::Integer = " + Cmb_s_id_int
-                                + " and g_id::Integer = " + Cmb_g_id_int
-                                + " and o_id::Integer = " + Cmb_o_id_int
-                                + " and c4_y::Text = '" + Cmb_nen_str + "'"
-                                + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_seikyu"
+                                + " WHERE s_id::Integer = " + Cmb_s_id_int
+                                + " AND g_id::Integer = " + Cmb_g_id_int
+                                + " AND o_id::Integer = " + Cmb_o_id_int
+                                + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                    + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                                    + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                     + " '' || '" + Cmb_tsuki_str + "'"
-                                                    + " end"
+                                                    + " END"
                                 + ");"
                                 , m_conn
                             );
@@ -6408,7 +6409,7 @@ namespace rk_seikyu
 
                             // update
                             da.UpdateCommand = new NpgsqlCommand(
-                                    "update t_seikyu set"
+                                    "UPDATE t_seikyu SET"
                                     + " c1 = :c1"
                                     + ", c2 = :c2"
                                     + ", c3 = :c3"
@@ -6438,7 +6439,7 @@ namespace rk_seikyu
                                     + ", s_id = :s_id"
                                     + ", g_id = :g_id"
                                     + ", o_id = :o_id"
-                                    + " where r_id=:r_id;"
+                                    + " WHERE r_id=:r_id;"
                                 , m_conn
                                 );
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -6475,9 +6476,9 @@ namespace rk_seikyu
                             // delete
                             da.DeleteCommand = new NpgsqlCommand
                             (
-                                   "delete from t_seikyu"
-                                + " where"
-                                + " r_id=:r_id;"
+                                   "DELETE FROM t_seikyu"
+                                + " WHERE"
+                                + " r_id = :r_id;"
                                 , m_conn
                             );
                             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -6523,7 +6524,7 @@ namespace rk_seikyu
                             Console.WriteLine("Case " + Cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
-                                "select"
+                                "SELECT"
                                 + " c1"
                                 + ", c2"
                                 + ", c3"
@@ -6582,20 +6583,20 @@ namespace rk_seikyu
                                 + ", c4_y"
                                 + ", c4_m"
                                 + ", time_stamp"
-                                + " from"
+                                + " FROM"
                                 + " t_shiharai_houhou"
-                                + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
-                                + " where s_id::Integer = " + Cmb_s_id_int
-                                + " and g_id::Integer = " + Cmb_g_id_int
-                                + " and o_id::Integer = " + Cmb_o_id_int
-                                + " and c4_y::Text = '" + Cmb_nen_str + "'"
-                                + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou"
+                                + " WHERE s_id::Integer = " + Cmb_s_id_int
+                                + " AND g_id::Integer = " + Cmb_g_id_int
+                                + " AND o_id::Integer = " + Cmb_o_id_int
+                                + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                + " AND c4_m::Text = CASE when length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                    + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                                    + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                     + " '' || '" + Cmb_tsuki_str + "'"
-                                                    + " end"
+                                                    + " END"
                                 + ")"
-                                + " order by c5;"
+                                + " ORDER BY c5;"
                                 , m_conn
                             );
 
@@ -6614,7 +6615,7 @@ namespace rk_seikyu
 
                             // update
                             da.UpdateCommand = new NpgsqlCommand(
-                                    "update t_shiharai_houhou set"
+                                    "UPDATE t_shiharai_houhou SET"
                                     + " c1 = :c1"
                                     + ", c2 = :c2"
                                     + ", c3 = :c3"
@@ -6671,7 +6672,7 @@ namespace rk_seikyu
                                     + ", req_id = :req_id"
                                     + ", c4_y = :c4_y"
                                     + ", c4_m = :c4_m"
-                                    + " where sh_id=:sh_id;"
+                                    + " WHERE sh_id = :sh_id;"
                                 , m_conn
                                 );
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -6735,9 +6736,9 @@ namespace rk_seikyu
                             // delete
                             da.DeleteCommand = new NpgsqlCommand
                             (
-                                   "delete from t_shiharai_houhou"
-                                + " where"
-                                + " sh_id=:sh_id;"
+                                   "DELETE FROM t_shiharai_houhou"
+                                + " WHERE"
+                                + " sh_id = :sh_id;"
                                 , m_conn
                             );
                             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("sh_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "sh_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -6783,7 +6784,7 @@ namespace rk_seikyu
                             Console.WriteLine("Case " + Cmb_s_id_int + "!");
                             da.SelectCommand = new NpgsqlCommand
                             (
-                                "select"
+                                "SELECT"
                                 + " c1"
                                 + ", c2"
                                 + ", c3"
@@ -6851,20 +6852,20 @@ namespace rk_seikyu
                                 + ", c4_y"
                                 + ", c4_m"
                                 + ", time_stamp"
-                                + " from"
+                                + " FROM"
                                 + " t_shinzoku_kankei"
-                                + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
-                                + " where s_id::Integer = " + Cmb_s_id_int
-                                + " and g_id::Integer = " + Cmb_g_id_int
-                                + " and o_id::Integer = " + Cmb_o_id_int
-                                + " and c4_y::Text = '" + Cmb_nen_str + "'"
-                                + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_shinzoku_kankei"
+                                + " WHERE s_id::Integer = " + Cmb_s_id_int
+                                + " AND g_id::Integer = " + Cmb_g_id_int
+                                + " AND o_id::Integer = " + Cmb_o_id_int
+                                + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                    + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                                    + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                     + " '' || '" + Cmb_tsuki_str + "'"
-                                                    + " end"
+                                                    + " END"
                                 + ")"
-                                + " order by c5;"
+                                + " ORDER BY c5;"
                                 , m_conn
                             );
 
@@ -6883,7 +6884,7 @@ namespace rk_seikyu
 
                             // update
                             da.UpdateCommand = new NpgsqlCommand(
-                                    "update t_shinzoku_kankei set"
+                                    "UPDATE t_shinzoku_kankei SET"
                                 + " c1 = :c1"
                                 + ", c2 = :c2"
                                 + ", c3 = :c3"
@@ -6949,7 +6950,7 @@ namespace rk_seikyu
                                 + ", req_id = :req_id"
                                 + ", c4_y = :c4_y"
                                 + ", c4_m = :c4_m"
-                                + " where sk_id=:sk_id;"
+                                + " WHERE sk_id=:sk_id;"
                                 , m_conn
                                 );
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -7022,7 +7023,7 @@ namespace rk_seikyu
                             // delete
                             da.DeleteCommand = new NpgsqlCommand
                             (
-                                   "delete from t_shinzoku_kankei"
+                                   "delete FROM t_shinzoku_kankei"
                                 + " where"
                                 + " sk_id=:sk_id;"
                                 , m_conn
@@ -7086,23 +7087,126 @@ namespace rk_seikyu
             Form.ShowDialog();
         }
 
+        private void SettingsRowUpdated(Object sender, NpgsqlRowUpdatedEventArgs e)
+        {
+            if (e.Status == UpdateStatus.Continue)
+            {
+                if (e.StatementType == System.Data.StatementType.Insert)
+                {
+                    settings_da.SelectCommand = new NpgsqlCommand
+                    (
+                    "SELECT"
+                    + " id"
+                    + ", o_id_val"
+                    + " FROM"
+                    + " t_settings;"
+                    + " WHERE id = currval('t_settings_id_seq');"
+                    , m_conn
+                    );
+           
+                }
+                else if (e.StatementType == System.Data.StatementType.Update)
+                {
+                    settings_da.SelectCommand = new NpgsqlCommand
+                    (
+                    "SELECT"
+                    + " id"
+                    + ", o_id_val"
+                    + " FROM"
+                    + " t_settings;"
+                    + " WHERE id = " + e.Row["id"].ToString()
+                    + ";"
+                    , m_conn
+                    );
+                }
+                try
+                {
+                    NpgsqlDataReader reader = settings_da.SelectCommand.ExecuteReader();
+                    reader.Read();
+                    e.Row["id"] = reader["id"];
+                    e.Row["o_id_val"] = reader["o_id_val"];
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    throw;
+                }
+            }
+        }
+
         private void Cmb_o_id_SelectedIndexChanged(object sender, EventArgs e)
         {
             Cmb_o_id_int = cmb_o_id.SelectedIndex + 1;
-            Console.WriteLine("cmb_o_id_int = " + Cmb_o_id_int);
+            Console.WriteLine("Cmb_o_id_int = " + Cmb_o_id_int);
+
+            // settings_da.SelectCommand = new NpgsqlCommand(
+            //     "select"
+            //     + " id"
+            //     + ", o_id_val"
+            //     + " FROM t_settings;"
+            //     , m_conn);
+
+            // settings_da.InsertCommand = new NpgsqlCommand(
+            //     "insert into t_settings ("
+            //     + " o_id_val"
+            //     + " ) values ("
+            //     + "'" + Cmb_o_id_int.ToString() + "'"
+            //     + ");"
+            //     , m_conn);
+            // settings_da.InsertCommand.Parameters.Add(new NpgsqlParameter("id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
+
+            // settings_da.UpdateCommand = new NpgsqlCommand(
+            //     "update t_settings"
+            //     + " set o_id_val"
+            //     + ";"
+            //     , m_conn);
+            // settings_da.UpdateCommand.Parameters.Add(new NpgsqlParameter("id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
+            // settings_da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id_val", NpgsqlTypes.NpgsqlDbType.Integer, 0, "o_id_val", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+
+            //settings_ds.AcceptChanges();
+            m_conn.Open();
+            using (var tran = m_conn.BeginTransaction())
+            {
+                //データ登録
+                //var cmd = new NpgsqlCommand(@"insert into t_settings (id, o_id_val) values (:id, '" + Cmb_o_id_int.ToString() + "')", m_conn);
+                var cmd = new NpgsqlCommand(@"UPDATE t_settings SET o_id_val = '" + Cmb_o_id_int.ToString() + "' WHERE id = 1;", m_conn);
+                //cmd.Parameters.Add(new NpgsqlParameter("id", DbType.Int32) { Value = 1 });
+                //cmd.Parameters.Add(new NpgsqlParameter("o_id_val", DbType.String) { Value = "1" });
+                cmd.ExecuteNonQuery();
+                //データ検索
+                var dataAdapter = new NpgsqlDataAdapter(@"SELECT * FROM t_settings", m_conn);
+                var dataSet = new DataSet();
+                dataAdapter.Fill(dataSet);
+
+                DataTable dt = dataSet.Tables[0];
+                Console.WriteLine("コミット前データ件数：{0}", dt.Rows.Count);
+
+                // コミットして、再検索
+                tran.Commit();
+
+                dataSet = new DataSet();
+                dataAdapter.Fill(dataSet);
+
+                dt = dataSet.Tables[0];
+                Console.WriteLine("コミット後データ件数：{0}", dt.Rows.Count);
+            }
+            m_conn.Close();
+
+            settings_da.RowUpdated += new NpgsqlRowUpdatedEventHandler(SettingsRowUpdated);
 
             s_id_da.SelectCommand = new NpgsqlCommand
             (
-                   "select"
-                + " s_id"
-                + ", syubetsu"
-                + ", shisetsumei"
-                + ", o_id"
-                + " from"
-                + " t_syubetsu"
-                + " where o_id = '" + Cmb_o_id_int + "'"
-                + " order by s_id;",
-                    m_conn
+                "select"
+            + " s_id"
+            + ", syubetsu"
+            + ", shisetsumei"
+            + ", o_id"
+            + " FROM"
+            + " t_syubetsu"
+            + " where o_id = '" + Cmb_o_id_int + "'"
+            + " order by s_id;",
+                m_conn
             );
 
             if (s_id_ds.Tables["t_syubetsu"] != null)
@@ -7378,9 +7482,9 @@ namespace rk_seikyu
                                         + ", id"
                                         + ", p_id"
                                         + ", req_id"
-                                        + " from"
+                                        + " FROM"
                                         + " t_seikyu"
-                                        + " where time_stamp = (select max(time_stamp) from t_seikyu"
+                                        + " where time_stamp = (select max(time_stamp) FROM t_seikyu"
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
@@ -7490,7 +7594,7 @@ namespace rk_seikyu
                                     // delete
                                     da.DeleteCommand = new NpgsqlCommand
                                     (
-                                           "delete from t_seikyu"
+                                           "delete FROM t_seikyu"
                                         + " where"
                                         + " r_id=:r_id;"
                                         , m_conn
@@ -7597,9 +7701,9 @@ namespace rk_seikyu
                                         + ", c4_y"
                                         + ", c4_m"
                                         + ", time_stamp"
-                                        + " from"
+                                        + " FROM"
                                         + " t_shiharai_houhou"
-                                        + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
+                                        + " where time_stamp = (select max(time_stamp) FROM t_shiharai_houhou"
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
@@ -7750,7 +7854,7 @@ namespace rk_seikyu
                                     // delete
                                     da.DeleteCommand = new NpgsqlCommand
                                     (
-                                           "delete from t_shiharai_houhou"
+                                           "delete FROM t_shiharai_houhou"
                                         + " where"
                                         + " sh_id=:sh_id;"
                                         , m_conn
@@ -7867,9 +7971,9 @@ namespace rk_seikyu
                                         + ", c4_y"
                                         + ", c4_m"
                                         + ", time_stamp"
-                                        + " from"
+                                        + " FROM"
                                         + " t_shinzoku_kankei"
-                                        + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
+                                        + " where time_stamp = (select max(time_stamp) FROM t_shinzoku_kankei"
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
@@ -8038,7 +8142,7 @@ namespace rk_seikyu
                                     // delete
                                     da.DeleteCommand = new NpgsqlCommand
                                     (
-                                           "delete from t_shinzoku_kankei"
+                                           "delete FROM t_shinzoku_kankei"
                                         + " where"
                                         + " sk_id=:sk_id;"
                                         , m_conn
@@ -8124,9 +8228,9 @@ namespace rk_seikyu
                                         + ", id"
                                         + ", p_id"
                                         + ", req_id"
-                                        + " from"
+                                        + " FROM"
                                         + " t_seikyu"
-                                        + " where time_stamp = (select max(time_stamp) from t_seikyu"
+                                        + " where time_stamp = (select max(time_stamp) FROM t_seikyu"
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
@@ -8236,7 +8340,7 @@ namespace rk_seikyu
                                     // delete
                                     da.DeleteCommand = new NpgsqlCommand
                                     (
-                                           "delete from t_seikyu"
+                                           "delete FROM t_seikyu"
                                         + " where"
                                         + " r_id=:r_id;"
                                         , m_conn
@@ -8343,9 +8447,9 @@ namespace rk_seikyu
                                         + ", c4_y"
                                         + ", c4_m"
                                         + ", time_stamp"
-                                        + " from"
+                                        + " FROM"
                                         + " t_shiharai_houhou"
-                                        + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
+                                        + " where time_stamp = (select max(time_stamp) FROM t_shiharai_houhou"
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
@@ -8496,7 +8600,7 @@ namespace rk_seikyu
                                     // delete
                                     da.DeleteCommand = new NpgsqlCommand
                                     (
-                                           "delete from t_shiharai_houhou"
+                                           "delete FROM t_shiharai_houhou"
                                         + " where"
                                         + " sh_id=:sh_id;"
                                         , m_conn
@@ -8613,9 +8717,9 @@ namespace rk_seikyu
                                         + ", c4_y"
                                         + ", c4_m"
                                         + ", time_stamp"
-                                        + " from"
+                                        + " FROM"
                                         + " t_shinzoku_kankei"
-                                        + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
+                                        + " where time_stamp = (select max(time_stamp) FROM t_shinzoku_kankei"
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
@@ -8784,7 +8888,7 @@ namespace rk_seikyu
                                     // delete
                                     da.DeleteCommand = new NpgsqlCommand
                                     (
-                                           "delete from t_shinzoku_kankei"
+                                           "delete FROM t_shinzoku_kankei"
                                         + " where"
                                         + " sk_id=:sk_id;"
                                         , m_conn
@@ -8869,9 +8973,9 @@ namespace rk_seikyu
                                         + ", id"
                                         + ", p_id"
                                         + ", req_id"
-                                        + " from"
+                                        + " FROM"
                                         + " t_seikyu"
-                                        + " where time_stamp = (select max(time_stamp) from t_seikyu"
+                                        + " where time_stamp = (select max(time_stamp) FROM t_seikyu"
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
@@ -8981,7 +9085,7 @@ namespace rk_seikyu
                                     // delete
                                     da.DeleteCommand = new NpgsqlCommand
                                     (
-                                           "delete from t_seikyu"
+                                           "delete FROM t_seikyu"
                                         + " where"
                                         + " r_id=:r_id;"
                                         , m_conn
@@ -9088,9 +9192,9 @@ namespace rk_seikyu
                                         + ", c4_y"
                                         + ", c4_m"
                                         + ", time_stamp"
-                                        + " from"
+                                        + " FROM"
                                         + " t_shiharai_houhou"
-                                        + " where time_stamp = (select max(time_stamp) from t_shiharai_houhou"
+                                        + " where time_stamp = (select max(time_stamp) FROM t_shiharai_houhou"
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
@@ -9241,7 +9345,7 @@ namespace rk_seikyu
                                     // delete
                                     da.DeleteCommand = new NpgsqlCommand
                                     (
-                                           "delete from t_shiharai_houhou"
+                                           "delete FROM t_shiharai_houhou"
                                         + " where"
                                         + " sh_id=:sh_id;"
                                         , m_conn
@@ -9358,9 +9462,9 @@ namespace rk_seikyu
                                         + ", c4_y"
                                         + ", c4_m"
                                         + ", time_stamp"
-                                        + " from"
+                                        + " FROM"
                                         + " t_shinzoku_kankei"
-                                        + " where time_stamp = (select max(time_stamp) from t_shinzoku_kankei"
+                                        + " where time_stamp = (select max(time_stamp) FROM t_shinzoku_kankei"
                                         + " where s_id::Integer = " + Cmb_s_id_int
                                         + " and g_id::Integer = " + Cmb_g_id_int
                                         + " and o_id::Integer = " + Cmb_o_id_int
@@ -9529,7 +9633,7 @@ namespace rk_seikyu
                                     // delete
                                     da.DeleteCommand = new NpgsqlCommand
                                     (
-                                           "delete from t_shinzoku_kankei"
+                                           "delete FROM t_shinzoku_kankei"
                                         + " where"
                                         + " sk_id=:sk_id;"
                                         , m_conn
