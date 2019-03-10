@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_seikyu));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.seikyu = new rk_seikyu.seikyu();
             this.bindingNavigatorSeikyu = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
@@ -253,9 +253,10 @@
             this.dataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataTableTableAdapter = new rk_seikyu.o_id_dsTableAdapters.DataTableTableAdapter();
             this.tableAdapterManager = new rk_seikyu.o_id_dsTableAdapters.TableAdapterManager();
-            this.cmb_o_id = new System.Windows.Forms.ComboBox();
             this.cmb_o_id_text = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBoxO_id = new System.Windows.Forms.TextBox();
+            this.textBoxO_name = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.seikyu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorSeikyu)).BeginInit();
             this.bindingNavigatorSeikyu.SuspendLayout();
@@ -570,8 +571,8 @@
             // c5
             // 
             this.c5.DataPropertyName = "c5";
-            dataGridViewCellStyle3.NullValue = null;
-            this.c5.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.NullValue = null;
+            this.c5.DefaultCellStyle = dataGridViewCellStyle1;
             this.c5.HeaderText = "c5";
             this.c5.Name = "c5";
             // 
@@ -722,9 +723,9 @@
             // time_stamp
             // 
             this.time_stamp.DataPropertyName = "time_stamp";
-            dataGridViewCellStyle4.Format = "G";
-            dataGridViewCellStyle4.NullValue = null;
-            this.time_stamp.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Format = "G";
+            dataGridViewCellStyle2.NullValue = null;
+            this.time_stamp.DefaultCellStyle = dataGridViewCellStyle2;
             this.time_stamp.HeaderText = "time_stamp";
             this.time_stamp.Name = "time_stamp";
             this.time_stamp.Visible = false;
@@ -1918,7 +1919,7 @@
             this.cmd_serv.TabIndex = 22;
             this.cmd_serv.Text = "設定";
             this.cmd_serv.UseVisualStyleBackColor = true;
-            this.cmd_serv.Click += new System.EventHandler(this.CmdSyubetsu_Click);
+            this.cmd_serv.Click += new System.EventHandler(this.CmdSyubetsuMod_Click);
             // 
             // cmdNenMod
             // 
@@ -1938,7 +1939,7 @@
             this.cmdGyoumu.TabIndex = 24;
             this.cmdGyoumu.Text = "設定";
             this.cmdGyoumu.UseVisualStyleBackColor = true;
-            this.cmdGyoumu.Click += new System.EventHandler(this.CmdGyoumu_Click);
+            this.cmdGyoumu.Click += new System.EventHandler(this.CmdGyoumuMod_Click);
             // 
             // o_id_ds1
             // 
@@ -1960,18 +1961,6 @@
             this.tableAdapterManager.DataTableTableAdapter = this.dataTableTableAdapter;
             this.tableAdapterManager.UpdateOrder = rk_seikyu.o_id_dsTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
-            // cmb_o_id
-            // 
-            this.cmb_o_id.DataSource = this.dataTableBindingSource;
-            this.cmb_o_id.DisplayMember = "o_name";
-            this.cmb_o_id.FormattingEnabled = true;
-            this.cmb_o_id.Location = new System.Drawing.Point(63, 78);
-            this.cmb_o_id.Name = "cmb_o_id";
-            this.cmb_o_id.Size = new System.Drawing.Size(300, 20);
-            this.cmb_o_id.TabIndex = 24;
-            this.cmb_o_id.ValueMember = "o_id";
-            this.cmb_o_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_o_id_SelectedIndexChanged);
-            // 
             // cmb_o_id_text
             // 
             this.cmb_o_id_text.Location = new System.Drawing.Point(422, 79);
@@ -1980,22 +1969,40 @@
             this.cmb_o_id_text.TabIndex = 25;
             this.cmb_o_id_text.Visible = false;
             // 
-            // textBox2
+            // button1
             // 
-            this.textBox2.Location = new System.Drawing.Point(369, 78);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(30, 19);
-            this.textBox2.TabIndex = 26;
+            this.button1.Location = new System.Drawing.Point(357, 78);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(37, 20);
+            this.button1.TabIndex = 26;
+            this.button1.Text = "設定";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.CmdO_idMod_Click);
+            // 
+            // textBoxO_id
+            // 
+            this.textBoxO_id.Location = new System.Drawing.Point(63, 103);
+            this.textBoxO_id.Name = "textBoxO_id";
+            this.textBoxO_id.Size = new System.Drawing.Size(290, 19);
+            this.textBoxO_id.TabIndex = 27;
+            // 
+            // textBoxO_name
+            // 
+            this.textBoxO_name.Location = new System.Drawing.Point(63, 79);
+            this.textBoxO_name.Name = "textBoxO_name";
+            this.textBoxO_name.Size = new System.Drawing.Size(290, 19);
+            this.textBoxO_name.TabIndex = 28;
             // 
             // Form_seikyu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1604, 881);
-            this.Controls.Add(this.textBox2);
+            this.ClientSize = new System.Drawing.Size(1621, 898);
+            this.Controls.Add(this.textBoxO_name);
+            this.Controls.Add(this.textBoxO_id);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.cmb_o_id_text);
-            this.Controls.Add(this.cmb_o_id);
             this.Controls.Add(this.cmdGyoumu);
             this.Controls.Add(this.cmdNenMod);
             this.Controls.Add(this.cmd_serv);
@@ -2280,9 +2287,10 @@
         private System.Windows.Forms.BindingSource dataTableBindingSource;
         private o_id_dsTableAdapters.DataTableTableAdapter dataTableTableAdapter;
         private o_id_dsTableAdapters.TableAdapterManager tableAdapterManager;
-        private System.Windows.Forms.ComboBox cmb_o_id;
         private System.Windows.Forms.TextBox cmb_o_id_text;
         internal System.Windows.Forms.ComboBox cmb_nen;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBoxO_id;
+        private System.Windows.Forms.TextBox textBoxO_name;
     }
 }

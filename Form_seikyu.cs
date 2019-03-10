@@ -85,30 +85,94 @@ namespace rk_seikyu
         public int VarMinute { get; set; }
         public int VarSecond { get; set; }
 
-        public string Cmb_o_id_str_TEXT { get => cmb_o_id.SelectedIndex.ToString(); set => cmb_o_id.Text = value; }
+        public int I { get; set; }
+
+        //public string Cmb_o_id_str_TEXT { get => cmb_o_id.SelectedIndex.ToString(); set => cmb_o_id.Text = value; }
         private static Form_seikyu _form_seikyu_Instance;
 
         public String cmb_o_id_str;
+        public String new_o_id_str;
 
         public Form_seikyu()
         {
             InitializeComponent();
             _form_seikyu_Instance = this;
-
         }
 
         //Form_seikyuインスタンスを設定、取得する。
-        public static Form_seikyu Form_seikyu_Instance { get => _form_seikyu_Instance; set => _form_seikyu_Instance = value; }
-        //文字列変数cmb_o_id_Textへコンボボックスcmb_o_idの値を設定、取得する。
-        public string Cmb_o_id_Text { get => cmb_o_id.SelectedIndex.ToString(); set => cmb_o_id.Text = value; }
-        public string Cmb_o_id_Item { get => cmb_o_id.Text; set => cmb_o_id.Text = value; }
+        public static Form_seikyu Form_seikyu_Instance
+        {
+            get
+            {
+                return _form_seikyu_Instance;
+            }
+            set
+            {
+                _form_seikyu_Instance = value;
+            }
+        }
+
+        ////文字列変数cmb_o_id_Textへコンボボックスcmb_o_idの値を設定、取得する。
+        //public string Cmb_o_id_Text { get => cmb_o_id.SelectedIndex.ToString(); set => cmb_o_id.Text = value; }
+        ////public string Cmb_o_id_Text { get => Cmb_o_id_int.ToString(); set => cmb_o_id.Text = value; }
+        //public string Cmb_o_id_Item { get => cmb_o_id.Text; set => cmb_o_id.Text = value; }
+
+        public string TextBoxO_id
+        {
+            get
+            {
+                return textBoxO_id.Text;
+            }
+            set
+            {
+                textBoxO_id.Text = value;
+            }
+        }
+
+        public string TextBoxO_name
+        {
+            get
+            {
+                return textBoxO_name.Text;
+            }
+            set
+            {
+                textBoxO_name.Text = value;
+            }
+        }
 
         private void Form_seikyu_Load(object sender, EventArgs e)
         {
+            m_conn.Open();
+
+            NpgsqlCommand command = new NpgsqlCommand("SELECT o_id, o_name FROM t_office WHERE flg = '1';", m_conn);
+
+            try
+            {
+                NpgsqlDataReader dr = command.ExecuteReader();
+                while (dr.Read())
+                {
+                    for (I = 0; I < dr.FieldCount; I++)
+                    {
+                        this.TextBoxO_id = dr[0].ToString();
+                        this.TextBoxO_name = dr[1].ToString();
+                        //Console.Write("i = {0} \t", dr[0]);
+                        //Console.Write("i = {0} \t", dr[1]);
+                    }
+                    Console.WriteLine();
+                }
+
+            }
+            finally
+            {
+                m_conn.Close();
+            }
+
             o_id_da.SelectCommand = new NpgsqlCommand
             (
                     "SELECT"
                 + " o_id"
+                + ", flg"
                 + ", o_number"
                 + ", o_name"
                 + ", o_p_code"
@@ -118,6 +182,7 @@ namespace rk_seikyu
                 + ", o_stuff"
                 + " FROM"
                 + " t_office"
+                + " WHERE flg = '1'"
                 + " ORDER BY o_id;",
                 m_conn
             );
@@ -164,8 +229,11 @@ namespace rk_seikyu
                 + ", o_id"
                 + " FROM"
                 + " t_syubetsu"
-                + " WHERE o_id = '" + Cmb_o_id_int + "'"
+                //+ " WHERE o_id = '" + Cmb_o_id_int + "'"
+                + " WHERE o_id = '" + TextBoxO_id + "'"
+                //+ " WHERE o_id = '1'"
                 + " AND s_id = '" + Cmb_s_id_int + "'"
+                //+ " AND s_id = '1'"
                 + " ORDER BY s_id;",
                     m_conn
             );
@@ -227,9 +295,9 @@ namespace rk_seikyu
             cmb_tsuki.DisplayMember = "tsuki";
             cmb_tsuki.ValueMember = "tsuki";
 
-            cmb_o_id.DataSource = o_id_ds.Tables[0]; ;
-            cmb_o_id.DisplayMember = "o_name";
-            cmb_o_id.ValueMember = "o_id";
+            //cmb_o_id.DataSource = o_id_ds.Tables[0]; ;
+            //cmb_o_id.DisplayMember = "o_name";
+            //cmb_o_id.ValueMember = "o_id";
 
             cmb_c4.DataSource = c4_ds.Tables[0];
             cmb_c4.DisplayMember = "c4";
@@ -7059,34 +7127,6 @@ namespace rk_seikyu
             }
         }
 
-        private void CmdSyubetsu_Click(object sender, EventArgs e)
-        {
-            Form_syubetsu Form = new Form_syubetsu
-            {
-                WindowState = FormWindowState.Maximized
-            };
-            Form.ShowDialog();
-        }
-
-        private void CmdNenMod_Click(object sender, EventArgs e)
-        {
-            Form_nen Form = new Form_nen
-            {
-                WindowState = FormWindowState.Maximized
-            };
-            Form.ShowDialog();
-
-        }
-
-        private void CmdGyoumu_Click(object sender, EventArgs e)
-        {
-            Form_gyoumu Form = new Form_gyoumu
-            {
-                WindowState = FormWindowState.Maximized
-            };
-            Form.ShowDialog();
-        }
-
         private void SettingsRowUpdated(Object sender, NpgsqlRowUpdatedEventArgs e)
         {
             if (e.Status == UpdateStatus.Continue)
@@ -7137,34 +7177,21 @@ namespace rk_seikyu
 
         private void Cmb_o_id_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Cmb_o_id_int = cmb_o_id.SelectedIndex + 1;
-            Console.WriteLine("Cmb_o_id_int = " + Cmb_o_id_int);
+            //Cmb_o_id_int = cmb_o_id.SelectedIndex + 1;
+            //Console.WriteLine("Cmb_o_id_int = " + Cmb_o_id_int);
+            if (int.TryParse(TextBoxO_id, out int z))
+            {
+                Cmb_o_id_int = z;
+                Console.WriteLine(z);
+            }
+            else
+            {
+                Console.WriteLine("数値に変換できません");
+            }
 
-            // settings_da.SelectCommand = new NpgsqlCommand(
-            //     "select"
-            //     + " id"
-            //     + ", o_id_val"
-            //     + " FROM t_settings;"
-            //     , m_conn);
 
-            // settings_da.InsertCommand = new NpgsqlCommand(
-            //     "insert into t_settings ("
-            //     + " o_id_val"
-            //     + " ) values ("
-            //     + "'" + Cmb_o_id_int.ToString() + "'"
-            //     + ");"
-            //     , m_conn);
-            // settings_da.InsertCommand.Parameters.Add(new NpgsqlParameter("id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
+            textBoxO_id.Text = Cmb_o_id_int.ToString();
 
-            // settings_da.UpdateCommand = new NpgsqlCommand(
-            //     "update t_settings"
-            //     + " set o_id_val"
-            //     + ";"
-            //     , m_conn);
-            // settings_da.UpdateCommand.Parameters.Add(new NpgsqlParameter("id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
-            // settings_da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id_val", NpgsqlTypes.NpgsqlDbType.Integer, 0, "o_id_val", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-
-            //settings_ds.AcceptChanges();
             m_conn.Open();
             using (var tran = m_conn.BeginTransaction())
             {
@@ -7193,26 +7220,50 @@ namespace rk_seikyu
             }
             m_conn.Close();
 
+            m_conn.Open();
+
+            NpgsqlCommand command = new NpgsqlCommand("SELECT o_id, o_name FROM t_office WHERE flg = '1';", m_conn);
+
+            try
+            {
+                NpgsqlDataReader dr = command.ExecuteReader();
+                while (dr.Read())
+                {
+                    for (I = 0; I < dr.FieldCount; I++)
+                    {
+                        this.TextBoxO_id = dr[0].ToString();
+                        this.TextBoxO_name = dr[1].ToString();
+                        //Console.Write("i = {0} \t", dr[0]);
+                        //Console.Write("i = {0} \t", dr[1]);
+                    }
+                    Console.WriteLine();
+                }
+
+            }
+            finally
+            {
+                m_conn.Close();
+            }
+
             settings_da.RowUpdated += new NpgsqlRowUpdatedEventHandler(SettingsRowUpdated);
 
             s_id_da.SelectCommand = new NpgsqlCommand
             (
-                "select"
+                "SELECT"
             + " s_id"
             + ", syubetsu"
             + ", shisetsumei"
             + ", o_id"
             + " FROM"
             + " t_syubetsu"
-            + " where o_id = '" + Cmb_o_id_int + "'"
-            + " order by s_id;",
+            + " WHERE o_id = '" + Cmb_o_id_int + "'"
+            + " ORDER BY s_id;",
                 m_conn
             );
 
             if (s_id_ds.Tables["t_syubetsu"] != null)
                 s_id_ds.Tables["t_syubetsu"].Clear();
             s_id_da.Fill(s_id_ds, "t_syubetsu");
-
 
             Cmb_s_id_int = cmb_s_id.SelectedIndex + 1;
             Console.WriteLine("cmb_s_id_int = " + Cmb_s_id_int);
@@ -9669,6 +9720,43 @@ namespace rk_seikyu
                     }
                     break;
             }
+        }
+
+        private void CmdNenMod_Click(object sender, EventArgs e)
+        {
+            Form_nen Form = new Form_nen
+            {
+                WindowState = FormWindowState.Maximized
+            };
+            Form.ShowDialog();
+
+        }
+
+        private void CmdGyoumuMod_Click(object sender, EventArgs e)
+        {
+            Form_gyoumu Form = new Form_gyoumu
+            {
+                WindowState = FormWindowState.Maximized
+            };
+            Form.ShowDialog();
+        }
+
+        private void CmdSyubetsuMod_Click(object sender, EventArgs e)
+        {
+            Form_syubetsu Form = new Form_syubetsu
+            {
+                WindowState = FormWindowState.Maximized
+            };
+            Form.ShowDialog();
+        }
+
+        private void CmdO_idMod_Click(object sender, EventArgs e)
+        {
+            Form_office Form = new Form_office
+            {
+                WindowState = FormWindowState.Maximized
+            };
+            Form.ShowDialog();
         }
     }
 }

@@ -178,6 +178,12 @@
     <Compile Include="Form_nen.Designer.cs">
       <DependentUpon>Form_nen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_office.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_office.Designer.cs">
+      <DependentUpon>Form_office.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_prn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -316,6 +322,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_nen.resx">
       <DependentUpon>Form_nen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_office.resx">
+      <DependentUpon>Form_office.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_prn.resx">
       <DependentUpon>Form_prn.cs</DependentUpon>
