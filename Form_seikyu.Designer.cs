@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_seikyu));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.seikyu = new rk_seikyu.seikyu();
             this.bindingNavigatorSeikyu = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
@@ -571,8 +571,8 @@
             // c5
             // 
             this.c5.DataPropertyName = "c5";
-            dataGridViewCellStyle1.NullValue = null;
-            this.c5.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.NullValue = null;
+            this.c5.DefaultCellStyle = dataGridViewCellStyle3;
             this.c5.HeaderText = "c5";
             this.c5.Name = "c5";
             // 
@@ -723,9 +723,9 @@
             // time_stamp
             // 
             this.time_stamp.DataPropertyName = "time_stamp";
-            dataGridViewCellStyle2.Format = "G";
-            dataGridViewCellStyle2.NullValue = null;
-            this.time_stamp.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Format = "G";
+            dataGridViewCellStyle4.NullValue = null;
+            this.time_stamp.DefaultCellStyle = dataGridViewCellStyle4;
             this.time_stamp.HeaderText = "time_stamp";
             this.time_stamp.Name = "time_stamp";
             this.time_stamp.Visible = false;
@@ -1985,6 +1985,7 @@
             this.textBoxO_id.Name = "textBoxO_id";
             this.textBoxO_id.Size = new System.Drawing.Size(290, 19);
             this.textBoxO_id.TabIndex = 27;
+            this.textBoxO_id.TextChanged += new System.EventHandler(this.textBoxO_id_TextChanged);
             // 
             // textBoxO_name
             // 

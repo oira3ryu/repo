@@ -176,6 +176,37 @@ namespace rk_seikyu
                 update_count += da.Update(ds.Tables["o_id_ds"].Select(null, null, DataViewRowState.Deleted));
                 update_count += da.Update(ds.Tables["o_id_ds"].Select(null, null, DataViewRowState.ModifiedCurrent));
                 update_count += da.Update(ds.Tables["o_id_ds"].Select(null, null, DataViewRowState.Added));
+
+                m_conn.Open();
+                using (var tran = m_conn.BeginTransaction())
+                {
+                    //データ登録
+                    //var cmd = new NpgsqlCommand(@"insert into t_settings (id, o_id_val) values (:id, '" + Cmb_o_id_int.ToString() + "')", m_conn);
+                    var cmd = new NpgsqlCommand(@"UPDATE t_settings SET o_id_val = '" + Cmb_o_id_int.ToString() + "' WHERE id = 1;", m_conn);
+                    //cmd.Parameters.Add(new NpgsqlParameter("id", DbType.Int32) { Value = 1 });
+                    //cmd.Parameters.Add(new NpgsqlParameter("o_id_val", DbType.String) { Value = "1" });
+                    cmd.ExecuteNonQuery();
+                    //データ検索
+                    var dataAdapter = new NpgsqlDataAdapter(@"SELECT * FROM t_settings", m_conn);
+                    var dataSet = new DataSet();
+                    dataAdapter.Fill(dataSet);
+
+                    DataTable dt = dataSet.Tables[0];
+                    Console.WriteLine("コミット前データ件数：{0}", dt.Rows.Count);
+
+                    // コミットして、再検索
+                    tran.Commit();
+
+                    dataSet = new DataSet();
+                    dataAdapter.Fill(dataSet);
+
+                    dt = dataSet.Tables[0];
+                    Console.WriteLine("コミット後データ件数：{0}", dt.Rows.Count);
+                }
+                m_conn.Close();
+
+
+
             }
             catch (Exception ex)
             {

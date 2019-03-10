@@ -143,30 +143,71 @@ namespace rk_seikyu
 
         private void Form_seikyu_Load(object sender, EventArgs e)
         {
-            m_conn.Open();
+            //m_conn.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("SELECT o_id, o_name FROM t_office WHERE flg = '1';", m_conn);
+            //NpgsqlCommand command = new NpgsqlCommand("SELECT o_id, o_name FROM t_office WHERE flg = '1';", m_conn);
 
-            try
-            {
-                NpgsqlDataReader dr = command.ExecuteReader();
-                while (dr.Read())
-                {
-                    for (I = 0; I < dr.FieldCount; I++)
-                    {
-                        this.TextBoxO_id = dr[0].ToString();
-                        this.TextBoxO_name = dr[1].ToString();
-                        //Console.Write("i = {0} \t", dr[0]);
-                        //Console.Write("i = {0} \t", dr[1]);
-                    }
-                    Console.WriteLine();
-                }
+            //try
+            //{
+            //    NpgsqlDataReader dr = command.ExecuteReader();
+            //    while (dr.Read())
+            //    {
+            //        for (I = 0; I < dr.FieldCount; I++)
+            //        {
+            //            this.TextBoxO_id = dr[0].ToString();
+            //            this.TextBoxO_name = dr[1].ToString();
+            //            //Console.Write("i = {0} \t", dr[0]);
+            //            //Console.Write("i = {0} \t", dr[1]);
+            //        }
+            //        Console.WriteLine();
+            //    }
 
-            }
-            finally
-            {
-                m_conn.Close();
-            }
+            //}
+            //finally
+            //{
+            //    m_conn.Close();
+            //}
+
+            //if (int.TryParse(TextBoxO_id, out int z))
+            //{
+            //    Cmb_o_id_int = z;
+            //    Console.WriteLine(z);
+            //}
+            //else
+            //{
+            //    Console.WriteLine("数値に変換できません");
+            //}
+
+            //textBoxO_id.Text = Cmb_o_id_int.ToString();
+
+
+            //m_conn.Open();
+
+            //NpgsqlCommand command = new NpgsqlCommand("SELECT o_id, o_name FROM t_office WHERE flg = '1';", m_conn);
+
+            //try
+            //{
+            //    NpgsqlDataReader dr = command.ExecuteReader();
+            //    while (dr.Read())
+            //    {
+            //        for (I = 0; I < dr.FieldCount; I++)
+            //        {
+            //            this.TextBoxO_id = dr[0].ToString();
+            //            this.TextBoxO_name = dr[1].ToString();
+            //            Console.Write("Form_Seikyu_I = {0} \t", dr[0]);
+            //            Console.Write("Form_Seikyu_I = {0} \t", dr[1]);
+            //        }
+            //        Console.WriteLine();
+            //    }
+
+            //}
+            //finally
+            //{
+            //    m_conn.Close();
+            //}
+
+
+
 
             o_id_da.SelectCommand = new NpgsqlCommand
             (
@@ -287,33 +328,33 @@ namespace rk_seikyu
 
             req_id_da.Fill(req_id_ds, "t_req");
 
-            cmb_nen.DataSource = nends.Tables[0];
             cmb_nen.DisplayMember = "nen";
             cmb_nen.ValueMember = "nen";
+            cmb_nen.DataSource = nends.Tables[0];
 
-            cmb_tsuki.DataSource = tsukids.Tables[0];
             cmb_tsuki.DisplayMember = "tsuki";
             cmb_tsuki.ValueMember = "tsuki";
+            cmb_tsuki.DataSource = tsukids.Tables[0];
 
             //cmb_o_id.DataSource = o_id_ds.Tables[0]; ;
             //cmb_o_id.DisplayMember = "o_name";
             //cmb_o_id.ValueMember = "o_id";
 
-            cmb_c4.DataSource = c4_ds.Tables[0];
             cmb_c4.DisplayMember = "c4";
             cmb_c4.ValueMember = "c4";
+            cmb_c4.DataSource = c4_ds.Tables[0];
 
-            cmb_s_id.DataSource = s_id_ds.Tables[0]; ;
             cmb_s_id.DisplayMember = "syubetsu";
             cmb_s_id.ValueMember = "s_id";
+            cmb_s_id.DataSource = s_id_ds.Tables[0]; ;
 
-            cmb_g_id.DataSource = g_id_ds.Tables[0]; ;
             cmb_g_id.DisplayMember = "gyoumu";
             cmb_g_id.ValueMember = "g_id";
+            cmb_g_id.DataSource = g_id_ds.Tables[0]; ;
 
-            cmb_req_id.DataSource = req_id_ds.Tables[0]; ;
             cmb_req_id.DisplayMember = "name1";
             cmb_req_id.ValueMember = "req_id";
+            cmb_req_id.DataSource = req_id_ds.Tables[0]; ;
 
             switch (Cmb_g_id_int)
             {
@@ -7179,71 +7220,7 @@ namespace rk_seikyu
         {
             //Cmb_o_id_int = cmb_o_id.SelectedIndex + 1;
             //Console.WriteLine("Cmb_o_id_int = " + Cmb_o_id_int);
-            if (int.TryParse(TextBoxO_id, out int z))
-            {
-                Cmb_o_id_int = z;
-                Console.WriteLine(z);
-            }
-            else
-            {
-                Console.WriteLine("数値に変換できません");
-            }
 
-
-            textBoxO_id.Text = Cmb_o_id_int.ToString();
-
-            m_conn.Open();
-            using (var tran = m_conn.BeginTransaction())
-            {
-                //データ登録
-                //var cmd = new NpgsqlCommand(@"insert into t_settings (id, o_id_val) values (:id, '" + Cmb_o_id_int.ToString() + "')", m_conn);
-                var cmd = new NpgsqlCommand(@"UPDATE t_settings SET o_id_val = '" + Cmb_o_id_int.ToString() + "' WHERE id = 1;", m_conn);
-                //cmd.Parameters.Add(new NpgsqlParameter("id", DbType.Int32) { Value = 1 });
-                //cmd.Parameters.Add(new NpgsqlParameter("o_id_val", DbType.String) { Value = "1" });
-                cmd.ExecuteNonQuery();
-                //データ検索
-                var dataAdapter = new NpgsqlDataAdapter(@"SELECT * FROM t_settings", m_conn);
-                var dataSet = new DataSet();
-                dataAdapter.Fill(dataSet);
-
-                DataTable dt = dataSet.Tables[0];
-                Console.WriteLine("コミット前データ件数：{0}", dt.Rows.Count);
-
-                // コミットして、再検索
-                tran.Commit();
-
-                dataSet = new DataSet();
-                dataAdapter.Fill(dataSet);
-
-                dt = dataSet.Tables[0];
-                Console.WriteLine("コミット後データ件数：{0}", dt.Rows.Count);
-            }
-            m_conn.Close();
-
-            m_conn.Open();
-
-            NpgsqlCommand command = new NpgsqlCommand("SELECT o_id, o_name FROM t_office WHERE flg = '1';", m_conn);
-
-            try
-            {
-                NpgsqlDataReader dr = command.ExecuteReader();
-                while (dr.Read())
-                {
-                    for (I = 0; I < dr.FieldCount; I++)
-                    {
-                        this.TextBoxO_id = dr[0].ToString();
-                        this.TextBoxO_name = dr[1].ToString();
-                        //Console.Write("i = {0} \t", dr[0]);
-                        //Console.Write("i = {0} \t", dr[1]);
-                    }
-                    Console.WriteLine();
-                }
-
-            }
-            finally
-            {
-                m_conn.Close();
-            }
 
             settings_da.RowUpdated += new NpgsqlRowUpdatedEventHandler(SettingsRowUpdated);
 
@@ -9757,6 +9734,47 @@ namespace rk_seikyu
                 WindowState = FormWindowState.Maximized
             };
             Form.ShowDialog();
+        }
+
+        private void textBoxO_id_TextChanged(object sender, EventArgs e)
+        {
+            if (int.TryParse(TextBoxO_id, out int z))
+            {
+                Cmb_o_id_int = z;
+                Console.WriteLine(z);
+            }
+            else
+            {
+                Console.WriteLine("数値に変換できません");
+            }
+
+            textBoxO_id.Text = Cmb_o_id_int.ToString();
+
+
+            m_conn.Open();
+
+            NpgsqlCommand command = new NpgsqlCommand("SELECT o_id, o_name FROM t_office WHERE flg = '1';", m_conn);
+
+            try
+            {
+                NpgsqlDataReader dr = command.ExecuteReader();
+                while (dr.Read())
+                {
+                    for (I = 0; I < dr.FieldCount; I++)
+                    {
+                        this.TextBoxO_id = dr[0].ToString();
+                        this.TextBoxO_name = dr[1].ToString();
+                        Console.Write("Form_Seikyu_textBoxO_id_TextChanged_I = {0} \t", dr[0]);
+                        Console.Write("Form_Seikyu_textBoxO_id_TextChanged_I = {0} \t", dr[1]);
+                    }
+                    Console.WriteLine();
+                }
+
+            }
+            finally
+            {
+                m_conn.Close();
+            }
         }
     }
 }
