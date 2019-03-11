@@ -17,7 +17,9 @@ namespace rk_seikyu
         private NpgsqlDataAdapter da = new NpgsqlDataAdapter();
         private DataSet ds = new DataSet();
         private DataSet Newds = new DataSet();
+        private NpgsqlDataAdapter s_id_da = new NpgsqlDataAdapter();
 
+        private DataSet s_id_ds = new DataSet();
         public int Cmb_o_id_int { get; set; }
         private NpgsqlDataAdapter o_id_da = new NpgsqlDataAdapter();
         private Form_seikyu form_seikyu_Instance;
@@ -204,9 +206,6 @@ namespace rk_seikyu
                     Console.WriteLine("コミット後データ件数：{0}", dt.Rows.Count);
                 }
                 m_conn.Close();
-
-
-
             }
             catch (Exception ex)
             {
@@ -350,7 +349,6 @@ namespace rk_seikyu
             {
                 m_conn.Close();
             }
-
         }
 
         private void Form_office_FormClosing(object sender, FormClosingEventArgs e)
