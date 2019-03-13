@@ -57,33 +57,20 @@ namespace rk_seikyu
 
         public string cmb_o_id_str;
         public string cmb_o_id_item;
+        public string Form_Seikyu_TextBoxO_id;
 
         private Form_seikyu form_seikyu_Instance;
 
         public Form_rep()
         {
             InitializeComponent();
-
             //Form_seikyuのインスタンスを取得
             form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
             //Form_seikyuのテキストボックス文字列を
-            //Form_prnの文字列変数cmb_o_id_strへ設定
-            cmb_o_id_str = form_seikyu_Instance.TextBoxO_id;
+            //Form_prnの文字列変数Form_Seikyu_TextBoxO_idへ設定
+            Form_Seikyu_TextBoxO_id = form_seikyu_Instance.TextBoxO_id;
             cmb_o_id_item = form_seikyu_Instance.TextBoxO_name;
             Console.WriteLine("cmb_o_idからのメンバーは、" + cmb_o_id_item);
-
-            //Form_seikyuのコンボボックスcmb_o_idからの変数cmb_o_id_strをint型に変換して1加算
-            int i;
-            if (int.TryParse(cmb_o_id_str, out i))
-            {
-                Cmb_o_id_int = i + 1;
-                cmb_o_id_str = Cmb_o_id_int.ToString();
-                Console.WriteLine("cmb_o_idからの値は、" + cmb_o_id_str);
-            }
-            else
-            {
-                Console.WriteLine("cmb_o_idからの値を数値に変換できません");
-            }
         }
 
         private void Form_rep_Load(object sender, EventArgs e)
@@ -106,7 +93,7 @@ namespace rk_seikyu
             
             da.SelectCommand = new NpgsqlCommand
             (
-                "select"
+                "SELECT"
 				 + " pt_id"
 				 + ", s_id"
                  + ", o_id"
@@ -121,12 +108,12 @@ namespace rk_seikyu
 				 + ", ac2"
 				 + ", ac3"
 				 + ", rep_id"
-                 + " from"
+                 + " FROM"
                  + " t_rep"
-                 + " where s_id::Integer = " + Cmb_s_id_int
-                 + " and o_id::Integer = " + cmb_o_id_str
-                 + " and pt_id::Integer = :pt_id"
-                 + " order by rep_id"
+                 + " WHERE s_id::Integer = " + Cmb_s_id_int
+                 + " AND o_id::Text = '" + Form_Seikyu_TextBoxO_id + "'"
+                 + " AND pt_id::Integer = :pt_id"
+                 + " ORDER BY rep_id"
                 ,m_conn
             );
             if (cmb_s_id.SelectedItem == null)
@@ -158,7 +145,7 @@ namespace rk_seikyu
             // insert
             da.InsertCommand = new NpgsqlCommand
             (
-                 "insert into t_rep ("
+                 "INSERT INTO t_rep ("
 				 + " pt_id"
 				 + ", s_id"
 				 + ", col0"
@@ -171,7 +158,7 @@ namespace rk_seikyu
 				 + ", ac1"
 				 + ", ac2"
 				 + ", ac3"
-                    + " ) values ("
+                    + " ) VALUES ("
 				 + " :pt_id"
 				 + ", :s_id"
 				 + ", :col0"
@@ -202,7 +189,7 @@ namespace rk_seikyu
 
             // update
             da.UpdateCommand = new NpgsqlCommand(
-                "update t_rep set"
+                "UPDATE t_rep SET"
 				 + " pt_id = :pt_id"
 				 + ", s_id = :s_id"
 				 + ", col0 = :col0"
@@ -215,8 +202,8 @@ namespace rk_seikyu
 				 + ", ac1 = :ac1"
 				 + ", ac2 = :ac2"
 				 + ", ac3 = :ac3"
-                + " where"
-                + " rep_id=:rep_id"
+                + " WHERE"
+                + " rep_id = :rep_id"
                 ,m_conn
                 );
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("pt_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "pt_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -236,9 +223,9 @@ namespace rk_seikyu
             // delete
             da.DeleteCommand = new NpgsqlCommand
             (
-                   "delete from t_rep"
-                + " where"
-                + " rep_id=:rep_id"
+                   "DELETE FROM t_rep"
+                + " WHERE"
+                + " rep_id = :rep_id"
                 ,m_conn
             );
             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("rep_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "rep_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -248,46 +235,45 @@ namespace rk_seikyu
 
             n_id_da.SelectCommand = new NpgsqlCommand
             (
-                   "select"
+                   "SELECT"
                 + " n_id"
                 + ", nen"
-                + " from t_nen"
-                + " order by n_id"
+                + " FROM t_nen"
+                + " ORDER BY n_id"
                   ,m_conn
             );
 
             t_id_da.SelectCommand = new NpgsqlCommand
             (
-                   "select"
+                   "SELECT"
                   + " t_id"
                   + ", tsuki"
-                  + " from t_tsuki"
-                  + " order by t_id"
+                  + " FROM t_tsuki"
+                  + " ORDER BY t_id"
                     ,m_conn
             );
 
             s_id_da.SelectCommand = new NpgsqlCommand
             (
-                   "select"
+                   "SELECT"
                 + " s_id"
                 + ", syubetsu"
                 + ", shisetsumei"
                 + ", o_id"
-                + " from"
+                + " FROM"
                 + " t_syubetsu"
-                + " where o_id = " + cmb_o_id_str
-                //+ " and s_id = '" + Cmb_s_id_int + "'"
-                + " order by s_id;",
+                + " WHERE o_id::Text = '" + Form_Seikyu_TextBoxO_id + "'"
+                + " ORDER BY s_id;",
                     m_conn
             );
 
             pt_id_da.SelectCommand = new NpgsqlCommand
             (
-                   "select"
+                   "SELECT"
                   + " pt_id"
                   + ", syubetsu"
-                  + " from t_shiharai_syubetsu"
-                  + " order by pt_id",
+                  + " FROM t_shiharai_syubetsu"
+                  + " ORDER BY pt_id",
                     m_conn
             );
 
@@ -357,7 +343,7 @@ namespace rk_seikyu
                 {
                     NpgsqlCommand cmd = new NpgsqlCommand
                 (
-                "select"
+                "SELECT"
 				 + " pt_id"
 				 + ", s_id"
 				 + ", col0"
@@ -371,10 +357,10 @@ namespace rk_seikyu
 				 + ", ac2"
 				 + ", ac3"
 				 + ", rep_id"
-                + " from"
+                + " FROM"
                 + " t_rep"
-                + " where rep_id=currval('t_rep_rep_id_seq')"
-                + " order by rep_id"
+                + " WHERE rep_id = currval('t_rep_rep_id_seq')"
+                + " ORDER BY rep_id"
                 , m_conn
                  );
                     try
@@ -406,7 +392,7 @@ namespace rk_seikyu
                 {
                     NpgsqlCommand cmd = new NpgsqlCommand
                 (
-                "select"
+                "SELECT"
 				 + " pt_id"
 				 + ", s_id"
 				 + ", col0"
@@ -420,10 +406,10 @@ namespace rk_seikyu
 				 + ", ac2"
 				 + ", ac3"
 				 + ", rep_id"
-                + " from"
+                + " FROM"
                 + " t_rep"
-                + " where rep_id=" + e.Row["rep_id"].ToString()
-                + " order by rep_id"
+                + " WHERE rep_id = " + e.Row["rep_id"].ToString()
+                + " ORDER BY rep_id"
                 ,m_conn
                     );
                     try
@@ -559,7 +545,7 @@ namespace rk_seikyu
 
             da.SelectCommand = new NpgsqlCommand
             (
-                "select"
+                "SELECT"
                  + " pt_id"
                  + ", s_id"
                  + ", o_id "
@@ -574,12 +560,12 @@ namespace rk_seikyu
                  + ", ac2"
                  + ", ac3"
                  + ", rep_id"
-                 + " from"
+                 + " FROM"
                  + " t_rep"
-                 + " where s_id::Integer = " + Cmb_s_id_int
-                 + " and o_id::Integer = " + cmb_o_id_str
-                 + " and pt_id::Integer = :pt_id"
-                 + " order by rep_id"
+                 + " WHERE s_id::Integer = " + Cmb_s_id_int
+                 + " AND o_id::Text = '" + Form_Seikyu_TextBoxO_id + "'"
+                 + " AND pt_id::Integer = :pt_id"
+                 + " ORDER BY rep_id"
                 , m_conn
             );
             if (cmb_s_id.SelectedItem == null)
@@ -611,7 +597,7 @@ namespace rk_seikyu
             // insert
             da.InsertCommand = new NpgsqlCommand
             (
-                 "insert into t_rep ("
+                 "INSERT INTO t_rep ("
                  + " pt_id"
                  + ", s_id"
                  + ", col0"
@@ -624,7 +610,7 @@ namespace rk_seikyu
                  + ", ac1"
                  + ", ac2"
                  + ", ac3"
-                    + " ) values ("
+                    + " ) VALUES ("
                  + " :pt_id"
                  + ", :s_id"
                  + ", :col0"
@@ -655,7 +641,7 @@ namespace rk_seikyu
 
             // update
             da.UpdateCommand = new NpgsqlCommand(
-                "update t_rep set"
+                "UPDATE t_rep SET"
                  + " pt_id = :pt_id"
                  + ", s_id = :s_id"
                  + ", col0 = :col0"
@@ -668,8 +654,8 @@ namespace rk_seikyu
                  + ", ac1 = :ac1"
                  + ", ac2 = :ac2"
                  + ", ac3 = :ac3"
-                + " where"
-                + " rep_id=:rep_id"
+                + " WHERE"
+                + " rep_id = :rep_id"
                 , m_conn
                 );
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("pt_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "pt_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -689,9 +675,9 @@ namespace rk_seikyu
             // delete
             da.DeleteCommand = new NpgsqlCommand
             (
-                   "delete from t_rep"
-                + " where"
-                + " rep_id=:rep_id"
+                   "DELETE FROM t_rep"
+                + " WHERE"
+                + " rep_id = :rep_id"
                 , m_conn
             );
             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("rep_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "rep_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -699,55 +685,9 @@ namespace rk_seikyu
             // RowUpdate
             da.RowUpdated += new NpgsqlRowUpdatedEventHandler(RepRowUpdated);
 
-            //n_id_da.SelectCommand = new NpgsqlCommand
-            //(
-            //       "select"
-            //    + " n_id"
-            //    + ", nen"
-            //    + " from t_nen"
-            //    + " order by n_id"
-            //      , m_conn
-            //);
-
-            //t_id_da.SelectCommand = new NpgsqlCommand
-            //(
-            //       "select"
-            //      + " t_id"
-            //      + ", tsuki"
-            //      + " from t_tsuki"
-            //      + " order by t_id"
-            //        , m_conn
-            //);
-
-            //s_id_da.SelectCommand = new NpgsqlCommand
-            //(
-            //       "select"
-            //      + " s_id"
-            //      + ", syubetsu"
-            //      + " from t_syubetsu"
-            //      + " order by s_id",
-            //        m_conn
-            //);
-
-            //da.Fill(ds, "rep");
             if (ds.Tables["rep"] != null)
                 ds.Tables["rep"].Clear();
             da.Fill(ds, "rep");
-            //t_id_da.Fill(t_id_ds, "t_tsuki");
-            //n_id_da.Fill(n_id_ds, "t_nen");
-            //s_id_da.Fill(s_id_ds, "t_syubetsu");
-
-            //cmb_n_id.DataSource = n_id_ds.Tables[0]; ;
-            //cmb_n_id.DisplayMember = "nen";
-            //cmb_n_id.ValueMember = "n_id";
-
-            //cmb_t_id.DataSource = t_id_ds.Tables[0]; ;
-            //cmb_t_id.DisplayMember = "tsuki";
-            //cmb_t_id.ValueMember = "t_id";
-
-            //cmb_s_id.DataSource = s_id_ds.Tables[0]; ;
-            //cmb_s_id.DisplayMember = "syubetsu";
-            //cmb_s_id.ValueMember = "s_id";
 
             bindingSourceRep.DataSource = ds;
             bindingSourceRep.DataMember = "rep";
@@ -775,7 +715,7 @@ namespace rk_seikyu
 
             da.SelectCommand = new NpgsqlCommand
             (
-                "select"
+                "SELECT"
                  + " pt_id"
                  + ", s_id"
                  + ", col0"
@@ -789,12 +729,12 @@ namespace rk_seikyu
                  + ", ac2"
                  + ", ac3"
                  + ", rep_id"
-                 + " from"
+                 + " FROM"
                  + " t_rep"
-                 + " where s_id::Integer = :s_id"
-                 + " and o_id::Integer = " + cmb_o_id_str
-                 + " and pt_id::Integer = :pt_id"
-                 + " order by rep_id"
+                 + " WHERE s_id::Integer = :s_id"
+                 + " AND o_id::Text = '" + Form_Seikyu_TextBoxO_id + "'"
+                 + " AND pt_id::Integer = :pt_id"
+                 + " ORDER BY rep_id"
                 , m_conn
             );
             if (cmb_s_id.SelectedItem == null)
@@ -826,7 +766,7 @@ namespace rk_seikyu
             // insert
             da.InsertCommand = new NpgsqlCommand
             (
-                 "insert into t_rep ("
+                 "INSERT INTO t_rep ("
                  + " pt_id"
                  + ", s_id"
                  + ", o_id"
@@ -840,7 +780,7 @@ namespace rk_seikyu
                  + ", ac1"
                  + ", ac2"
                  + ", ac3"
-                    + " ) values ("
+                    + " ) VALUES ("
                  + " :pt_id"
                  + ", :s_id"
                  + "," + cmb_o_id_str
@@ -872,7 +812,7 @@ namespace rk_seikyu
 
             // update
             da.UpdateCommand = new NpgsqlCommand(
-                "update t_rep set"
+                "UPDATE t_rep SET"
                  + " pt_id = :pt_id"
                  + ", s_id = :s_id"
                  + ", col0 = :col0"
@@ -885,8 +825,8 @@ namespace rk_seikyu
                  + ", ac1 = :ac1"
                  + ", ac2 = :ac2"
                  + ", ac3 = :ac3"
-                + " where"
-                + " rep_id=:rep_id"
+                + " WHERE"
+                + " rep_id = :rep_id"
                 , m_conn
                 );
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("pt_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "pt_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -906,9 +846,9 @@ namespace rk_seikyu
             // delete
             da.DeleteCommand = new NpgsqlCommand
             (
-                   "delete from t_rep"
-                + " where"
-                + " rep_id=:rep_id"
+                   "DELETE FROM t_rep"
+                + " WHERE"
+                + " rep_id = :rep_id"
                 , m_conn
             );
             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("rep_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "rep_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -916,55 +856,9 @@ namespace rk_seikyu
             // RowUpdate
             da.RowUpdated += new NpgsqlRowUpdatedEventHandler(RepRowUpdated);
 
-            //n_id_da.SelectCommand = new NpgsqlCommand
-            //(
-            //       "select"
-            //    + " n_id"
-            //    + ", nen"
-            //    + " from t_nen"
-            //    + " order by n_id"
-            //      , m_conn
-            //);
-
-            //t_id_da.SelectCommand = new NpgsqlCommand
-            //(
-            //       "select"
-            //      + " t_id"
-            //      + ", tsuki"
-            //      + " from t_tsuki"
-            //      + " order by t_id"
-            //        , m_conn
-            //);
-
-            //s_id_da.SelectCommand = new NpgsqlCommand
-            //(
-            //       "select"
-            //      + " s_id"
-            //      + ", syubetsu"
-            //      + " from t_syubetsu"
-            //      + " order by s_id",
-            //        m_conn
-            //);
-
-            //da.Fill(ds, "rep");
             if (ds.Tables["rep"] != null)
                 ds.Tables["rep"].Clear();
             da.Fill(ds, "rep");
-            //t_id_da.Fill(t_id_ds, "t_tsuki");
-            //n_id_da.Fill(n_id_ds, "t_nen");
-            //s_id_da.Fill(s_id_ds, "t_syubetsu");
-
-            //cmb_n_id.DataSource = n_id_ds.Tables[0]; ;
-            //cmb_n_id.DisplayMember = "nen";
-            //cmb_n_id.ValueMember = "n_id";
-
-            //cmb_t_id.DataSource = t_id_ds.Tables[0]; ;
-            //cmb_t_id.DisplayMember = "tsuki";
-            //cmb_t_id.ValueMember = "t_id";
-
-            //cmb_s_id.DataSource = s_id_ds.Tables[0]; ;
-            //cmb_s_id.DisplayMember = "syubetsu";
-            //cmb_s_id.ValueMember = "s_id";
 
             bindingSourceRep.DataSource = ds;
             bindingSourceRep.DataMember = "rep";

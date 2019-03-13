@@ -30,24 +30,23 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_office));
-            this.dataGridViewOffice = new System.Windows.Forms.DataGridView();
+            this.DataGridViewOffice = new System.Windows.Forms.DataGridView();
             this.CmdOfficeSave = new System.Windows.Forms.Button();
             this.CmdClose = new System.Windows.Forms.Button();
             this.bindingSourceOffice = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorOffice = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.o_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.flg = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.o_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.o_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.o_p_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,30 +54,33 @@
             this.o_phone_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.o_manager = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.o_stuff = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOffice)).BeginInit();
+            this.flg = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewOffice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceOffice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorOffice)).BeginInit();
             this.bindingNavigatorOffice.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridViewOffice
+            // DataGridViewOffice
             // 
-            this.dataGridViewOffice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewOffice.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DataGridViewOffice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridViewOffice.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.o_id,
-            this.flg,
             this.o_number,
             this.o_name,
             this.o_p_code,
             this.o_address,
             this.o_phone_number,
             this.o_manager,
-            this.o_stuff});
-            this.dataGridViewOffice.Location = new System.Drawing.Point(142, 115);
-            this.dataGridViewOffice.Name = "dataGridViewOffice";
-            this.dataGridViewOffice.RowTemplate.Height = 21;
-            this.dataGridViewOffice.Size = new System.Drawing.Size(1027, 150);
-            this.dataGridViewOffice.TabIndex = 0;
+            this.o_stuff,
+            this.flg});
+            this.DataGridViewOffice.Location = new System.Drawing.Point(142, 115);
+            this.DataGridViewOffice.Name = "DataGridViewOffice";
+            this.DataGridViewOffice.RowTemplate.Height = 21;
+            this.DataGridViewOffice.Size = new System.Drawing.Size(1027, 150);
+            this.DataGridViewOffice.TabIndex = 0;
+            this.DataGridViewOffice.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewOffice_CellValueChanged);
+            this.DataGridViewOffice.CurrentCellDirtyStateChanged += new System.EventHandler(this.DataGridViewOffice_CurrentCellDirtyStateChanged);
             // 
             // CmdOfficeSave
             // 
@@ -128,6 +130,31 @@
             this.bindingNavigatorOffice.TabIndex = 3;
             this.bindingNavigatorOffice.Text = "bindingNavigator1";
             // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "新規追加";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(29, 22);
+            this.bindingNavigatorCountItem.Text = "/ {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "項目の総数";
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "削除";
+            // 
             // bindingNavigatorMoveFirstItem
             // 
             this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -160,16 +187,9 @@
             this.bindingNavigatorPositionItem.Text = "0";
             this.bindingNavigatorPositionItem.ToolTipText = "現在の場所";
             // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(29, 22);
-            this.bindingNavigatorCountItem.Text = "/ {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "項目の総数";
-            // 
             // bindingNavigatorSeparator1
             // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // bindingNavigatorMoveNextItem
@@ -192,40 +212,14 @@
             // 
             // bindingNavigatorSeparator2
             // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "新規追加";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "削除";
             // 
             // o_id
             // 
             this.o_id.DataPropertyName = "o_id";
             this.o_id.HeaderText = "ID";
             this.o_id.Name = "o_id";
-            // 
-            // flg
-            // 
-            this.flg.DataPropertyName = "flg";
-            this.flg.HeaderText = "既定";
-            this.flg.Name = "flg";
-            this.flg.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.flg.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // o_number
             // 
@@ -269,6 +263,14 @@
             this.o_stuff.HeaderText = "担当者";
             this.o_stuff.Name = "o_stuff";
             // 
+            // flg
+            // 
+            this.flg.DataPropertyName = "flg";
+            this.flg.HeaderText = "既定";
+            this.flg.Name = "flg";
+            this.flg.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.flg.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // Form_office
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -277,11 +279,11 @@
             this.Controls.Add(this.bindingNavigatorOffice);
             this.Controls.Add(this.CmdClose);
             this.Controls.Add(this.CmdOfficeSave);
-            this.Controls.Add(this.dataGridViewOffice);
+            this.Controls.Add(this.DataGridViewOffice);
             this.Name = "Form_office";
             this.Text = "Form_office";
             this.Load += new System.EventHandler(this.Form_office_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOffice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewOffice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceOffice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorOffice)).EndInit();
             this.bindingNavigatorOffice.ResumeLayout(false);
@@ -293,7 +295,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridViewOffice;
+        private System.Windows.Forms.DataGridView DataGridViewOffice;
         private System.Windows.Forms.Button CmdOfficeSave;
         private System.Windows.Forms.Button CmdClose;
         private System.Windows.Forms.BindingSource bindingSourceOffice;
@@ -310,7 +312,6 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.DataGridViewTextBoxColumn o_id;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn flg;
         private System.Windows.Forms.DataGridViewTextBoxColumn o_number;
         private System.Windows.Forms.DataGridViewTextBoxColumn o_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn o_p_code;
@@ -318,5 +319,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn o_phone_number;
         private System.Windows.Forms.DataGridViewTextBoxColumn o_manager;
         private System.Windows.Forms.DataGridViewTextBoxColumn o_stuff;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn flg;
     }
 }

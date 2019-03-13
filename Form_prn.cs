@@ -71,25 +71,10 @@ namespace rk_seikyu
             //Form_seikyuのインスタンスを取得
             form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
             //Form_seikyuのテキストボックス文字列を
-            //Form_prnの文字列変数cmb_o_id_strへ設定
+            //Form_prnの文字列変数Form_Seikyu_TextBoxO_idへ設定
             Form_Seikyu_TextBoxO_id = form_seikyu_Instance.TextBoxO_id;
-            //cmb_o_id_str = form_seikyu_Instance.TextBoxO_id;
             cmb_o_id_item = form_seikyu_Instance.TextBoxO_name;
             Console.WriteLine("cmb_o_idからのメンバーは、" + cmb_o_id_item);
-
-            ////Form_seikyuのコンボボックスcmb_o_idからの変数cmb_o_id_strをint型に変換して1加算
-            //int i;
-            //if (int.TryParse(cmb_o_id_str, out i))
-            //{
-            //    Cmb_o_id_int = i + 1;
-            //    cmb_o_id_str = Cmb_o_id_int.ToString();
-            //    Console.WriteLine("cmb_o_idからの値は、" + cmb_o_id_str);
-            //}
-            //else
-            //{
-            //    Console.WriteLine("cmb_o_idからの値を数値に変換できません");
-            //}
-
         }
 
         private void cmdClose_Click(object sender, EventArgs e)

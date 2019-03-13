@@ -36,15 +36,15 @@ namespace rk_seikyu
 
         private void Form_office_Load(object sender, EventArgs e)
         {
-            dataGridViewOffice.Columns[0].HeaderText = "ID";
-            dataGridViewOffice.Columns[1].HeaderText = "既定";
-            dataGridViewOffice.Columns[2].HeaderText = "事業所番号";
-            dataGridViewOffice.Columns[3].HeaderText = "事業所名";
-            dataGridViewOffice.Columns[4].HeaderText = "郵便番号";
-            dataGridViewOffice.Columns[5].HeaderText = "住所";
-            dataGridViewOffice.Columns[6].HeaderText = "電話番号";
-            dataGridViewOffice.Columns[7].HeaderText = "管理者";
-            dataGridViewOffice.Columns[8].HeaderText = "担当者";
+            DataGridViewOffice.Columns[0].HeaderText = "ID";
+            DataGridViewOffice.Columns[1].HeaderText = "既定";
+            DataGridViewOffice.Columns[2].HeaderText = "事業所番号";
+            DataGridViewOffice.Columns[3].HeaderText = "事業所名";
+            DataGridViewOffice.Columns[4].HeaderText = "郵便番号";
+            DataGridViewOffice.Columns[5].HeaderText = "住所";
+            DataGridViewOffice.Columns[6].HeaderText = "電話番号";
+            DataGridViewOffice.Columns[7].HeaderText = "管理者";
+            DataGridViewOffice.Columns[8].HeaderText = "担当者";
 
             da.SelectCommand = new NpgsqlCommand
             (
@@ -145,8 +145,8 @@ namespace rk_seikyu
             bindingSourceOffice.DataSource = ds;
             bindingSourceOffice.DataMember = "o_id_ds";
             bindingNavigatorOffice.BindingSource = bindingSourceOffice;
-            dataGridViewOffice.DataSource = bindingSourceOffice;
-            dataGridViewOffice.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            DataGridViewOffice.DataSource = bindingSourceOffice;
+            DataGridViewOffice.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
 
             bindingNavigatorOffice.Visible = true;
 
@@ -166,8 +166,8 @@ namespace rk_seikyu
 
         private void DataGridViewEvent()
         {
-            dataGridViewOffice.CellMouseMove += new DataGridViewCellMouseEventHandler(DataGridViewOffice_CellMouseMove);
-            dataGridViewOffice.CellPainting += new DataGridViewCellPaintingEventHandler(DataGridViewOffice_CellPainting);
+            DataGridViewOffice.CellMouseMove += new DataGridViewCellMouseEventHandler(DataGridViewOffice_CellMouseMove);
+            DataGridViewOffice.CellPainting += new DataGridViewCellPaintingEventHandler(DataGridViewOffice_CellPainting);
         }
 
         private void CmdOfficeSave_Click(object sender, EventArgs e)
@@ -315,18 +315,6 @@ namespace rk_seikyu
 
             NpgsqlCommand command = new NpgsqlCommand("SELECT o_id, o_name FROM t_office WHERE flg = '1';", m_conn);
 
-            //try
-            //{
-            //    Cmb_o_id_int = (Int32)command.ExecuteScalar();
-            //    form_seikyu_Instance.TextBoxO_id = Cmb_o_id_int.ToString();
-            //    Console.WriteLine("Cmb_o_id_int: {0}", Cmb_o_id_int);
-            //}
-
-
-            //finally
-            //{
-            //    m_conn.Close();
-            //}
             try
             {
                 NpgsqlDataReader dr = command.ExecuteReader();
@@ -336,9 +324,6 @@ namespace rk_seikyu
                     {
                         form_seikyu_Instance.TextBoxO_id = dr[0].ToString();
                         form_seikyu_Instance.TextBoxO_name = dr[1].ToString();
-                        //Console.Write("i = {0} \t", dr[i]);
-                        //Console.Write("i = {0} \t", dr[0]);
-                        //Console.Write("i = {0} \t", dr[1]);
                     }
                     Console.WriteLine();
                 }
@@ -370,8 +355,10 @@ namespace rk_seikyu
 
         private void DataGridViewOffice_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
-            DataGridViewCellStyle dcs = new DataGridViewCellStyle();
-            dcs.BackColor = Color.Yellow;
+            DataGridViewCellStyle dcs = new DataGridViewCellStyle
+            {
+                BackColor = Color.Yellow
+            };
 
             DataGridView dgv = (DataGridView)sender;
 
@@ -401,6 +388,49 @@ namespace rk_seikyu
                     e.CellStyle.ForeColor,
                     TextFormatFlags.Right | TextFormatFlags.VerticalCenter);
                 e.Handled = true;
+            }
+        }
+
+        private void DataGridViewOffice_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (DataGridViewOffice.CurrentCellAddress.X == 9 &&
+                DataGridViewOffice.IsCurrentCellDirty)
+            {
+                //コミットする
+                DataGridViewOffice.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+        }
+
+        private void DataGridViewOffice_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            //DataGridView dgv = (DataGridView)sender;
+            //// 選択列の場合
+            //if (e.ColumnIndex == 0)
+            //{
+            //    // 今回チェック設定した
+            //    if ((bool)dgv[e.ColumnIndex, e.RowIndex].Value == true)
+            //    {
+            //        // 他にチェックされている項目がある場合はそのチェックを解除
+            //        for (int rowIndex = 0; rowIndex < dgv.Rows.Count; rowIndex++)
+            //{
+            //            if ((rowIndex != e.RowIndex) && ((bool)dgv[e.ColumnIndex, rowIndex].Value == true))
+            //    {
+            //                // チェックを解除
+            //                dgv[e.ColumnIndex, rowIndex].Value = false;
+            //                // ReadOnlyを解除
+            //                dgv[e.ColumnIndex, rowIndex].ReadOnly = false;
+            //            }
+            //        }
+            //        // 今回チェックした場所をReadOnlyに設定
+            //        dgv[e.ColumnIndex, e.RowIndex].ReadOnly = true;
+            //    }
+            //}
+            //列のインデックスを確認する
+            if (e.ColumnIndex == 9)
+            {
+                Console.WriteLine(string.Format("{0}行目のチェックボックスが{1}に変わりました。",
+                    e.RowIndex,
+                    DataGridViewOffice[e.ColumnIndex, e.RowIndex].Value));
             }
         }
 
