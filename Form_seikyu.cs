@@ -112,16 +112,10 @@ namespace rk_seikyu
             }
         }
 
-        ////文字列変数cmb_o_id_Textへコンボボックスcmb_o_idの値を設定、取得する。
-        //public string Cmb_o_id_Text { get => cmb_o_id.SelectedIndex.ToString(); set => cmb_o_id.Text = value; }
-        ////public string Cmb_o_id_Text { get => Cmb_o_id_int.ToString(); set => cmb_o_id.Text = value; }
-        //public string Cmb_o_id_Item { get => cmb_o_id.Text; set => cmb_o_id.Text = value; }
-
         public string TextBoxO_id
         {
             get
             {
-
                 return textBoxO_id.Text;
             }
             set
@@ -169,66 +163,6 @@ namespace rk_seikyu
                 m_conn.Close();
             }
 
-            //if (int.TryParse(TextBoxO_id, out int z))
-            //{
-            //    Cmb_o_id_int = z;
-            //    Console.WriteLine(z);
-            //}
-            //else
-            //{
-            //    Console.WriteLine("数値に変換できません");
-            //}
-
-            //textBoxO_id.Text = Cmb_o_id_int.ToString();
-
-
-            //m_conn.Open();
-
-            //NpgsqlCommand command = new NpgsqlCommand("SELECT o_id, o_name FROM t_office WHERE flg = '1';", m_conn);
-
-            //try
-            //{
-            //    NpgsqlDataReader dr = command.ExecuteReader();
-            //    while (dr.Read())
-            //    {
-            //        for (I = 0; I < dr.FieldCount; I++)
-            //        {
-            //            this.TextBoxO_id = dr[0].ToString();
-            //            this.TextBoxO_name = dr[1].ToString();
-            //            Console.Write("Form_Seikyu_I = {0} \t", dr[0]);
-            //            Console.Write("Form_Seikyu_I = {0} \t", dr[1]);
-            //        }
-            //        Console.WriteLine();
-            //    }
-
-            //}
-            //finally
-            //{
-            //    m_conn.Close();
-            //}
-
-
-
-
-            o_id_da.SelectCommand = new NpgsqlCommand
-            (
-                    "SELECT"
-                + " o_id"
-                + ", flg"
-                + ", o_number"
-                + ", o_name"
-                + ", o_p_code"
-                + ", o_address"
-                + ", o_phone_number"
-                + ", o_manager"
-                + ", o_stuff"
-                + " FROM"
-                + " t_office"
-                + " WHERE flg = '1'"
-                + " ORDER BY o_id;",
-                m_conn
-            );
-
             nen_da.SelectCommand = new NpgsqlCommand
             (
                    "SELECT"
@@ -272,7 +206,6 @@ namespace rk_seikyu
                 + " FROM"
                 + " t_syubetsu"
                 + " WHERE o_id = '" + TextBoxO_id + "'"
-                //+ " AND s_id = '2'"
                 + " ORDER BY s_id;",
                     m_conn
             );
@@ -310,10 +243,6 @@ namespace rk_seikyu
                 tsukids.Tables["t_tsuki"].Clear();
             tsuki_da.Fill(tsukids, "t_tsuki");
 
-            if (o_id_ds.Tables["t_office"] != null)
-                o_id_ds.Tables["t_office"].Clear();
-            o_id_da.Fill(o_id_ds, "t_office");
-
             if (c4_ds.Tables["t_seikyu"] != null)
                 c4_ds.Tables["t_seikyu"].Clear();
             c4_da.Fill(c4_ds, "t_seikyu");
@@ -333,10 +262,6 @@ namespace rk_seikyu
             cmb_tsuki.DisplayMember = "tsuki";
             cmb_tsuki.ValueMember = "tsuki";
             cmb_tsuki.DataSource = tsukids.Tables[0];
-
-            //cmb_o_id.DataSource = o_id_ds.Tables[0];
-            //cmb_o_id.DisplayMember = "o_name";
-            //cmb_o_id.ValueMember = "o_id";
 
             cmb_c4.DisplayMember = "c4";
             cmb_c4.ValueMember = "c4";
@@ -2262,6 +2187,7 @@ namespace rk_seikyu
         {
             switch (Cmb_g_id_int)
             {
+                // 請求データヘッダ
                 case 1:
                     switch (Cmb_s_id_int)
                     {
@@ -2318,6 +2244,7 @@ namespace rk_seikyu
                     }
                     break;
 
+                // 支払方法ヘッダ
                 case 2:
                     switch (Cmb_s_id_int)
                     {
@@ -2389,6 +2316,7 @@ namespace rk_seikyu
                     }
                     break;
 
+                // 親族関係ヘッダ
                 case 3:
                     switch (Cmb_s_id_int)
                     {
@@ -2470,6 +2398,7 @@ namespace rk_seikyu
                     break;
             }
 
+            // 各csvファイルからt_csvへインサート
             try
             {
                 m_conn.Open();
@@ -2510,6 +2439,7 @@ namespace rk_seikyu
 
                 switch (Cmb_g_id_int)
                 {
+                    // 請求データ
                     case 1:
                         switch (Cmb_s_id_int)
                         {
@@ -2683,6 +2613,7 @@ namespace rk_seikyu
                         }
                         break;
 
+                    // 支払方法
                     case 2:
                         switch (Cmb_s_id_int)
                         {
@@ -2866,6 +2797,7 @@ namespace rk_seikyu
                         }
                         break;
 
+                    // 親族関係
                     case 3:
                         switch (Cmb_s_id_int)
                         {
@@ -3149,26 +3081,31 @@ namespace rk_seikyu
 
                         TblStr = "t_csv";
 
+                        // t_csvにo_idを付加
                         command = new NpgsqlCommand(
                             "UPDATE " + TblStr + " SET o_id = " + TextBoxO_id
                             , m_conn);
                         command.ExecuteNonQuery();
 
+                        // t_csvにs_idを付加
                         command = new NpgsqlCommand(
                             "UPDATE " + TblStr + " SET s_id = " + Cmb_s_id_int
                             , m_conn);
                         command.ExecuteNonQuery();
 
+                        // t_csvにg_idを付加 
                         command = new NpgsqlCommand(
                             "UPDATE " + TblStr + " SET g_id = " + Cmb_g_id_int
                             , m_conn);
                         command.ExecuteNonQuery();
 
+                        // t_csvにp_idを付加
                         command = new NpgsqlCommand(
                             "UPDATE " + TblStr + " SET p_id = " + 1
                             , m_conn);
                         command.ExecuteNonQuery();
 
+                        //  t_csvにreq_idを付加
                         command = new NpgsqlCommand(
                             "UPDATE " + TblStr + " SET req_id = " + Cmb_req_id_int
                             , m_conn);
@@ -3298,6 +3235,7 @@ namespace rk_seikyu
                         Cursor.Current = Cursors.Default;
                     }
 
+                    // t_csvから各テーブルへインサート
                     switch (Cmb_g_id_int)
                     {
                         case 1:
@@ -3368,8 +3306,6 @@ namespace rk_seikyu
                                             + ", c20"
                                             + ", c21"
                                             + ", c22"
-                                            //+ ", substr(c4, 1, strpos(c4, '/') - 1) as c4_y"
-                                            //+ ", substr(c4,strpos(c4, '/')+1,length(c4)) as c4_m"
                                             + ", '" + Cmb_nen_str + "' c4_y"
                                             + ", CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                 + " ' ' || '" + Cmb_tsuki_str + "'"
@@ -3766,6 +3702,7 @@ namespace rk_seikyu
                     // 再表示
                     switch (Cmb_g_id_int)
                     {
+                        // 請求データ
                         case 1:
                             switch (Cmb_s_id_int)
                             {
@@ -5380,6 +5317,7 @@ namespace rk_seikyu
             // 再表示
             switch (Cmb_g_id_int)
             {
+                // 請求データ
                 case 1:
                     switch (Cmb_s_id_int)
                     {
@@ -6426,6 +6364,7 @@ namespace rk_seikyu
             // 再表示
             switch (Cmb_g_id_int)
             {
+                // 請求データ
                 case 1:
                     switch (Cmb_s_id_int)
                     {
@@ -7217,10 +7156,6 @@ namespace rk_seikyu
 
         private void Cmb_o_id_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Cmb_o_id_int = cmb_o_id.SelectedIndex + 1;
-            //Console.WriteLine("Cmb_o_id_int = " + Cmb_o_id_int);
-
-
             settings_da.RowUpdated += new NpgsqlRowUpdatedEventHandler(SettingsRowUpdated);
 
             s_id_da.SelectCommand = new NpgsqlCommand
@@ -7305,6 +7240,7 @@ namespace rk_seikyu
                             break;
                     }
                     break;
+
                 case 2:
                     switch (Cmb_s_id_int)
                     {
@@ -7375,6 +7311,7 @@ namespace rk_seikyu
                             break;
                     }
                     break;
+
                 case 3:
                     switch (Cmb_s_id_int)
                     {
@@ -7460,9 +7397,11 @@ namespace rk_seikyu
             // 再表示
             switch (Cmb_o_id_int)
             {
+                // 老人保健施設
                 case 1:
                     switch (Cmb_g_id_int)
                     {
+                        // 請求データ
                         case 1:
                             switch (Cmb_s_id_int)
                             {
@@ -8204,10 +8143,11 @@ namespace rk_seikyu
                     }
                     break;
 
-                //
+                // 秀峰園
                 case 2:
                     switch (Cmb_g_id_int)
                     {
+                        // 請求データ
                         case 1:
                             switch (Cmb_s_id_int)
                             {
@@ -8949,10 +8889,12 @@ namespace rk_seikyu
                             break;
                     }
                     break;
-                //
+
+                // デイサービスセンター
                 case 3:
                     switch (Cmb_g_id_int)
                     {
+                        // 請求データ
                         case 1:
                             switch (Cmb_s_id_int)
                             {
@@ -9416,7 +9358,6 @@ namespace rk_seikyu
                                 case 5:
                                 case 6:
 
-                                    //MessageBox.Show("Case " + cmb_s_id_int + "!");
                                     Console.WriteLine("Case " + Cmb_s_id_int + "!");
                                     da.SelectCommand = new NpgsqlCommand
                                     (
@@ -9760,43 +9701,6 @@ namespace rk_seikyu
         private void textBoxO_id_TextChanged(object sender, EventArgs e)
         {
 
-            //if (int.TryParse(TextBoxO_id, out int z))
-            //{
-            //    Cmb_o_id_int = z;
-            //    Console.WriteLine(z);
-            //}
-            //else
-            //{
-            //    Console.WriteLine("数値に変換できません");
-            //}
-
-            //textBoxO_id.Text = Cmb_o_id_int.ToString();
-
-
-            //m_conn.Open();
-
-            //NpgsqlCommand command = new NpgsqlCommand("SELECT o_id, o_name FROM t_office WHERE flg = '1';", m_conn);
-
-            //try
-            //{
-            //    NpgsqlDataReader dr = command.ExecuteReader();
-            //    while (dr.Read())
-            //    {
-            //        for (I = 0; I < dr.FieldCount; I++)
-            //        {
-            //            this.TextBoxO_id = dr[0].ToString();
-            //            this.TextBoxO_name = dr[1].ToString();
-            //            Console.Write("Form_Seikyu_textBoxO_id_TextChanged_I = {0} \t", dr[0]);
-            //            Console.Write("Form_Seikyu_textBoxO_id_TextChanged_I = {0} \t", dr[1]);
-            //        }
-            //        Console.WriteLine();
-            //    }
-
-            //}
-            //finally
-            //{
-            //    m_conn.Close();
-            //}
         }
     }
 }

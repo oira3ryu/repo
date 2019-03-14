@@ -77,7 +77,7 @@ namespace rk_seikyu
             Console.WriteLine("cmb_o_idからのメンバーは、" + cmb_o_id_item);
         }
 
-        private void cmdClose_Click(object sender, EventArgs e)
+        private void CmdClose_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -715,6 +715,7 @@ namespace rk_seikyu
                         crvSeikyu.Visible = true;
                     }
                     break;
+
                 case 2: // 収入原簿
                     {
                         da.SelectCommand = new NpgsqlCommand
@@ -1526,6 +1527,7 @@ namespace rk_seikyu
                         crvSeikyu.Visible = true;
                     }
                     break;
+
                 case 5: // 引落請求書
                     {
                         Console.WriteLine("Cmb_b_code_str = " + Cmb_b_code_str);
@@ -2203,8 +2205,6 @@ namespace rk_seikyu
                   string.Format("{0}行目のチェックボックスが{1}に変わりました。",
                   e.RowIndex,
                   dataGridViewWithdrawal[e.ColumnIndex, e.RowIndex].Value));
-                //this.dataGridViewWithdrawal.EndEdit();
-                //this.dataGridViewWithdrawal.Refresh();
             }
         }
 
@@ -2711,33 +2711,9 @@ namespace rk_seikyu
 
         private void DataGridViewWithdrawal_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //foreach (DataGridViewCell c in this.dataGridViewWithdrawal.SelectedCells)
-            //{
-            //    // 設定チェックボックスの場合
-            //    if (c.ColumnIndex == 0)
-            //    {
-            //        this.dataGridViewWithdrawal.EndEdit();
-            //        this.dataGridViewWithdrawal.Refresh();
-            //    }
-            //}
-            //if (e.ColumnIndex == 0)//ﾁｪｯｸﾎﾞｯｸｽの列かどうか判別して
-            //{
-            //    if (dataGridViewWithdrawal.Rows[e.RowIndex].Cells[e.ColumnIndex].EditedFormattedValue.Equals(true))
-            //    {
-            //        this.dataGridViewWithdrawal.EndEdit();
-            //        this.dataGridViewWithdrawal.Refresh();
-            //    }
-            //    else
-            //    {
-            //        this.dataGridViewWithdrawal.EndEdit();
-            //        this.dataGridViewWithdrawal.Refresh();
-            //    }
-            //}
         }
 
-        //private CheckBox checkBoxAll = new System.Windows.Forms.CheckBox();
-
-        // 列ヘッダーのチェックボックスを押したときに、すべて選択用のチェックボックス状態を切り替え
+         // 列ヘッダーのチェックボックスを押したときに、すべて選択用のチェックボックス状態を切り替え
         private void DataGridViewWithdrawal_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0 && e.RowIndex == -1)
