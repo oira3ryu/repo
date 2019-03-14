@@ -391,48 +391,46 @@ namespace rk_seikyu
             }
         }
 
-        private void DataGridViewOffice_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        private void DataGridViewOffice_CurrentCellDirtyStateChanged(
+          object sender, EventArgs e)
         {
-            if (DataGridViewOffice.CurrentCellAddress.X == 9 &&
-                DataGridViewOffice.IsCurrentCellDirty)
+            if (DataGridViewOffice.IsCurrentCellDirty)
             {
                 //コミットする
                 DataGridViewOffice.CommitEdit(DataGridViewDataErrorContexts.Commit);
             }
         }
 
-        private void DataGridViewOffice_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        //CellValueChangedイベントハンドラ
+        private void DataGridViewOffice_CellValueChanged(
+          object sender, DataGridViewCellEventArgs e)
         {
-            //DataGridView dgv = (DataGridView)sender;
-            //// 選択列の場合
-            //if (e.ColumnIndex == 0)
-            //{
-            //    // 今回チェック設定した
-            //    if ((bool)dgv[e.ColumnIndex, e.RowIndex].Value == true)
-            //    {
-            //        // 他にチェックされている項目がある場合はそのチェックを解除
-            //        for (int rowIndex = 0; rowIndex < dgv.Rows.Count; rowIndex++)
-            //{
-            //            if ((rowIndex != e.RowIndex) && ((bool)dgv[e.ColumnIndex, rowIndex].Value == true))
-            //    {
-            //                // チェックを解除
-            //                dgv[e.ColumnIndex, rowIndex].Value = false;
-            //                // ReadOnlyを解除
-            //                dgv[e.ColumnIndex, rowIndex].ReadOnly = false;
-            //            }
-            //        }
-            //        // 今回チェックした場所をReadOnlyに設定
-            //        dgv[e.ColumnIndex, e.RowIndex].ReadOnly = true;
-            //    }
-            //}
-            //列のインデックスを確認する
-            if (e.ColumnIndex == 9)
+            //チェックボックスの列かどうか調べる
+            if (DataGridViewOffice.Columns[e.ColumnIndex].ValueType == typeof(bool))
             {
-                Console.WriteLine(string.Format("{0}行目のチェックボックスが{1}に変わりました。",
-                    e.RowIndex,
-                    DataGridViewOffice[e.ColumnIndex, e.RowIndex].Value));
+                Console.WriteLine("{0}列目、{1}行目のチェックボックスが{2}に変わりました。",
+                  e.ColumnIndex, e.RowIndex + 1,
+                  DataGridViewOffice[e.ColumnIndex, e.RowIndex].Value);
+                // 選択列の場合
+                if (bool.Equals(DataGridViewOffice[e.ColumnIndex, e.RowIndex].Value, true))
+                    {
+                    // 他にチェックされている項目がある場合はそのチェックを解除
+                    for (int rowIndex = 0; rowIndex < DataGridViewOffice.Rows.Count; rowIndex++)
+                    {
+                        // チェックした行以外
+                        if (rowIndex != e.RowIndex)
+                            {
+                            // チェックを解除
+                            DataGridViewOffice[e.ColumnIndex, rowIndex].Value = false;
+                            // ReadOnlyを解除
+                            DataGridViewOffice[e.ColumnIndex, rowIndex].ReadOnly = false;
+                        }
+                        // 今回チェックした場所をReadOnlyに設定
+                        DataGridViewOffice[e.ColumnIndex, e.RowIndex].ReadOnly = true;
+
+                    }
+                }
             }
         }
-
     }
 }

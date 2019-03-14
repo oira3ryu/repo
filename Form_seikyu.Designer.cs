@@ -1985,6 +1985,7 @@
             this.textBoxO_id.Name = "textBoxO_id";
             this.textBoxO_id.Size = new System.Drawing.Size(290, 19);
             this.textBoxO_id.TabIndex = 27;
+            this.textBoxO_id.Visible = false;
             this.textBoxO_id.TextChanged += new System.EventHandler(this.textBoxO_id_TextChanged);
             // 
             // textBoxO_name
@@ -1999,7 +2000,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1621, 898);
+            this.ClientSize = new System.Drawing.Size(1604, 881);
             this.Controls.Add(this.textBoxO_name);
             this.Controls.Add(this.textBoxO_id);
             this.Controls.Add(this.button1);

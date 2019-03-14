@@ -31,6 +31,15 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_office));
             this.DataGridViewOffice = new System.Windows.Forms.DataGridView();
+            this.o_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.o_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.o_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.o_p_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.o_address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.o_phone_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.o_manager = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.o_stuff = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.flg = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.CmdOfficeSave = new System.Windows.Forms.Button();
             this.CmdClose = new System.Windows.Forms.Button();
             this.bindingSourceOffice = new System.Windows.Forms.BindingSource(this.components);
@@ -46,15 +55,6 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.o_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.o_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.o_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.o_p_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.o_address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.o_phone_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.o_manager = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.o_stuff = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.flg = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewOffice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceOffice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorOffice)).BeginInit();
@@ -81,6 +81,62 @@
             this.DataGridViewOffice.TabIndex = 0;
             this.DataGridViewOffice.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewOffice_CellValueChanged);
             this.DataGridViewOffice.CurrentCellDirtyStateChanged += new System.EventHandler(this.DataGridViewOffice_CurrentCellDirtyStateChanged);
+            // 
+            // o_id
+            // 
+            this.o_id.DataPropertyName = "o_id";
+            this.o_id.HeaderText = "ID";
+            this.o_id.Name = "o_id";
+            // 
+            // o_number
+            // 
+            this.o_number.DataPropertyName = "o_number";
+            this.o_number.HeaderText = "事業所番号";
+            this.o_number.Name = "o_number";
+            // 
+            // o_name
+            // 
+            this.o_name.DataPropertyName = "o_name";
+            this.o_name.HeaderText = "事業所名";
+            this.o_name.Name = "o_name";
+            // 
+            // o_p_code
+            // 
+            this.o_p_code.DataPropertyName = "o_p_code";
+            this.o_p_code.HeaderText = "郵便番号";
+            this.o_p_code.Name = "o_p_code";
+            // 
+            // o_address
+            // 
+            this.o_address.DataPropertyName = "o_address";
+            this.o_address.HeaderText = "住所";
+            this.o_address.Name = "o_address";
+            // 
+            // o_phone_number
+            // 
+            this.o_phone_number.DataPropertyName = "o_phone_number";
+            this.o_phone_number.HeaderText = "電話番号";
+            this.o_phone_number.Name = "o_phone_number";
+            // 
+            // o_manager
+            // 
+            this.o_manager.DataPropertyName = "o_manager";
+            this.o_manager.HeaderText = "管理者";
+            this.o_manager.Name = "o_manager";
+            // 
+            // o_stuff
+            // 
+            this.o_stuff.DataPropertyName = "o_stuff";
+            this.o_stuff.HeaderText = "担当者";
+            this.o_stuff.Name = "o_stuff";
+            // 
+            // flg
+            // 
+            this.flg.DataPropertyName = "flg";
+            this.flg.HeaderText = "既定";
+            this.flg.Name = "flg";
+            this.flg.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.flg.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // CmdOfficeSave
             // 
@@ -214,62 +270,6 @@
             // 
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // o_id
-            // 
-            this.o_id.DataPropertyName = "o_id";
-            this.o_id.HeaderText = "ID";
-            this.o_id.Name = "o_id";
-            // 
-            // o_number
-            // 
-            this.o_number.DataPropertyName = "o_number";
-            this.o_number.HeaderText = "事業所番号";
-            this.o_number.Name = "o_number";
-            // 
-            // o_name
-            // 
-            this.o_name.DataPropertyName = "o_name";
-            this.o_name.HeaderText = "事業所名";
-            this.o_name.Name = "o_name";
-            // 
-            // o_p_code
-            // 
-            this.o_p_code.DataPropertyName = "o_p_code";
-            this.o_p_code.HeaderText = "郵便番号";
-            this.o_p_code.Name = "o_p_code";
-            // 
-            // o_address
-            // 
-            this.o_address.DataPropertyName = "o_address";
-            this.o_address.HeaderText = "住所";
-            this.o_address.Name = "o_address";
-            // 
-            // o_phone_number
-            // 
-            this.o_phone_number.DataPropertyName = "o_phone_number";
-            this.o_phone_number.HeaderText = "電話番号";
-            this.o_phone_number.Name = "o_phone_number";
-            // 
-            // o_manager
-            // 
-            this.o_manager.DataPropertyName = "o_manager";
-            this.o_manager.HeaderText = "管理者";
-            this.o_manager.Name = "o_manager";
-            // 
-            // o_stuff
-            // 
-            this.o_stuff.DataPropertyName = "o_stuff";
-            this.o_stuff.HeaderText = "担当者";
-            this.o_stuff.Name = "o_stuff";
-            // 
-            // flg
-            // 
-            this.flg.DataPropertyName = "flg";
-            this.flg.HeaderText = "既定";
-            this.flg.Name = "flg";
-            this.flg.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.flg.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // Form_office
             // 
