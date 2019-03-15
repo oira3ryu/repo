@@ -1,20 +1,12 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using Npgsql;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.FileIO;
 using System.IO;
-using System.Text.RegularExpressions;
-using System.Data.SqlTypes;
-using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.ReportSource;
-using CrystalDecisions.Shared;
 
 namespace rk_seikyu
 {
