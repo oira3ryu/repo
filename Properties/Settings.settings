@@ -9,21 +9,5 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Server=127.0.0.1;Port=5433;User Id=rkadmin;Password=yu2;Database=rk_seikyu;</Value>
     </Setting>
-    <Setting Name="rk_seikyuConnectionString" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Port=5433;Host=127.0.0.1;Database=rk_seikyu;Username=rkadmin;Password=yu2;Persist Security Info=True;Preload Reader=True;&lt;/ConnectionString&gt;
-  &lt;ProviderName&gt;Npgsql&lt;/ProviderName&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Port=5433;Host=127.0.0.1;Database=rk_seikyu;Username=rkadmin;Password=yu2;Persist Security Info=True;Preload Reader=True;</Value>
-    </Setting>
-    <Setting Name="rk_seikyuConnectionString1" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Port=5433;Host=127.0.0.1;Database=rk_seikyu;Username=rkadmin;Password=yu2;Persist Security Info=True&lt;/ConnectionString&gt;
-  &lt;ProviderName&gt;Npgsql&lt;/ProviderName&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Port=5433;Host=127.0.0.1;Database=rk_seikyu;Username=rkadmin;Password=yu2;Persist Security Info=True</Value>
-    </Setting>
   </Settings>
 </SettingsFile>

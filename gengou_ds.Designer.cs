@@ -976,7 +976,7 @@ namespace rk_seikyu.rk_seikyuDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::Npgsql.NpgsqlConnection();
-            this._connection.ConnectionString = global::rk_seikyu.Properties.Settings.Default.rk_seikyuConnectionString1;
+            //this._connection.ConnectionString = global::rk_seikyu.Properties.Settings.Default.rk_seikyuConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

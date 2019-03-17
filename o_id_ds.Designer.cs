@@ -1393,7 +1393,7 @@ namespace rk_seikyu.o_id_dsTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::Npgsql.NpgsqlConnection();
-            this._connection.ConnectionString = global::rk_seikyu.Properties.Settings.Default.rk_seikyuConnectionString;
+            //this._connection.ConnectionString = global::rk_seikyu.Properties.Settings.Default.rk_seikyuConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

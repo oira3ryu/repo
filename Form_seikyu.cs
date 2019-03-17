@@ -9694,5 +9694,14 @@ namespace rk_seikyu
         {
 
         }
+
+        private void cmdDbconfig_Click(object sender, EventArgs e)
+        {
+            Form_dbconfig Form = new Form_dbconfig
+            {
+                WindowState = FormWindowState.Maximized
+            };
+            Form.ShowDialog();
+        }
     }
 }

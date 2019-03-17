@@ -82,6 +82,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -141,6 +142,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>crWithdrawal.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dbconfig_ds.Designer.cs" />
+    <Compile Include="Form_dbconfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_dbconfig.Designer.cs">
+      <DependentUpon>Form_dbconfig.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_gengou.cs">
       <SubType>Form</SubType>
@@ -305,6 +313,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crWithdrawal.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_dbconfig.resx">
+      <DependentUpon>Form_dbconfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_gengou.resx">
       <DependentUpon>Form_gengou.cs</DependentUpon>
     </EmbeddedResource>
@@ -371,6 +382,17 @@
     <None Include="bank.xss">
       <DependentUpon>bank.xsd</DependentUpon>
     </None>
+    <None Include="dbconfig_ds.xsc">
+      <DependentUpon>dbconfig_ds.xsd</DependentUpon>
+    </None>
+    <None Include="dbconfig_ds.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dbconfig_ds1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="dbconfig_ds.xss">
+      <DependentUpon>dbconfig_ds.xsd</DependentUpon>
+    </None>
     <None Include="gyoumu_ds.xsc">
       <DependentUpon>gyoumu_ds.xsd</DependentUpon>
     </None>
@@ -430,6 +452,7 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

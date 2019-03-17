@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_seikyu));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.seikyu = new rk_seikyu.seikyu();
             this.bindingNavigatorSeikyu = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
@@ -257,6 +257,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.textBoxO_id = new System.Windows.Forms.TextBox();
             this.textBoxO_name = new System.Windows.Forms.TextBox();
+            this.cmdDbconfig = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.seikyu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorSeikyu)).BeginInit();
             this.bindingNavigatorSeikyu.SuspendLayout();
@@ -571,8 +572,8 @@
             // c5
             // 
             this.c5.DataPropertyName = "c5";
-            dataGridViewCellStyle3.NullValue = null;
-            this.c5.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.NullValue = null;
+            this.c5.DefaultCellStyle = dataGridViewCellStyle1;
             this.c5.HeaderText = "c5";
             this.c5.Name = "c5";
             // 
@@ -723,9 +724,9 @@
             // time_stamp
             // 
             this.time_stamp.DataPropertyName = "time_stamp";
-            dataGridViewCellStyle4.Format = "G";
-            dataGridViewCellStyle4.NullValue = null;
-            this.time_stamp.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Format = "G";
+            dataGridViewCellStyle2.NullValue = null;
+            this.time_stamp.DefaultCellStyle = dataGridViewCellStyle2;
             this.time_stamp.HeaderText = "time_stamp";
             this.time_stamp.Name = "time_stamp";
             this.time_stamp.Visible = false;
@@ -1971,7 +1972,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(357, 78);
+            this.button1.Location = new System.Drawing.Point(357, 79);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(37, 20);
             this.button1.TabIndex = 26;
@@ -1995,12 +1996,24 @@
             this.textBoxO_name.Size = new System.Drawing.Size(290, 19);
             this.textBoxO_name.TabIndex = 28;
             // 
+            // cmdDbconfig
+            // 
+            this.cmdDbconfig.Location = new System.Drawing.Point(723, 123);
+            this.cmdDbconfig.Name = "cmdDbconfig";
+            this.cmdDbconfig.Size = new System.Drawing.Size(75, 24);
+            this.cmdDbconfig.TabIndex = 30;
+            this.cmdDbconfig.Text = "DB設定";
+            this.cmdDbconfig.UseVisualStyleBackColor = true;
+            this.cmdDbconfig.Click += new System.EventHandler(this.cmdDbconfig_Click);
+            // 
             // Form_seikyu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1604, 881);
+            this.Controls.Add(this.dataGridViewShiharai_houhou);
+            this.Controls.Add(this.cmdDbconfig);
             this.Controls.Add(this.textBoxO_name);
             this.Controls.Add(this.textBoxO_id);
             this.Controls.Add(this.button1);
@@ -2014,7 +2027,6 @@
             this.Controls.Add(this.cmb_nen);
             this.Controls.Add(this.bindingNavigatorShinzoku_kankei);
             this.Controls.Add(this.bindingNavigatorShiharai_houhou);
-            this.Controls.Add(this.dataGridViewSeikyu);
             this.Controls.Add(this.cmb_c4);
             this.Controls.Add(this.cmdSave);
             this.Controls.Add(this.cmb_req_id);
@@ -2024,8 +2036,8 @@
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.cmbImport);
             this.Controls.Add(this.bindingNavigatorSeikyu);
+            this.Controls.Add(this.dataGridViewSeikyu);
             this.Controls.Add(this.dataGridViewShinzoku_kankei);
-            this.Controls.Add(this.dataGridViewShiharai_houhou);
             this.Name = "Form_seikyu";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Seikyu_FormClosing);
@@ -2294,5 +2306,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBoxO_id;
         private System.Windows.Forms.TextBox textBoxO_name;
+        private System.Windows.Forms.Button cmdDbconfig;
     }
 }
