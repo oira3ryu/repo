@@ -65,7 +65,7 @@
             // 
             // CmdDbconfigSave
             // 
-            this.CmdDbconfigSave.Location = new System.Drawing.Point(56, 159);
+            this.CmdDbconfigSave.Location = new System.Drawing.Point(38, 135);
             this.CmdDbconfigSave.Name = "CmdDbconfigSave";
             this.CmdDbconfigSave.Size = new System.Drawing.Size(75, 23);
             this.CmdDbconfigSave.TabIndex = 0;
@@ -75,7 +75,7 @@
             // 
             // cmdClose
             // 
-            this.cmdClose.Location = new System.Drawing.Point(55, 235);
+            this.cmdClose.Location = new System.Drawing.Point(37, 211);
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(75, 23);
             this.cmdClose.TabIndex = 1;
@@ -98,10 +98,10 @@
             this.d_pass,
             this.d_database_name,
             this.d_flg});
-            this.DataGridViewDbconfig.Location = new System.Drawing.Point(157, 135);
+            this.DataGridViewDbconfig.Location = new System.Drawing.Point(140, 114);
             this.DataGridViewDbconfig.Name = "DataGridViewDbconfig";
             this.DataGridViewDbconfig.RowTemplate.Height = 21;
-            this.DataGridViewDbconfig.Size = new System.Drawing.Size(1012, 150);
+            this.DataGridViewDbconfig.Size = new System.Drawing.Size(1040, 150);
             this.DataGridViewDbconfig.TabIndex = 2;
             // 
             // bindingNavigatorDbconfig
