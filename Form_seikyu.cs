@@ -197,7 +197,7 @@ namespace rk_seikyu
                 + ", o_id"
                 + " FROM"
                 + " t_syubetsu"
-                + " WHERE o_id = '" + TextBoxO_id + "'"
+                + " WHERE o_id::Text = '" + TextBoxO_id + "'"
                 + " ORDER BY s_id;",
                     m_conn
             );
@@ -1336,7 +1336,7 @@ namespace rk_seikyu
                                         + ", req_id"
                                         + " FROM"
                                         + " t_seikyu"
-                                        + " WHERE r_id=currval('t_seikyu_r_id_seq');"
+                                        + " WHERE r_id = currval('t_seikyu_r_id_seq');"
                                         , m_conn
                                     );
 
@@ -1418,7 +1418,7 @@ namespace rk_seikyu
                                         + ", time_stamp"
                                         + " FROM"
                                         + " t_shiharai_houhou"
-                                        + " WHERE sh_id=currval('t_shiharai_houhou_sh_id_seq');"
+                                        + " WHERE sh_id = currval('t_shiharai_houhou_sh_id_seq');"
                                         , m_conn
                                     );
 
@@ -1509,7 +1509,7 @@ namespace rk_seikyu
                                         + ", sk_id"
                                         + " FROM"
                                         + " t_shinzoku_kankei"
-                                        + " WHERE sk_id=currval('t_shizoku_kankei_sk_id_seq');"
+                                        + " WHERE sk_id = currval('t_shizoku_kankei_sk_id_seq');"
                                         , m_conn
                                     );
                                     break;
@@ -1951,7 +1951,7 @@ namespace rk_seikyu
                                         + ", time_stamp"
                                         + " FROM"
                                         + " t_shinzoku_kankei"
-                                        + " WHERE sk_id=" + e.Row["sk_id"].ToString()
+                                        + " WHERE sk_id = " + e.Row["sk_id"].ToString()
                                         + ";"
                                         , m_conn
                                     );
@@ -5153,6 +5153,7 @@ namespace rk_seikyu
                             break;
                     }
                     break;
+
                 case 2:
                     switch (Cmb_s_id_int)
                     {

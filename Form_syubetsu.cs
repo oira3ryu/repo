@@ -59,7 +59,7 @@ namespace rk_seikyu
                 + ", shisetsumei"
                 + " from"
                 + " t_syubetsu"
-                + " where o_id = " + cmb_o_id_str
+                + " where o_id::Text = '" + cmb_o_id_str + "'"
                 + " order by s_id;",
                 m_conn
             );
@@ -92,7 +92,7 @@ namespace rk_seikyu
                 + ", shisetsumei = :shisetsumei"
                 + ", s_id"
                 + " where"
-                + " o_id = " + cmb_o_id_str
+                + " o_id::Text = '" + cmb_o_id_str + "'"
                 + " and s_id = :s_id"
                 , m_conn
                 );
