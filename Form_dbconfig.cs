@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
+using System.Configuration;
 using System.Windows.Forms;
 using Npgsql;
 
@@ -36,7 +37,7 @@ namespace rk_seikyu
             DataGridViewDbconfig.Columns[1].HeaderText = "接続文字列";
             DataGridViewDbconfig.Columns[2].HeaderText = "第１オクテット";
             DataGridViewDbconfig.Columns[3].HeaderText = "第２オクテット";
-            DataGridViewDbconfig.Columns[4].HeaderText = "第３１オクテット";
+            DataGridViewDbconfig.Columns[4].HeaderText = "第３オクテット";
             DataGridViewDbconfig.Columns[5].HeaderText = "第４オクテット";
             DataGridViewDbconfig.Columns[6].HeaderText = "ポート";
             DataGridViewDbconfig.Columns[7].HeaderText = "ユーザー名";

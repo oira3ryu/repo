@@ -18,6 +18,7 @@ namespace rk_seikyu
 
         public String cmb_o_id_str;
         public int cmb_o_id_int { get; set; }
+        public string Form_Seikyu_TextBoxO_id;
 
         public Form_syubetsu()
         {
@@ -27,25 +28,26 @@ namespace rk_seikyu
             form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
             //Form_seikyuのテキストボックス文字列を
             //Form_syubetsuの文字列変数cmb_o_id_strへ設定
-            cmb_o_id_str = form_seikyu_Instance.TextBoxO_id;
+            //cmb_o_id_str = form_seikyu_Instance.TextBoxO_id;
+            Form_Seikyu_TextBoxO_id = form_seikyu_Instance.TextBoxO_id;
 
-            //Form_seikyuのコンボボックスcmb_o_idからの変数cmb_o_id_strをint型に変換して1加算
-            if (int.TryParse(cmb_o_id_str, out int i))
-            {
-                cmb_o_id_int = i + 1;
-                cmb_o_id_str = cmb_o_id_int.ToString();
-                Console.WriteLine("cmb_o_idからの値は、" + cmb_o_id_str);
-            }
-            else
-            {
-                Console.WriteLine("cmb_o_idからの値を数値に変換できません");
-            }
+            ////Form_seikyuのコンボボックスcmb_o_idからの変数cmb_o_id_strをint型に変換して1加算
+            //if (int.TryParse(cmb_o_id_str, out int i))
+            //{
+            //    cmb_o_id_int = i;
+            //    cmb_o_id_str = cmb_o_id_int.ToString();
+            //    Console.WriteLine("cmb_o_idからの値は、" + cmb_o_id_str);
+            //}
+            //else
+            //{
+            //    Console.WriteLine("cmb_o_idからの値を数値に変換できません");
+            //}
         }
 
         private void Form_syubetsu_Load(object sender, EventArgs e)
         {
 
-            Console.WriteLine("Form_syubetsu_cmb_o_id_str = " + cmb_o_id_str);
+            Console.WriteLine("Form_syubetsu_cmb_o_id_str = " + Form_Seikyu_TextBoxO_id);
 
             dataGridViewSyubetsu.Columns[0].HeaderText = "ID";
             dataGridViewSyubetsu.Columns[1].HeaderText = "種別";
@@ -53,31 +55,32 @@ namespace rk_seikyu
 
             da.SelectCommand = new NpgsqlCommand
             (
-                   "select"
-                + " s_id"
+                   "SELECT"
+                + " ps_id"
+                + ", s_id"
                 + ", syubetsu"
                 + ", shisetsumei"
-                + " from"
+                + " FROM"
                 + " t_syubetsu"
-                + " where o_id::Text = '" + cmb_o_id_str + "'"
-                + " order by s_id;",
+                + " WHERE o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                + " ORDER BY s_id;",
                 m_conn
             );
 
             // insert
             da.InsertCommand = new NpgsqlCommand
             (
-                    "insert into t_syubetsu ("
+                    "INSERT INTO t_syubetsu ("
                 + " syubetsu"
                 + ", shisetsumei"
                 + ", s_id"
                 + ", o_id"
-                + " ) values ("
+                + " ) VALUES ("
                 + " :syubetsu"
                 + ", :shisetsumei"
                 + ", :s_id"
                 + ", :o_id"
-                + ")",
+                + ");",
                 m_conn
             );
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("syubetsu", NpgsqlTypes.NpgsqlDbType.Text, 0, "syubetsu", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -87,27 +90,28 @@ namespace rk_seikyu
 
             // update
             da.UpdateCommand = new NpgsqlCommand(
-                "update t_syubetsu set"
-                + " syubetsu = :syubetsu"
+                "UPDATE t_syubetsu SET"
+                + " ps_id = :ps_id"
+                + ", syubetsu = :syubetsu"
                 + ", shisetsumei = :shisetsumei"
-                + ", s_id"
-                + " where"
-                + " o_id::Text = '" + cmb_o_id_str + "'"
-                + " and s_id = :s_id"
+                + ", s_id = :s_id"
+                + ", o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                + " WHERE"
+                + " ps_id = :ps_id"
                 , m_conn
                 );
+            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("ps_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "ps_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("syubetsu", NpgsqlTypes.NpgsqlDbType.Text, 0, "syubetsu", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("shisetsumei", NpgsqlTypes.NpgsqlDbType.Text, 0, "shisetsumei", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
-            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
-            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("ps_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "ps_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
+            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
             // delete
             da.DeleteCommand = new NpgsqlCommand
             (
-                   "delete from t_syubetsu"
-                + " where"
-                + " ps_id=:ps_id"
+                   "DELETE FROM t_syubetsu"
+                + " WHERE"
+                + " ps_id = :ps_id"
                 , m_conn
             );
             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("ps_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "ps_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -164,20 +168,22 @@ namespace rk_seikyu
                 {
                     NpgsqlCommand cmd = new NpgsqlCommand
                 (
-                "select"
-                + " s_id"
+                "SELECT"
+                + " ps_id"
+                + ", s_id"
                 + ", syubetsu"
                 + ", shisetsumei"
-                + " from"
+                + " FROM"
                 + " t_syubetsu"
-                + " where s_id=currval('t_syubetsu_s_id_seq')"
-                + " order by s_id;"
+                + " WHERE ps_id = currval('prn_syubetsu_ps_id_seq')"
+                + " ORDER BY s_id;"
                 , m_conn
                  );
                     try
                     {
                         NpgsqlDataReader reader = cmd.ExecuteReader();
                         reader.Read();
+                        e.Row["ps_id"] = reader["ps_id"];
                         e.Row["s_id"] = reader["s_id"];
                         e.Row["syubetsu"] = reader["syubetsu"];
                         e.Row["shisetsumei"] = reader["shisetsumei"];
@@ -193,20 +199,22 @@ namespace rk_seikyu
                 {
                     NpgsqlCommand cmd = new NpgsqlCommand
                 (
-                 "select"
-                + " s_id"
+                 "SELECT"
+                + " ps_id"
+                + ", s_id"
                 + ", syubetsu"
                 + ", shisetsumei"
-                + " from"
+                + " FROM"
                 + " t_syubetsu"
-                + " where s_id=" + e.Row["s_id"].ToString()
-                + " order by s_id"
+                + " WHERE ps_id = " + e.Row["ps_id"].ToString()
+                + " ORDER BY s_id"
                 , m_conn
                     );
                     try
                     {
                         NpgsqlDataReader reader = cmd.ExecuteReader();
                         reader.Read();
+                        e.Row["ps_id"] = reader["ps_id"];
                         e.Row["s_id"] = reader["s_id"];
                         e.Row["syubetsu"] = reader["syubetsu"];
                         e.Row["shisetsumei"] = reader["shisetsumei"];

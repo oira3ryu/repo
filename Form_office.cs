@@ -128,7 +128,7 @@ namespace rk_seikyu
             (
                    "DELETE FROM t_Office"
                 + " WHERE"
-                + " o_id=:o_id"
+                + " o_id = :o_id"
                 , m_conn
             );
             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
