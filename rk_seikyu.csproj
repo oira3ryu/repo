@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>rk_seikyu</RootNamespace>
     <AssemblyName>rk_seikyu</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -245,11 +245,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>nen.xsd</DependentUpon>
     </Compile>
-    <Compile Include="o_id_ds.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>o_id_ds.xsd</DependentUpon>
-    </Compile>
     <Compile Include="par.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -263,22 +258,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>req_ds.xsd</DependentUpon>
     </Compile>
-    <Compile Include="gengou_ds.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>gengou_ds.xsd</DependentUpon>
-    </Compile>
     <Compile Include="seikyu.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>seikyu.xsd</DependentUpon>
     </Compile>
     <Compile Include="seikyu_ds.Designer.cs" />
-    <Compile Include="settings_ds.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>settings_ds.xsd</DependentUpon>
-    </Compile>
     <Compile Include="shiharai_houhou_ds.Designer.cs" />
     <Compile Include="shinzoku_kankei_ds.Designer.cs" />
     <Compile Include="syubetsu.Designer.cs">
@@ -432,7 +417,6 @@
     <None Include="o_id_ds.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>o_id_ds.Designer.cs</LastGenOutput>
     </None>
     <None Include="o_id_ds.xss">
       <DependentUpon>o_id_ds.xsd</DependentUpon>
@@ -486,7 +470,6 @@
     </None>
     <None Include="gengou_ds.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>gengou_ds.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="gengou_ds.xss">
@@ -520,7 +503,6 @@
     <None Include="settings_ds.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>settings_ds.Designer.cs</LastGenOutput>
     </None>
     <None Include="settings_ds.xss">
       <DependentUpon>settings_ds.xsd</DependentUpon>

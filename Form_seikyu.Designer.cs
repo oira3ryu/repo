@@ -249,10 +249,7 @@
             this.cmd_serv = new System.Windows.Forms.Button();
             this.cmdNenMod = new System.Windows.Forms.Button();
             this.cmdGyoumu = new System.Windows.Forms.Button();
-            this.o_id_ds1 = new rk_seikyu.o_id_ds();
             this.dataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataTableTableAdapter = new rk_seikyu.o_id_dsTableAdapters.DataTableTableAdapter();
-            this.tableAdapterManager = new rk_seikyu.o_id_dsTableAdapters.TableAdapterManager();
             this.cmb_o_id_text = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.textBoxO_id = new System.Windows.Forms.TextBox();
@@ -283,7 +280,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tsukiBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tsukiBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tsuki)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.o_id_ds1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -1942,25 +1938,15 @@
             this.cmdGyoumu.UseVisualStyleBackColor = true;
             this.cmdGyoumu.Click += new System.EventHandler(this.CmdGyoumuMod_Click);
             // 
-            // o_id_ds1
-            // 
-            this.o_id_ds1.DataSetName = "o_id_ds";
-            this.o_id_ds1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // dataTableBindingSource
             // 
             this.dataTableBindingSource.DataMember = "DataTable";
-            this.dataTableBindingSource.DataSource = this.o_id_ds1;
             // 
             // dataTableTableAdapter
             // 
-            this.dataTableTableAdapter.ClearBeforeFill = true;
             // 
             // tableAdapterManager
             // 
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.DataTableTableAdapter = this.dataTableTableAdapter;
-            this.tableAdapterManager.UpdateOrder = rk_seikyu.o_id_dsTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // cmb_o_id_text
             // 
@@ -2070,7 +2056,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tsukiBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tsukiBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tsuki)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.o_id_ds1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -2297,10 +2282,7 @@
         private System.Windows.Forms.Button cmd_serv;
         private System.Windows.Forms.Button cmdNenMod;
         private System.Windows.Forms.Button cmdGyoumu;
-        private o_id_ds o_id_ds1;
         private System.Windows.Forms.BindingSource dataTableBindingSource;
-        private o_id_dsTableAdapters.DataTableTableAdapter dataTableTableAdapter;
-        private o_id_dsTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.TextBox cmb_o_id_text;
         internal System.Windows.Forms.ComboBox cmb_nen;
         private System.Windows.Forms.Button button1;
