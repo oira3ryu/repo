@@ -442,80 +442,88 @@ namespace rk_seikyu
 
         private void button1_Click(object sender, EventArgs e)
         {
-            m_conn.Open();
-
-            NpgsqlCommand command = new NpgsqlCommand(
-            "SELECT"
-            +" d_id"
-            + ", d_name"
-            + ", d_oct1"
-            + ", d_oct2"
-            + ", d_oct3"
-            + ", d_oct4"
-            + ", d_port"
-            + ", d_user"
-            + ", d_pass"
-            + ", d_database_name"
-            + ", d_flg"
-            + " FROM"
-            + " t_dbconfig"
-            + " WHERE d_flg = 'TRUE'"
-            + " ORDER BY d_id;"
-            , m_conn);
-
             try
             {
+                m_conn.Open();
 
-                NpgsqlDataReader dr = command.ExecuteReader();
-                while (dr.Read())
+                NpgsqlCommand command = new NpgsqlCommand(
+                "SELECT"
+                +" d_id"
+                + ", d_name"
+                + ", d_oct1"
+                + ", d_oct2"
+                + ", d_oct3"
+                + ", d_oct4"
+                + ", d_port"
+                + ", d_user"
+                + ", d_pass"
+                + ", d_database_name"
+                + ", d_flg"
+                + " FROM"
+                + " t_dbconfig"
+                + " WHERE d_flg = 'TRUE'"
+                + " ORDER BY d_id;"
+                , m_conn);
+
+                try
                 {
-                    for (I = 0; I < dr.FieldCount; I++)
+
+                    NpgsqlDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
                     {
-                        val_d_id = dr[0].ToString();
-                        val_d_name = dr[1].ToString();
-                        val_d_oct1 = dr[2].ToString();
-                        val_d_oct2 = dr[3].ToString();
-                        val_d_oct3 = dr[4].ToString();
-                        val_d_oct4 = dr[5].ToString();
-                        val_d_port = dr[6].ToString();
-                        val_d_user = dr[7].ToString();
-                        val_d_pass = dr[8].ToString();
-                        val_d_database_name = dr[9].ToString();
-                        val_d_flg = dr[10].ToString();
+                        for (I = 0; I < dr.FieldCount; I++)
+                        {
+                            val_d_id = dr[0].ToString();
+                            val_d_name = dr[1].ToString();
+                            val_d_oct1 = dr[2].ToString();
+                            val_d_oct2 = dr[3].ToString();
+                            val_d_oct3 = dr[4].ToString();
+                            val_d_oct4 = dr[5].ToString();
+                            val_d_port = dr[6].ToString();
+                            val_d_user = dr[7].ToString();
+                            val_d_pass = dr[8].ToString();
+                            val_d_database_name = dr[9].ToString();
+                            val_d_flg = dr[10].ToString();
+                        }
+                        Console.WriteLine("val_d_id = " + val_d_id);
+                        Console.WriteLine("val_d_name = " + val_d_name);
+                        Console.WriteLine("val_d_oct1 = " + val_d_oct1);
+                        Console.WriteLine("val_d_oct2 = " + val_d_oct2);
+                        Console.WriteLine("val_d_oct3 = " + val_d_oct3);
+                        Console.WriteLine("val_d_oct4 = " + val_d_oct4);
+                        Console.WriteLine("val_d_port = " + val_d_port);
+                        Console.WriteLine("val_d_user = " + val_d_user);
+                        Console.WriteLine("val_d_pass = " + val_d_pass);
+                        Console.WriteLine("val_d_database_name = " + val_d_database_name);
+                        Console.WriteLine("val_d_flg = " + val_d_flg);
+
+
                     }
-                    Console.WriteLine("val_d_id = " + val_d_id);
-                    Console.WriteLine("val_d_name = " + val_d_name);
-                    Console.WriteLine("val_d_oct1 = " + val_d_oct1);
-                    Console.WriteLine("val_d_oct2 = " + val_d_oct2);
-                    Console.WriteLine("val_d_oct3 = " + val_d_oct3);
-                    Console.WriteLine("val_d_oct4 = " + val_d_oct4);
-                    Console.WriteLine("val_d_port = " + val_d_port);
-                    Console.WriteLine("val_d_user = " + val_d_user);
-                    Console.WriteLine("val_d_pass = " + val_d_pass);
-                    Console.WriteLine("val_d_database_name = " + val_d_database_name);
-                    Console.WriteLine("val_d_flg = " + val_d_flg);
+                }
+                finally
+                {
+                    m_conn.Close();
+                }
 
-
+                //書き込み処理
+                var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
+                if (connectionStringsSection != null)
+                {
+                    connectionStringsSection.ConnectionStrings[val_d_name].ConnectionString
+                        = "Server = " + val_d_oct1 + "." + val_d_oct2 + "." + val_d_oct3 + "." + val_d_oct4 + "; "
+                        + "Port = " + val_d_port + "; "
+                        + "User Id = " + val_d_user + "; "
+                        + "Password = " + val_d_pass + "; "
+                        + "Database = " + val_d_database_name + ";"
+                        + "Pooling = False";
+                    config.Save();
+                    ConfigurationManager.RefreshSection("connectionStrings");
                 }
             }
             finally
             {
                 m_conn.Close();
-            }
-
-            //書き込み処理
-            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
-            if (connectionStringsSection != null)
-            {
-                connectionStringsSection.ConnectionStrings[val_d_name].ConnectionString
-                    = "Server = " + val_d_oct1 + "." + val_d_oct2 + "." + val_d_oct3 + "." + val_d_oct4 + "; "
-                    + "Port = " + val_d_port + "; "
-                    + "User Id = " + val_d_user + "; "
-                    + "Password = " + val_d_pass + "; "
-                    + "Database = " + val_d_database_name + ";";
-                config.Save();
-                ConfigurationManager.RefreshSection("connectionStrings");
             }
         }
     }
