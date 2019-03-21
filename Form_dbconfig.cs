@@ -317,30 +317,6 @@ namespace rk_seikyu
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
-
-            //m_conn.Open();
-
-            //NpgsqlCommand command = new NpgsqlCommand("SELECT d_id, d_name FROM t_dbconfig WHEREd_ flg = '1';", m_conn);
-
-            //try
-            //{
-            //    NpgsqlDataReader dr = command.ExecuteReader();
-            //    while (dr.Read())
-            //    {
-            //        for (I = 0; I < dr.FieldCount; I++)
-            //        {
-            //            form_seikyu_Instance.TextBoxO_id = dr[0].ToString();
-            //            form_seikyu_Instance.TextBoxO_name = dr[1].ToString();
-            //        }
-            //        Console.WriteLine();
-            //    }
-
-            //}
-
-            //finally
-            //{
-            //    m_conn.Close();
-            //}
         }
 
         private void Form_dbconfig_FormClosing(object sender, FormClosingEventArgs e)
@@ -496,9 +472,8 @@ namespace rk_seikyu
                         Console.WriteLine("val_d_pass = " + val_d_pass);
                         Console.WriteLine("val_d_database_name = " + val_d_database_name);
                         Console.WriteLine("val_d_flg = " + val_d_flg);
-
-
                     }
+                    dr.Close();
                 }
                 finally
                 {
@@ -521,9 +496,16 @@ namespace rk_seikyu
                     ConfigurationManager.RefreshSection("connectionStrings");
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("保存に失敗しました。\n\n[内容]\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             finally
             {
+                MessageBox.Show("保存しました。\n\n[内容]\n", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 m_conn.Close();
+                m_conn.Dispose();
             }
         }
     }
