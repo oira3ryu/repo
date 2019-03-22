@@ -493,6 +493,7 @@ namespace rk_seikyu
                         + "Database = " + val_d_database_name + ";"
                         + "Pooling = False";
                     config.Save();
+                    Properties.Settings.Default.Save();
                     ConfigurationManager.RefreshSection("connectionStrings");
                 }
             }
