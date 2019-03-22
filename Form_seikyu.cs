@@ -130,12 +130,12 @@ namespace rk_seikyu
 
         private void Form_seikyu_Load(object sender, EventArgs e)
         {
-            m_conn.Open();
-
-            NpgsqlCommand command = new NpgsqlCommand("SELECT o_id, o_name FROM t_office WHERE flg = '1';", m_conn);
-
             try
             {
+                m_conn.Open();
+
+                NpgsqlCommand command = new NpgsqlCommand("SELECT o_id, o_name FROM t_office WHERE flg = '1';", m_conn);
+
                 NpgsqlDataReader dr = command.ExecuteReader();
                 while (dr.Read())
                 {
@@ -148,6 +148,11 @@ namespace rk_seikyu
                     }
                     Console.WriteLine();
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("データ取得に失敗しました。\n\n[内容]\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
 
             }
             finally
