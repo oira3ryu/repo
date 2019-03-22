@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rk_seikyu", "rk_seikyu.csproj", "{E686D0CE-538E-4BEE-9BCD-5C7E0DFE07FA}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "..\Setup1\Setup1.vdproj", "{3513964E-3689-48D6-8FC3-E514E90879C1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|x86 = CD_ROM|x86
@@ -26,18 +24,13 @@ Global
 		{E686D0CE-538E-4BEE-9BCD-5C7E0DFE07FA}.Release|x86.Build.0 = Release|x86
 		{E686D0CE-538E-4BEE-9BCD-5C7E0DFE07FA}.SingleImage|x86.ActiveCfg = Release|x86
 		{E686D0CE-538E-4BEE-9BCD-5C7E0DFE07FA}.SingleImage|x86.Build.0 = Release|x86
-		{3513964E-3689-48D6-8FC3-E514E90879C1}.CD_ROM|x86.ActiveCfg = Release
-		{3513964E-3689-48D6-8FC3-E514E90879C1}.Debug|x86.ActiveCfg = Debug
-		{3513964E-3689-48D6-8FC3-E514E90879C1}.DVD-5|x86.ActiveCfg = Debug
-		{3513964E-3689-48D6-8FC3-E514E90879C1}.Release|x86.ActiveCfg = Release
-		{3513964E-3689-48D6-8FC3-E514E90879C1}.SingleImage|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {A723C434-93B6-465C-9DEE-91A4ECA17290}
 		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {A723C434-93B6-465C-9DEE-91A4ECA17290}
 	EndGlobalSection
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
