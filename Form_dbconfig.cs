@@ -490,9 +490,9 @@ namespace rk_seikyu
                         + "Port = " + val_d_port + "; "
                         + "User Id = " + val_d_user + "; "
                         + "Password = " + val_d_pass + "; "
-                        + "Database = " + val_d_database_name + ";"
-                        + "Pooling = False";
-                    config.Save();
+                        + "Database = " + val_d_database_name + ";";
+                        //+ "Pooling = False";
+                    config.Save(ConfigurationSaveMode.Modified, true);
                     Properties.Settings.Default.Save();
                     ConfigurationManager.RefreshSection("connectionStrings");
                 }
