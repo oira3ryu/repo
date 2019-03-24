@@ -100,7 +100,7 @@ namespace rk_seikyu
 
             // update
             da.UpdateCommand = new NpgsqlCommand(
-                "UPDATE t_Office SET"
+                "UPDATE t_office SET"
                 + " o_id = :o_id"
                 + ", flg = :flg"
                 + ", o_number = :o_number"
@@ -126,7 +126,7 @@ namespace rk_seikyu
             // delete
             da.DeleteCommand = new NpgsqlCommand
             (
-                   "DELETE FROM t_Office"
+                   "DELETE FROM t_office"
                 + " WHERE"
                 + " o_id = :o_id"
                 , m_conn
@@ -180,7 +180,7 @@ namespace rk_seikyu
                 {
                     //データ登録
                     //var cmd = new NpgsqlCommand(@"insert into t_settings (id, o_id_val) values (:id, '" + Cmb_o_id_int.ToString() + "')", m_conn);
-                    var cmd = new NpgsqlCommand(@"UPDATE t_settings SET o_id_val = '" + Cmb_o_id_int.ToString() + "' WHERE id = 1;", m_conn);
+                    var cmd = new NpgsqlCommand(@"UPDATE t_settings SET o_id_val = '" + Cmb_o_id_int.ToString() + "' WHERE sid = 1;", m_conn);
                     //cmd.Parameters.Add(new NpgsqlParameter("id", DbType.Int32) { Value = 1 });
                     //cmd.Parameters.Add(new NpgsqlParameter("o_id_val", DbType.String) { Value = "1" });
                     cmd.ExecuteNonQuery();

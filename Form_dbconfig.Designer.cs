@@ -104,6 +104,10 @@
             this.DataGridViewDbconfig.RowTemplate.Height = 21;
             this.DataGridViewDbconfig.Size = new System.Drawing.Size(1040, 150);
             this.DataGridViewDbconfig.TabIndex = 2;
+            this.DataGridViewDbconfig.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewDbconfig_CellMouseMove);
+            this.DataGridViewDbconfig.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DataGridViewDbconfig_CellPainting);
+            this.DataGridViewDbconfig.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewDbconfig_CellValueChanged);
+            this.DataGridViewDbconfig.CurrentCellDirtyStateChanged += new System.EventHandler(this.DataGridViewDbconfig_CurrentCellDirtyStateChanged);
             // 
             // d_id
             // 

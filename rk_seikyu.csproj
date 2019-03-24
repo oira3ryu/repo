@@ -264,6 +264,9 @@
       <DependentUpon>seikyu.xsd</DependentUpon>
     </Compile>
     <Compile Include="seikyu_ds.Designer.cs" />
+    <Compile Include="settings_ds.cs">
+      <DependentUpon>settings_ds.xsd</DependentUpon>
+    </Compile>
     <Compile Include="shiharai_houhou_ds.Designer.cs" />
     <Compile Include="shinzoku_kankei_ds.Designer.cs" />
     <Compile Include="syubetsu.Designer.cs">

@@ -16,6 +16,7 @@ namespace rk_seikyu
 
         public string cmb_o_id_str;
         public string cmb_o_id_item;
+        public string Form_Seikyu_TextBoxO_id;
 
         private Form_seikyu form_seikyu_Instance;
 
@@ -27,22 +28,22 @@ namespace rk_seikyu
             form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
             //Form_seikyuのテキストボックス文字列を
             //Form_prnの文字列変数cmb_o_id_strへ設定
-            cmb_o_id_str = form_seikyu_Instance.TextBoxO_id;
+            Form_Seikyu_TextBoxO_id = form_seikyu_Instance.TextBoxO_id;
             cmb_o_id_item = form_seikyu_Instance.TextBoxO_name;
             Console.WriteLine("cmb_o_idからのメンバーは、" + cmb_o_id_item);
 
             //Form_seikyuのコンボボックスcmb_o_idからの変数cmb_o_id_strをint型に変換して1加算
-            int i;
-            if (int.TryParse(cmb_o_id_str, out i))
-            {
-                Cmb_o_id_int = i + 1;
-                cmb_o_id_str = Cmb_o_id_int.ToString();
-                Console.WriteLine("cmb_o_idからの値は、" + cmb_o_id_str);
-            }
-            else
-            {
-                Console.WriteLine("cmb_o_idからの値を数値に変換できません");
-            }
+            //int i;
+            //if (int.TryParse(cmb_o_id_str, out i))
+            //{
+            //    Cmb_o_id_int = i + 1;
+            //    cmb_o_id_str = Cmb_o_id_int.ToString();
+            //    Console.WriteLine("cmb_o_idからの値は、" + cmb_o_id_str);
+            //}
+            //else
+            //{
+            //    Console.WriteLine("cmb_o_idからの値を数値に変換できません");
+            //}
         }
 
         private void Form_req_Load(object sender, EventArgs e)
@@ -68,7 +69,7 @@ namespace rk_seikyu
 
             da.SelectCommand = new NpgsqlCommand
             (
-                   "select"
+                   "SELECT"
                 + " req_id"
                 + ", title1"
                 + ", title2"
@@ -87,17 +88,17 @@ namespace rk_seikyu
                 + ", data9"
                 + ", data10"
                 + ", o_id"
-                + " from"
+                + " FROM"
                 + " t_req"
-                + " where o_id = '" + cmb_o_id_str + "'"
-                + " order by req_id;",
+                + " WHERE o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                + " ORDER BY req_id;",
                 m_conn
             );
 
             // insert
             da.InsertCommand = new NpgsqlCommand
             (
-                    "insert into t_req ("
+                "INSERT INTO t_req ("
                 + " title1"
                 + ", title2"
                 + ", name1"
@@ -115,7 +116,7 @@ namespace rk_seikyu
                 + ", data9"
                 + ", data10"
                 + ", o_id"
-                + " ) values ("
+                + " ) VALUES ("
                 + " :title1"
                 + ", :title2"
                 + ", :name1"
@@ -157,7 +158,7 @@ namespace rk_seikyu
 
             // update
             da.UpdateCommand = new NpgsqlCommand(
-                "update t_req set"
+                "UPDATE t_req SET"
                 + " title1 = :title1"
                 + ", title2 = :title2"
                 + ", name1 = :name1"
@@ -175,7 +176,7 @@ namespace rk_seikyu
                 + ", data9 = :data9"
                 + ", data10 = :data10"
                 + ", o_id = :o_id"
-                + " where"
+                + " WHERE"
                 + " req_id = :req_id"
                 , m_conn
                 );
@@ -201,9 +202,9 @@ namespace rk_seikyu
             // delete
             da.DeleteCommand = new NpgsqlCommand
             (
-                   "delete from t_req"
-                + " where"
-                + " req_id=:req_id"
+                   "DELETE FROM t_req"
+                + " WHERE"
+                + " req_id = :req_id"
                 , m_conn
             );
             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -252,7 +253,7 @@ namespace rk_seikyu
                 {
                     NpgsqlCommand cmd = new NpgsqlCommand
                 (
-                   "select"
+                   "SELECT"
                 + " title1"
                 + ", title2"
                 + ", name1"
@@ -270,10 +271,10 @@ namespace rk_seikyu
                 + ", data9"
                 + ", data10"
                 + ", o_id"
-                + " from"
+                + " FROM"
                 + " t_req"
-                + " where req_id=currval('t_req_req_id_seq')"
-                + " order by req_id;"
+                + " WHERE req_id = currval('t_req_req_id_seq')"
+                + " OEDER BY req_id;"
                 , m_conn
                  );
                     try
@@ -309,7 +310,7 @@ namespace rk_seikyu
                 {
                     NpgsqlCommand cmd = new NpgsqlCommand
                 (
-                   "select"
+                   "SELECT"
                 + " title1"
                 + ", title2"
                 + ", name1"
@@ -327,10 +328,10 @@ namespace rk_seikyu
                 + ", data9"
                 + ", data10"
                 + ", o_id"
-                + " from"
+                + " FROM"
                 + " t_req"
-                + " where req_id=" + e.Row["req_id"].ToString()
-                + " order by req_id"
+                + " WHERE req_id =" + e.Row["req_id"].ToString()
+                + " ORDER BY req_id"
                 , m_conn
                     );
                     try
