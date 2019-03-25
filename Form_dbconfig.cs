@@ -424,7 +424,7 @@ namespace rk_seikyu
 
                 NpgsqlCommand command = new NpgsqlCommand(
                 "SELECT"
-                +" d_id"
+                + " d_id"
                 + ", d_name"
                 + ", d_oct1"
                 + ", d_oct2"
@@ -491,12 +491,21 @@ namespace rk_seikyu
                         + "User Id = " + val_d_user + "; "
                         + "Password = " + val_d_pass + "; "
                         + "Database = " + val_d_database_name + ";";
-                        //+ "Pooling = False";
+                    //+ "Pooling = False";
                     config.Save(ConfigurationSaveMode.Modified, true);
-                    Properties.Settings.Default.Save();
-                    ConfigurationManager.RefreshSection("connectionStrings");
                 }
-            }
+
+                    //Properties.Settings.Default["PostgresConnect"] += 
+                    //    "Server = " + val_d_oct1 + "." + val_d_oct2 + "." + val_d_oct3 + "." + val_d_oct4 + "; "
+                    //    + "Port = " + val_d_port + "; "
+                    //    + "User Id = " + val_d_user + "; "
+                    //    + "Password = " + val_d_pass + "; "
+                    //    + "Database = " + val_d_database_name + ";";
+                    //Properties.Settings.Default.Save();
+                    //Properties.Settings.Default.Reload();
+                    //ConfigurationManager.RefreshSection("connectionStrings");
+                    //}
+                }
             catch (Exception ex)
             {
                 MessageBox.Show("保存に失敗しました。\n\n[内容]\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
