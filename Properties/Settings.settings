@@ -10,7 +10,7 @@
       <Value Profile="(Default)">Server=127.0.0.1;Port=5433;User Id=rkadmin;Password=yu2;Database=rk_seikyu</Value>
     </Setting>
     <Setting Name="TestConnect" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Server=127.0.0.1;Port=5432;User Id=rkadmin;Password=yu2;Database=rk_seikyu</Value>
+      <Value Profile="(Default)">Server=127.0.0.1;Port=5433;User Id=rkadmin;Password=yu2;Database=rk_seikyu</Value>
     </Setting>
   </Settings>
 </SettingsFile>

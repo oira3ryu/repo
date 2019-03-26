@@ -483,31 +483,27 @@ namespace rk_seikyu
                 }
 
                 //書き込み処理
-                var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
-                if (connectionStringsSection != null)
-                {
-                    connectionStringsSection.ConnectionStrings[val_d_name].ConnectionString
-                        = "Server = " + val_d_oct1 + "." + val_d_oct2 + "." + val_d_oct3 + "." + val_d_oct4 + "; "
-                        + "Port = " + val_d_port + "; "
-                        + "User Id = " + val_d_user + "; "
-                        + "Password = " + val_d_pass + "; "
-                        + "Database = " + val_d_database_name + ";";
-                    //+ "Pooling = False";
-                    config.Save(ConfigurationSaveMode.Modified, true);
-                }
+                //var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                //var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
+                //if (connectionStringsSection != null)
+                //{
+                //    connectionStringsSection.ConnectionStrings[val_d_name].ConnectionString
+                //        = "Server = " + val_d_oct1 + "." + val_d_oct2 + "." + val_d_oct3 + "." + val_d_oct4 + "; "
+                //        + "Port = " + val_d_port + "; "
+                //        + "User Id = " + val_d_user + "; "
+                //        + "Password = " + val_d_pass + "; "
+                //        + "Database = " + val_d_database_name + ";";
+                //    config.Save(ConfigurationSaveMode.Modified, true);
+                //}
 
-                    //Properties.Settings.Default["PostgresConnect"] += 
-                    //    "Server = " + val_d_oct1 + "." + val_d_oct2 + "." + val_d_oct3 + "." + val_d_oct4 + "; "
-                    //    + "Port = " + val_d_port + "; "
-                    //    + "User Id = " + val_d_user + "; "
-                    //    + "Password = " + val_d_pass + "; "
-                    //    + "Database = " + val_d_database_name + ";";
-                    //Properties.Settings.Default.Save();
-                    //Properties.Settings.Default.Reload();
-                    //ConfigurationManager.RefreshSection("connectionStrings");
-                    //}
-                }
+                Properties.Settings.Default.PostgresConnect =
+                    "Server = " + val_d_oct1 + "." + val_d_oct2 + "." + val_d_oct3 + "." + val_d_oct4 + "; "
+                    + "Port = " + val_d_port + "; "
+                    + "User Id = " + val_d_user + "; "
+                    + "Password = " + val_d_pass + "; "
+                    + "Database = " + val_d_database_name + ";";
+                Properties.Settings.Default.Save();
+            }
             catch (Exception ex)
             {
                 MessageBox.Show("保存に失敗しました。\n\n[内容]\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -523,13 +519,13 @@ namespace rk_seikyu
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.TestConnect = this.textBox1.Text;
-            Properties.Settings.Default.Save();
+            //Properties.Settings.Default.TestConnect = this.textBox1.Text;
+            //Properties.Settings.Default.Save();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.textBox1.Text = Properties.Settings.Default.TestConnect.Replace("Server=127.0.0.1;Port=5433;User Id=rkadmin;Password=yu2;Database=rk_seikyu",textBox1.Text);
+            this.textBox1.Text = Properties.Settings.Default.PostgresConnect;
         }
     }
 }
