@@ -42,6 +42,8 @@ namespace rk_seikyu
 
             //Form_dbconfigのインスタンスを取得
             form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
+
+            this.textBox1.Text = Properties.Settings.Default.TestConnect;
         }
 
         private void Form_dbconfig_Load(object sender, EventArgs e)
@@ -517,6 +519,17 @@ namespace rk_seikyu
                 m_conn.Close();
                 m_conn.Dispose();
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.TestConnect = this.textBox1.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.textBox1.Text = Properties.Settings.Default.TestConnect.Replace("Server=127.0.0.1;Port=5433;User Id=rkadmin;Password=yu2;Database=rk_seikyu",textBox1.Text);
         }
     }
 }

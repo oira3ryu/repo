@@ -35,5 +35,17 @@ namespace rk_seikyu.Properties {
                 this["PostgresConnect"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=127.0.0.1;Port=5432;User Id=rkadmin;Password=yu2;Database=rk_seikyu")]
+        public string TestConnect {
+            get {
+                return ((string)(this["TestConnect"]));
+            }
+            set {
+                this["TestConnect"] = value;
+            }
+        }
     }
 }
