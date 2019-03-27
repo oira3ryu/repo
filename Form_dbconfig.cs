@@ -9,7 +9,7 @@ namespace rk_seikyu
 {
     public partial class Form_dbconfig : Form
     {
-        private NpgsqlConnection m_conn = new NpgsqlConnection(rk_seikyu.Properties.Settings.Default.PostgresConnect);
+        private NpgsqlConnection m_conn = new NpgsqlConnection(rk_seikyu.Properties.Settings.Default.PostgresConnect1);
 
         private NpgsqlDataAdapter da = new NpgsqlDataAdapter();
         private DataSet ds = new DataSet();
@@ -42,8 +42,6 @@ namespace rk_seikyu
 
             //Form_dbconfigのインスタンスを取得
             form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
-
-            this.textBox1.Text = Properties.Settings.Default.TestConnect;
         }
 
         private void Form_dbconfig_Load(object sender, EventArgs e)
@@ -317,6 +315,102 @@ namespace rk_seikyu
 
         private void CmdClose_Click(object sender, EventArgs e)
         {
+            try
+            {
+                m_conn.Open();
+
+                NpgsqlCommand command = new NpgsqlCommand(
+                "SELECT"
+                + " d_id"
+                + ", d_name"
+                + ", d_oct1"
+                + ", d_oct2"
+                + ", d_oct3"
+                + ", d_oct4"
+                + ", d_port"
+                + ", d_user"
+                + ", d_pass"
+                + ", d_database_name"
+                + ", d_flg"
+                + " FROM"
+                + " t_dbconfig"
+                + " WHERE d_flg = 'TRUE'"
+                + " ORDER BY d_id;"
+                , m_conn);
+
+                try
+                {
+
+                    NpgsqlDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        for (I = 0; I < dr.FieldCount; I++)
+                        {
+                            val_d_id = dr[0].ToString();
+                            val_d_name = dr[1].ToString();
+                            val_d_oct1 = dr[2].ToString();
+                            val_d_oct2 = dr[3].ToString();
+                            val_d_oct3 = dr[4].ToString();
+                            val_d_oct4 = dr[5].ToString();
+                            val_d_port = dr[6].ToString();
+                            val_d_user = dr[7].ToString();
+                            val_d_pass = dr[8].ToString();
+                            val_d_database_name = dr[9].ToString();
+                            val_d_flg = dr[10].ToString();
+                        }
+                        Console.WriteLine("val_d_id = " + val_d_id);
+                        Console.WriteLine("val_d_name = " + val_d_name);
+                        Console.WriteLine("val_d_oct1 = " + val_d_oct1);
+                        Console.WriteLine("val_d_oct2 = " + val_d_oct2);
+                        Console.WriteLine("val_d_oct3 = " + val_d_oct3);
+                        Console.WriteLine("val_d_oct4 = " + val_d_oct4);
+                        Console.WriteLine("val_d_port = " + val_d_port);
+                        Console.WriteLine("val_d_user = " + val_d_user);
+                        Console.WriteLine("val_d_pass = " + val_d_pass);
+                        Console.WriteLine("val_d_database_name = " + val_d_database_name);
+                        Console.WriteLine("val_d_flg = " + val_d_flg);
+                    }
+                    dr.Close();
+                }
+                finally
+                {
+                    m_conn.Close();
+                }
+
+                //書き込み処理
+                //var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                //var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
+                //if (connectionStringsSection != null)
+                //{
+                //    connectionStringsSection.ConnectionStrings[val_d_name].ConnectionString
+                //        = "Server = " + val_d_oct1 + "." + val_d_oct2 + "." + val_d_oct3 + "." + val_d_oct4 + "; "
+                //        + "Port = " + val_d_port + "; "
+                //        + "User Id = " + val_d_user + "; "
+                //        + "Password = " + val_d_pass + "; "
+                //        + "Database = " + val_d_database_name + ";";
+                //    config.Save(ConfigurationSaveMode.Modified, true);
+                //}
+
+                Properties.Settings.Default.PostgresConnect =
+                    "Server = " + val_d_oct1 + "." + val_d_oct2 + "." + val_d_oct3 + "." + val_d_oct4 + "; "
+                    + "Port = " + val_d_port + "; "
+                    + "User Id = " + val_d_user + "; "
+                    + "Password = " + val_d_pass + "; "
+                    + "Database = " + val_d_database_name + ";";
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("保存に失敗しました。\n\n[内容]\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            finally
+            {
+                //MessageBox.Show("保存しました。\n\n[内容]\n", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                m_conn.Close();
+                m_conn.Dispose();
+            }
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -416,116 +510,6 @@ namespace rk_seikyu
                     }
                 }
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                m_conn.Open();
-
-                NpgsqlCommand command = new NpgsqlCommand(
-                "SELECT"
-                + " d_id"
-                + ", d_name"
-                + ", d_oct1"
-                + ", d_oct2"
-                + ", d_oct3"
-                + ", d_oct4"
-                + ", d_port"
-                + ", d_user"
-                + ", d_pass"
-                + ", d_database_name"
-                + ", d_flg"
-                + " FROM"
-                + " t_dbconfig"
-                + " WHERE d_flg = 'TRUE'"
-                + " ORDER BY d_id;"
-                , m_conn);
-
-                try
-                {
-
-                    NpgsqlDataReader dr = command.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        for (I = 0; I < dr.FieldCount; I++)
-                        {
-                            val_d_id = dr[0].ToString();
-                            val_d_name = dr[1].ToString();
-                            val_d_oct1 = dr[2].ToString();
-                            val_d_oct2 = dr[3].ToString();
-                            val_d_oct3 = dr[4].ToString();
-                            val_d_oct4 = dr[5].ToString();
-                            val_d_port = dr[6].ToString();
-                            val_d_user = dr[7].ToString();
-                            val_d_pass = dr[8].ToString();
-                            val_d_database_name = dr[9].ToString();
-                            val_d_flg = dr[10].ToString();
-                        }
-                        Console.WriteLine("val_d_id = " + val_d_id);
-                        Console.WriteLine("val_d_name = " + val_d_name);
-                        Console.WriteLine("val_d_oct1 = " + val_d_oct1);
-                        Console.WriteLine("val_d_oct2 = " + val_d_oct2);
-                        Console.WriteLine("val_d_oct3 = " + val_d_oct3);
-                        Console.WriteLine("val_d_oct4 = " + val_d_oct4);
-                        Console.WriteLine("val_d_port = " + val_d_port);
-                        Console.WriteLine("val_d_user = " + val_d_user);
-                        Console.WriteLine("val_d_pass = " + val_d_pass);
-                        Console.WriteLine("val_d_database_name = " + val_d_database_name);
-                        Console.WriteLine("val_d_flg = " + val_d_flg);
-                    }
-                    dr.Close();
-                }
-                finally
-                {
-                    m_conn.Close();
-                }
-
-                //書き込み処理
-                //var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                //var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
-                //if (connectionStringsSection != null)
-                //{
-                //    connectionStringsSection.ConnectionStrings[val_d_name].ConnectionString
-                //        = "Server = " + val_d_oct1 + "." + val_d_oct2 + "." + val_d_oct3 + "." + val_d_oct4 + "; "
-                //        + "Port = " + val_d_port + "; "
-                //        + "User Id = " + val_d_user + "; "
-                //        + "Password = " + val_d_pass + "; "
-                //        + "Database = " + val_d_database_name + ";";
-                //    config.Save(ConfigurationSaveMode.Modified, true);
-                //}
-
-                Properties.Settings.Default.PostgresConnect =
-                    "Server = " + val_d_oct1 + "." + val_d_oct2 + "." + val_d_oct3 + "." + val_d_oct4 + "; "
-                    + "Port = " + val_d_port + "; "
-                    + "User Id = " + val_d_user + "; "
-                    + "Password = " + val_d_pass + "; "
-                    + "Database = " + val_d_database_name + ";";
-                Properties.Settings.Default.Save();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("保存に失敗しました。\n\n[内容]\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            finally
-            {
-                MessageBox.Show("保存しました。\n\n[内容]\n", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                m_conn.Close();
-                m_conn.Dispose();
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //Properties.Settings.Default.TestConnect = this.textBox1.Text;
-            //Properties.Settings.Default.Save();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            this.textBox1.Text = Properties.Settings.Default.PostgresConnect;
         }
     }
 }
