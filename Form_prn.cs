@@ -589,7 +589,7 @@ namespace rk_seikyu
                                                 + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                 + " '' || '" + Cmb_tsuki_str + "'"
                                                 + " END"
-                        + " AND r.req_id::Integer = :req_id"
+                        + " AND r.req_id::Integer = " + Form_Seikyu_TextBoxO_id
                         + " ORDER BY r.id"
                         + ")"
                         + "SELECT"
@@ -686,19 +686,6 @@ namespace rk_seikyu
                             da.SelectCommand.Parameters.AddWithValue("s_id", row["s_id"]);
                         }
 
-                        if (cmb_req_id.SelectedItem == null)
-                        {
-                            da.SelectCommand.Parameters.Add(new NpgsqlParameter("req_id",
-                            NpgsqlTypes.NpgsqlDbType.Integer, 0, "req_id",
-                            ParameterDirection.Input, false, 0, 0, DataRowVersion.Current,
-                            DBNull.Value));
-                        }
-                        else
-                        {
-                            DataRowView row = (DataRowView)cmb_req_id.SelectedItem;
-                            da.SelectCommand.Parameters.AddWithValue("req_id", row["req_id"]);
-                        }
-
                         if (ds.Tables["seikyu"] != null)
                             ds.Tables["seikyu"].Clear();
                         da.Fill(ds, "seikyu");
@@ -707,7 +694,7 @@ namespace rk_seikyu
                         myReport.SetDataSource(ds);
 
                         myReport.SetParameterValue("s_id", Cmb_s_id_int.ToString());
-                        myReport.SetParameterValue("req_id", Cmb_req_id_int.ToString());
+                        myReport.SetParameterValue("req_id", Form_Seikyu_TextBoxO_id);
 
                         crvSeikyu.ReportSource = myReport;
 
@@ -885,7 +872,7 @@ namespace rk_seikyu
                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                             + " '' || '" + Cmb_tsuki_str + "'"
                                             + " END"
-                        + " AND r.req_id::Integer = :req_id"
+                        + " AND r.req_id::Integer = " + Form_Seikyu_TextBoxO_id
                         + " ORDER BY r.id"
                         + ")"
                         + " SELECT"
@@ -984,19 +971,6 @@ namespace rk_seikyu
                             da.SelectCommand.Parameters.AddWithValue("s_id", row["s_id"]);
                         }
 
-                        if (cmb_req_id.SelectedItem == null)
-                        {
-                            da.SelectCommand.Parameters.Add(new NpgsqlParameter("req_id",
-                            NpgsqlTypes.NpgsqlDbType.Integer, 0, "req_id",
-                            ParameterDirection.Input, false, 0, 0, DataRowVersion.Current,
-                            DBNull.Value));
-                        }
-                        else
-                        {
-                            DataRowView row = (DataRowView)cmb_req_id.SelectedItem;
-                            da.SelectCommand.Parameters.AddWithValue("req_id", row["req_id"]);
-                        }
-
                         if (ds.Tables["seikyu"] != null)
                             ds.Tables["seikyu"].Clear();
                         da.Fill(ds, "seikyu");
@@ -1005,7 +979,7 @@ namespace rk_seikyu
                         myReport.SetDataSource(ds);
 
                         myReport.SetParameterValue("s_id", Cmb_s_id_int.ToString());
-                        myReport.SetParameterValue("req_id", Cmb_req_id_int.ToString());
+                        myReport.SetParameterValue("req_id", Form_Seikyu_TextBoxO_id);
 
                         crvSeikyu.ReportSource = myReport;
 
@@ -1129,7 +1103,7 @@ namespace rk_seikyu
                                             + " END"
                             + " AND r.s_id::Integer = :s_id"
                             + " AND r.o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
-                            + " AND r.req_id::Integer = :req_id"
+                            + " AND r.req_id::Integer = " + Form_Seikyu_TextBoxO_id
                             + " AND r.time_stamp = (SELECT max(time_stamp) FROM t_seikyu WHERE"
                                                     + " s_id::Integer = :s_id"
                                                     + " AND o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
@@ -1204,19 +1178,6 @@ namespace rk_seikyu
                             da.SelectCommand.Parameters.AddWithValue("s_id", row["s_id"]);
                         }
 
-                        if (cmb_req_id.SelectedItem == null)
-                        {
-                            da.SelectCommand.Parameters.Add(new NpgsqlParameter("req_id",
-                            NpgsqlTypes.NpgsqlDbType.Integer, 0, "req_id",
-                            ParameterDirection.Input, false, 0, 0, DataRowVersion.Current,
-                            DBNull.Value));
-                        }
-                        else
-                        {
-                            DataRowView row = (DataRowView)cmb_req_id.SelectedItem;
-                            da.SelectCommand.Parameters.AddWithValue("req_id", row["req_id"]);
-                        }
-
                         if (ds.Tables["seikyu"] != null)
                             ds.Tables["seikyu"].Clear();
                         da.Fill(ds, "seikyu");
@@ -1225,7 +1186,7 @@ namespace rk_seikyu
                         myReport.SetDataSource(ds);
 
                         myReport.SetParameterValue("s_id", Cmb_s_id_int.ToString());
-                        myReport.SetParameterValue("req_id", Cmb_req_id_int.ToString());
+                        myReport.SetParameterValue("req_id", Form_Seikyu_TextBoxO_id);
 
                         crvSeikyu.ReportSource = myReport;
 
@@ -1398,7 +1359,7 @@ namespace rk_seikyu
                             + " ' ' || '" + Cmb_tsuki_str + "'"
                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                             + " '' || '" + Cmb_tsuki_str + "'"
-                            + " end"
+                            + " END"
                             + " AND s_id::Integer = " + Cmb_s_id_int
                             + " AND o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
                         + " )) i ON a.c1 = i.c1"
@@ -1498,19 +1459,6 @@ namespace rk_seikyu
                             da.SelectCommand.Parameters.AddWithValue("s_id", row["s_id"]);
                         }
 
-                        if (cmb_req_id.SelectedItem == null)
-                        {
-                            da.SelectCommand.Parameters.Add(new NpgsqlParameter("req_id",
-                            NpgsqlTypes.NpgsqlDbType.Integer, 0, "req_id",
-                            ParameterDirection.Input, false, 0, 0, DataRowVersion.Current,
-                            DBNull.Value));
-                        }
-                        else
-                        {
-                            DataRowView row = (DataRowView)cmb_req_id.SelectedItem;
-                            da.SelectCommand.Parameters.AddWithValue("req_id", row["req_id"]);
-                        }
-
                         if (ds.Tables["seikyu"] != null)
                             ds.Tables["seikyu"].Clear();
                         da.Fill(ds, "seikyu");
@@ -1519,7 +1467,7 @@ namespace rk_seikyu
                         myReport.SetDataSource(ds);
 
                         myReport.SetParameterValue("s_id", Cmb_s_id_int.ToString());
-                        myReport.SetParameterValue("req_id", Cmb_req_id_int.ToString());
+                        myReport.SetParameterValue("req_id", Form_Seikyu_TextBoxO_id);
 
                         crvSeikyu.ReportSource = myReport;
 
@@ -2524,6 +2472,7 @@ namespace rk_seikyu
                         crvSeikyu.Visible = true;
                     }
                     break;
+
                 case '1': // 
                     {
                         da.SelectCommand = new NpgsqlCommand

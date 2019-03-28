@@ -55,7 +55,6 @@
             this.withdrawal_ds = new rk_seikyu.withdrawal_ds();
             this.bindingSourceWithdrawal = new System.Windows.Forms.BindingSource(this.components);
             this.syubetsuBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sidBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorWithdrawal = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -98,7 +97,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.withdrawal_ds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceWithdrawal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.syubetsuBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sidBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorWithdrawal)).BeginInit();
             this.bindingNavigatorWithdrawal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.syubetsuBindingSource1)).BeginInit();
@@ -298,7 +296,6 @@
             // syubetsuBindingSource
             // 
             this.syubetsuBindingSource.DataMember = "syubetsu";
-            this.syubetsuBindingSource.DataSource = this.sidBindingSource;
             // 
             // bindingNavigatorWithdrawal
             // 
@@ -435,7 +432,6 @@
             // syubetsuBindingSource1
             // 
             this.syubetsuBindingSource1.DataMember = "syubetsu";
-            this.syubetsuBindingSource1.DataSource = this.sidBindingSource;
             // 
             // dataGridViewWithdrawal
             // 
@@ -648,7 +644,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.withdrawal_ds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceWithdrawal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.syubetsuBindingSource)).EndInit();
-            //((System.ComponentModel.ISupportInitialize)(this.sidBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorWithdrawal)).EndInit();
             this.bindingNavigatorWithdrawal.ResumeLayout(false);
             this.bindingNavigatorWithdrawal.PerformLayout();
@@ -700,7 +695,6 @@
         private System.Windows.Forms.ComboBox cmb_b_code;
         private System.Windows.Forms.Button cmd_Ins;
         private System.Windows.Forms.BindingSource syubetsuBindingSource;
-        private System.Windows.Forms.BindingSource sidBindingSource;
         //private s_id s_id;
         private System.Windows.Forms.BindingSource syubetsuBindingSource1;
         private System.Windows.Forms.DataGridView dataGridViewWithdrawal;

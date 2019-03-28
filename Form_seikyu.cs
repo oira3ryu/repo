@@ -79,7 +79,6 @@ namespace rk_seikyu
 
         public int I { get; set; }
 
-        //public string Cmb_o_id_str_TEXT { get => cmb_o_id.SelectedIndex.ToString(); set => cmb_o_id.Text = value; }
         private static Form_seikyu _form_seikyu_Instance;
 
         public String cmb_o_id_str;
@@ -3104,7 +3103,7 @@ namespace rk_seikyu
 
                         //  t_csvにreq_idを付加
                         command = new NpgsqlCommand(
-                            "UPDATE " + TblStr + " SET req_id = " + Cmb_req_id_int
+                            "UPDATE " + TblStr + " SET req_id = " + TextBoxO_id
                             , m_conn);
                         command.ExecuteNonQuery();
 
