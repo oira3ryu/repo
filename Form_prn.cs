@@ -2009,30 +2009,36 @@ namespace rk_seikyu
                     {
                         cmb_b_code.Visible = false;
                         cmdPrnWithdrawal.Visible = false;
+                        checkBoxIni.Visible = false;
                     }
                     break;
                 case 2: // 
                     {
                         cmb_b_code.Visible = false;
                         cmdPrnWithdrawal.Visible = false;
+                        checkBoxIni.Visible = false;
                     }
                     break;
                 case 3: // 
                     {
                         cmb_b_code.Visible = false;
                         cmdPrnWithdrawal.Visible = false;
+                        checkBoxIni.Visible = false;
                     }
                     break;
                 case 4: // 
                     {
                         cmb_b_code.Visible = false;
                         cmdPrnWithdrawal.Visible = false;
+                        checkBoxIni.Visible = false;
                     }
                     break;
                 case 5: // 
                     {
                         cmb_b_code.Visible = true;
                         cmdPrnWithdrawal.Visible = true;
+                        checkBoxIni.Visible = true;
+
                     }
                     break;
             }
