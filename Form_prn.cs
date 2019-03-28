@@ -46,6 +46,7 @@ namespace rk_seikyu
         public int _year { get; set; }
         public int _month { get; set; }
         public int _day { get; set; }
+        public int rec { get; set; }
 
         public object Cmb_n_id_str { get; set; }
         public object Cmb_t_id_str { get; set; }
@@ -1530,7 +1531,47 @@ namespace rk_seikyu
 
                 case 5: // 引落請求書
                     {
-                        Console.WriteLine("Cmb_b_code_str = " + Cmb_b_code_str);
+                        if (checkBoxIni.Checked)
+                        {
+                            try
+                            {
+                                m_conn.Open();
+                                using (var tran = m_conn.BeginTransaction())
+                                {
+                                    //データ登録
+                                    var cmd = new NpgsqlCommand(@"UPDATE t_seikyu SET w_flg = Null WHERE w_flg = '1';", m_conn);
+                                    cmd.ExecuteNonQuery();
+                                    //データ検索
+                                    var dataAdapter = new NpgsqlDataAdapter(@"SELECT * FROM t_seikyu", m_conn);
+                                    var dataSet = new DataSet();
+                                    dataAdapter.Fill(dataSet);
+
+                                    DataTable dst = dataSet.Tables[0];
+                                    Console.WriteLine("コミット前データ件数：{0}", dst.Rows.Count);
+
+                                    // コミットして、再検索
+                                    tran.Commit();
+
+                                    dataSet = new DataSet();
+                                    dataAdapter.Fill(dataSet);
+
+                                    dst = dataSet.Tables[0];
+                                    Console.WriteLine("コミット後データ件数：{0}", dst.Rows.Count);
+                                    rec = dst.Rows.Count;
+                                }
+                                m_conn.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("保存に失敗しました。\n\n[内容]\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            MessageBox.Show(rec.ToString() + "件、保存しました。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+
+                            Console.WriteLine("Cmb_b_code_str = " + Cmb_b_code_str);
 
                         da.SelectCommand = new NpgsqlCommand
                         (
@@ -1691,7 +1732,8 @@ namespace rk_seikyu
                         // update
                         da.UpdateCommand = new NpgsqlCommand(
                             "UPDATE t_seikyu SET w_flg = :w_flg"
-                            + " WHERE r_id = :r_id;"
+                            + " WHERE"
+                            + " r_id = :r_id;"
                             , m_conn
                             );
                         da.UpdateCommand.Parameters.Add(new NpgsqlParameter("w_flg", NpgsqlTypes.NpgsqlDbType.Integer, 0, "w_flg", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -1730,6 +1772,7 @@ namespace rk_seikyu
                         dataGridViewWithdrawal.Visible = true;
                     }
                     break;
+                    }
             }
         }
 
