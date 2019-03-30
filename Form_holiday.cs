@@ -27,10 +27,10 @@ namespace rk_seikyu
 
             da.SelectCommand = new NpgsqlCommand
             (
-            "select"
-            + " distinct DATE_PART('YEAR',holiday) as year"
-            + " from t_holiday"
-            + " order by DATE_PART('YEAR',holiday);",
+            "SELECT"
+            + " distinct DATE_PART('YEAR',holiday) AS year"
+            + " FROM t_holiday"
+            + " ORDER BY DATE_PART('YEAR',holiday);",
             m_conn
             );
             //if (ds.Tables["t_holiday"] != null)
@@ -39,26 +39,26 @@ namespace rk_seikyu
 
             da.SelectCommand = new NpgsqlCommand
             (
-                   "select"
+                   "SELECT"
                 + " h_id"
                 + ", holiday"
                 + ", h_name"
-                + " from"
+                + " FROM"
                 + " t_holiday"
-                + " order by holiday;",
+                + " ORDER BY holiday;",
                 m_conn
             );
 
             // insert
             da.InsertCommand = new NpgsqlCommand
             (
-                    "insert into t_holiday ("
+                    "INSERT INTO t_holiday ("
                 + "holiday"
                 + ", h_name"
-                + " ) values ("
+                + " ) VALUES ("
                 + " :holiday"
                 + ", :h_name"
-                + ")",
+                + ");",
                 m_conn
             );
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("holiday", NpgsqlTypes.NpgsqlDbType.Date, 0, "holiday", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -66,11 +66,11 @@ namespace rk_seikyu
 
             // update
             da.UpdateCommand = new NpgsqlCommand(
-                "update t_holiday set"
+                "UPDATE t_holiday SET"
                 + " holiday = :holiday"
                 + ", h_name = :h_name"
-                + " where"
-                + " h_id=:h_id"
+                + " WHERE"
+                + " h_id = :h_id;"
                 , m_conn
                 );
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("holiday", NpgsqlTypes.NpgsqlDbType.Date, 0, "holiday", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -80,9 +80,9 @@ namespace rk_seikyu
             // delete
             da.DeleteCommand = new NpgsqlCommand
             (
-                   "delete from t_holiday"
-                + " where"
-                + " h_id=:h_id"
+                   "DELETE FROM t_holiday"
+                + " WHERE"
+                + " h_id = :h_id;"
                 , m_conn
             );
             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("h_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "h_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
@@ -148,14 +148,14 @@ namespace rk_seikyu
                 {
                     NpgsqlCommand cmd = new NpgsqlCommand
                 (
-                "select"
+                "SELECT"
                 + " h_id"
                 + ", holiday"
                 + ", h_name"
-                + " from"
+                + " FROM"
                 + " t_holiday"
-                + " where h_id=currval('t_holiday_h_id_seq')"
-                + " order by h_id"
+                + " WHERE h_id = currval('t_holiday_h_id_seq')"
+                + " ORDER BY h_id;"
                 , m_conn
                  );
                     try
@@ -177,14 +177,14 @@ namespace rk_seikyu
                 {
                     NpgsqlCommand cmd = new NpgsqlCommand
                 (
-                "select"
+                "SELECT"
                 + " h_id"
                 + ", holiday"
                 + ", h_name"
-                + " from"
+                + " FROM"
                 + " t_holiday"
-                + " where h_id=" + e.Row["h_id"].ToString()
-                + " order by h_id"
+                + " WHERE h_id = " + e.Row["h_id"].ToString()
+                + " ORDER BY h_id;"
                 , m_conn
                     );
                     try
@@ -207,22 +207,20 @@ namespace rk_seikyu
 
         private void Cmb_year_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //cmb_year_str = cmb_year.Text;
-            //Console.WriteLine("cmb_year_str  = " + cmb_year_str);
             System.Data.DataRowView view_year = (DataRowView)this.cmb_year.SelectedItem;
             Console.WriteLine("view_year  = " + view_year);
             Cmb_year_str = view_year.Row.ItemArray[0].ToString();
 
             da.SelectCommand = new NpgsqlCommand
             (
-                   "select"
+                   "SELECT"
                 + " h_id"
                 + ", holiday"
                 + ", h_name"
-                + " from"
+                + " FROM"
                 + " t_holiday"
-                + " where DATE_PART('YEAR',holiday) = '" + Cmb_year_str + "'"
-                + " order by holiday;",
+                + " WHERE DATE_PART('YEAR',holiday) = '" + Cmb_year_str + "'"
+                + " ORDER BY holiday;",
                 m_conn
 
             );

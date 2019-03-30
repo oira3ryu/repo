@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_holiday));
-            this.holiday = new rk_seikyu.holiday();
-            this.bindingSourceHoliday = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorHoliday = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -46,28 +44,20 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.holidayBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.dataGridViewHoliday = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmb_year = new System.Windows.Forms.ComboBox();
             this.cmdHoliday = new System.Windows.Forms.Button();
             this.cmdClose = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.holiday)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHoliday)).BeginInit();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSourceHoliday = new System.Windows.Forms.BindingSource(this.components);
+            this.holiday = new rk_seikyu.holiday();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorHoliday)).BeginInit();
             this.bindingNavigatorHoliday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHoliday)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHoliday)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.holiday)).BeginInit();
             this.SuspendLayout();
-            // 
-            // holiday
-            // 
-            this.holiday.DataSetName = "holiday";
-            this.holiday.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // bindingSourceHoliday
-            // 
-            this.bindingSourceHoliday.DataMember = "holiday";
-            this.bindingSourceHoliday.DataSource = this.holiday;
             // 
             // bindingNavigatorHoliday
             // 
@@ -95,7 +85,7 @@
             this.bindingNavigatorHoliday.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigatorHoliday.Name = "bindingNavigatorHoliday";
             this.bindingNavigatorHoliday.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigatorHoliday.Size = new System.Drawing.Size(530, 25);
+            this.bindingNavigatorHoliday.Size = new System.Drawing.Size(692, 25);
             this.bindingNavigatorHoliday.TabIndex = 0;
             this.bindingNavigatorHoliday.Text = "bindingNavigator1";
             // 
@@ -111,7 +101,7 @@
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(37, 22);
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(29, 22);
             this.bindingNavigatorCountItem.Text = "/ {0}";
             this.bindingNavigatorCountItem.ToolTipText = "項目の総数";
             // 
@@ -202,36 +192,18 @@
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3});
             this.dataGridViewHoliday.DataSource = this.bindingSourceHoliday;
-            this.dataGridViewHoliday.Location = new System.Drawing.Point(149, 69);
+            this.dataGridViewHoliday.Location = new System.Drawing.Point(158, 69);
             this.dataGridViewHoliday.Name = "dataGridViewHoliday";
             this.dataGridViewHoliday.RowTemplate.Height = 21;
-            this.dataGridViewHoliday.Size = new System.Drawing.Size(354, 519);
+            this.dataGridViewHoliday.Size = new System.Drawing.Size(494, 519);
             this.dataGridViewHoliday.TabIndex = 1;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "h_id";
-            this.dataGridViewTextBoxColumn1.HeaderText = "h_id";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "holiday";
-            this.dataGridViewTextBoxColumn2.HeaderText = "holiday";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "h_name";
-            this.dataGridViewTextBoxColumn3.HeaderText = "h_name";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
             // cmb_year
             // 
             this.cmb_year.FormattingEnabled = true;
-            this.cmb_year.Location = new System.Drawing.Point(12, 108);
+            this.cmb_year.Location = new System.Drawing.Point(38, 108);
             this.cmb_year.Name = "cmb_year";
-            this.cmb_year.Size = new System.Drawing.Size(121, 20);
+            this.cmb_year.Size = new System.Drawing.Size(95, 20);
             this.cmb_year.TabIndex = 2;
             this.cmb_year.SelectedIndexChanged += new System.EventHandler(this.Cmb_year_SelectedIndexChanged);
             // 
@@ -255,11 +227,39 @@
             this.cmdClose.UseVisualStyleBackColor = true;
             this.cmdClose.Click += new System.EventHandler(this.CmdClose_Click);
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "h_id";
+            this.dataGridViewTextBoxColumn1.HeaderText = "h_id";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "holiday";
+            this.dataGridViewTextBoxColumn2.HeaderText = "holiday";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "h_name";
+            this.dataGridViewTextBoxColumn3.HeaderText = "h_name";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // bindingSourceHoliday
+            // 
+            this.bindingSourceHoliday.DataMember = "holiday";
+            this.bindingSourceHoliday.DataSource = this.holiday;
+            // 
+            // holiday
+            // 
+            this.holiday.DataSetName = "holiday";
+            this.holiday.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // Form_holiday
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(530, 586);
+            this.ClientSize = new System.Drawing.Size(692, 586);
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.cmdHoliday);
             this.Controls.Add(this.cmb_year);
@@ -269,12 +269,12 @@
             this.Text = "Form_holiday";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_holiday_FormClosing);
             this.Load += new System.EventHandler(this.Form_holiday_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.holiday)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHoliday)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorHoliday)).EndInit();
             this.bindingNavigatorHoliday.ResumeLayout(false);
             this.bindingNavigatorHoliday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHoliday)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHoliday)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.holiday)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

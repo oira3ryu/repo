@@ -34,11 +34,10 @@ namespace rk_seikyu
             if (rb_gengou.Checked)
             {
                 Form_gengou Form = new Form_gengou();
-                Form.ShowDialog();
+                Form.ShowDialog(this);
             }
             this.DialogResult = DialogResult.OK;
             this.Close();
-
         }
     }
 }

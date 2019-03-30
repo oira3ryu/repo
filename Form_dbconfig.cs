@@ -406,7 +406,7 @@ namespace rk_seikyu
             }
             finally
             {
-                //MessageBox.Show("保存しました。\n\n[内容]\n", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("保存しました。変更を有効にするにはアプリケーションを再起動してください。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 m_conn.Close();
                 m_conn.Dispose();

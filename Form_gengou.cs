@@ -223,6 +223,7 @@ namespace rk_seikyu
         private void CmdClose_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
+            this.Dispose();
             this.Close();
         }
 
@@ -230,7 +231,8 @@ namespace rk_seikyu
         {
             if (ds.HasChanges())
             {
-                DialogResult ret = MessageBox.Show("保存していないデータがあります。終了してよろしいですか？", "終了", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult ret = MessageBox.Show("保存していないデータがあります。終了してよろしいですか？"
+                    , "終了", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 switch (ret)
                 {
                     case DialogResult.Yes:

@@ -812,6 +812,8 @@
             this.dataGridViewShiharai_houhou.RowTemplate.Height = 21;
             this.dataGridViewShiharai_houhou.Size = new System.Drawing.Size(1710, 750);
             this.dataGridViewShiharai_houhou.TabIndex = 15;
+            this.dataGridViewShiharai_houhou.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewShiharai_houhouu_CellMouseMove);
+            this.dataGridViewShiharai_houhou.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DataGridViewShiharai_houhou_CellPainting);
             // 
             // dataGridViewTextBoxColumn30
             // 
@@ -1218,6 +1220,8 @@
             this.dataGridViewShinzoku_kankei.RowTemplate.Height = 21;
             this.dataGridViewShinzoku_kankei.Size = new System.Drawing.Size(1710, 750);
             this.dataGridViewShinzoku_kankei.TabIndex = 15;
+            this.dataGridViewShinzoku_kankei.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewShinzoku_kankei_CellMouseMove);
+            this.dataGridViewShinzoku_kankei.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DataGridViewShinzoku_kankei_CellPainting);
             // 
             // dataGridViewTextBoxColumn84
             // 
@@ -1941,12 +1945,6 @@
             // dataTableBindingSource
             // 
             this.dataTableBindingSource.DataMember = "DataTable";
-            // 
-            // dataTableTableAdapter
-            // 
-            // 
-            // tableAdapterManager
-            // 
             // 
             // cmb_o_id_text
             // 
