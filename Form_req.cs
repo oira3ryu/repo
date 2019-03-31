@@ -31,19 +31,6 @@ namespace rk_seikyu
             Form_Seikyu_TextBoxO_id = form_seikyu_Instance.TextBoxO_id;
             cmb_o_id_item = form_seikyu_Instance.TextBoxO_name;
             Console.WriteLine("cmb_o_idからのメンバーは、" + cmb_o_id_item);
-
-            //Form_seikyuのコンボボックスcmb_o_idからの変数cmb_o_id_strをint型に変換して1加算
-            //int i;
-            //if (int.TryParse(cmb_o_id_str, out i))
-            //{
-            //    Cmb_o_id_int = i + 1;
-            //    cmb_o_id_str = Cmb_o_id_int.ToString();
-            //    Console.WriteLine("cmb_o_idからの値は、" + cmb_o_id_str);
-            //}
-            //else
-            //{
-            //    Console.WriteLine("cmb_o_idからの値を数値に変換できません");
-            //}
         }
 
         private void Form_req_Load(object sender, EventArgs e)
@@ -56,16 +43,12 @@ namespace rk_seikyu
             dataGridViewReq.Columns[5].HeaderText = "職名２";
             dataGridViewReq.Columns[6].HeaderText = "会計管理者";
             dataGridViewReq.Columns[7].HeaderText = "会計管理者職名カナ";
-            dataGridViewReq.Columns[8].HeaderText = "管理者氏名";
-            dataGridViewReq.Columns[9].HeaderText = "担当者";
-            dataGridViewReq.Columns[10].HeaderText = "電話番号";
-            dataGridViewReq.Columns[11].HeaderText = "会計管理者氏名カナ";
-            dataGridViewReq.Columns[12].HeaderText = "事業所名称";
-            dataGridViewReq.Columns[13].HeaderText = "口座種別";
-            dataGridViewReq.Columns[14].HeaderText = "口座番号";
-            dataGridViewReq.Columns[15].HeaderText = "予備";
-            dataGridViewReq.Columns[16].HeaderText = "予備";
-            dataGridViewReq.Columns[16].HeaderText = "OID";
+            dataGridViewReq.Columns[8].HeaderText = "会計管理者氏名カナ";
+            dataGridViewReq.Columns[9].HeaderText = "口座種別";
+            dataGridViewReq.Columns[10].HeaderText = "口座番号";
+            dataGridViewReq.Columns[11].HeaderText = "予備";
+            dataGridViewReq.Columns[12].HeaderText = "予備";
+            dataGridViewReq.Columns[13].HeaderText = "OID";
 
             da.SelectCommand = new NpgsqlCommand
             (
@@ -78,11 +61,7 @@ namespace rk_seikyu
                 + ", title4"
                 + ", name2"
                 + ", title4_kana"
-                + ", name3"
-                + ", name4"
-                + ", name5"
                 + ", name2_kana"
-                + ", data6"
                 + ", data7"
                 + ", data8"
                 + ", data9"
@@ -106,11 +85,7 @@ namespace rk_seikyu
                 + ", title4"
                 + ", name2"
                 + ", title4_kana"
-                + ", name3"
-                + ", name4"
-                + ", name5"
                 + ", name2_kana"
-                + ", data6"
                 + ", data7"
                 + ", data8"
                 + ", data9"
@@ -124,11 +99,7 @@ namespace rk_seikyu
                 + ", :title4"
                 + ", :name2"
                 + ", :title4_kana"
-                + ", :name3"
-                + ", :name4"
-                + ", :name5"
                 + ", :name2_kana"
-                + ", :data6"
                 + ", :data7"
                 + ", :data8"
                 + ", :data9"
@@ -144,11 +115,7 @@ namespace rk_seikyu
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("title4", NpgsqlTypes.NpgsqlDbType.Text, 0, "title4", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("name2", NpgsqlTypes.NpgsqlDbType.Text, 0, "name2", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("title4_kana", NpgsqlTypes.NpgsqlDbType.Text, 0, "title4_kana", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            da.InsertCommand.Parameters.Add(new NpgsqlParameter("name3", NpgsqlTypes.NpgsqlDbType.Text, 0, "name3", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            da.InsertCommand.Parameters.Add(new NpgsqlParameter("name4", NpgsqlTypes.NpgsqlDbType.Text, 0, "name4", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            da.InsertCommand.Parameters.Add(new NpgsqlParameter("name5", NpgsqlTypes.NpgsqlDbType.Text, 0, "name5", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("name2_kana", NpgsqlTypes.NpgsqlDbType.Text, 0, "name2_kana", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            da.InsertCommand.Parameters.Add(new NpgsqlParameter("data6", NpgsqlTypes.NpgsqlDbType.Text, 0, "data6", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("data7", NpgsqlTypes.NpgsqlDbType.Text, 0, "data7", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("data8", NpgsqlTypes.NpgsqlDbType.Text, 0, "data8", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("data9", NpgsqlTypes.NpgsqlDbType.Text, 0, "data9", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -166,11 +133,7 @@ namespace rk_seikyu
                 + ", title4 = :title4"
                 + ", name2 = :name2"
                 + ", title4_kana = :title4_kana"
-                + ", name3 = :name3"
-                + ", name4 = :name4"
-                + ", name5 = :name5"
                 + ", name2_kana = :name2_kana"
-                + ", data6 = :data6"
                 + ", data7 = :data7"
                 + ", data8 = :data8"
                 + ", data9 = :data9"
@@ -187,11 +150,7 @@ namespace rk_seikyu
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("title4", NpgsqlTypes.NpgsqlDbType.Text, 0, "title4", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("name2", NpgsqlTypes.NpgsqlDbType.Text, 0, "name2", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("title4_kana", NpgsqlTypes.NpgsqlDbType.Text, 0, "title4_kana", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("name3", NpgsqlTypes.NpgsqlDbType.Text, 0, "name3", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("name4", NpgsqlTypes.NpgsqlDbType.Text, 0, "name4", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("name5", NpgsqlTypes.NpgsqlDbType.Text, 0, "name5", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("name2_kana", NpgsqlTypes.NpgsqlDbType.Text, 0, "name2_kana", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("data6", NpgsqlTypes.NpgsqlDbType.Text, 0, "data6", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("data7", NpgsqlTypes.NpgsqlDbType.Text, 0, "data7", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("data8", NpgsqlTypes.NpgsqlDbType.Text, 0, "data8", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("data9", NpgsqlTypes.NpgsqlDbType.Text, 0, "data9", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -261,11 +220,7 @@ namespace rk_seikyu
                 + ", title4"
                 + ", name2"
                 + ", title4_kana"
-                + ", name3"
-                + ", name4"
-                + ", name5"
                 + ", name2_kana"
-                + ", data6"
                 + ", data7"
                 + ", data8"
                 + ", data9"
@@ -288,11 +243,7 @@ namespace rk_seikyu
                         e.Row["title4"] = reader["title4"];
                         e.Row["name2"] = reader["name2"];
                         e.Row["title4_kana"] = reader["title4_kana"];
-                        e.Row["name3"] = reader["name3"];
-                        e.Row["name4"] = reader["name4"];
-                        e.Row["name5"] = reader["name5"];
                         e.Row["name2_kana"] = reader["name2_kana"];
-                        e.Row["data6"] = reader["data6"];
                         e.Row["data7"] = reader["data7"];
                         e.Row["data8"] = reader["data8"];
                         e.Row["data9"] = reader["data9"];
@@ -318,11 +269,7 @@ namespace rk_seikyu
                 + ", title4"
                 + ", name2"
                 + ", title4_kana"
-                + ", name3"
-                + ", name4"
-                + ", name5"
                 + ", name2_kana"
-                + ", data6"
                 + ", data7"
                 + ", data8"
                 + ", data9"
@@ -345,11 +292,7 @@ namespace rk_seikyu
                         e.Row["title4"] = reader["title4"];
                         e.Row["name2"] = reader["name2"];
                         e.Row["title4_kana"] = reader["title4_kana"];
-                        e.Row["name3"] = reader["name3"];
-                        e.Row["name4"] = reader["name4"];
-                        e.Row["name5"] = reader["name5"];
                         e.Row["name2_kana"] = reader["name2_kana"];
-                        e.Row["data6"] = reader["data6"];
                         e.Row["data7"] = reader["data7"];
                         e.Row["data8"] = reader["data8"];
                         e.Row["data9"] = reader["data9"];

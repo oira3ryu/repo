@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_req));
-            this.req_ds = new rk_seikyu.req_ds();
-            this.bindingSourceReq = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorReq = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -48,6 +46,8 @@
             this.dataGridViewReq = new System.Windows.Forms.DataGridView();
             this.cmdReqSave = new System.Windows.Forms.Button();
             this.cmdClose = new System.Windows.Forms.Button();
+            this.bindingSourceReq = new System.Windows.Forms.BindingSource(this.components);
+            this.req_ds = new rk_seikyu.req_ds();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,31 +56,18 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.req_ds)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceReq)).BeginInit();
+            this.o_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorReq)).BeginInit();
             this.bindingNavigatorReq.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceReq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.req_ds)).BeginInit();
             this.SuspendLayout();
-            // 
-            // req_ds
-            // 
-            this.req_ds.DataSetName = "req_ds";
-            this.req_ds.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // bindingSourceReq
-            // 
-            this.bindingSourceReq.DataMember = "req_ds";
-            this.bindingSourceReq.DataSource = this.req_ds;
             // 
             // bindingNavigatorReq
             // 
@@ -219,15 +206,12 @@
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10,
             this.dataGridViewTextBoxColumn11,
-            this.dataGridViewTextBoxColumn12,
             this.dataGridViewTextBoxColumn13,
             this.dataGridViewTextBoxColumn14,
             this.dataGridViewTextBoxColumn15,
-            this.dataGridViewTextBoxColumn16});
+            this.dataGridViewTextBoxColumn16,
+            this.o_id});
             this.dataGridViewReq.DataSource = this.bindingSourceReq;
             this.dataGridViewReq.Location = new System.Drawing.Point(24, 78);
             this.dataGridViewReq.Name = "dataGridViewReq";
@@ -254,6 +238,16 @@
             this.cmdClose.Text = "閉じる";
             this.cmdClose.UseVisualStyleBackColor = true;
             this.cmdClose.Click += new System.EventHandler(this.CmdClose_Click);
+            // 
+            // bindingSourceReq
+            // 
+            this.bindingSourceReq.DataMember = "req_ds";
+            this.bindingSourceReq.DataSource = this.req_ds;
+            // 
+            // req_ds
+            // 
+            this.req_ds.DataSetName = "req_ds";
+            this.req_ds.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // dataGridViewTextBoxColumn17
             // 
@@ -303,35 +297,11 @@
             this.dataGridViewTextBoxColumn7.HeaderText = "title4_kana";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "name3";
-            this.dataGridViewTextBoxColumn8.HeaderText = "name3";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "name4";
-            this.dataGridViewTextBoxColumn9.HeaderText = "name4";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "name5";
-            this.dataGridViewTextBoxColumn10.HeaderText = "name5";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            // 
             // dataGridViewTextBoxColumn11
             // 
             this.dataGridViewTextBoxColumn11.DataPropertyName = "name2_kana";
             this.dataGridViewTextBoxColumn11.HeaderText = "name2_kana";
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "data6";
-            this.dataGridViewTextBoxColumn12.HeaderText = "data6";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             // 
             // dataGridViewTextBoxColumn13
             // 
@@ -357,6 +327,12 @@
             this.dataGridViewTextBoxColumn16.HeaderText = "data10";
             this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
             // 
+            // o_id
+            // 
+            this.o_id.DataPropertyName = "o_id";
+            this.o_id.HeaderText = "o_id";
+            this.o_id.Name = "o_id";
+            // 
             // Form_req
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -369,12 +345,12 @@
             this.Name = "Form_req";
             this.Text = "Form_req";
             this.Load += new System.EventHandler(this.Form_req_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.req_ds)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceReq)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorReq)).EndInit();
             this.bindingNavigatorReq.ResumeLayout(false);
             this.bindingNavigatorReq.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceReq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.req_ds)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -400,6 +376,7 @@
         private System.Windows.Forms.DataGridView dataGridViewReq;
         private System.Windows.Forms.Button cmdReqSave;
         private System.Windows.Forms.Button cmdClose;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
@@ -408,14 +385,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn o_id;
     }
 }

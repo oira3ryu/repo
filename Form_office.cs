@@ -33,14 +33,14 @@ namespace rk_seikyu
         private void Form_office_Load(object sender, EventArgs e)
         {
             DataGridViewOffice.Columns[0].HeaderText = "ID";
-            DataGridViewOffice.Columns[1].HeaderText = "既定";
-            DataGridViewOffice.Columns[2].HeaderText = "事業所番号";
-            DataGridViewOffice.Columns[3].HeaderText = "事業所名";
-            DataGridViewOffice.Columns[4].HeaderText = "郵便番号";
-            DataGridViewOffice.Columns[5].HeaderText = "住所";
-            DataGridViewOffice.Columns[6].HeaderText = "電話番号";
-            DataGridViewOffice.Columns[7].HeaderText = "管理者";
-            DataGridViewOffice.Columns[8].HeaderText = "担当者";
+            DataGridViewOffice.Columns[1].HeaderText = "事業所番号";
+            DataGridViewOffice.Columns[2].HeaderText = "事業所名";
+            DataGridViewOffice.Columns[3].HeaderText = "郵便番号";
+            DataGridViewOffice.Columns[4].HeaderText = "住所";
+            DataGridViewOffice.Columns[5].HeaderText = "電話番号";
+            DataGridViewOffice.Columns[6].HeaderText = "管理者";
+            DataGridViewOffice.Columns[7].HeaderText = "担当者";
+            DataGridViewOffice.Columns[8].HeaderText = "既定";
 
             da.SelectCommand = new NpgsqlCommand
             (
