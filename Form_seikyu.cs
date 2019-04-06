@@ -1213,7 +1213,7 @@ namespace rk_seikyu
         {
             dataGridViewSeikyu.CellMouseMove += new DataGridViewCellMouseEventHandler(DataGridViewSeikyu_CellMouseMove);
             dataGridViewSeikyu.CellPainting += new DataGridViewCellPaintingEventHandler(DataGridViewSeikyu_CellPainting);
-            dataGridViewSeikyu.CellValueChanged += new DataGridViewCellEventHandler(dataGridViewSeikyu_CellValueChanged);
+            dataGridViewSeikyu.CellValueChanged += new DataGridViewCellEventHandler(DataGridViewSeikyu_CellValueChanged);
         }
 
         private void CmdSave_Click(object sender, EventArgs e)
@@ -1431,7 +1431,7 @@ namespace rk_seikyu
                             break;
 
                         // 親族関係
-                        case 7:
+                        case 3:
                             switch (Cmb_s_id_int)
                             {
                                 case 1:
@@ -6158,7 +6158,7 @@ namespace rk_seikyu
             Form.ShowDialog();
         }
 
-        private void dataGridViewSeikyu_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void DataGridViewSeikyu_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == -1 || e.RowIndex == -1) return;
 

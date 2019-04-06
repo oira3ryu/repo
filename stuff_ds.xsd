@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="stuff_ds" targetNamespace="http://tempuri.org/stuff_ds.xsd" xmlns:mstns="http://tempuri.org/stuff_ds.xsd" xmlns="http://tempuri.org/stuff_ds.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="stuff_ds" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="stuff_ds" msprop:Generator_UserDSName="stuff_ds">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="stuff_ds" msprop:Generator_TableClassName="stuff_dsDataTable" msprop:Generator_TableVarName="tablestuff_ds" msprop:Generator_TablePropName="_stuff_ds" msprop:Generator_RowDeletingName="stuff_dsRowDeleting" msprop:Generator_RowChangingName="stuff_dsRowChanging" msprop:Generator_RowEvHandlerName="stuff_dsRowChangeEventHandler" msprop:Generator_RowDeletedName="stuff_dsRowDeleted" msprop:Generator_UserTableName="stuff_ds" msprop:Generator_RowChangedName="stuff_dsRowChanged" msprop:Generator_RowEvArgName="stuff_dsRowChangeEvent" msprop:Generator_RowClassName="stuff_dsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="stf_id" msprop:Generator_ColumnVarNameInTable="columnstf_id" msprop:Generator_ColumnPropNameInRow="stf_id" msprop:Generator_ColumnPropNameInTable="stf_idColumn" msprop:Generator_UserColumnName="stf_id" type="xs:string" />
+              <xs:element name="stuff" msprop:Generator_ColumnVarNameInTable="columnstuff" msprop:Generator_ColumnPropNameInRow="stuff" msprop:Generator_ColumnPropNameInTable="stuffColumn" msprop:Generator_UserColumnName="stuff" type="xs:string" minOccurs="0" />
+              <xs:element name="start_date" msprop:Generator_ColumnVarNameInTable="columnstart_date" msprop:Generator_ColumnPropNameInRow="start_date" msprop:Generator_ColumnPropNameInTable="start_dateColumn" msprop:Generator_UserColumnName="start_date" type="xs:string" minOccurs="0" />
+              <xs:element name="end_date" msprop:Generator_ColumnVarNameInTable="columnend_date" msprop:Generator_ColumnPropNameInRow="end_date" msprop:Generator_ColumnPropNameInTable="end_dateColumn" msprop:Generator_UserColumnName="end_date" type="xs:string" minOccurs="0" />
+              <xs:element name="o_id" msprop:Generator_ColumnVarNameInTable="columno_id" msprop:Generator_ColumnPropNameInRow="o_id" msprop:Generator_ColumnPropNameInTable="o_idColumn" msprop:Generator_UserColumnName="o_id" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:stuff_ds" />
+      <xs:field xpath="mstns:stf_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

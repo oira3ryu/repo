@@ -539,7 +539,7 @@
             this.dataGridViewSeikyu.RowTemplate.Height = 21;
             this.dataGridViewSeikyu.Size = new System.Drawing.Size(1710, 750);
             this.dataGridViewSeikyu.TabIndex = 15;
-            this.dataGridViewSeikyu.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSeikyu_CellValueChanged);
+            this.dataGridViewSeikyu.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewSeikyu_CellValueChanged);
             // 
             // c1
             // 

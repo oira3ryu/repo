@@ -10,7 +10,7 @@ namespace rk_seikyu
             InitializeComponent();
         }
 
-        private void CmdClose_Click(object sender, EventArgs e)
+        private void CmdOK_Click(object sender, EventArgs e)
         {
             // Form_par
             if (rb_par.Checked)
@@ -34,8 +34,37 @@ namespace rk_seikyu
             if (rb_gengou.Checked)
             {
                 Form_gengou Form = new Form_gengou();
-                Form.ShowDialog(this);
+                Form.ShowDialog();
             }
+            // Form_chief
+            if (rb_chief.Checked)
+            {
+                Form_chief Form = new Form_chief();
+                Form.ShowDialog();
+            }
+            // Form_accounting_manager
+            if (rb_accounting_manager.Checked)
+            {
+                Form_accounting_manager Form = new Form_accounting_manager();
+                Form.ShowDialog();
+            }
+            // Form_manager
+            if (rb_manager.Checked)
+            {
+                Form_manager Form = new Form_manager();
+                Form.ShowDialog();
+            }
+            // Form_stuff
+            if (rb_stuff.Checked)
+            {
+                Form_stuff Form = new Form_stuff();
+                Form.ShowDialog();
+            }
+
+        }
+
+        private void CmdClose_Click(object sender, EventArgs e)
+        {
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

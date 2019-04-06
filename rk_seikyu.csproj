@@ -108,10 +108,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounting_manager.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Accounting_manager.xsd</DependentUpon>
+    </Compile>
     <Compile Include="bank.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>bank.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="chief_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>chief_ds.xsd</DependentUpon>
     </Compile>
     <Compile Include="crGenbo.cs">
       <AutoGen>True</AutoGen>
@@ -144,6 +154,18 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="dbconfig_ds.Designer.cs" />
+    <Compile Include="Form_accounting_manager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_accounting_manager.Designer.cs">
+      <DependentUpon>Form_accounting_manager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_chief.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_chief.Designer.cs">
+      <DependentUpon>Form_chief.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_dbconfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -179,6 +201,12 @@
     </Compile>
     <Compile Include="Form_holiday.Designer.cs">
       <DependentUpon>Form_holiday.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_manager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_manager.Designer.cs">
+      <DependentUpon>Form_manager.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_nen.cs">
       <SubType>Form</SubType>
@@ -221,6 +249,12 @@
     </Compile>
     <Compile Include="Form_seikyu.Designer.cs">
       <DependentUpon>Form_seikyu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_stuff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_stuff.Designer.cs">
+      <DependentUpon>Form_stuff.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_syubetsu.cs">
       <SubType>Form</SubType>
@@ -269,6 +303,11 @@
     </Compile>
     <Compile Include="shiharai_houhou_ds.Designer.cs" />
     <Compile Include="shinzoku_kankei_ds.Designer.cs" />
+    <Compile Include="stuff_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>stuff_ds.xsd</DependentUpon>
+    </Compile>
     <Compile Include="syubetsu.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -301,6 +340,12 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crWithdrawal.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_accounting_manager.resx">
+      <DependentUpon>Form_accounting_manager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_chief.resx">
+      <DependentUpon>Form_chief.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_dbconfig.resx">
       <DependentUpon>Form_dbconfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -318,6 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_holiday.resx">
       <DependentUpon>Form_holiday.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_manager.resx">
+      <DependentUpon>Form_manager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_nen.resx">
       <DependentUpon>Form_nen.cs</DependentUpon>
@@ -340,6 +388,9 @@
     <EmbeddedResource Include="Form_seikyu.resx">
       <DependentUpon>Form_seikyu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_stuff.resx">
+      <DependentUpon>Form_stuff.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_syubetsu.resx">
       <DependentUpon>Form_syubetsu.cs</DependentUpon>
     </EmbeddedResource>
@@ -356,6 +407,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Accounting_manager.xsc">
+      <DependentUpon>Accounting_manager.xsd</DependentUpon>
+    </None>
+    <None Include="Accounting_manager.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Accounting_manager.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Accounting_manager.xss">
+      <DependentUpon>Accounting_manager.xsd</DependentUpon>
+    </None>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
@@ -369,6 +431,17 @@
     </None>
     <None Include="bank.xss">
       <DependentUpon>bank.xsd</DependentUpon>
+    </None>
+    <None Include="chief_ds.xsc">
+      <DependentUpon>chief_ds.xsd</DependentUpon>
+    </None>
+    <None Include="chief_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>chief_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="chief_ds.xss">
+      <DependentUpon>chief_ds.xsd</DependentUpon>
     </None>
     <None Include="dbconfig_ds.xsc">
       <DependentUpon>dbconfig_ds.xsd</DependentUpon>
@@ -402,6 +475,17 @@
     </None>
     <None Include="holiday.xss">
       <DependentUpon>holiday.xsd</DependentUpon>
+    </None>
+    <None Include="manager_ds.xsc">
+      <DependentUpon>manager_ds.xsd</DependentUpon>
+    </None>
+    <None Include="manager_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>manager_ds1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="manager_ds.xss">
+      <DependentUpon>manager_ds.xsd</DependentUpon>
     </None>
     <None Include="nen.xsc">
       <DependentUpon>nen.xsd</DependentUpon>
@@ -531,6 +615,17 @@
     </None>
     <None Include="shinzoku_kankei_ds.xss">
       <DependentUpon>shinzoku_kankei_ds.xsd</DependentUpon>
+    </None>
+    <None Include="stuff_ds.xsc">
+      <DependentUpon>stuff_ds.xsd</DependentUpon>
+    </None>
+    <None Include="stuff_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>stuff_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="stuff_ds.xss">
+      <DependentUpon>stuff_ds.xsd</DependentUpon>
     </None>
     <None Include="syubetsu.xsc">
       <DependentUpon>syubetsu.xsd</DependentUpon>

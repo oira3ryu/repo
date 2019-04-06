@@ -6,41 +6,40 @@ using Npgsql;
 
 namespace rk_seikyu
 {
-    public partial class Form_gengou : Form
+    public partial class Form_chief : Form
     {
         private NpgsqlConnection m_conn = new NpgsqlConnection(rk_seikyu.Properties.Settings.Default.PostgresConnect);
 
         private NpgsqlDataAdapter da = new NpgsqlDataAdapter();
         private DataSet ds = new DataSet();
 
-        public Form_gengou()
+        public Form_chief()
         {
             InitializeComponent();
         }
 
-        private void Form_Gengou_Load(object sender, EventArgs e)
+        private void CmdClose_Click(object sender, EventArgs e)
         {
-            dataGridViewGengou.Columns[0].HeaderText = "ID";
-            dataGridViewGengou.Columns[1].HeaderText = "元号";
-            dataGridViewGengou.Columns[2].HeaderText = "略号";
-            dataGridViewGengou.Columns[3].HeaderText = "開始日";
-            dataGridViewGengou.Columns[4].HeaderText = "終了日";
-            dataGridViewGengou.Columns[5].HeaderText = "西暦との年差";
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
 
-            //    // TODO: このコード行はデータを 'rk_seikyuDataSet.t_gengou' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
-                //this.t_gengouTableAdapter.Fill(this.rk_seikyuDataSet.t_gengou);
+        private void Form_chief_Load(object sender, EventArgs e)
+        {
+            dataGridViewChief.Columns[0].HeaderText = "ID";
+            dataGridViewChief.Columns[1].HeaderText = "理事者";
+            dataGridViewChief.Columns[2].HeaderText = "開始日";
+            dataGridViewChief.Columns[3].HeaderText = "終了日";
 
             da.SelectCommand = new NpgsqlCommand
             (
-                   "select"
-                + " gg_id"
-                + ", gengou"
-                + ", g_name"
+                   "SELECT"
+                + " c_id"
+                + ", chief"
                 + ", start_date"
                 + ", end_date"
-                + ", diff"
-                + " from"
-                + " t_gengou"
+                + " FROM"
+                + " t_chief"
                 + " order by start_date;",
                 m_conn
                 );
@@ -48,94 +47,83 @@ namespace rk_seikyu
             // insert
             da.InsertCommand = new NpgsqlCommand
             (
-                    "insert into t_gengou ("
-                + " gengou"
-                + ", g_name"
+                    "INSERT INTO t_chief ("
+                + " chief"
                 + ", start_date"
                 + ", end_date"
-                + ", diff"
-                + " ) values ("
-                + ", :gengou"
-                + ", :g_name"
+                + " ) VALUES ("
+                + ", :chief"
                 + ", :start_date"
                 + ", :end_date"
-                + ", :diff"
                 + ");",
                 m_conn
             );
-            da.InsertCommand.Parameters.Add(new NpgsqlParameter("gengou", NpgsqlTypes.NpgsqlDbType.Text, 0, "gengou", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            da.InsertCommand.Parameters.Add(new NpgsqlParameter("g_name", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_name", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+            da.InsertCommand.Parameters.Add(new NpgsqlParameter("chief", NpgsqlTypes.NpgsqlDbType.Text, 0, "chief", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("start_date", NpgsqlTypes.NpgsqlDbType.TimestampTz, 0, "start_date", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("end_date", NpgsqlTypes.NpgsqlDbType.TimestampTz, 0, "end_date", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            da.InsertCommand.Parameters.Add(new NpgsqlParameter("diff", NpgsqlTypes.NpgsqlDbType.Integer, 0, "diff", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             m_conn.Close();
 
 
             // update
             da.UpdateCommand = new NpgsqlCommand(
-                "update t_gengou set"
-                + " gengou = :gengou"
-                + ", g_name = :g_name"
+                "update t_chief set"
+                + " chief = :chief"
                 + ", start_date = :start_date"
                 + ", end_date = :end_date"
-                + ", diff = :diff"
                 + " where"
-                + " gg_id = :gg_id"
+                + " c_id = :c_id"
                 , m_conn
                 );
-            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("gengou", NpgsqlTypes.NpgsqlDbType.Text, 0, "gengou", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_name", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_name", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("chief", NpgsqlTypes.NpgsqlDbType.Text, 0, "chief", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("start_date", NpgsqlTypes.NpgsqlDbType.TimestampTz, 0, "start_date", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("end_date", NpgsqlTypes.NpgsqlDbType.TimestampTz, 0, "end_date", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("diff", NpgsqlTypes.NpgsqlDbType.Integer, 0, "diff", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("gg_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "gg_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
+            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "c_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
             // delete
             da.DeleteCommand = new NpgsqlCommand
             (
-                   "delete from t_gengou"
-                + " where"
-                + " gg_id=:gg_id"
+                   "DELETE FROM t_chief"
+                + " WHERE"
+                + " c_id=:c_id"
                 , m_conn
             );
-            da.DeleteCommand.Parameters.Add(new NpgsqlParameter("gg_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "gg_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
+            da.DeleteCommand.Parameters.Add(new NpgsqlParameter("c_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "c_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
             // RowUpdate
-            da.RowUpdated += new NpgsqlRowUpdatedEventHandler(GengouRowUpdated);
+            da.RowUpdated += new NpgsqlRowUpdatedEventHandler(ChiefRowUpdated);
 
-            da.Fill(ds, "gengou_ds");
+            da.Fill(ds, "chief_ds");
 
-            bindingSourceGengou.DataSource = ds;
-            bindingSourceGengou.DataMember = "gengou_ds";
-            bindingNavigatorGengou.BindingSource = bindingSourceGengou;
-            dataGridViewGengou.DataSource = bindingSourceGengou;
-            dataGridViewGengou.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            bindingSourceChief.DataSource = ds;
+            bindingSourceChief.DataMember = "chief_ds";
+            bindingNavigatorChief.BindingSource = bindingSourceChief;
+            dataGridViewChief.DataSource = bindingSourceChief;
+            dataGridViewChief.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
 
-            bindingNavigatorGengou.Visible = true;
+            bindingNavigatorChief.Visible = true;
 
             // カラムを関連付け
-            gg_id.DataPropertyName = "gg_id";
-            gengou.DataPropertyName = "gengou";
+            c_id.DataPropertyName = "c_id";
+            chief.DataPropertyName = "chief";
             start_date.DataPropertyName = "start_date";
             end_date.DataPropertyName = "end_date";
-            diff.DataPropertyName = "diff";
 
             DataGridViewEvent();
         }
 
         private void DataGridViewEvent()
         {
-            dataGridViewGengou.CellMouseMove += new DataGridViewCellMouseEventHandler(DataGridViewGengou_CellMouseMove);
-            dataGridViewGengou.CellPainting += new DataGridViewCellPaintingEventHandler(DataGridViewGengou_CellPainting);
+            dataGridViewChief.CellMouseMove += new DataGridViewCellMouseEventHandler(DataGridViewChief_CellMouseMove);
+            dataGridViewChief.CellPainting += new DataGridViewCellPaintingEventHandler(DataGridViewChief_CellPainting);
         }
 
-        private void CmdGengouSave_Click(object sender, EventArgs e)
+        private void CmdChiefSave_Click(object sender, EventArgs e)
         {
             int update_count = 0;
             try
             {
-                update_count += da.Update(ds.Tables["gengou_ds"].Select(null, null, DataViewRowState.Deleted));
-                update_count += da.Update(ds.Tables["gengou_ds"].Select(null, null, DataViewRowState.ModifiedCurrent));
-                update_count += da.Update(ds.Tables["gengou_ds"].Select(null, null, DataViewRowState.Added));
+                update_count += da.Update(ds.Tables["chief_ds"].Select(null, null, DataViewRowState.Deleted));
+                update_count += da.Update(ds.Tables["chief_ds"].Select(null, null, DataViewRowState.ModifiedCurrent));
+                update_count += da.Update(ds.Tables["chief_ds"].Select(null, null, DataViewRowState.Added));
             }
             catch (Exception ex)
             {
@@ -145,7 +133,7 @@ namespace rk_seikyu
             MessageBox.Show(update_count.ToString() + "件、保存しました。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void GengouRowUpdated(Object sender, NpgsqlRowUpdatedEventArgs e)
+        private void ChiefRowUpdated(Object sender, NpgsqlRowUpdatedEventArgs e)
         {
             if (e.Status == UpdateStatus.Continue)
             {
@@ -153,27 +141,23 @@ namespace rk_seikyu
                 {
                     NpgsqlCommand cmd = new NpgsqlCommand
                 (
-                "select"
-                + " gg_id"
-                + ", g_name"
+                "SELECT"
+                + " c_id"
                 + ", start_date"
                 + ", end_date"
-                + ", diff"
-                + " from"
-                + " t_gengou"
-                + " where gg_id=currval('t_gengou_gg_id_seq')"
-                + " order by start_date;"
+                + " FROM"
+                + " t_chief"
+                + " WHERE c_id=currval('t_chief_c_id_seq')"
+                + " ORDER BY start_date;"
                 , m_conn
                  );
                     try
                     {
                         NpgsqlDataReader reader = cmd.ExecuteReader();
                         reader.Read();
-                        e.Row["gg_id"] = reader["gg_id"];
-                        e.Row["g_name"] = reader["g_name"];
+                        e.Row["c_id"] = reader["c_id"];
                         e.Row["start_date"] = reader["start_date"];
                         e.Row["end_date"] = reader["end_date"];
-                        e.Row["diff"] = reader["diff"];
                         reader.Close();
                         cmd.Dispose();
                     }
@@ -187,27 +171,23 @@ namespace rk_seikyu
                 {
                     NpgsqlCommand cmd = new NpgsqlCommand
                 (
-                "select"
-                + " gg_id"
-                + ", g_name"
+                "SELECT"
+                + " c_id"
                 + ", start_date"
                 + ", end_date"
-                + ", diff"
-                + " from"
-                + " t_gengou"
-                + " where gg_id=" + e.Row["gg_id"].ToString()
-                + " order by start_date;"
+                + " FROM"
+                + " t_chief"
+                + " WHERE c_id=" + e.Row["c_id"].ToString()
+                + " ORDER BY start_date;"
                 , m_conn
                     );
                     try
                     {
                         NpgsqlDataReader reader = cmd.ExecuteReader();
                         reader.Read();
-                        e.Row["gg_id"] = reader["gg_id"];
-                        e.Row["g_name"] = reader["g_name"];
+                        e.Row["c_id"] = reader["c_id"];
                         e.Row["start_date"] = reader["start_date"];
                         e.Row["end_date"] = reader["end_date"];
-                        e.Row["diff"] = reader["diff"];
                         reader.Close();
                         cmd.Dispose();
                     }
@@ -220,13 +200,7 @@ namespace rk_seikyu
             }
         }
 
-        private void CmdClose_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-        }
-
-        private void Form_Gengou_FormClosing(object sender, FormClosingEventArgs e)
+        private void Form_Chief_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (ds.HasChanges())
             {
@@ -244,7 +218,7 @@ namespace rk_seikyu
             }
         }
 
-        private void DataGridViewGengou_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        private void DataGridViewChief_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridViewCellStyle dcs = new DataGridViewCellStyle();
             dcs.BackColor = Color.Yellow;
@@ -262,7 +236,7 @@ namespace rk_seikyu
             }
         }
 
-        private void DataGridViewGengou_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        private void DataGridViewChief_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.ColumnIndex < 0 && e.RowIndex >= 0)
             {
@@ -279,6 +253,5 @@ namespace rk_seikyu
                 e.Handled = true;
             }
         }
-
     }
 }

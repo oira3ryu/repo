@@ -1,6 +1,6 @@
 ﻿namespace rk_seikyu
 {
-    partial class Form_office
+    partial class Form_accounting_manager
     {
         /// <summary>
         /// Required designer variable.
@@ -29,21 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_office));
-            this.DataGridViewOffice = new System.Windows.Forms.DataGridView();
-            this.o_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.o_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.o_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.o_p_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.o_address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.o_phone_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.o_manager = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.o_stuff = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.flg = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.CmdOfficeSave = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_accounting_manager));
+            this.CmdSaveAccounting_manager = new System.Windows.Forms.Button();
             this.CmdClose = new System.Windows.Forms.Button();
-            this.bindingSourceOffice = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingNavigatorOffice = new System.Windows.Forms.BindingNavigator(this.components);
+            this.dataGridViewAccounting_manager = new System.Windows.Forms.DataGridView();
+            this.acc_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.accounting_manager = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.start_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.end_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSourceAccounting_manager = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingNavigatorAccounting_manager = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
@@ -55,115 +50,78 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewOffice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceOffice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorOffice)).BeginInit();
-            this.bindingNavigatorOffice.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAccounting_manager)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceAccounting_manager)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorAccounting_manager)).BeginInit();
+            this.bindingNavigatorAccounting_manager.SuspendLayout();
             this.SuspendLayout();
             // 
-            // DataGridViewOffice
+            // CmdSaveAccounting_manager
             // 
-            this.DataGridViewOffice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGridViewOffice.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.o_id,
-            this.o_number,
-            this.o_name,
-            this.o_p_code,
-            this.o_address,
-            this.o_phone_number,
-            this.o_manager,
-            this.o_stuff,
-            this.flg});
-            this.DataGridViewOffice.Location = new System.Drawing.Point(142, 115);
-            this.DataGridViewOffice.Name = "DataGridViewOffice";
-            this.DataGridViewOffice.RowTemplate.Height = 21;
-            this.DataGridViewOffice.Size = new System.Drawing.Size(1027, 150);
-            this.DataGridViewOffice.TabIndex = 0;
-            this.DataGridViewOffice.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewOffice_CellValueChanged);
-            this.DataGridViewOffice.CurrentCellDirtyStateChanged += new System.EventHandler(this.DataGridViewOffice_CurrentCellDirtyStateChanged);
-            // 
-            // o_id
-            // 
-            this.o_id.DataPropertyName = "o_id";
-            this.o_id.HeaderText = "ID";
-            this.o_id.Name = "o_id";
-            // 
-            // o_number
-            // 
-            this.o_number.DataPropertyName = "o_number";
-            this.o_number.HeaderText = "事業所番号";
-            this.o_number.Name = "o_number";
-            // 
-            // o_name
-            // 
-            this.o_name.DataPropertyName = "o_name";
-            this.o_name.HeaderText = "事業所名";
-            this.o_name.Name = "o_name";
-            // 
-            // o_p_code
-            // 
-            this.o_p_code.DataPropertyName = "o_p_code";
-            this.o_p_code.HeaderText = "郵便番号";
-            this.o_p_code.Name = "o_p_code";
-            // 
-            // o_address
-            // 
-            this.o_address.DataPropertyName = "o_address";
-            this.o_address.HeaderText = "住所";
-            this.o_address.Name = "o_address";
-            // 
-            // o_phone_number
-            // 
-            this.o_phone_number.DataPropertyName = "o_phone_number";
-            this.o_phone_number.HeaderText = "電話番号";
-            this.o_phone_number.Name = "o_phone_number";
-            // 
-            // o_manager
-            // 
-            this.o_manager.DataPropertyName = "o_manager";
-            this.o_manager.HeaderText = "管理者";
-            this.o_manager.Name = "o_manager";
-            // 
-            // o_stuff
-            // 
-            this.o_stuff.DataPropertyName = "o_stuff";
-            this.o_stuff.HeaderText = "担当者";
-            this.o_stuff.Name = "o_stuff";
-            // 
-            // flg
-            // 
-            this.flg.DataPropertyName = "flg";
-            this.flg.HeaderText = "既定";
-            this.flg.Name = "flg";
-            this.flg.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.flg.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // CmdOfficeSave
-            // 
-            this.CmdOfficeSave.Location = new System.Drawing.Point(36, 136);
-            this.CmdOfficeSave.Name = "CmdOfficeSave";
-            this.CmdOfficeSave.Size = new System.Drawing.Size(75, 23);
-            this.CmdOfficeSave.TabIndex = 1;
-            this.CmdOfficeSave.Text = "更新";
-            this.CmdOfficeSave.UseVisualStyleBackColor = true;
-            this.CmdOfficeSave.Click += new System.EventHandler(this.CmdOfficeSave_Click);
+            this.CmdSaveAccounting_manager.Location = new System.Drawing.Point(32, 100);
+            this.CmdSaveAccounting_manager.Name = "CmdSaveAccounting_manager";
+            this.CmdSaveAccounting_manager.Size = new System.Drawing.Size(75, 23);
+            this.CmdSaveAccounting_manager.TabIndex = 0;
+            this.CmdSaveAccounting_manager.Text = "更新";
+            this.CmdSaveAccounting_manager.UseVisualStyleBackColor = true;
+            this.CmdSaveAccounting_manager.Click += new System.EventHandler(this.CmdAccounting_managerSave_Click);
             // 
             // CmdClose
             // 
-            this.CmdClose.Location = new System.Drawing.Point(36, 213);
+            this.CmdClose.Location = new System.Drawing.Point(32, 184);
             this.CmdClose.Name = "CmdClose";
             this.CmdClose.Size = new System.Drawing.Size(75, 23);
-            this.CmdClose.TabIndex = 2;
+            this.CmdClose.TabIndex = 1;
             this.CmdClose.Text = "閉じる";
             this.CmdClose.UseVisualStyleBackColor = true;
             this.CmdClose.Click += new System.EventHandler(this.CmdClose_Click);
             // 
-            // bindingNavigatorOffice
+            // dataGridViewAccounting_manager
             // 
-            this.bindingNavigatorOffice.AddNewItem = this.bindingNavigatorAddNewItem;
-            this.bindingNavigatorOffice.CountItem = this.bindingNavigatorCountItem;
-            this.bindingNavigatorOffice.DeleteItem = this.bindingNavigatorDeleteItem;
-            this.bindingNavigatorOffice.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dataGridViewAccounting_manager.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewAccounting_manager.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.acc_id,
+            this.accounting_manager,
+            this.start_date,
+            this.end_date});
+            this.dataGridViewAccounting_manager.Location = new System.Drawing.Point(150, 100);
+            this.dataGridViewAccounting_manager.Name = "dataGridViewAccounting_manager";
+            this.dataGridViewAccounting_manager.RowTemplate.Height = 21;
+            this.dataGridViewAccounting_manager.Size = new System.Drawing.Size(500, 150);
+            this.dataGridViewAccounting_manager.TabIndex = 2;
+            this.dataGridViewAccounting_manager.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewAccounting_manager_CellMouseMove);
+            this.dataGridViewAccounting_manager.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DataGridViewAccounting_manager_CellPainting);
+            // 
+            // acc_id
+            // 
+            this.acc_id.DataPropertyName = "acc_id";
+            this.acc_id.HeaderText = "acc_id";
+            this.acc_id.Name = "acc_id";
+            // 
+            // accounting_manager
+            // 
+            this.accounting_manager.DataPropertyName = "accounting_manager";
+            this.accounting_manager.HeaderText = "accounting_manager";
+            this.accounting_manager.Name = "accounting_manager";
+            // 
+            // start_date
+            // 
+            this.start_date.DataPropertyName = "start_date";
+            this.start_date.HeaderText = "start_date";
+            this.start_date.Name = "start_date";
+            // 
+            // end_date
+            // 
+            this.end_date.DataPropertyName = "end_date";
+            this.end_date.HeaderText = "end_date";
+            this.end_date.Name = "end_date";
+            // 
+            // bindingNavigatorAccounting_manager
+            // 
+            this.bindingNavigatorAccounting_manager.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.bindingNavigatorAccounting_manager.CountItem = this.bindingNavigatorCountItem;
+            this.bindingNavigatorAccounting_manager.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.bindingNavigatorAccounting_manager.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
             this.bindingNavigatorMovePreviousItem,
             this.bindingNavigatorSeparator,
@@ -175,16 +133,16 @@
             this.bindingNavigatorSeparator2,
             this.bindingNavigatorAddNewItem,
             this.bindingNavigatorDeleteItem});
-            this.bindingNavigatorOffice.Location = new System.Drawing.Point(0, 0);
-            this.bindingNavigatorOffice.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.bindingNavigatorOffice.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.bindingNavigatorOffice.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.bindingNavigatorOffice.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.bindingNavigatorOffice.Name = "bindingNavigatorOffice";
-            this.bindingNavigatorOffice.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigatorOffice.Size = new System.Drawing.Size(1197, 25);
-            this.bindingNavigatorOffice.TabIndex = 3;
-            this.bindingNavigatorOffice.Text = "bindingNavigator1";
+            this.bindingNavigatorAccounting_manager.Location = new System.Drawing.Point(0, 0);
+            this.bindingNavigatorAccounting_manager.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.bindingNavigatorAccounting_manager.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.bindingNavigatorAccounting_manager.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.bindingNavigatorAccounting_manager.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.bindingNavigatorAccounting_manager.Name = "bindingNavigatorAccounting_manager";
+            this.bindingNavigatorAccounting_manager.PositionItem = this.bindingNavigatorPositionItem;
+            this.bindingNavigatorAccounting_manager.Size = new System.Drawing.Size(784, 25);
+            this.bindingNavigatorAccounting_manager.TabIndex = 3;
+            this.bindingNavigatorAccounting_manager.Text = "bindingNavigator1";
             // 
             // bindingNavigatorAddNewItem
             // 
@@ -271,24 +229,24 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // Form_office
+            // Form_accounting_manager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1197, 450);
-            this.Controls.Add(this.bindingNavigatorOffice);
+            this.ClientSize = new System.Drawing.Size(784, 361);
+            this.Controls.Add(this.bindingNavigatorAccounting_manager);
+            this.Controls.Add(this.dataGridViewAccounting_manager);
             this.Controls.Add(this.CmdClose);
-            this.Controls.Add(this.CmdOfficeSave);
-            this.Controls.Add(this.DataGridViewOffice);
-            this.Name = "Form_office";
-            this.Text = "Form_office";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_office_FormClosing);
-            this.Load += new System.EventHandler(this.Form_office_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewOffice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceOffice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorOffice)).EndInit();
-            this.bindingNavigatorOffice.ResumeLayout(false);
-            this.bindingNavigatorOffice.PerformLayout();
+            this.Controls.Add(this.CmdSaveAccounting_manager);
+            this.Name = "Form_accounting_manager";
+            this.Text = "Form_accounting_manager";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Accounting_manager_FormClosing);
+            this.Load += new System.EventHandler(this.Form_accounting_manager_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAccounting_manager)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceAccounting_manager)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorAccounting_manager)).EndInit();
+            this.bindingNavigatorAccounting_manager.ResumeLayout(false);
+            this.bindingNavigatorAccounting_manager.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,11 +254,11 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView DataGridViewOffice;
-        private System.Windows.Forms.Button CmdOfficeSave;
+        private System.Windows.Forms.Button CmdSaveAccounting_manager;
         private System.Windows.Forms.Button CmdClose;
-        private System.Windows.Forms.BindingSource bindingSourceOffice;
-        private System.Windows.Forms.BindingNavigator bindingNavigatorOffice;
+        private System.Windows.Forms.DataGridView dataGridViewAccounting_manager;
+        private System.Windows.Forms.BindingSource bindingSourceAccounting_manager;
+        private System.Windows.Forms.BindingNavigator bindingNavigatorAccounting_manager;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
@@ -312,14 +270,9 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn o_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn o_number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn o_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn o_p_code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn o_address;
-        private System.Windows.Forms.DataGridViewTextBoxColumn o_phone_number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn o_manager;
-        private System.Windows.Forms.DataGridViewTextBoxColumn o_stuff;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn flg;
+        private System.Windows.Forms.DataGridViewTextBoxColumn acc_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn accounting_manager;
+        private System.Windows.Forms.DataGridViewTextBoxColumn start_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn end_date;
     }
 }
