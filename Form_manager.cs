@@ -11,11 +11,32 @@ namespace rk_seikyu
         private NpgsqlConnection m_conn = new NpgsqlConnection(rk_seikyu.Properties.Settings.Default.PostgresConnect);
 
         private NpgsqlDataAdapter da = new NpgsqlDataAdapter();
+        private NpgsqlDataAdapter cmb_o_id_da = new NpgsqlDataAdapter();
+        private NpgsqlDataAdapter o_id_da = new NpgsqlDataAdapter();
+
         private DataSet ds = new DataSet();
+        private DataSet cmb_o_id_ds = new DataSet();
+
+        public int cmb_o_id_int;
+
+        public string cmb_o_id_item;
+        public string cmb_o_id_str;
+        public string Form_Seikyu_TextBoxO_id;
+
+        private Form_seikyu form_seikyu_Instance;
 
         public Form_manager()
         {
             InitializeComponent();
+
+            //Form_seikyuのインスタンスを取得
+            form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
+            //Form_seikyuのテキストボックス文字列を
+            //Form_prnの文字列変数Form_Seikyu_TextBoxO_idへ設定
+            Form_Seikyu_TextBoxO_id = form_seikyu_Instance.TextBoxO_id;
+            cmb_o_id_item = form_seikyu_Instance.TextBoxO_name;
+            Console.WriteLine("cmb_o_idからのメンバーは、" + cmb_o_id_item);
+
         }
 
         private void CmdClose_Click(object sender, EventArgs e)
@@ -26,6 +47,55 @@ namespace rk_seikyu
 
         private void Form_manager_Load(object sender, EventArgs e)
         {
+            o_id_da.SelectCommand = new NpgsqlCommand
+            (
+                   "SELECT"
+                + " o_id"
+                + ", o_number"
+                + ", o_name"
+                + ", o_p_code"
+                + ", o_address"
+                + ", o_phone_number"
+                + ", o_manager"
+                + ", o_stuff"
+                + ", flg"
+                + " FROM"
+                + " t_office"
+                + " ORDER BY o_id;",
+                m_conn
+                );
+            o_id_da.Fill(office_ds, "office_ds");
+            o_id.DataSource = office_ds.Tables[0]; ;
+            o_id.DisplayMember = "o_name";
+            o_id.ValueMember = "o_id";
+
+            cmb_o_id_da.SelectCommand = new NpgsqlCommand
+            (
+                   "SELECT"
+                + " o_id"
+                + ", o_number"
+                + ", o_name"
+                + ", o_p_code"
+                + ", o_address"
+                + ", o_phone_number"
+                + ", o_manager"
+                + ", o_stuff"
+                + ", flg"
+                + " FROM"
+                + " t_office"
+                + " ORDER BY o_id;",
+                m_conn
+                );
+
+            if (office_ds.Tables["office_ds"] != null)
+                office_ds.Tables["office_ds"].Clear();
+            cmb_o_id_da.Fill(office_ds, "office_ds");
+
+            cmb_o_id.DataSource = office_ds.Tables["office_ds"];
+            cmb_o_id.DisplayMember = "o_name";
+            cmb_o_id.ValueMember = "o_id";
+            cmb_o_id.SelectedIndexChanged += new EventHandler(cmb_o_id_SelectedIndexChanged);
+
             dataGridViewManager.Columns[0].HeaderText = "ID";
             dataGridViewManager.Columns[1].HeaderText = "管理者";
             dataGridViewManager.Columns[2].HeaderText = "開始日";
@@ -42,6 +112,7 @@ namespace rk_seikyu
                 + ", o_id"
                 + " FROM"
                 + " t_manager"
+                + " WHERE o_id = '" + cmb_o_id_int.ToString() + "'"
                 + " ORDER BY start_date;",
                 m_conn
                 );
@@ -98,6 +169,8 @@ namespace rk_seikyu
             // RowUpdate
             da.RowUpdated += new NpgsqlRowUpdatedEventHandler(ManagerRowUpdated);
 
+            if (ds.Tables["manager_ds"] != null)
+                ds.Tables["manager_ds"].Clear();
             da.Fill(ds, "manager_ds");
 
             bindingSourceManager.DataSource = ds;
@@ -113,8 +186,41 @@ namespace rk_seikyu
             manager.DataPropertyName = "manager";
             start_date.DataPropertyName = "start_date";
             end_date.DataPropertyName = "end_date";
+            o_id.DataPropertyName = "o_id";
 
             DataGridViewEvent();
+        }
+
+        private void cmb_o_id_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmb_o_id_int = cmb_o_id.SelectedIndex + 1;
+            Console.WriteLine("cmb_o_id_int1 = " + cmb_o_id_int);
+            cmb_o_id_str = cmb_o_id.Text;
+            Console.WriteLine("cmb_o_id_str1 = " + cmb_o_id_str);
+
+            da.SelectCommand = new NpgsqlCommand
+            (
+                   "SELECT"
+                + " m_id"
+                + ", manager"
+                + ", start_date"
+                + ", end_date"
+                + ", o_id"
+                + " FROM"
+                + " t_manager"
+                + " WHERE o_id = '" + cmb_o_id_int.ToString() + "'"
+                + " ORDER BY start_date;",
+                m_conn
+                );
+            if (ds.Tables["manager_ds"] != null)
+                ds.Tables["manager_ds"].Clear();
+            da.Fill(ds, "manager_ds");
+
+            bindingSourceManager.DataSource = ds;
+            bindingSourceManager.DataMember = "manager_ds";
+            bindingNavigatorManager.BindingSource = bindingSourceManager;
+            dataGridViewManager.DataSource = bindingSourceManager;
+            dataGridViewManager.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
 
         private void DataGridViewEvent()

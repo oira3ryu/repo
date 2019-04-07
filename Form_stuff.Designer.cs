@@ -33,33 +33,36 @@
             this.CmdSaveStuff = new System.Windows.Forms.Button();
             this.CmdClose = new System.Windows.Forms.Button();
             this.bindingNavigatorStuff = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingSourceStuff = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewStuff = new System.Windows.Forms.DataGridView();
+            this.cmb_o_id = new System.Windows.Forms.ComboBox();
+            this.office_ds = new rk_seikyu.office_ds();
             this.stf_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stuff = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.start_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.end_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.o_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.o_id = new System.Windows.Forms.DataGridViewComboBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorStuff)).BeginInit();
             this.bindingNavigatorStuff.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceStuff)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStuff)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.office_ds)).BeginInit();
             this.SuspendLayout();
             // 
             // CmdSaveStuff
             // 
-            this.CmdSaveStuff.Location = new System.Drawing.Point(33, 118);
+            this.CmdSaveStuff.Location = new System.Drawing.Point(34, 130);
             this.CmdSaveStuff.Name = "CmdSaveStuff";
             this.CmdSaveStuff.Size = new System.Drawing.Size(75, 23);
             this.CmdSaveStuff.TabIndex = 0;
@@ -69,7 +72,7 @@
             // 
             // CmdClose
             // 
-            this.CmdClose.Location = new System.Drawing.Point(34, 203);
+            this.CmdClose.Location = new System.Drawing.Point(34, 199);
             this.CmdClose.Name = "CmdClose";
             this.CmdClose.Size = new System.Drawing.Size(75, 23);
             this.CmdClose.TabIndex = 1;
@@ -105,6 +108,31 @@
             this.bindingNavigatorStuff.TabIndex = 2;
             this.bindingNavigatorStuff.Text = "bindingNavigator1";
             // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "新規追加";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(29, 22);
+            this.bindingNavigatorCountItem.Text = "/ {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "項目の総数";
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "削除";
+            // 
             // bindingNavigatorMoveFirstItem
             // 
             this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -137,16 +165,9 @@
             this.bindingNavigatorPositionItem.Text = "0";
             this.bindingNavigatorPositionItem.ToolTipText = "現在の場所";
             // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(29, 22);
-            this.bindingNavigatorCountItem.Text = "/ {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "項目の総数";
-            // 
             // bindingNavigatorSeparator1
             // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // bindingNavigatorMoveNextItem
@@ -169,26 +190,8 @@
             // 
             // bindingNavigatorSeparator2
             // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "新規追加";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "削除";
             // 
             // dataGridViewStuff
             // 
@@ -199,13 +202,27 @@
             this.start_date,
             this.end_date,
             this.o_id});
-            this.dataGridViewStuff.Location = new System.Drawing.Point(168, 110);
+            this.dataGridViewStuff.Location = new System.Drawing.Point(150, 100);
             this.dataGridViewStuff.Name = "dataGridViewStuff";
             this.dataGridViewStuff.RowTemplate.Height = 21;
-            this.dataGridViewStuff.Size = new System.Drawing.Size(500, 150);
+            this.dataGridViewStuff.Size = new System.Drawing.Size(600, 300);
             this.dataGridViewStuff.TabIndex = 3;
             this.dataGridViewStuff.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewStuff_CellMouseMove);
             this.dataGridViewStuff.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DataGridViewStuff_CellPainting);
+            // 
+            // cmb_o_id
+            // 
+            this.cmb_o_id.FormattingEnabled = true;
+            this.cmb_o_id.Location = new System.Drawing.Point(34, 55);
+            this.cmb_o_id.Name = "cmb_o_id";
+            this.cmb_o_id.Size = new System.Drawing.Size(260, 20);
+            this.cmb_o_id.TabIndex = 4;
+            this.cmb_o_id.SelectedIndexChanged += new System.EventHandler(this.cmb_o_id_SelectedIndexChanged);
+            // 
+            // office_ds
+            // 
+            this.office_ds.DataSetName = "office_ds";
+            this.office_ds.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // stf_id
             // 
@@ -234,14 +251,18 @@
             // o_id
             // 
             this.o_id.DataPropertyName = "o_id";
+            this.o_id.DataSource = this.bindingSourceStuff;
             this.o_id.HeaderText = "o_id";
             this.o_id.Name = "o_id";
+            this.o_id.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.o_id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // Form_stuff
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cmb_o_id);
             this.Controls.Add(this.dataGridViewStuff);
             this.Controls.Add(this.bindingNavigatorStuff);
             this.Controls.Add(this.CmdClose);
@@ -255,6 +276,7 @@
             this.bindingNavigatorStuff.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceStuff)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStuff)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.office_ds)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -278,10 +300,12 @@
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.BindingSource bindingSourceStuff;
         private System.Windows.Forms.DataGridView dataGridViewStuff;
+        private System.Windows.Forms.ComboBox cmb_o_id;
+        private office_ds office_ds;
         private System.Windows.Forms.DataGridViewTextBoxColumn stf_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn stuff;
         private System.Windows.Forms.DataGridViewTextBoxColumn start_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn end_date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn o_id;
+        private System.Windows.Forms.DataGridViewComboBoxColumn o_id;
     }
 }

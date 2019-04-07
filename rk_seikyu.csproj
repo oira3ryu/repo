@@ -279,6 +279,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>nen.xsd</DependentUpon>
     </Compile>
+    <Compile Include="office_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>office_ds.xsd</DependentUpon>
+    </Compile>
     <Compile Include="par.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -497,6 +502,17 @@
     </None>
     <None Include="nen.xss">
       <DependentUpon>nen.xsd</DependentUpon>
+    </None>
+    <None Include="office_ds.xsc">
+      <DependentUpon>office_ds.xsd</DependentUpon>
+    </None>
+    <None Include="office_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>office_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="office_ds.xss">
+      <DependentUpon>office_ds.xsd</DependentUpon>
     </None>
     <None Include="o_id_ds.xsc">
       <DependentUpon>o_id_ds.xsd</DependentUpon>

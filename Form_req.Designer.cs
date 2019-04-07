@@ -376,7 +376,6 @@
         private System.Windows.Forms.DataGridView dataGridViewReq;
         private System.Windows.Forms.Button cmdReqSave;
         private System.Windows.Forms.Button cmdClose;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
