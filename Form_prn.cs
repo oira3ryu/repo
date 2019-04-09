@@ -567,7 +567,12 @@ namespace rk_seikyu
                         + ", r.end_date"
                         + ", r.diff"
                         + " FROM r"
-                        + " LEFT JOIN (SELECT c4, c5, c6, c7, c9, c11, c14, c15, c16, c17, c19, s_id, o_id, CASE WHEN c7 = '現金' THEN '1' WHEN c7 = '引落' THEN '2' WHEN c7 = '振込' THEN '2' else '' END 支払方法, time_stamp FROM t_shiharai_houhou"
+                        + " LEFT JOIN (SELECT c4, c5, c6, c7, c9, c11, c14, c15, c16, c17, c19, s_id, o_id"
+                            + ", CASE WHEN c7 = '現金' THEN '1'"
+                            + " WHEN c7 = '引落' THEN '2'"
+                            + " WHEN c7 = '振込' THEN '2'"
+                            + " else '' END 支払方法"
+                            + ", time_stamp FROM t_shiharai_houhou"
                         + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE"
                             + " c4_y::Text = '" + Cmb_nen_str + "'"
                             + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
@@ -577,7 +582,12 @@ namespace rk_seikyu
                                                 + " END"
                             + " AND s_id::Integer = " + Cmb_s_id_int
                             + " AND o_id::Text = '" + Form_Seikyu_TextBoxO_id + "'"
-                        + ")) s ON r.c1 = s.c5 AND rtrim(replace(r.c3,substr(r.c3,strpos(r.c3, '('), strpos(r.c3, ')')),'')) = rtrim(replace(s.c6,substr(s.c6,strpos(s.c6, '('), strpos(s.c6, ')')),'')) AND r.s_id = s.s_id AND r.o_id = s.o_id AND s.s_id::Integer = " + Cmb_s_id_int
+                        + ")) s ON r.c1 = s.c5"
+                        + " AND rtrim(replace(r.c3,substr(r.c3,strpos(r.c3, '('), strpos(r.c3, ')')),''))"
+                            + "= rtrim(replace(s.c6,substr(s.c6,strpos(s.c6, '('), strpos(s.c6, ')')),''))"
+                        + " AND r.s_id = s.s_id"
+                        + " AND r.o_id = s.o_id"
+                        + " AND s.s_id::Integer = " + Cmb_s_id_int
                         + " WHERE"
                         + " r.s_id::Integer = " + Cmb_s_id_int
                         + " AND r.o_id::Text = '" + Form_Seikyu_TextBoxO_id + "'"
