@@ -2408,13 +2408,13 @@ namespace rk_seikyu
                                         + " CASE WHEN b.b_id = '0' then null"
                                             + " WHEN b.b_id = '1' then" /* 稚内信金の場合の処理*/
                                                 + " CASE WHEN b.sd = '99' then" /* 翌月末引落の場合の処理 */
-                                                                                + " CASE WHEN '" + Cmb_tsuki_str + "' = '11' Or '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
-                                                                                    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                                                                + " ELSE"
-                                                                                    /* 11, 12月以外の場合の処理 */
-                                                                                    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                                                                + " END"
-                                                + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                                                                //+ " CASE WHEN '" + Cmb_tsuki_str + "' = '11' Or '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
+                                                                                //    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                                                //+ " ELSE"
+                                                                                //    /* 11, 12月以外の場合の処理 */
+                                                                                //    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                                                //+ " END"
+                                                                        + " next_month_last_day(" + Cmb_nen_str + "," + Cmb_tsuki_str + ",1,h,g_name,h.diff)" + " ELSE" /* 翌月末引落以外の場合の処理 */
                                                     + " CASE WHEN '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
                                                         + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-11 || '/' || to_number(b.sd,'99')),'yyyy/mm/dd'))"
                                                     + " ELSE"
@@ -2504,6 +2504,8 @@ namespace rk_seikyu
                         crWithdrawal myReport = new crWithdrawal();
                         myReport.SetDataSource(withdrawalds);
                         myReport.SetParameterValue("r_cmb_o_id_item", cmb_o_id_item);  // 指定したパラメータ値をセット
+                        myReport.SetParameterValue("Cmb_nen_str", Cmb_nen_str);  // 指定したパラメータ値をセット
+                        myReport.SetParameterValue("Cmb_tsuki_str", Cmb_tsuki_str);  // 指定したパラメータ値をセット
                         crvSeikyu.ReportSource = myReport;
 
                         bindingNavigatorWithdrawal.Visible = true;
@@ -2664,11 +2666,12 @@ namespace rk_seikyu
                                     + ", CASE WHEN b.sy IS NULL or b.sm IS NULL then" /* 引落年月日自動入力の場合*/
                                         + " CASE WHEN b.b_id = '0' then null"
                                             + " WHEN b.b_id = '1' then" /* 稚内信金の場合の処理*/
-                                                + " CASE WHEN b.sd = '99' then" /* 翌月末引落の場合の処理 */
-                                                        + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                                + " ELSE" /* 翌月末引落以外の場合の処理 */
-                                                        + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+1 || '/' || to_number(b.sd,'99')),'yyyy/mm/dd'))"
-                                                + " END"
+                                                                        //+ " CASE WHEN b.sd = '99' then" /* 翌月末引落の場合の処理 */
+                                                                        //        + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                                        //+ " ELSE" /* 翌月末引落以外の場合の処理 */
+                                                                        //        + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+1 || '/' || to_number(b.sd,'99')),'yyyy/mm/dd'))"
+                                                                        //+ " END"
+                                                                        + " next_month_last_day(" + Cmb_nen_str + "," + Cmb_tsuki_str + ",1,h,g_name,h.diff)"
                                             + " WHEN b.b_id = '2' then" /* ゆうちょ銀行の場合の処理*/
                                                 + " CASE WHEN b.sd = '99' then" /* 翌月末引落の場合の処理 */
                                                         + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
@@ -2731,6 +2734,8 @@ namespace rk_seikyu
                         crWithdrawal myReport = new crWithdrawal();
                         myReport.SetDataSource(withdrawalds);
                         myReport.SetParameterValue("r_cmb_o_id_item", cmb_o_id_item);  // 指定したパラメータ値をセット
+                        myReport.SetParameterValue("Cmb_nen_str", Cmb_nen_str);  // 指定したパラメータ値をセット
+                        myReport.SetParameterValue("Cmb_tsuki_str", Cmb_tsuki_str);  // 指定したパラメータ値をセット
                         crvSeikyu.ReportSource = myReport;
 
                         bindingNavigatorWithdrawal.Visible = true;
