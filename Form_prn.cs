@@ -520,7 +520,8 @@ namespace rk_seikyu
                         + ", r.c4"
                         + ", r.c4_y"
                         + ", r.c4_m"
-                        + ", to_date((to_number(r.c4_y,'999')+diff || '/' || r.c4_m || '/' || 1),'yyyy/mm/dd') first_date"
+                        //+ ", to_date((to_number(r.c4_y,'999')+diff || '/' || r.c4_m || '/' || 1),'yyyy/mm/dd') first_date"
+                        + ", first_day(r.c4_y, r.c4_m, r.g_name, r.diff) first_date"
                         + ", cast(CASE WHEN date_part('month', to_date((to_number(r.c4_y,'999')+diff || '/' || r.c4_m || '/' || 1),'yyyy/mm/dd')::timestamp) < 4 THEN"
                         + " to_number(r.c4_y,'999')-1 else to_number(r.c4_y,'999') END AS text) as nendo"
                         + ", to_number(r.c4_y,'999')::Text AS nen"
@@ -592,25 +593,26 @@ namespace rk_seikyu
                                                 + " END"
                             + " AND s_id::Integer = " + Cmb_s_id_int
                             + " AND o_id::Text = '" + Form_Seikyu_TextBoxO_id + "'"
-                        + ")) s ON r.c1 = s.c5"
-                        + " AND rtrim(replace(r.c3,substr(r.c3,strpos(r.c3, '('), strpos(r.c3, ')')),''))"
-                            + "= rtrim(replace(s.c6,substr(s.c6,strpos(s.c6, '('), strpos(s.c6, ')')),''))"
-                        + " AND r.s_id = s.s_id"
-                        + " AND r.o_id = s.o_id"
-                        + " AND s.s_id::Integer = " + Cmb_s_id_int
-                        + " WHERE"
-                        + " r.s_id::Integer = " + Cmb_s_id_int
-                        + " AND r.o_id::Text = '" + Form_Seikyu_TextBoxO_id + "'"
-                        + " AND r.time_stamp = (SELECT max(time_stamp) FROM t_seikyu WHERE"
-                            + " s_id::Integer = " + Cmb_s_id_int
-                            + " AND o_id::Text = '" + Form_Seikyu_TextBoxO_id + "'"
-                            + " AND c4_y::Text = '" + Cmb_nen_str + "'"
-                            + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
-                                                + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
-                                                + " '' || '" + Cmb_tsuki_str + "'"
-                                                + " END"
-                            + ")"
+                                            + ")"
+                                    + ") s ON r.c1 = s.c5"
+                                    + " AND rtrim(replace(r.c3,substr(r.c3,strpos(r.c3, '('), strpos(r.c3, ')')),''))"
+                                        + "= rtrim(replace(s.c6,substr(s.c6,strpos(s.c6, '('), strpos(s.c6, ')')),''))"
+                                    + " AND r.s_id = s.s_id"
+                                    + " AND r.o_id = s.o_id"
+                                    + " AND s.s_id::Integer = " + Cmb_s_id_int
+                                    + " WHERE"
+                                    + " r.s_id::Integer = " + Cmb_s_id_int
+                                    + " AND r.o_id::Text = '" + Form_Seikyu_TextBoxO_id + "'"
+                                    + " AND r.time_stamp = (SELECT max(time_stamp) FROM t_seikyu WHERE"
+                                                            + " s_id::Integer = " + Cmb_s_id_int
+                                                            + " AND o_id::Text = '" + Form_Seikyu_TextBoxO_id + "'"
+                                                            + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                                            + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
+                                                                                + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                                                + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
+                                                                                + " '' || '" + Cmb_tsuki_str + "'"
+                                                                                + " END"
+                                                        + ")"
                             + " AND c4_y::Text = '" + Cmb_nen_str + "'"
                             + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                 + " ' ' || '" + Cmb_tsuki_str + "'"
@@ -810,7 +812,8 @@ namespace rk_seikyu
                         + ", r.c3_mod"
                         + ", r.c3_flg"
                         + ", r.c4"
-                        + ", to_date((to_number(r.c4_y,'999')+r.diff || '/' || r.c4_m || '/' || 1),'yyyy/mm/dd') first_date"
+                        //+ ", to_date((to_number(r.c4_y,'999')+r.diff || '/' || r.c4_m || '/' || 1),'yyyy/mm/dd') first_date"
+                        + ", first_day(r.c4_y, r.c4_m, r.g_name, r.diff) first_date"
                         + ", cast(CASE WHEN date_part('month', to_date((to_number(r.c4_y,'999')+r.diff || '/' || r.c4_m || '/' || 1),'yyyy/mm/dd')::timestamp) < 4 THEN"
                         + " to_number(r.c4_y,'999')-1 else to_number(r.c4_y,'999') end AS text) AS nendo"
                         + ", to_number(r.c4_y,'999')::Text AS nen"
@@ -1550,205 +1553,205 @@ namespace rk_seikyu
 
                             Console.WriteLine("Cmb_b_code_str = " + Cmb_b_code_str);
 
-                        da.SelectCommand = new NpgsqlCommand
-                        (
-                        "WITH RECURSIVE r as ("
-                        + "SELECT"
-                        + " a.r_id"
-                        + ", a.c1"
-                        + ", c.c5"
-                        + ", c.c6"
-                        + ", a.c3"
-                        + ", rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),'')) c3_mod"
-                        + ", a.c4"
-                        + ", rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),'')) c6_mod"
-                        + ", c.c6"
-                        + ", c.c9"
-                        + ", c.c11"
-                        + ", c.c14"
-                        + ", c.c16"
-                        + ", c.c19"
-                        + ", a.c22"
-                        + ", a.c4_y"
-                        + ", a.c4_m"
-                        + ", CASE substr(c.c4,strpos(c.c4, '[')+1, strpos(c.c4, ']')-strpos(c.c4, '[')-1)"
-                        + " WHEN '入所' THEN '入所'"
-                        + " WHEN '介護通所' THEN '通所'"
-                        + " WHEN '介護短期' THEN '短期'"
-                        + " WHEN '予防通所' THEN '予防通所'"
-                        + " WHEN '予防短期' THEN '予防短期'"
-                        + " WHEN '通所型サービス' THEN '通所型'"
-                        + " END s_id_str"
-                        + ", a.s_id"
-                        + ", a.o_id"
-                        + ", a.w_flg"
-                        + ", i.gengou"
-                        + ", i.g_name"
-                        + ", i.start_date"
-                        + ", i.end_date"
-                        + ", i.diff"
-                        + " FROM t_seikyu a LEFT JOIN t_shiharai_houhou c"
-                        + " ON a.c1 = c.c5"
-                        + " AND rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),''))"
-                            + " = rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),''))"
-                        + " AND a.o_id = c.o_id"
-                        + " AND a.s_id = c.s_id"
-                        + " AND a.o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
-                        + " INNER JOIN t_gengou i ON substr(a.c4_y,1,1) = i.g_name"
-                        + " WHERE NOT EXISTS ("
-                                            + " SELECT 1 FROM t_seikyu b"
+                            da.SelectCommand = new NpgsqlCommand
+                            (
+                            "WITH RECURSIVE r as ("
+                            + "SELECT"
+                            + " a.r_id"
+                            + ", a.c1"
+                            + ", c.c5"
+                            + ", c.c6"
+                            + ", a.c3"
+                            + ", rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),'')) c3_mod"
+                            + ", a.c4"
+                            + ", rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),'')) c6_mod"
+                            + ", c.c6"
+                            + ", c.c9"
+                            + ", c.c11"
+                            + ", c.c14"
+                            + ", c.c16"
+                            + ", c.c19"
+                            + ", a.c22"
+                            + ", a.c4_y"
+                            + ", a.c4_m"
+                            + ", CASE substr(c.c4,strpos(c.c4, '[')+1, strpos(c.c4, ']')-strpos(c.c4, '[')-1)"
+                            + " WHEN '入所' THEN '入所'"
+                            + " WHEN '介護通所' THEN '通所'"
+                            + " WHEN '介護短期' THEN '短期'"
+                            + " WHEN '予防通所' THEN '予防通所'"
+                            + " WHEN '予防短期' THEN '予防短期'"
+                            + " WHEN '通所型サービス' THEN '通所型'"
+                            + " END s_id_str"
+                            + ", a.s_id"
+                            + ", a.o_id"
+                            + ", a.w_flg"
+                            + ", i.gengou"
+                            + ", i.g_name"
+                            + ", i.start_date"
+                            + ", i.end_date"
+                            + ", i.diff"
+                            + " FROM t_seikyu a LEFT JOIN t_shiharai_houhou c"
+                            + " ON a.c1 = c.c5"
+                            + " AND rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),''))"
+                                + " = rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),''))"
+                            + " AND a.o_id = c.o_id"
+                            + " AND a.s_id = c.s_id"
+                            + " AND a.o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
+                            + " INNER JOIN t_gengou i ON substr(a.c4_y,1,1) = i.g_name"
+                            + " WHERE NOT EXISTS ("
+                                                + " SELECT 1 FROM t_seikyu b"
+                                                + " WHERE"
+                                                + " a.c4_y::Text = '" + Cmb_nen_str + "'"
+                                                + " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
+                                                                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                                        + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
+                                                                        + " '' || '" + Cmb_tsuki_str + "'"
+                                                                        + " END"
+                                                + " AND a.s_id = b.s_id"
+                                                + " AND a.o_id = b.o_id"
+                                                + " AND a.time_stamp < b.time_stamp"
+                                                + ")"
+                            + " AND a.c4_y::Text = '" + Cmb_nen_str + "'"
+                            + " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
+                                                    + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                    + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
+                                                    + " '' || '" + Cmb_tsuki_str + "'"
+                                                    + " END"
+                            + " AND NOT EXISTS ("
+                                            + " SELECT 1 FROM t_shiharai_houhou d"
                                             + " WHERE"
-                                            + " a.c4_y::Text = '" + Cmb_nen_str + "'"
-                                            + " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
+                                            + " d.c4_y::Text = '" + Cmb_nen_str + "'"
+                                            + " AND d.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                                     + " '' || '" + Cmb_tsuki_str + "'"
                                                                     + " END"
-                                            + " AND a.s_id = b.s_id"
-                                            + " AND a.o_id = b.o_id"
-                                            + " AND a.time_stamp < b.time_stamp"
+                                            + " AND c.s_id = d.s_id"
+                                            + " AND c.o_id = d.o_id"
+                                            + " AND c.time_stamp < d.time_stamp"
                                             + ")"
-                        + " AND a.c4_y::Text = '" + Cmb_nen_str + "'"
-                        + " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
-                                                + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
-                                                + " '' || '" + Cmb_tsuki_str + "'"
-                                                + " END"
-                        + " AND NOT EXISTS ("
-                                        + " SELECT 1 FROM t_shiharai_houhou d"
-                                        + " WHERE"
-                                        + " d.c4_y::Text = '" + Cmb_nen_str + "'"
-                                        + " AND d.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
-                                                                + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                                + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
-                                                                + " '' || '" + Cmb_tsuki_str + "'"
-                                                                + " END"
-                                        + " AND c.s_id = d.s_id"
-                                        + " AND c.o_id = d.o_id"
-                                        + " AND c.time_stamp < d.time_stamp"
-                                        + ")"
-                        + " AND c.c4_y::Text = '" + Cmb_nen_str + "'"
-                        + " AND c.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
-                                                + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
-                                                + " '' || '" + Cmb_tsuki_str + "'"
-                                                + " END"
-                        + " AND CASE WHEN '" + Cmb_b_code_str + "' ='0000' THEN"
-                                + " c.c9 = ''"
-                                + " ELSE"
-                                + " c.c9 = '" + Cmb_b_code_str + "'"
-                                + " END"
-                        + " ORDER BY a.r_id"
-                        + ")"
-                        + "SELECT"
-                        + " r_id"
-                        + ", c1"
-                        + ", c5"
-                        + ", c3"
-                        + ", c3_mod"
-                        + ", c4"
-                        + ", c6_mod"
-                        + ", c9"
-                        + ", c11"
-                        + ", c14"
-                        + ", c16"
-                        + ", c19"
-                        + ", c22"
-                        + ", c4_y"
-                        + ", c4_m"
-                        + ", c4_y || '/' || c4_m c4_ym"
-                        + ", s_id_str"
-                        + ", s_id"
-                        + ", o_id"
-                        + ", w_flg"
-                        + ", gengou"
-                        + ", g_name"
-                        + ", start_date"
-                        + ", end_date"
-                        + ", diff"
-                        + " FROM r;"
+                            + " AND c.c4_y::Text = '" + Cmb_nen_str + "'"
+                            + " AND c.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
+                                                    + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                    + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
+                                                    + " '' || '" + Cmb_tsuki_str + "'"
+                                                    + " END"
+                            + " AND CASE WHEN '" + Cmb_b_code_str + "' ='0000' THEN"
+                                    + " c.c9 = ''"
+                                    + " ELSE"
+                                    + " c.c9 = '" + Cmb_b_code_str + "'"
+                                    + " END"
+                            + " ORDER BY a.r_id"
+                            + ")"
+                            + "SELECT"
+                            + " r_id"
+                            + ", c1"
+                            + ", c5"
+                            + ", c3"
+                            + ", c3_mod"
+                            + ", c4"
+                            + ", c6_mod"
+                            + ", c9"
+                            + ", c11"
+                            + ", c14"
+                            + ", c16"
+                            + ", c19"
+                            + ", c22"
+                            + ", c4_y"
+                            + ", c4_m"
+                            + ", c4_y || '/' || c4_m c4_ym"
+                            + ", s_id_str"
+                            + ", s_id"
+                            + ", o_id"
+                            + ", w_flg"
+                            + ", gengou"
+                            + ", g_name"
+                            + ", start_date"
+                            + ", end_date"
+                            + ", diff"
+                            + " FROM r;"
+                                    , m_conn
+                                );
+
+                            da.InsertCommand = new NpgsqlCommand(
+                            "INSERT INTO t_seikyu ("
+                                        + " r_id"
+                                        + ", c3"
+                                        + ", c4"
+                                        + ", c9"
+                                        + ", c11"
+                                        + ", c14"
+                                        + ", c19"
+                                        + ", c22"
+                                        + ", s_id"
+                                        + ", o_id"
+                                        + " ) SELECT"
+                                        + " r_id"
+                                        + ", c3"
+                                        + ", c4"
+                                        + ", c9"
+                                        + ", c11"
+                                        + ", c14"
+                                        + ", c19"
+                                        + ", c22"
+                                        + ", s_id"
+                                        + ", o_id"
+                                        + " FROM t_csv"
+                                        + " ORDER BY id;"
+                                            , m_conn);
+                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c3", NpgsqlTypes.NpgsqlDbType.Text, 0, "c3", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c4", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c9", NpgsqlTypes.NpgsqlDbType.Text, 0, "c9", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c11", NpgsqlTypes.NpgsqlDbType.Text, 0, "c11", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c14", NpgsqlTypes.NpgsqlDbType.Text, 0, "c14", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c19", NpgsqlTypes.NpgsqlDbType.Text, 0, "c19", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c22", NpgsqlTypes.NpgsqlDbType.Text, 0, "c22", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+
+                            // update
+                            da.UpdateCommand = new NpgsqlCommand(
+                                "UPDATE t_seikyu SET w_flg = :w_flg"
+                                + " WHERE"
+                                + " r_id = :r_id;"
+                                , m_conn
+                                );
+                            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("w_flg", NpgsqlTypes.NpgsqlDbType.Integer, 0, "w_flg", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
+
+                            // delete
+                            da.DeleteCommand = new NpgsqlCommand
+                            (
+                                   "DELETE FROM t_withdrawal"
+                                + " WHERE"
+                                + " w_id = :w_id;"
                                 , m_conn
                             );
+                            da.DeleteCommand.Parameters.Add(new NpgsqlParameter("w_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "w_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
-                        da.InsertCommand = new NpgsqlCommand(
-                        "INSERT INTO t_seikyu ("
-                                    + " r_id"
-                                    + ", c3"
-                                    + ", c4"
-                                    + ", c9"
-                                    + ", c11"
-                                    + ", c14"
-                                    + ", c19"
-                                    + ", c22"
-                                    + ", s_id"
-                                    + ", o_id"
-                                    + " ) SELECT"
-                                    + " r_id"
-                                    + ", c3"
-                                    + ", c4"
-                                    + ", c9"
-                                    + ", c11"
-                                    + ", c14"
-                                    + ", c19"
-                                    + ", c22"
-                                    + ", s_id"
-                                    + ", o_id"
-                                    + " FROM t_csv"
-                                    + " ORDER BY id;"
-                                        , m_conn);
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("c3", NpgsqlTypes.NpgsqlDbType.Text, 0, "c3", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("c4", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("c9", NpgsqlTypes.NpgsqlDbType.Text, 0, "c9", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("c11", NpgsqlTypes.NpgsqlDbType.Text, 0, "c11", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("c14", NpgsqlTypes.NpgsqlDbType.Text, 0, "c14", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("c19", NpgsqlTypes.NpgsqlDbType.Text, 0, "c19", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("c22", NpgsqlTypes.NpgsqlDbType.Text, 0, "c22", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            // RowUpdate
+                            da.RowUpdated += new NpgsqlRowUpdatedEventHandler(WithdrawalRowUpdated);
 
-                        // update
-                        da.UpdateCommand = new NpgsqlCommand(
-                            "UPDATE t_seikyu SET w_flg = :w_flg"
-                            + " WHERE"
-                            + " r_id = :r_id;"
-                            , m_conn
-                            );
-                        da.UpdateCommand.Parameters.Add(new NpgsqlParameter("w_flg", NpgsqlTypes.NpgsqlDbType.Integer, 0, "w_flg", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
+                            if (withdrawalds.Tables["withdrawal_ds"] != null)
+                                withdrawalds.Tables["withdrawal_ds"].Clear();
+                            da.Fill(withdrawalds, "withdrawal_ds");
 
-                        // delete
-                        da.DeleteCommand = new NpgsqlCommand
-                        (
-                               "DELETE FROM t_withdrawal"
-                            + " WHERE"
-                            + " w_id = :w_id;"
-                            , m_conn
-                        );
-                        da.DeleteCommand.Parameters.Add(new NpgsqlParameter("w_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "w_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
+                            bindingSourceWithdrawal.DataSource = withdrawalds;
+                            bindingSourceWithdrawal.DataMember = "withdrawal_ds";
 
-                        // RowUpdate
-                        da.RowUpdated += new NpgsqlRowUpdatedEventHandler(WithdrawalRowUpdated);
+                            bindingNavigatorWithdrawal.BindingSource = bindingSourceWithdrawal;
 
-                        if (withdrawalds.Tables["withdrawal_ds"] != null)
-                            withdrawalds.Tables["withdrawal_ds"].Clear();
-                        da.Fill(withdrawalds, "withdrawal_ds");
+                            dataGridViewWithdrawal.AutoGenerateColumns = false;
 
-                        bindingSourceWithdrawal.DataSource = withdrawalds;
-                        bindingSourceWithdrawal.DataMember = "withdrawal_ds";
+                            dataGridViewWithdrawal.DataSource = bindingSourceWithdrawal;
 
-                        bindingNavigatorWithdrawal.BindingSource = bindingSourceWithdrawal;
+                            dataGridViewWithdrawal.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
 
-                        dataGridViewWithdrawal.AutoGenerateColumns = false;
-
-                        dataGridViewWithdrawal.DataSource = bindingSourceWithdrawal;
-
-                        dataGridViewWithdrawal.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-
-                        crvSeikyu.Visible = false;
-                        bindingNavigatorWithdrawal.Visible = true;
-                        dataGridViewWithdrawal.Visible = true;
-                    }
-                    break;
+                            crvSeikyu.Visible = false;
+                            bindingNavigatorWithdrawal.Visible = true;
+                            dataGridViewWithdrawal.Visible = true;
+                        }
+                        break;
                     }
             }
         }
@@ -2405,12 +2408,12 @@ namespace rk_seikyu
                                         + " CASE WHEN b.b_id = '0' then null"
                                             + " WHEN b.b_id = '1' then" /* 稚内信金の場合の処理*/
                                                 + " CASE WHEN b.sd = '99' then" /* 翌月末引落の場合の処理 */
-                                                    + " CASE WHEN '" + Cmb_tsuki_str + "' = '11' Or '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
-                                                        + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                                    + " ELSE"
-                                                        /* 11, 12月以外の場合の処理 */
-                                                        + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                                    + " END"
+                                                                                + " CASE WHEN '" + Cmb_tsuki_str + "' = '11' Or '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
+                                                                                    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                                                + " ELSE"
+                                                                                    /* 11, 12月以外の場合の処理 */
+                                                                                    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                                                + " END"
                                                 + " ELSE" /* 翌月末引落以外の場合の処理 */
                                                     + " CASE WHEN '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
                                                         + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-11 || '/' || to_number(b.sd,'99')),'yyyy/mm/dd'))"
@@ -2421,12 +2424,12 @@ namespace rk_seikyu
                                                 + " END"
                                             + " WHEN b.b_id = '2' then" /* ゆうちょ銀行の場合の処理*/
                                                 + " CASE WHEN b.sd = '99' then" /* 翌月末引落の場合の処理 */
-                                                    + " CASE WHEN '" + Cmb_tsuki_str + "' = '11' Or '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
-                                                        + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                                    + " ELSE"
-                                                        /* 11, 12月以外の場合の処理 */
-                                                        + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                                    + " END"
+                                                                                + " CASE WHEN '" + Cmb_tsuki_str + "' = '11' Or '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
+                                                                                    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                                                + " ELSE"
+                                                                                    /* 11, 12月以外の場合の処理 */
+                                                                                    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                                                + " END"
                                                 + " ELSE" /* 翌月末引落以外の場合の処理 */
                                                     + " CASE WHEN '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
                                                         + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-11 || '/' || to_number(b.sd,'99')),'yyyy/mm/dd'))"
@@ -2437,12 +2440,12 @@ namespace rk_seikyu
                                                 + " END"
                                             + " WHEN b.b_id = '3' then" /* 利尻漁協の場合の処理*/
                                                 + " CASE WHEN b.sd = '99' then" /* 翌月末引落の場合の処理 */
-                                                    + " CASE WHEN '" + Cmb_tsuki_str + "' = '11' Or '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
-                                                        + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                                    + " ELSE"
-                                                        /* 11, 12月以外の場合の処理 */
-                                                        + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                                    + " END"
+                                                                                + " CASE WHEN '" + Cmb_tsuki_str + "' = '11' Or '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
+                                                                                    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                                                + " ELSE"
+                                                                                    /* 11, 12月以外の場合の処理 */
+                                                                                    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                                                + " END"
                                                 + " ELSE" /* 翌月末引落以外の場合の処理 */
                                                     + " CASE WHEN '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
                                                         + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-11 || '/' || to_number(b.sd,'99')),'yyyy/mm/dd'))"
@@ -2742,7 +2745,7 @@ namespace rk_seikyu
         {
         }
 
-         // 列ヘッダーのチェックボックスを押したときに、すべて選択用のチェックボックス状態を切り替え
+        // 列ヘッダーのチェックボックスを押したときに、すべて選択用のチェックボックス状態を切り替え
         private void DataGridViewWithdrawal_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0 && e.RowIndex == -1)
