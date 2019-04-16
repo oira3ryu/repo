@@ -2408,13 +2408,13 @@ namespace rk_seikyu
                                         + " CASE WHEN b.b_id = '0' then null"
                                             + " WHEN b.b_id = '1' then" /* 稚内信金の場合の処理*/
                                                 + " CASE WHEN b.sd = '99' then" /* 翌月末引落の場合の処理 */
-                                                                                //+ " CASE WHEN '" + Cmb_tsuki_str + "' = '11' Or '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
-                                                                                //    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                                                                //+ " ELSE"
-                                                                                //    /* 11, 12月以外の場合の処理 */
-                                                                                //    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                                                                //+ " END"
-                                                                        + " next_month_last_day(:add_year,:add_month,:add_day,h.g_name,h.diff)"
+                                                                                + " CASE WHEN '" + Cmb_tsuki_str + "' = '11' Or '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
+                                                                                    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                                                + " ELSE"
+                                                                                    /* 11, 12月以外の場合の処理 */
+                                                                                    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                                                + " END"
+                                                //+ " next_month_last_day(:add_year,:add_month,:add_day,h.g_name,h.diff)"
                                                 + " ELSE" /* 翌月末引落以外の場合の処理 */
                                                     + " CASE WHEN '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
                                                         + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-11 || '/' || to_number(b.sd,'99')),'yyyy/mm/dd'))"
