@@ -222,10 +222,8 @@ namespace rk_seikyu
                   + " req_id"
                   + ", title1"
                   + ", title2"
-                  + ", name1"
                   + ", title3"
                   + ", title4"
-                  + ", name2"
                   + " FROM t_req"
                   + " ORDER BY req_id;",
                     m_conn
