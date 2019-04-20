@@ -289,8 +289,6 @@ namespace rk_seikyu {
             
             private global::System.Data.DataColumn columntitle4_kana;
             
-            private global::System.Data.DataColumn columnname2_kana;
-            
             private global::System.Data.DataColumn columndata7;
             
             private global::System.Data.DataColumn columndata8;
@@ -373,14 +371,6 @@ namespace rk_seikyu {
             public global::System.Data.DataColumn title4_kanaColumn {
                 get {
                     return this.columntitle4_kana;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn name2_kanaColumn {
-                get {
-                    return this.columnname2_kana;
                 }
             }
             
@@ -469,7 +459,7 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public req_dsRow Addreq_dsRow(string title1, string title2, string title3, string title4, string title4_kana, string name2_kana, string data7, string data8, string data9, string data10, int req_id, string o_id) {
+            public req_dsRow Addreq_dsRow(string title1, string title2, string title3, string title4, string title4_kana, string data7, string data8, string data9, string data10, int req_id, string o_id) {
                 req_dsRow rowreq_dsRow = ((req_dsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         title1,
@@ -477,7 +467,6 @@ namespace rk_seikyu {
                         title3,
                         title4,
                         title4_kana,
-                        name2_kana,
                         data7,
                         data8,
                         data9,
@@ -518,7 +507,6 @@ namespace rk_seikyu {
                 this.columntitle3 = base.Columns["title3"];
                 this.columntitle4 = base.Columns["title4"];
                 this.columntitle4_kana = base.Columns["title4_kana"];
-                this.columnname2_kana = base.Columns["name2_kana"];
                 this.columndata7 = base.Columns["data7"];
                 this.columndata8 = base.Columns["data8"];
                 this.columndata9 = base.Columns["data9"];
@@ -540,8 +528,6 @@ namespace rk_seikyu {
                 base.Columns.Add(this.columntitle4);
                 this.columntitle4_kana = new global::System.Data.DataColumn("title4_kana", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntitle4_kana);
-                this.columnname2_kana = new global::System.Data.DataColumn("name2_kana", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnname2_kana);
                 this.columndata7 = new global::System.Data.DataColumn("data7", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndata7);
                 this.columndata8 = new global::System.Data.DataColumn("data8", typeof(string), null, global::System.Data.MappingType.Element);
@@ -782,22 +768,6 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string name2_kana {
-                get {
-                    try {
-                        return ((string)(this[this.tablereq_ds.name2_kanaColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("テーブル \'req_ds\' にある列 \'name2_kana\' の値は DBNull です。", e);
-                    }
-                }
-                set {
-                    this[this.tablereq_ds.name2_kanaColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string data7 {
                 get {
                     try {
@@ -945,18 +915,6 @@ namespace rk_seikyu {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void Settitle4_kanaNull() {
                 this[this.tablereq_ds.title4_kanaColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool Isname2_kanaNull() {
-                return this.IsNull(this.tablereq_ds.name2_kanaColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void Setname2_kanaNull() {
-                this[this.tablereq_ds.name2_kanaColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
