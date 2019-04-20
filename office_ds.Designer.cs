@@ -291,10 +291,6 @@ namespace rk_seikyu {
             
             private global::System.Data.DataColumn columno_phone_number;
             
-            private global::System.Data.DataColumn columno_manager;
-            
-            private global::System.Data.DataColumn columno_stuff;
-            
             private global::System.Data.DataColumn columnflg;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -380,22 +376,6 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn o_managerColumn {
-                get {
-                    return this.columno_manager;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn o_stuffColumn {
-                get {
-                    return this.columno_stuff;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn flgColumn {
                 get {
                     return this.columnflg;
@@ -439,7 +419,7 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public office_dsRow Addoffice_dsRow(string o_id, string o_number, string o_name, string o_p_code, string o_address, string o_phone_number, string o_manager, string o_stuff, string flg) {
+            public office_dsRow Addoffice_dsRow(string o_id, string o_number, string o_name, string o_p_code, string o_address, string o_phone_number, string flg) {
                 office_dsRow rowoffice_dsRow = ((office_dsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         o_id,
@@ -448,8 +428,6 @@ namespace rk_seikyu {
                         o_p_code,
                         o_address,
                         o_phone_number,
-                        o_manager,
-                        o_stuff,
                         flg};
                 rowoffice_dsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowoffice_dsRow);
@@ -486,8 +464,6 @@ namespace rk_seikyu {
                 this.columno_p_code = base.Columns["o_p_code"];
                 this.columno_address = base.Columns["o_address"];
                 this.columno_phone_number = base.Columns["o_phone_number"];
-                this.columno_manager = base.Columns["o_manager"];
-                this.columno_stuff = base.Columns["o_stuff"];
                 this.columnflg = base.Columns["flg"];
             }
             
@@ -506,10 +482,6 @@ namespace rk_seikyu {
                 base.Columns.Add(this.columno_address);
                 this.columno_phone_number = new global::System.Data.DataColumn("o_phone_number", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columno_phone_number);
-                this.columno_manager = new global::System.Data.DataColumn("o_manager", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columno_manager);
-                this.columno_stuff = new global::System.Data.DataColumn("o_stuff", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columno_stuff);
                 this.columnflg = new global::System.Data.DataColumn("flg", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnflg);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -751,38 +723,6 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string o_manager {
-                get {
-                    try {
-                        return ((string)(this[this.tableoffice_ds.o_managerColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("テーブル \'office_ds\' にある列 \'o_manager\' の値は DBNull です。", e);
-                    }
-                }
-                set {
-                    this[this.tableoffice_ds.o_managerColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string o_stuff {
-                get {
-                    try {
-                        return ((string)(this[this.tableoffice_ds.o_stuffColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("テーブル \'office_ds\' にある列 \'o_stuff\' の値は DBNull です。", e);
-                    }
-                }
-                set {
-                    this[this.tableoffice_ds.o_stuffColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string flg {
                 get {
                     try {
@@ -855,30 +795,6 @@ namespace rk_seikyu {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void Seto_phone_numberNull() {
                 this[this.tableoffice_ds.o_phone_numberColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool Iso_managerNull() {
-                return this.IsNull(this.tableoffice_ds.o_managerColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void Seto_managerNull() {
-                this[this.tableoffice_ds.o_managerColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool Iso_stuffNull() {
-                return this.IsNull(this.tableoffice_ds.o_stuffColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void Seto_stuffNull() {
-                this[this.tableoffice_ds.o_stuffColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

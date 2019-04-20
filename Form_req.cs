@@ -37,10 +37,10 @@ namespace rk_seikyu
         {
             dataGridViewReq.Columns[0].HeaderText = "ID";
             dataGridViewReq.Columns[1].HeaderText = "予備";
-            dataGridViewReq.Columns[2].HeaderText = "職名１";
-            dataGridViewReq.Columns[3].HeaderText = "住所１";
+            dataGridViewReq.Columns[2].HeaderText = "職名";
+            dataGridViewReq.Columns[3].HeaderText = "住所";
             dataGridViewReq.Columns[4].HeaderText = "会計管理者";
-            dataGridViewReq.Columns[5].HeaderText = "会計管理者職名カナ";
+            dataGridViewReq.Columns[5].HeaderText = "会計管理者カナ";
             dataGridViewReq.Columns[6].HeaderText = "口座種別";
             dataGridViewReq.Columns[7].HeaderText = "口座番号";
             dataGridViewReq.Columns[8].HeaderText = "予備";
@@ -63,7 +63,7 @@ namespace rk_seikyu
                 + ", o_id"
                 + " FROM"
                 + " t_req"
-                + " WHERE o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                //+ " WHERE o_id = '" + Form_Seikyu_TextBoxO_id + "'"
                 + " ORDER BY req_id;",
                 m_conn
             );

@@ -3101,7 +3101,8 @@ namespace rk_seikyu
 
                         //  t_csvにreq_idを付加
                         command = new NpgsqlCommand(
-                            "UPDATE " + TblStr + " SET req_id = " + TextBoxO_id
+                            //"UPDATE " + TblStr + " SET req_id = " + TextBoxO_id
+                            "UPDATE " + TblStr + " SET req_id = " + 1
                             , m_conn);
                         command.ExecuteNonQuery();
 

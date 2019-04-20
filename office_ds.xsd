@@ -12,7 +12,7 @@
   <xs:element name="office_ds" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="office_ds" msprop:Generator_UserDSName="office_ds">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="office_ds" msprop:Generator_TableClassName="office_dsDataTable" msprop:Generator_TableVarName="tableoffice_ds" msprop:Generator_TablePropName="_office_ds" msprop:Generator_RowDeletingName="office_dsRowDeleting" msprop:Generator_RowChangingName="office_dsRowChanging" msprop:Generator_RowEvHandlerName="office_dsRowChangeEventHandler" msprop:Generator_RowDeletedName="office_dsRowDeleted" msprop:Generator_UserTableName="office_ds" msprop:Generator_RowChangedName="office_dsRowChanged" msprop:Generator_RowEvArgName="office_dsRowChangeEvent" msprop:Generator_RowClassName="office_dsRow">
+        <xs:element name="office_ds" msprop:Generator_TableClassName="office_dsDataTable" msprop:Generator_TableVarName="tableoffice_ds" msprop:Generator_RowChangedName="office_dsRowChanged" msprop:Generator_TablePropName="_office_ds" msprop:Generator_RowDeletingName="office_dsRowDeleting" msprop:Generator_RowChangingName="office_dsRowChanging" msprop:Generator_RowEvHandlerName="office_dsRowChangeEventHandler" msprop:Generator_RowDeletedName="office_dsRowDeleted" msprop:Generator_RowClassName="office_dsRow" msprop:Generator_UserTableName="office_ds" msprop:Generator_RowEvArgName="office_dsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="o_id" msprop:Generator_ColumnVarNameInTable="columno_id" msprop:Generator_ColumnPropNameInRow="o_id" msprop:Generator_ColumnPropNameInTable="o_idColumn" msprop:Generator_UserColumnName="o_id" type="xs:string" />
@@ -21,8 +21,6 @@
               <xs:element name="o_p_code" msprop:Generator_ColumnVarNameInTable="columno_p_code" msprop:Generator_ColumnPropNameInRow="o_p_code" msprop:Generator_ColumnPropNameInTable="o_p_codeColumn" msprop:Generator_UserColumnName="o_p_code" type="xs:string" minOccurs="0" />
               <xs:element name="o_address" msprop:Generator_ColumnVarNameInTable="columno_address" msprop:Generator_ColumnPropNameInRow="o_address" msprop:Generator_ColumnPropNameInTable="o_addressColumn" msprop:Generator_UserColumnName="o_address" type="xs:string" minOccurs="0" />
               <xs:element name="o_phone_number" msprop:Generator_ColumnVarNameInTable="columno_phone_number" msprop:Generator_ColumnPropNameInRow="o_phone_number" msprop:Generator_ColumnPropNameInTable="o_phone_numberColumn" msprop:Generator_UserColumnName="o_phone_number" type="xs:string" minOccurs="0" />
-              <xs:element name="o_manager" msprop:Generator_ColumnVarNameInTable="columno_manager" msprop:Generator_ColumnPropNameInRow="o_manager" msprop:Generator_ColumnPropNameInTable="o_managerColumn" msprop:Generator_UserColumnName="o_manager" type="xs:string" minOccurs="0" />
-              <xs:element name="o_stuff" msprop:Generator_ColumnVarNameInTable="columno_stuff" msprop:Generator_ColumnPropNameInRow="o_stuff" msprop:Generator_ColumnPropNameInTable="o_stuffColumn" msprop:Generator_UserColumnName="o_stuff" type="xs:string" minOccurs="0" />
               <xs:element name="flg" msprop:Generator_ColumnVarNameInTable="columnflg" msprop:Generator_ColumnPropNameInRow="flg" msprop:Generator_ColumnPropNameInTable="flgColumn" msprop:Generator_UserColumnName="flg" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
