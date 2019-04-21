@@ -624,7 +624,7 @@ namespace rk_seikyu
                                                 + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                 + " '' || '" + Cmb_tsuki_str + "'"
                                                 + " END"
-                        + " AND r.req_id::Integer = " + Form_Seikyu_TextBoxO_id
+                        //+ " AND r.req_id::Integer = " + Form_Seikyu_TextBoxO_id
                         + " ORDER BY r.id"
                         + ")"
                         + "SELECT"
@@ -903,7 +903,7 @@ namespace rk_seikyu
                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                             + " '' || '" + Cmb_tsuki_str + "'"
                                             + " END"
-                        + " AND r.req_id::Integer = " + Form_Seikyu_TextBoxO_id
+                        //+ " AND r.req_id::Integer = " + Form_Seikyu_TextBoxO_id
                         + " ORDER BY r.id"
                         + ")"
                         + " SELECT"
