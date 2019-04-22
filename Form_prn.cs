@@ -624,7 +624,6 @@ namespace rk_seikyu
                                                 + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                 + " '' || '" + Cmb_tsuki_str + "'"
                                                 + " END"
-                        //+ " AND r.req_id::Integer = " + Form_Seikyu_TextBoxO_id
                         + " ORDER BY r.id"
                         + ")"
                         + "SELECT"
@@ -1134,7 +1133,6 @@ namespace rk_seikyu
                                             + " END"
                             + " AND r.s_id::Integer = :s_id"
                             + " AND r.o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
-                            + " AND r.req_id::Integer = " + Form_Seikyu_TextBoxO_id
                             + " AND r.time_stamp = (SELECT max(time_stamp) FROM t_seikyu WHERE"
                                                     + " s_id::Integer = :s_id"
                                                     + " AND o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
@@ -1215,10 +1213,7 @@ namespace rk_seikyu
 
                         crUchiwake myReport = new crUchiwake();
                         myReport.SetDataSource(ds);
-
                         myReport.SetParameterValue("s_id", Cmb_s_id_int.ToString());
-                        myReport.SetParameterValue("req_id", Form_Seikyu_TextBoxO_id);
-
                         crvSeikyu.ReportSource = myReport;
 
                         bindingNavigatorWithdrawal.Visible = false;
