@@ -20,6 +20,8 @@ namespace rk_seikyu
         private NpgsqlDataAdapter o_id_da = new NpgsqlDataAdapter();
         private Form_seikyu form_seikyu_Instance;
 
+        public string Form_Seikyu_TextBoxO_name;
+
         public int I { get; set; }
 
         public Form_office()
@@ -28,7 +30,10 @@ namespace rk_seikyu
 
             //Form_seikyuのインスタンスを取得
             form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
+            Form_Seikyu_TextBoxO_name = form_seikyu_Instance.TextBoxO_name;
+
         }
+
 
         private void Form_office_Load(object sender, EventArgs e)
         {
@@ -208,7 +213,7 @@ namespace rk_seikyu
                 MessageBox.Show("保存に失敗しました。\n\n[内容]\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            MessageBox.Show(update_count.ToString() + "件、保存しました。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(Form_Seikyu_TextBoxO_name + "を選択しました。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void OfficeRowUpdated(Object sender, NpgsqlRowUpdatedEventArgs e)

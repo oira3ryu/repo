@@ -30,18 +30,6 @@ namespace rk_seikyu
             //Form_syubetsuの文字列変数cmb_o_id_strへ設定
             //cmb_o_id_str = form_seikyu_Instance.TextBoxO_id;
             Form_Seikyu_TextBoxO_id = form_seikyu_Instance.TextBoxO_id;
-
-            ////Form_seikyuのコンボボックスcmb_o_idからの変数cmb_o_id_strをint型に変換して1加算
-            //if (int.TryParse(cmb_o_id_str, out int i))
-            //{
-            //    cmb_o_id_int = i;
-            //    cmb_o_id_str = cmb_o_id_int.ToString();
-            //    Console.WriteLine("cmb_o_idからの値は、" + cmb_o_id_str);
-            //}
-            //else
-            //{
-            //    Console.WriteLine("cmb_o_idからの値を数値に変換できません");
-            //}
         }
 
         private void Form_syubetsu_Load(object sender, EventArgs e)
