@@ -213,7 +213,7 @@ namespace rk_seikyu
                 MessageBox.Show("保存に失敗しました。\n\n[内容]\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            MessageBox.Show(Form_Seikyu_TextBoxO_name + "を選択しました。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("事業所を変更しました。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void OfficeRowUpdated(Object sender, NpgsqlRowUpdatedEventArgs e)
@@ -414,13 +414,13 @@ namespace rk_seikyu
                   DataGridViewOffice[e.ColumnIndex, e.RowIndex].Value);
                 // 選択列の場合
                 if (bool.Equals(DataGridViewOffice[e.ColumnIndex, e.RowIndex].Value, true))
-                    {
+                {
                     // 他にチェックされている項目がある場合はそのチェックを解除
                     for (int rowIndex = 0; rowIndex < DataGridViewOffice.Rows.Count; rowIndex++)
                     {
                         // チェックした行以外
                         if (rowIndex != e.RowIndex)
-                            {
+                        {
                             // チェックを解除
                             DataGridViewOffice[e.ColumnIndex, rowIndex].Value = false;
                             // ReadOnlyを解除
