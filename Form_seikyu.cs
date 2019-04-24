@@ -510,7 +510,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -731,7 +735,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y = " + Cmb_nen_str
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -1002,7 +1010,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = " + TextBoxO_id
-                                        + " AND c4_y = " + Cmb_nen_str
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -3301,7 +3313,10 @@ namespace rk_seikyu
                                             + ", c20"
                                             + ", c21"
                                             + ", c22"
-                                            + ", '" + Cmb_nen_str + "' c4_y"
+                                            + ", CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                + " substr('" + Cmb_nen_str + "', 1, 1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "') - 1 + 1, length('" + Cmb_nen_str + "'))"
+                                                + " ELSE '" + Cmb_nen_str + "'"
+                                                + " END"
                                             + ", CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                 + " ' ' || '" + Cmb_tsuki_str + "'"
                                                 + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -3473,7 +3488,10 @@ namespace rk_seikyu
                                                 + ", o_id"
                                                 + ", p_id"
                                                 + ", req_id"
-                                                + ", '" + Cmb_nen_str + "'"
+                                                + ", CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                    + " substr('" + Cmb_nen_str + "', 1, 1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "') - 1 + 1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE '" + Cmb_nen_str + "'"
+                                                    + " END"
                                                 + ", CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -3656,7 +3674,11 @@ namespace rk_seikyu
                                                 + ", o_id"
                                                 + ", p_id"
                                                 + ", req_id"
-                                                + ", '" + Cmb_nen_str + "'"
+                                                + ", CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                    + " substr('" + Cmb_nen_str + "', 1, 1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "') - 1 + 1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE"
+                                                    + "'" + Cmb_nen_str + "'"
+                                                    + " END"
                                                 + ", CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -3748,11 +3770,15 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
-                                                            + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                                + " ' ' || '" + Cmb_tsuki_str + "'"
                                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
-                                                            + " '' || '" + Cmb_tsuki_str + "'"
+                                                                + " '' || '" + Cmb_tsuki_str + "'"
                                                             + " END"
                                         + ");"
                                         , m_conn
@@ -4057,7 +4083,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -4194,7 +4224,11 @@ namespace rk_seikyu
                                                 + ", :o_id"
                                                 + ", :p_id"
                                                 + ", :req_id"
-                                                + ", '" + Cmb_nen_str + "'"
+                                                + ", CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE"
+                                                        + "'" + Cmb_nen_str + "'"
+                                                    + " END"
                                                 + ", CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -4440,7 +4474,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -4595,7 +4633,11 @@ namespace rk_seikyu
                                                 + ", :o_id"
                                                 + ", :p_id"
                                                 + ", :req_id"
-                                                + ", '" + Cmb_nen_str + "'"
+                                                + ", CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE"
+                                                        + "'" + Cmb_nen_str + "'"
+                                                    + " END"
                                                 + ", CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -5444,7 +5486,11 @@ namespace rk_seikyu
                                 + " WHERE s_id::Integer = " + Cmb_s_id_int
                                 + " AND g_id::Integer = " + Cmb_g_id_int
                                 + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                + " AND c4_y = '" + Cmb_nen_str + "'"
+                                + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE"
+                                                        + "'" + Cmb_nen_str + "'"
+                                                    + " END"
                                 + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -5663,7 +5709,11 @@ namespace rk_seikyu
                                 + " WHERE s_id::Integer = " + Cmb_s_id_int
                                 + " AND g_id::Integer = " + Cmb_g_id_int
                                 + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                + " AND c4_y = '" + Cmb_nen_str + "'"
+                                + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE"
+                                                        + "'" + Cmb_nen_str + "'"
+                                                    + " END"
                                 + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -5932,7 +5982,11 @@ namespace rk_seikyu
                                 + " WHERE s_id::Integer = " + Cmb_s_id_int
                                 + " AND g_id::Integer = " + Cmb_g_id_int
                                 + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                + " AND c4_y = '" + Cmb_nen_str + "'"
+                                + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE"
+                                                        + "'" + Cmb_nen_str + "'"
+                                                    + " END"
                                 + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
@@ -6491,7 +6545,11 @@ namespace rk_seikyu
                                 + " WHERE s_id::Integer = " + Cmb_s_id_int
                                 + " AND g_id::Integer = " + Cmb_g_id_int
                                 + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE"
+                                                        + "'" + Cmb_nen_str + "'"
+                                                    + " END"
                                 + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -6710,7 +6768,11 @@ namespace rk_seikyu
                                 + " WHERE s_id::Integer = " + Cmb_s_id_int
                                 + " AND g_id::Integer = " + Cmb_g_id_int
                                 + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE"
+                                                        + "'" + Cmb_nen_str + "'"
+                                                    + " END"
                                 + " AND c4_m::Text = CASE when length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -6979,7 +7041,11 @@ namespace rk_seikyu
                                 + " WHERE s_id::Integer = " + Cmb_s_id_int
                                 + " AND g_id::Integer = " + Cmb_g_id_int
                                 + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE"
+                                                        + "'" + Cmb_nen_str + "'"
+                                                    + " END"
                                 + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -7489,7 +7555,7 @@ namespace rk_seikyu
                                     Console.WriteLine("Case " + Cmb_s_id_int + "!");
                                     da.SelectCommand = new NpgsqlCommand
                                     (
-                                        "select"
+                                        "SELECT"
                                         + " c1"
                                         + ", c2"
                                         + ", c3"
@@ -7524,16 +7590,20 @@ namespace rk_seikyu
                                         + ", req_id"
                                         + " FROM"
                                         + " t_seikyu"
-                                        + " where time_stamp = (select max(time_stamp) FROM t_seikyu"
-                                        + " where s_id::Integer = " + Cmb_s_id_int
-                                        + " and g_id::Integer = " + Cmb_g_id_int
-                                        + " and o_id::Text = " + TextBoxO_id
-                                        + " and c4_y::Text = '" + Cmb_nen_str + "'"
-                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_seikyu"
+                                        + " WHERE s_id::Integer = " + Cmb_s_id_int
+                                        + " AND g_id::Integer = " + Cmb_g_id_int
+                                        + " AND o_id::Text = " + TextBoxO_id
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
+                                        + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                            + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                                            + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                             + " '' || '" + Cmb_tsuki_str + "'"
-                                                            + " end"
+                                                            + " END"
                                         + ");"
                                         , m_conn
                                     );
@@ -7567,7 +7637,7 @@ namespace rk_seikyu
 
                                     // update
                                     da.UpdateCommand = new NpgsqlCommand(
-                                            "update t_seikyu set"
+                                            "UPDATE t_seikyu SET"
                                             + " c1 = :c1"
                                             + ", c2 = :c2"
                                             + ", c3 = :c3"
@@ -7597,7 +7667,7 @@ namespace rk_seikyu
                                             + ", s_id = :s_id"
                                             + ", g_id = :g_id"
                                             + ", o_id = :o_id"
-                                            + " where r_id=:r_id;"
+                                            + " WHERE r_id=:r_id;"
                                         , m_conn
                                         );
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -7682,7 +7752,7 @@ namespace rk_seikyu
                                     Console.WriteLine("Case " + Cmb_s_id_int + "!");
                                     da.SelectCommand = new NpgsqlCommand
                                     (
-                                        "select"
+                                        "SELECT"
                                         + " c1"
                                         + ", c2"
                                         + ", c3"
@@ -7743,16 +7813,20 @@ namespace rk_seikyu
                                         + ", time_stamp"
                                         + " FROM"
                                         + " t_shiharai_houhou"
-                                        + " where time_stamp = (select max(time_stamp) FROM t_shiharai_houhou"
-                                        + " where s_id::Integer = " + Cmb_s_id_int
-                                        + " and g_id::Integer = " + Cmb_g_id_int
-                                        + " and o_id::Text = '" + TextBoxO_id + "'"
-                                        + " and c4_y::Text = '" + Cmb_nen_str + "'"
-                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou"
+                                        + " WHERE s_id::Integer = " + Cmb_s_id_int
+                                        + " AND g_id::Integer = " + Cmb_g_id_int
+                                        + " AND o_id::Text = '" + TextBoxO_id + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
+                                        + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                            + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                                            + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                             + " '' || '" + Cmb_tsuki_str + "'"
-                                                            + " end"
+                                                            + " END"
                                         + ")"
                                         + " order by c5;"
                                         , m_conn
@@ -7773,7 +7847,7 @@ namespace rk_seikyu
 
                                     // update
                                     da.UpdateCommand = new NpgsqlCommand(
-                                            "update t_shiharai_houhou set"
+                                            "UPDATE t_shiharai_houhou SET"
                                             + " c1 = :c1"
                                             + ", c2 = :c2"
                                             + ", c3 = :c3"
@@ -7830,7 +7904,7 @@ namespace rk_seikyu
                                             + ", req_id = :req_id"
                                             + ", c4_y = :c4_y"
                                             + ", c4_m = :c4_m"
-                                            + " where sh_id=:sh_id;"
+                                            + " WHERE sh_id=:sh_id;"
                                         , m_conn
                                         );
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -8016,7 +8090,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -8274,7 +8352,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -8493,7 +8575,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -8763,7 +8849,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                         + " ' ' || '" + Cmb_tsuki_str + "'"
                                         + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -9021,7 +9111,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                         + " ' ' || '" + Cmb_tsuki_str + "'"
                                         + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -9240,7 +9334,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                         + " ' ' || '" + Cmb_tsuki_str + "'"
                                         + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -9509,7 +9607,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                         + " ' ' || '" + Cmb_tsuki_str + "'"
                                         + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
