@@ -9107,7 +9107,7 @@ namespace rk_seikyu
                                         + ", req_id"
                                         + " FROM"
                                         + " t_seikyu"
-                                        + " HWERE time_stamp = (SELECT max(time_stamp) FROM t_seikyu"
+                                        + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_seikyu"
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
