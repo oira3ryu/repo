@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rk_seikyu", "rk_seikyu.csproj", "{E686D0CE-538E-4BEE-9BCD-5C7E0DFE07FA}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "納付書作成V3.1", "..\納付書作成V3.1\納付書作成V3.1.vdproj", "{D25C84CC-57B7-4330-8719-2E58DBD26B69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|x86 = CD_ROM|x86
@@ -24,6 +26,11 @@ Global
 		{E686D0CE-538E-4BEE-9BCD-5C7E0DFE07FA}.Release|x86.Build.0 = Release|x86
 		{E686D0CE-538E-4BEE-9BCD-5C7E0DFE07FA}.SingleImage|x86.ActiveCfg = Release|x86
 		{E686D0CE-538E-4BEE-9BCD-5C7E0DFE07FA}.SingleImage|x86.Build.0 = Release|x86
+		{D25C84CC-57B7-4330-8719-2E58DBD26B69}.CD_ROM|x86.ActiveCfg = Release
+		{D25C84CC-57B7-4330-8719-2E58DBD26B69}.Debug|x86.ActiveCfg = Debug
+		{D25C84CC-57B7-4330-8719-2E58DBD26B69}.DVD-5|x86.ActiveCfg = Debug
+		{D25C84CC-57B7-4330-8719-2E58DBD26B69}.Release|x86.ActiveCfg = Release
+		{D25C84CC-57B7-4330-8719-2E58DBD26B69}.SingleImage|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
