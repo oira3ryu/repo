@@ -105,9 +105,9 @@
             // 
             // cmdClose
             // 
-            this.cmdClose.Location = new System.Drawing.Point(89, 696);
+            this.cmdClose.Location = new System.Drawing.Point(104, 696);
             this.cmdClose.Name = "cmdClose";
-            this.cmdClose.Size = new System.Drawing.Size(75, 23);
+            this.cmdClose.Size = new System.Drawing.Size(87, 23);
             this.cmdClose.TabIndex = 1;
             this.cmdClose.Text = "閉じる";
             this.cmdClose.UseVisualStyleBackColor = true;
@@ -115,17 +115,17 @@
             // 
             // cmb_n_id
             // 
-            this.cmb_n_id.Location = new System.Drawing.Point(46, 30);
+            this.cmb_n_id.Location = new System.Drawing.Point(54, 30);
             this.cmb_n_id.Name = "cmb_n_id";
-            this.cmb_n_id.Size = new System.Drawing.Size(121, 20);
+            this.cmb_n_id.Size = new System.Drawing.Size(140, 20);
             this.cmb_n_id.TabIndex = 10;
             this.cmb_n_id.Visible = false;
             // 
             // cmb_t_id
             // 
-            this.cmb_t_id.Location = new System.Drawing.Point(46, 56);
+            this.cmb_t_id.Location = new System.Drawing.Point(54, 56);
             this.cmb_t_id.Name = "cmb_t_id";
-            this.cmb_t_id.Size = new System.Drawing.Size(121, 20);
+            this.cmb_t_id.Size = new System.Drawing.Size(140, 20);
             this.cmb_t_id.TabIndex = 9;
             this.cmb_t_id.Visible = false;
             // 
@@ -134,10 +134,11 @@
             this.crvSeikyu.ActiveViewIndex = -1;
             this.crvSeikyu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.crvSeikyu.Cursor = System.Windows.Forms.Cursors.Default;
-            this.crvSeikyu.Location = new System.Drawing.Point(219, 1);
+            this.crvSeikyu.Location = new System.Drawing.Point(255, 114);
             this.crvSeikyu.Name = "crvSeikyu";
-            this.crvSeikyu.Size = new System.Drawing.Size(1114, 987);
+            this.crvSeikyu.Size = new System.Drawing.Size(1299, 826);
             this.crvSeikyu.TabIndex = 4;
+            this.crvSeikyu.ToolPanelWidth = 233;
             // 
             // crystalReportViewer1
             // 
@@ -152,9 +153,9 @@
             // cmb_p_id
             // 
             this.cmb_p_id.FormattingEnabled = true;
-            this.cmb_p_id.Location = new System.Drawing.Point(44, 77);
+            this.cmb_p_id.Location = new System.Drawing.Point(51, 77);
             this.cmb_p_id.Name = "cmb_p_id";
-            this.cmb_p_id.Size = new System.Drawing.Size(121, 20);
+            this.cmb_p_id.Size = new System.Drawing.Size(140, 20);
             this.cmb_p_id.TabIndex = 5;
             this.cmb_p_id.Visible = false;
             this.cmb_p_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_p_id_SelectedIndexChanged);
@@ -162,9 +163,9 @@
             // cmb_req_id
             // 
             this.cmb_req_id.FormattingEnabled = true;
-            this.cmb_req_id.Location = new System.Drawing.Point(44, 103);
+            this.cmb_req_id.Location = new System.Drawing.Point(51, 103);
             this.cmb_req_id.Name = "cmb_req_id";
-            this.cmb_req_id.Size = new System.Drawing.Size(121, 20);
+            this.cmb_req_id.Size = new System.Drawing.Size(140, 20);
             this.cmb_req_id.TabIndex = 6;
             this.cmb_req_id.Visible = false;
             this.cmb_req_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_req_id_SelectedIndexChanged);
@@ -172,34 +173,34 @@
             // cmb_s_id
             // 
             this.cmb_s_id.FormattingEnabled = true;
-            this.cmb_s_id.Location = new System.Drawing.Point(44, 288);
+            this.cmb_s_id.Location = new System.Drawing.Point(51, 288);
             this.cmb_s_id.Name = "cmb_s_id";
-            this.cmb_s_id.Size = new System.Drawing.Size(121, 20);
+            this.cmb_s_id.Size = new System.Drawing.Size(140, 20);
             this.cmb_s_id.TabIndex = 7;
             this.cmb_s_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_s_id_SelectedIndexChanged);
             // 
             // cmb_c4
             // 
             this.cmb_c4.FormattingEnabled = true;
-            this.cmb_c4.Location = new System.Drawing.Point(46, 129);
+            this.cmb_c4.Location = new System.Drawing.Point(54, 129);
             this.cmb_c4.Name = "cmb_c4";
-            this.cmb_c4.Size = new System.Drawing.Size(121, 20);
+            this.cmb_c4.Size = new System.Drawing.Size(140, 20);
             this.cmb_c4.TabIndex = 8;
             this.cmb_c4.Visible = false;
             this.cmb_c4.SelectedIndexChanged += new System.EventHandler(this.Cmb_c4_SelectedIndexChanged);
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(44, 417);
+            this.dateTimePicker1.Location = new System.Drawing.Point(51, 417);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(121, 19);
+            this.dateTimePicker1.Size = new System.Drawing.Size(140, 19);
             this.dateTimePicker1.TabIndex = 11;
             // 
             // cmdPrv
             // 
-            this.cmdPrv.Location = new System.Drawing.Point(90, 447);
+            this.cmdPrv.Location = new System.Drawing.Point(105, 447);
             this.cmdPrv.Name = "cmdPrv";
-            this.cmdPrv.Size = new System.Drawing.Size(75, 23);
+            this.cmdPrv.Size = new System.Drawing.Size(87, 23);
             this.cmdPrv.TabIndex = 12;
             this.cmdPrv.Text = "表示";
             this.cmdPrv.UseVisualStyleBackColor = true;
@@ -208,17 +209,17 @@
             // cmb_prn_id
             // 
             this.cmb_prn_id.FormattingEnabled = true;
-            this.cmb_prn_id.Location = new System.Drawing.Point(44, 331);
+            this.cmb_prn_id.Location = new System.Drawing.Point(51, 331);
             this.cmb_prn_id.Name = "cmb_prn_id";
-            this.cmb_prn_id.Size = new System.Drawing.Size(121, 20);
+            this.cmb_prn_id.Size = new System.Drawing.Size(140, 20);
             this.cmb_prn_id.TabIndex = 13;
             this.cmb_prn_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_prn_id_SelectedIndexChanged);
             // 
             // cmd_holiday
             // 
-            this.cmd_holiday.Location = new System.Drawing.Point(90, 585);
+            this.cmd_holiday.Location = new System.Drawing.Point(105, 585);
             this.cmd_holiday.Name = "cmd_holiday";
-            this.cmd_holiday.Size = new System.Drawing.Size(75, 23);
+            this.cmd_holiday.Size = new System.Drawing.Size(87, 23);
             this.cmd_holiday.TabIndex = 14;
             this.cmd_holiday.Text = "祝日設定";
             this.cmd_holiday.UseVisualStyleBackColor = true;
@@ -226,9 +227,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(89, 623);
+            this.button1.Location = new System.Drawing.Point(104, 623);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(87, 23);
             this.button1.TabIndex = 15;
             this.button1.Text = "口座設定";
             this.button1.UseVisualStyleBackColor = true;
@@ -239,9 +240,9 @@
             this.cmb_nen.DataSource = this.nenBindingSource;
             this.cmb_nen.DisplayMember = "nen";
             this.cmb_nen.FormattingEnabled = true;
-            this.cmb_nen.Location = new System.Drawing.Point(44, 243);
+            this.cmb_nen.Location = new System.Drawing.Point(51, 243);
             this.cmb_nen.Name = "cmb_nen";
-            this.cmb_nen.Size = new System.Drawing.Size(56, 20);
+            this.cmb_nen.Size = new System.Drawing.Size(65, 20);
             this.cmb_nen.TabIndex = 16;
             this.cmb_nen.ValueMember = "n_id";
             this.cmb_nen.SelectedIndexChanged += new System.EventHandler(this.Cmb_nen_SelectedIndexChanged);
@@ -261,9 +262,9 @@
             this.cmb_tsuki.DataSource = this.tsukiBindingSource1;
             this.cmb_tsuki.DisplayMember = "tsuki";
             this.cmb_tsuki.FormattingEnabled = true;
-            this.cmb_tsuki.Location = new System.Drawing.Point(109, 243);
+            this.cmb_tsuki.Location = new System.Drawing.Point(127, 243);
             this.cmb_tsuki.Name = "cmb_tsuki";
-            this.cmb_tsuki.Size = new System.Drawing.Size(56, 20);
+            this.cmb_tsuki.Size = new System.Drawing.Size(65, 20);
             this.cmb_tsuki.TabIndex = 17;
             this.cmb_tsuki.ValueMember = "t_id";
             this.cmb_tsuki.SelectedIndexChanged += new System.EventHandler(this.Cmb_tsuki_SelectedIndexChanged);
@@ -321,7 +322,7 @@
             this.bindingNavigatorWithdrawal.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigatorWithdrawal.Name = "bindingNavigatorWithdrawal";
             this.bindingNavigatorWithdrawal.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigatorWithdrawal.Size = new System.Drawing.Size(1587, 25);
+            this.bindingNavigatorWithdrawal.Size = new System.Drawing.Size(1871, 25);
             this.bindingNavigatorWithdrawal.TabIndex = 18;
             this.bindingNavigatorWithdrawal.Text = "bindingNavigator1";
             // 
@@ -378,7 +379,7 @@
             this.bindingNavigatorPositionItem.AccessibleName = "位置";
             this.bindingNavigatorPositionItem.AutoSize = false;
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(58, 23);
             this.bindingNavigatorPositionItem.Text = "0";
             this.bindingNavigatorPositionItem.ToolTipText = "現在の場所";
             // 
@@ -413,17 +414,17 @@
             // cmb_b_code
             // 
             this.cmb_b_code.FormattingEnabled = true;
-            this.cmb_b_code.Location = new System.Drawing.Point(44, 373);
+            this.cmb_b_code.Location = new System.Drawing.Point(51, 373);
             this.cmb_b_code.Name = "cmb_b_code";
-            this.cmb_b_code.Size = new System.Drawing.Size(121, 20);
+            this.cmb_b_code.Size = new System.Drawing.Size(140, 20);
             this.cmb_b_code.TabIndex = 19;
             this.cmb_b_code.SelectedIndexChanged += new System.EventHandler(this.Cmb_b_code_SelectedIndexChanged);
             // 
             // cmd_Ins
             // 
-            this.cmd_Ins.Location = new System.Drawing.Point(90, 476);
+            this.cmd_Ins.Location = new System.Drawing.Point(105, 476);
             this.cmd_Ins.Name = "cmd_Ins";
-            this.cmd_Ins.Size = new System.Drawing.Size(75, 23);
+            this.cmd_Ins.Size = new System.Drawing.Size(87, 23);
             this.cmd_Ins.TabIndex = 20;
             this.cmd_Ins.Text = "保存";
             this.cmd_Ins.UseVisualStyleBackColor = true;
@@ -452,10 +453,10 @@
             this.timestampDataGridViewTextBoxColumn,
             this.last_day});
             this.dataGridViewWithdrawal.DataSource = this.bindingSourceWithdrawal;
-            this.dataGridViewWithdrawal.Location = new System.Drawing.Point(219, 26);
+            this.dataGridViewWithdrawal.Location = new System.Drawing.Point(255, 28);
             this.dataGridViewWithdrawal.Name = "dataGridViewWithdrawal";
             this.dataGridViewWithdrawal.RowTemplate.Height = 21;
-            this.dataGridViewWithdrawal.Size = new System.Drawing.Size(1246, 834);
+            this.dataGridViewWithdrawal.Size = new System.Drawing.Size(1454, 912);
             this.dataGridViewWithdrawal.TabIndex = 21;
             this.dataGridViewWithdrawal.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewWithdrawal_CellClick);
             this.dataGridViewWithdrawal.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewWithdrawal_CellContentClick);
@@ -553,9 +554,9 @@
             // 
             // cmdPrnWithdrawal
             // 
-            this.cmdPrnWithdrawal.Location = new System.Drawing.Point(89, 505);
+            this.cmdPrnWithdrawal.Location = new System.Drawing.Point(104, 505);
             this.cmdPrnWithdrawal.Name = "cmdPrnWithdrawal";
-            this.cmdPrnWithdrawal.Size = new System.Drawing.Size(75, 23);
+            this.cmdPrnWithdrawal.Size = new System.Drawing.Size(87, 23);
             this.cmdPrnWithdrawal.TabIndex = 22;
             this.cmdPrnWithdrawal.Text = "印刷";
             this.cmdPrnWithdrawal.UseVisualStyleBackColor = true;
@@ -563,16 +564,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(44, 155);
+            this.textBox1.Location = new System.Drawing.Point(51, 155);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 19);
+            this.textBox1.Size = new System.Drawing.Size(116, 19);
             this.textBox1.TabIndex = 23;
             this.textBox1.Visible = false;
             // 
             // checkBoxAll
             // 
             this.checkBoxAll.AutoSize = true;
-            this.checkBoxAll.Location = new System.Drawing.Point(301, 30);
+            this.checkBoxAll.Location = new System.Drawing.Point(340, 33);
             this.checkBoxAll.Name = "checkBoxAll";
             this.checkBoxAll.Size = new System.Drawing.Size(15, 14);
             this.checkBoxAll.TabIndex = 24;
@@ -583,9 +584,9 @@
             // chk_title
             // 
             this.chk_title.AutoSize = true;
-            this.chk_title.Location = new System.Drawing.Point(84, 547);
+            this.chk_title.Location = new System.Drawing.Point(98, 547);
             this.chk_title.Name = "chk_title";
-            this.chk_title.Size = new System.Drawing.Size(121, 16);
+            this.chk_title.Size = new System.Drawing.Size(122, 16);
             this.chk_title.TabIndex = 25;
             this.chk_title.Text = "請求月を配列にする";
             this.chk_title.UseVisualStyleBackColor = true;
@@ -595,7 +596,7 @@
             // 
             this.checkBoxIni.AutoSize = true;
             this.checkBoxIni.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxIni.Location = new System.Drawing.Point(24, 451);
+            this.checkBoxIni.Location = new System.Drawing.Point(16, 540);
             this.checkBoxIni.Name = "checkBoxIni";
             this.checkBoxIni.Size = new System.Drawing.Size(60, 16);
             this.checkBoxIni.TabIndex = 26;
@@ -605,10 +606,10 @@
             // 
             // Form_prn
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1604, 865);
+            this.ClientSize = new System.Drawing.Size(1871, 968);
             this.Controls.Add(this.checkBoxIni);
             this.Controls.Add(this.chk_title);
             this.Controls.Add(this.checkBoxAll);
