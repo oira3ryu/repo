@@ -81,31 +81,31 @@ namespace rk_seikyu
             dataGridViewRep.Columns[10].HeaderText = "項目９";
             dataGridViewRep.Columns[11].HeaderText = "項目１０";
             dataGridViewRep.Columns[12].HeaderText = "項目１１";
-            
+
             da.SelectCommand = new NpgsqlCommand
             (
                 "SELECT"
-				 + " pt_id"
-				 + ", s_id"
+                 + " pt_id"
+                 + ", s_id"
                  + ", o_id"
-				 + ", col0"
-				 + ", col1"
-				 + ", col2"
-				 + ", col3"
-				 + ", col4"
-				 + ", col5"
-				 + ", ac0"
-				 + ", ac1"
-				 + ", ac2"
-				 + ", ac3"
-				 + ", rep_id"
+                 + ", col0"
+                 + ", col1"
+                 + ", col2"
+                 + ", col3"
+                 + ", col4"
+                 + ", col5"
+                 + ", ac0"
+                 + ", ac1"
+                 + ", ac2"
+                 + ", ac3"
+                 + ", rep_id"
                  + " FROM"
                  + " t_rep"
                  + " WHERE s_id::Integer = " + Cmb_s_id_int
-                 + " AND o_id::Text = '" + Form_Seikyu_TextBoxO_id + "'"
+                 + " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
                  + " AND pt_id::Integer = :pt_id"
                  + " ORDER BY rep_id"
-                ,m_conn
+                , m_conn
             );
             if (cmb_s_id.SelectedItem == null)
             {
@@ -137,31 +137,31 @@ namespace rk_seikyu
             da.InsertCommand = new NpgsqlCommand
             (
                  "INSERT INTO t_rep ("
-				 + " pt_id"
-				 + ", s_id"
-				 + ", col0"
-				 + ", col1"
-				 + ", col2"
-				 + ", col3"
-				 + ", col4"
-				 + ", col5"
-				 + ", ac0"
-				 + ", ac1"
-				 + ", ac2"
-				 + ", ac3"
+                 + " pt_id"
+                 + ", s_id"
+                 + ", col0"
+                 + ", col1"
+                 + ", col2"
+                 + ", col3"
+                 + ", col4"
+                 + ", col5"
+                 + ", ac0"
+                 + ", ac1"
+                 + ", ac2"
+                 + ", ac3"
                  + " ) VALUES ("
-				 + " :pt_id"
-				 + ", :s_id"
-				 + ", :col0"
-				 + ", :col1"
-				 + ", :col2"
-				 + ", :col3"
-				 + ", :col4"
-				 + ", :col5"
-				 + ", :ac0"
-				 + ", :ac1"
-				 + ", :ac2"
-				 + ", :ac3"
+                 + " :pt_id"
+                 + ", :s_id"
+                 + ", :col0"
+                 + ", :col1"
+                 + ", :col2"
+                 + ", :col3"
+                 + ", :col4"
+                 + ", :col5"
+                 + ", :ac0"
+                 + ", :ac1"
+                 + ", :ac2"
+                 + ", :ac3"
                     + ")",
                 m_conn
             );
@@ -181,21 +181,21 @@ namespace rk_seikyu
             // update
             da.UpdateCommand = new NpgsqlCommand(
                 "UPDATE t_rep SET"
-				 + " pt_id = :pt_id"
-				 + ", s_id = :s_id"
-				 + ", col0 = :col0"
-				 + ", col1 = :col1"
-				 + ", col2 = :col2"
-				 + ", col3 = :col3"
-				 + ", col4 = :col4"
-				 + ", col5 = :col5"
-				 + ", ac0 = :ac0"
-				 + ", ac1 = :ac1"
-				 + ", ac2 = :ac2"
-				 + ", ac3 = :ac3"
+                 + " pt_id = :pt_id"
+                 + ", s_id = :s_id"
+                 + ", col0 = :col0"
+                 + ", col1 = :col1"
+                 + ", col2 = :col2"
+                 + ", col3 = :col3"
+                 + ", col4 = :col4"
+                 + ", col5 = :col5"
+                 + ", ac0 = :ac0"
+                 + ", ac1 = :ac1"
+                 + ", ac2 = :ac2"
+                 + ", ac3 = :ac3"
                 + " WHERE"
                 + " rep_id = :rep_id"
-                ,m_conn
+                , m_conn
                 );
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("pt_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "pt_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -217,7 +217,7 @@ namespace rk_seikyu
                    "DELETE FROM t_rep"
                 + " WHERE"
                 + " rep_id = :rep_id"
-                ,m_conn
+                , m_conn
             );
             da.DeleteCommand.Parameters.Add(new NpgsqlParameter("rep_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "rep_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
@@ -231,7 +231,7 @@ namespace rk_seikyu
                 + ", nen"
                 + " FROM t_nen"
                 + " ORDER BY n_id"
-                  ,m_conn
+                  , m_conn
             );
 
             t_id_da.SelectCommand = new NpgsqlCommand
@@ -241,7 +241,7 @@ namespace rk_seikyu
                   + ", tsuki"
                   + " FROM t_tsuki"
                   + " ORDER BY t_id"
-                    ,m_conn
+                    , m_conn
             );
 
             s_id_da.SelectCommand = new NpgsqlCommand
@@ -253,7 +253,7 @@ namespace rk_seikyu
                 + ", o_id"
                 + " FROM"
                 + " t_syubetsu"
-                + " WHERE o_id::Text = '" + Form_Seikyu_TextBoxO_id + "'"
+                + " WHERE o_id = '" + Form_Seikyu_TextBoxO_id + "'"
                 + " ORDER BY s_id;",
                     m_conn
             );
@@ -335,19 +335,19 @@ namespace rk_seikyu
                     NpgsqlCommand cmd = new NpgsqlCommand
                 (
                 "SELECT"
-				 + " pt_id"
-				 + ", s_id"
-				 + ", col0"
-				 + ", col1"
-				 + ", col2"
-				 + ", col3"
-				 + ", col4"
-				 + ", col5"
-				 + ", ac0"
-				 + ", ac1"
-				 + ", ac2"
-				 + ", ac3"
-				 + ", rep_id"
+                 + " pt_id"
+                 + ", s_id"
+                 + ", col0"
+                 + ", col1"
+                 + ", col2"
+                 + ", col3"
+                 + ", col4"
+                 + ", col5"
+                 + ", ac0"
+                 + ", ac1"
+                 + ", ac2"
+                 + ", ac3"
+                 + ", rep_id"
                 + " FROM"
                 + " t_rep"
                 + " WHERE rep_id = currval('t_rep_rep_id_seq')"
@@ -384,24 +384,24 @@ namespace rk_seikyu
                     NpgsqlCommand cmd = new NpgsqlCommand
                 (
                 "SELECT"
-				 + " pt_id"
-				 + ", s_id"
-				 + ", col0"
-				 + ", col1"
-				 + ", col2"
-				 + ", col3"
-				 + ", col4"
-				 + ", col5"
-				 + ", ac0"
-				 + ", ac1"
-				 + ", ac2"
-				 + ", ac3"
-				 + ", rep_id"
+                 + " pt_id"
+                 + ", s_id"
+                 + ", col0"
+                 + ", col1"
+                 + ", col2"
+                 + ", col3"
+                 + ", col4"
+                 + ", col5"
+                 + ", ac0"
+                 + ", ac1"
+                 + ", ac2"
+                 + ", ac3"
+                 + ", rep_id"
                 + " FROM"
                 + " t_rep"
                 + " WHERE rep_id = " + e.Row["rep_id"].ToString()
                 + " ORDER BY rep_id"
-                ,m_conn
+                , m_conn
                     );
                     try
                     {
@@ -554,7 +554,7 @@ namespace rk_seikyu
                  + " FROM"
                  + " t_rep"
                  + " WHERE s_id::Integer = " + Cmb_s_id_int
-                 + " AND o_id::Text = '" + Form_Seikyu_TextBoxO_id + "'"
+                 + " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
                  + " AND pt_id::Integer = :pt_id"
                  + " ORDER BY rep_id"
                 , m_conn
@@ -722,8 +722,8 @@ namespace rk_seikyu
                  + ", rep_id"
                  + " FROM"
                  + " t_rep"
-                 + " WHERE s_id::Integer = :s_id"
-                 + " AND o_id::Text = '" + Form_Seikyu_TextBoxO_id + "'"
+                 + " WHERE s_id = :s_id"
+                 + " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
                  + " AND pt_id::Integer = :pt_id"
                  + " ORDER BY rep_id"
                 , m_conn

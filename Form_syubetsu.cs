@@ -40,6 +40,7 @@ namespace rk_seikyu
             dataGridViewSyubetsu.Columns[0].HeaderText = "ID";
             dataGridViewSyubetsu.Columns[1].HeaderText = "種別";
             dataGridViewSyubetsu.Columns[2].HeaderText = "施設名";
+            dataGridViewSyubetsu.Columns[3].HeaderText = "種別ID";
 
             da.SelectCommand = new NpgsqlCommand
             (
@@ -48,6 +49,7 @@ namespace rk_seikyu
                 + ", s_id"
                 + ", syubetsu"
                 + ", shisetsumei"
+                + ", o_id"
                 + " FROM"
                 + " t_syubetsu"
                 + " WHERE o_id = '" + Form_Seikyu_TextBoxO_id + "'"
@@ -91,8 +93,8 @@ namespace rk_seikyu
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("ps_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "ps_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("syubetsu", NpgsqlTypes.NpgsqlDbType.Text, 0, "syubetsu", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("shisetsumei", NpgsqlTypes.NpgsqlDbType.Text, 0, "shisetsumei", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
+            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
             // delete
             da.DeleteCommand = new NpgsqlCommand
@@ -161,6 +163,7 @@ namespace rk_seikyu
                 + ", s_id"
                 + ", syubetsu"
                 + ", shisetsumei"
+                + ", o_id"
                 + " FROM"
                 + " t_syubetsu"
                 + " WHERE ps_id = currval('prn_syubetsu_ps_id_seq')"
@@ -175,6 +178,7 @@ namespace rk_seikyu
                         e.Row["s_id"] = reader["s_id"];
                         e.Row["syubetsu"] = reader["syubetsu"];
                         e.Row["shisetsumei"] = reader["shisetsumei"];
+                        e.Row["o_id"] = reader["o_id"];
                         reader.Close();
                     }
                     catch (Exception ex)
@@ -192,6 +196,7 @@ namespace rk_seikyu
                 + ", s_id"
                 + ", syubetsu"
                 + ", shisetsumei"
+                + ", o_id"
                 + " FROM"
                 + " t_syubetsu"
                 + " WHERE ps_id = " + e.Row["ps_id"].ToString()
@@ -206,6 +211,7 @@ namespace rk_seikyu
                         e.Row["s_id"] = reader["s_id"];
                         e.Row["syubetsu"] = reader["syubetsu"];
                         e.Row["shisetsumei"] = reader["shisetsumei"];
+                        e.Row["o_id"] = reader["o_id"];
                         reader.Close();
                     }
                     catch (Exception ex)
