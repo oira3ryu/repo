@@ -1948,6 +1948,7 @@ namespace rk_seikyu
                                                 //+ " AND s_id::Integer = " + Cmb_s_id_int
                                                 + " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
                                             + " )) i ON a.c1 = i.c1"
+                                            + " AND a.s_id = i.s_id"
                                             //+ " AND i.s_id::Integer = " + Cmb_s_id_int
                                             + " AND i.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
                                             + ") "
