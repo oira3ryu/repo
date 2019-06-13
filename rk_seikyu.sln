@@ -36,8 +36,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {A723C434-93B6-465C-9DEE-91A4ECA17290}
 		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {A723C434-93B6-465C-9DEE-91A4ECA17290}
 	EndGlobalSection
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
