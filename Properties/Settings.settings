@@ -2,7 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="rk_seikyu.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="PostgresConnect" Type="(Connection string)" Scope="Application">
+    <!-- <Setting Name="PostgresConnect" Type="(Connection string)" Scope="Application"> -->
+    <Setting Name="PostgresConnect" Type="(Connection string)" Scope="User">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;ConnectionString&gt;Server=127.0.0.1;Port=5433;User Id=rkadmin;Password=yu2;Database=rk_seikyu;&lt;/ConnectionString&gt;
