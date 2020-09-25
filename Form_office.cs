@@ -69,8 +69,7 @@ namespace rk_seikyu
             da.InsertCommand = new NpgsqlCommand
             (
                     "INSERT INTO t_office ("
-                + " o_id"
-                + ", flg"
+                + " flg"
                 + ", o_number"
                 + ", o_name"
                 + ", o_p_code"
@@ -79,8 +78,7 @@ namespace rk_seikyu
                 + ", o_manager"
                 + ", o_stuff"
                 + " ) VALUES ("
-                + " :o_id"
-                + ", :flg"
+                + " :flg"
                 + ", :o_number"
                 + ", :o_name"
                 + ", :o_p_code"
@@ -91,7 +89,7 @@ namespace rk_seikyu
                 + ");",
                 m_conn
             );
-            da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+            //da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("flg", NpgsqlTypes.NpgsqlDbType.Boolean, 0, "flg", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_number", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_number", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_name", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_name", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
