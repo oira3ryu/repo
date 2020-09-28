@@ -73,7 +73,7 @@ namespace rk_seikyu
                 + ", :hyoujimei"
                 + ", :shisetsumei"
                 + ", :s_id"
-                + ", :o_id"
+                + ", '" + Form_Seikyu_TextBoxO_id + "'"
                 + ");",
                 m_conn
             );
