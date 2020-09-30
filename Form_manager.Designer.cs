@@ -33,6 +33,12 @@
             this.CmdSaveManager = new System.Windows.Forms.Button();
             this.CmdClose = new System.Windows.Forms.Button();
             this.dataGridViewManager = new System.Windows.Forms.DataGridView();
+            this.m_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.manager = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.start_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.end_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.o_id = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.bindingSourceManager = new System.Windows.Forms.BindingSource(this.components);
             this.officedsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.office_ds = new rk_seikyu.office_ds();
             this.bindingNavigatorManager = new System.Windows.Forms.BindingNavigator(this.components);
@@ -47,19 +53,14 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingSourceManager = new System.Windows.Forms.BindingSource(this.components);
             this.cmb_o_id = new System.Windows.Forms.ComboBox();
-            this.m_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.manager = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.start_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.end_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.o_id = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.textBoxO_id = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewManager)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.officedsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.office_ds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorManager)).BeginInit();
             this.bindingNavigatorManager.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceManager)).BeginInit();
             this.SuspendLayout();
             // 
             // CmdSaveManager
@@ -98,6 +99,39 @@
             this.dataGridViewManager.TabIndex = 2;
             this.dataGridViewManager.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewManager_CellMouseMove);
             this.dataGridViewManager.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DataGridViewManager_CellPainting);
+            // 
+            // m_id
+            // 
+            this.m_id.DataPropertyName = "m_id";
+            this.m_id.HeaderText = "m_id";
+            this.m_id.Name = "m_id";
+            // 
+            // manager
+            // 
+            this.manager.DataPropertyName = "manager";
+            this.manager.HeaderText = "manager";
+            this.manager.Name = "manager";
+            // 
+            // start_date
+            // 
+            this.start_date.DataPropertyName = "start_date";
+            this.start_date.HeaderText = "start_date";
+            this.start_date.Name = "start_date";
+            // 
+            // end_date
+            // 
+            this.end_date.DataPropertyName = "end_date";
+            this.end_date.HeaderText = "end_date";
+            this.end_date.Name = "end_date";
+            // 
+            // o_id
+            // 
+            this.o_id.DataPropertyName = "o_id";
+            this.o_id.DataSource = this.bindingSourceManager;
+            this.o_id.HeaderText = "o_id";
+            this.o_id.Name = "o_id";
+            this.o_id.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.o_id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // officedsBindingSource
             // 
@@ -189,6 +223,7 @@
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "位置";
             this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Yu Gothic UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -231,44 +266,20 @@
             this.cmb_o_id.TabIndex = 4;
             this.cmb_o_id.SelectedIndexChanged += new System.EventHandler(this.cmb_o_id_SelectedIndexChanged);
             // 
-            // m_id
+            // textBoxO_id
             // 
-            this.m_id.DataPropertyName = "m_id";
-            this.m_id.HeaderText = "m_id";
-            this.m_id.Name = "m_id";
-            // 
-            // manager
-            // 
-            this.manager.DataPropertyName = "manager";
-            this.manager.HeaderText = "manager";
-            this.manager.Name = "manager";
-            // 
-            // start_date
-            // 
-            this.start_date.DataPropertyName = "start_date";
-            this.start_date.HeaderText = "start_date";
-            this.start_date.Name = "start_date";
-            // 
-            // end_date
-            // 
-            this.end_date.DataPropertyName = "end_date";
-            this.end_date.HeaderText = "end_date";
-            this.end_date.Name = "end_date";
-            // 
-            // o_id
-            // 
-            this.o_id.DataPropertyName = "o_id";
-            this.o_id.DataSource = this.bindingSourceManager;
-            this.o_id.HeaderText = "o_id";
-            this.o_id.Name = "o_id";
-            this.o_id.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.o_id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.textBoxO_id.Location = new System.Drawing.Point(12, 54);
+            this.textBoxO_id.Name = "textBoxO_id";
+            this.textBoxO_id.ReadOnly = true;
+            this.textBoxO_id.Size = new System.Drawing.Size(18, 19);
+            this.textBoxO_id.TabIndex = 5;
             // 
             // Form_manager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBoxO_id);
             this.Controls.Add(this.cmb_o_id);
             this.Controls.Add(this.bindingNavigatorManager);
             this.Controls.Add(this.dataGridViewManager);
@@ -279,12 +290,12 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_manager_FormClosing);
             this.Load += new System.EventHandler(this.Form_manager_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewManager)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.officedsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.office_ds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorManager)).EndInit();
             this.bindingNavigatorManager.ResumeLayout(false);
             this.bindingNavigatorManager.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceManager)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -316,5 +327,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn start_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn end_date;
         private System.Windows.Forms.DataGridViewComboBoxColumn o_id;
+        private System.Windows.Forms.TextBox textBoxO_id;
     }
 }

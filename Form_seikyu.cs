@@ -63,6 +63,7 @@ namespace rk_seikyu
         public int Cmb_o_id_int { get; set; }
         public int Cmb_req_id_int { get; set; }
 
+        //public String cmb_s_id_text { get; set; }
 
         public String Cmb_c4_str { get; set; }
         public String Cmb_nen_str { get; set; }
@@ -82,6 +83,7 @@ namespace rk_seikyu
         private static Form_seikyu _form_seikyu_Instance;
 
         public String cmb_o_id_str;
+        public String cmb_s_id_str;
         public String new_o_id_str;
 
         public Form_seikyu()
@@ -112,6 +114,18 @@ namespace rk_seikyu
             set
             {
                 textBoxO_id.Text = value;
+            }
+        }
+
+        public string TextBoxS_id
+        {
+            get
+            {
+                return textBoxS_id.Text;
+            }
+            set
+            {
+                textBoxS_id.Text = value;
             }
         }
 
@@ -5216,8 +5230,7 @@ namespace rk_seikyu
                 Cmb_s_id_str = ((DataRowView)cmb_s_id.SelectedItem).Row["s_id"].ToString();
             }
             Console.WriteLine("Form_seikyu_cmb_s_id_str = " + Cmb_s_id_str);
-            cmb_o_id_text.Text = Cmb_s_id_str;
-
+            this.TextBoxS_id = Cmb_s_id_str;
 
             switch (Cmb_g_id_int)
             {
@@ -9872,11 +9885,6 @@ namespace rk_seikyu
             cmb_s_id.DisplayMember = "syubetsu";
             cmb_s_id.ValueMember = "s_id";
             cmb_s_id.DataSource = s_id_ds.Tables[0];
-        }
-
-        private void textBoxO_id_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void cmdDbconfig_Click(object sender, EventArgs e)

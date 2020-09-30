@@ -19,6 +19,9 @@ namespace rk_seikyu
         public String cmb_o_id_str;
         public int cmb_o_id_int { get; set; }
         public string Form_Seikyu_TextBoxO_id;
+        public string Form_Seikyu_TextBoxS_id;
+
+        public int I { get; set; }
 
         public Form_syubetsu()
         {
@@ -30,17 +33,20 @@ namespace rk_seikyu
             //Form_syubetsuの文字列変数cmb_o_id_strへ設定
             //cmb_o_id_str = form_seikyu_Instance.TextBoxO_id;
             Form_Seikyu_TextBoxO_id = form_seikyu_Instance.TextBoxO_id;
+            Form_Seikyu_TextBoxS_id = form_seikyu_Instance.TextBoxS_id;
         }
 
         private void Form_syubetsu_Load(object sender, EventArgs e)
         {
 
             Console.WriteLine("Form_syubetsu_cmb_o_id_str = " + Form_Seikyu_TextBoxO_id);
+            Console.WriteLine("Form_syubetsu_cmb_s_id_str = " + Form_Seikyu_TextBoxS_id);
 
             dataGridViewSyubetsu.Columns[0].HeaderText = "ID";
             dataGridViewSyubetsu.Columns[1].HeaderText = "種別";
-            dataGridViewSyubetsu.Columns[2].HeaderText = "施設名";
-            dataGridViewSyubetsu.Columns[3].HeaderText = "種別ID";
+            dataGridViewSyubetsu.Columns[2].HeaderText = "引落口座表示名";
+            dataGridViewSyubetsu.Columns[3].HeaderText = "施設名";
+            dataGridViewSyubetsu.Columns[4].HeaderText = "種別ID";
 
             da.SelectCommand = new NpgsqlCommand
             (
@@ -48,6 +54,7 @@ namespace rk_seikyu
                 + " ps_id"
                 + ", s_id"
                 + ", syubetsu"
+                + ", hyoujimei"
                 + ", shisetsumei"
                 + ", o_id"
                 + " FROM"
@@ -62,11 +69,13 @@ namespace rk_seikyu
             (
                     "INSERT INTO t_syubetsu ("
                 + " syubetsu"
+                + ", hyoujimei"
                 + ", shisetsumei"
                 + ", s_id"
                 + ", o_id"
                 + " ) VALUES ("
                 + " :syubetsu"
+                + ", :hyoujimei"
                 + ", :shisetsumei"
                 + ", :s_id"
                 + ", :o_id"
@@ -74,26 +83,31 @@ namespace rk_seikyu
                 m_conn
             );
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("syubetsu", NpgsqlTypes.NpgsqlDbType.Text, 0, "syubetsu", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+            da.InsertCommand.Parameters.Add(new NpgsqlParameter("hyoujimei", NpgsqlTypes.NpgsqlDbType.Text, 0, "hyoujimei", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("shisetsumei", NpgsqlTypes.NpgsqlDbType.Text, 0, "shisetsumei", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+            //da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+            da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text) { Value = "" + Form_Seikyu_TextBoxO_id + "" });
 
             // update
             da.UpdateCommand = new NpgsqlCommand(
                 "UPDATE t_syubetsu SET"
                 + " ps_id = :ps_id"
                 + ", syubetsu = :syubetsu"
+                + ", hyoujimei = :hyoujimei"
                 + ", shisetsumei = :shisetsumei"
                 + ", s_id = :s_id"
-                + ", o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                + ", o_id = :o_id"
                 + " WHERE"
                 + " ps_id = :ps_id"
                 , m_conn
                 );
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("ps_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "ps_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("syubetsu", NpgsqlTypes.NpgsqlDbType.Text, 0, "syubetsu", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("hyoujimei", NpgsqlTypes.NpgsqlDbType.Text, 0, "hyoujimei", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("shisetsumei", NpgsqlTypes.NpgsqlDbType.Text, 0, "shisetsumei", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text) { Value = "" + Form_Seikyu_TextBoxS_id + "" });
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
             // delete
@@ -162,11 +176,12 @@ namespace rk_seikyu
                 + " ps_id"
                 + ", s_id"
                 + ", syubetsu"
+                + ", hyoujimei"
                 + ", shisetsumei"
                 + ", o_id"
                 + " FROM"
                 + " t_syubetsu"
-                + " WHERE ps_id = currval('prn_syubetsu_ps_id_seq')"
+                + " WHERE ps_id = currval('t_syubetsu_ps_id_seq')"
                 + " ORDER BY s_id;"
                 , m_conn
                  );
@@ -177,6 +192,7 @@ namespace rk_seikyu
                         e.Row["ps_id"] = reader["ps_id"];
                         e.Row["s_id"] = reader["s_id"];
                         e.Row["syubetsu"] = reader["syubetsu"];
+                        e.Row["hyoujimei"] = reader["hyoujimei"];
                         e.Row["shisetsumei"] = reader["shisetsumei"];
                         e.Row["o_id"] = reader["o_id"];
                         reader.Close();
@@ -195,6 +211,7 @@ namespace rk_seikyu
                 + " ps_id"
                 + ", s_id"
                 + ", syubetsu"
+                + ", hyoujimei"
                 + ", shisetsumei"
                 + ", o_id"
                 + " FROM"
@@ -210,6 +227,7 @@ namespace rk_seikyu
                         e.Row["ps_id"] = reader["ps_id"];
                         e.Row["s_id"] = reader["s_id"];
                         e.Row["syubetsu"] = reader["syubetsu"];
+                        e.Row["hyoujimei"] = reader["hyoujimei"];
                         e.Row["shisetsumei"] = reader["shisetsumei"];
                         e.Row["o_id"] = reader["o_id"];
                         reader.Close();
@@ -290,6 +308,39 @@ namespace rk_seikyu
         private void Label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridViewSyubetsu_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
+        {
+            try
+            {
+                m_conn.Open();
+
+                NpgsqlCommand command = new NpgsqlCommand("SELECT cast(max(s_id) AS Integer)+1 FROM t_syubetsu WHERE o_id = '" + Form_Seikyu_TextBoxO_id + "'; ", m_conn);
+
+                NpgsqlDataReader dr = command.ExecuteReader();
+                while (dr.Read())
+                {
+                    for (I = 0; I < dr.FieldCount; I++)
+                    {
+                        this.TextBoxS_id.Text = dr[0].ToString();
+                        Console.WriteLine("TextBoxS_id = " + TextBoxS_id);
+                    }
+                    Console.WriteLine();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("データ取得に失敗しました。\n\n[内容]\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+
+            }
+            finally
+            {
+                m_conn.Close();
+            }
+            e.Row.Cells["s_id"].Value = this.TextBoxS_id.Text;
+            e.Row.Cells["o_id"].Value = Form_Seikyu_TextBoxO_id;
         }
     }
 }

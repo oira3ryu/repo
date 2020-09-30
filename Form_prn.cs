@@ -1109,7 +1109,7 @@ namespace rk_seikyu
                                             + " ON a.s_id = b.s_id AND a.o_id = b.o_id)"
                                                 + " INNER JOIN t_par c ON a.p_id::Integer = c.p_id)"
                                                     + " INNER JOIN t_req d ON a.req_id::Integer = d.req_id)"
-                                        + " INNER JOIN t_syutsuryokubi e ON a.s_id = e.s_id)"
+                                        + " INNER JOIN t_syutsuryokubi e ON a.s_id::Text = e.s_id)"
                                     + " INNER JOIN t_gengou f ON substr(a.c4_y,1,1) = f.g_name"
                                     + " ORDER BY c1"
                                 + ")"// r
@@ -1158,10 +1158,10 @@ namespace rk_seikyu
                                             + "       WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                             + " '' || '" + Cmb_tsuki_str + "'"
                                             + " END"
-                            + " AND r.s_id = :s_id"
+                            + " AND r.s_id::Integer = " + Cmb_s_id_int
                             + " AND r.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
                             + " AND r.time_stamp = (SELECT max(time_stamp) FROM t_seikyu WHERE"
-                                                    + " s_id = :s_id"
+                                                    + " s_id::Integer = " + Cmb_s_id_int
                                                     + " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
                                                     + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
                                                                             + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
@@ -1275,7 +1275,11 @@ namespace rk_seikyu
                         + ", b.c7 支払方法"
                         + ", b.c14 引落金融機関支店名"
                         + ", b.c15 引落口座種別"
-                        + ", substr(b.c4,strpos(b.c4, '[')+1, strpos(b.c4, ']')-strpos(b.c4, '[')-1) 事業所名"
+                        + ", CASE WHEN strpos(b.c4, '[')>=1 THEN" 
+                        + " substr(b.c4, strpos(b.c4, '[') + 1, strpos(b.c4, ']') - strpos(b.c4, '[') - 1)"
+                        + " ELSE"
+                        + " b.c4"
+                        + " END 事業所名"
                         + ", d.col0"
                         + ", d.col1"
                         + ", d.col2"
@@ -1632,14 +1636,7 @@ namespace rk_seikyu
                         + ", rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),'')) c3_mod"
                         + ", rtrim(replace(b.c6,substr(b.c6,strpos(b.c6, '('), strpos(b.c6, ')')),'')) c6_mod"
                         + ", a.w_flg"
-                        + ", CASE substr(b.c4,strpos(b.c4, '[')+1, strpos(b.c4, ']')-strpos(b.c4, '[')-1)"
-                        + " WHEN '入所' THEN '入所'"
-                        + " WHEN '介護通所' THEN '通所'"
-                        + " WHEN '介護短期' THEN '短期'"
-                        + " WHEN '予防通所' THEN '予防通所'"
-                        + " WHEN '予防短期' THEN '予防短期'"
-                        + " WHEN '通所型サービス' THEN '通所型'"
-                        + " END s_id_str"
+                        + ", c.hyoujimei s_id_str"
                         + ", b.c5"
                         + ", b.c7 支払方法"
                         + ", b.c9"
@@ -1648,7 +1645,11 @@ namespace rk_seikyu
                         + ", b.c15 引落口座種別"
                         + ", b.c16"
                         + ", b.c19"
-                        + ", substr(b.c4,strpos(b.c4, '[')+1, strpos(b.c4, ']')-strpos(b.c4, '[')-1) 事業所名"
+                         + ", CASE WHEN strpos(b.c4, '[')>=1 THEN"
+                        + " substr(b.c4, strpos(b.c4, '[') + 1, strpos(b.c4, ']') - strpos(b.c4, '[') - 1)"
+                        + " ELSE"
+                        + " b.c4"
+                        + " END 事業所名"
                         + ", d.col0"
                         + ", d.col1"
                         + ", d.col2"
@@ -1756,7 +1757,6 @@ namespace rk_seikyu
                                                                     + "(SELECT max(time_stamp) FROM t_seikyu WHERE"
                                                                     + " s_id = t1.s_id"
                                                                     + " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
-                                                                    //+ " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
                                                                     + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
                                                                                             + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
                                                                                         + " ELSE"
@@ -1797,7 +1797,7 @@ namespace rk_seikyu
                                                                                 + " AND a.o_id = b.o_id"
                                                                                 + ")"
                                                                                 //+ " AND b.s_id::Integer = " + Cmb_s_id_int + ")"
-                                                                        + " LEFT JOIN (SELECT s_id, o_id, syubetsu FROM t_syubetsu) c ON a.s_id::Text = c.s_id AND a.o_id = c.o_id)"
+                                                                        + " LEFT JOIN (SELECT s_id, o_id, syubetsu, hyoujimei FROM t_syubetsu) c ON a.s_id::Text = c.s_id AND a.o_id = c.o_id)"
                                                                     + " LEFT JOIN (SELECT rep_id, pt_id, s_id, o_id, col0, col1, col2, col3, col4, col5, ac0, ac1, ac2, ac3 FROM t_rep) d ON b.支払方法 = d.pt_id AND a.s_id = d.s_id AND a.o_id::Text = d.o_id)"
                                                                 + " LEFT JOIN (SELECT bid, b_id, b_code, b_name, sb_name, br_code, br_name, sd, sm, sy FROM t_bank) e ON b.c11 = e.b_name)"
                                                             + " LEFT JOIN (SELECT req_id, title1, title2, title3, title4, data7, data8, title4_kana FROM t_req) f ON a.req_id::Integer = f.req_id)"
@@ -1862,7 +1862,6 @@ namespace rk_seikyu
                         + ", req_id"
                         + ", syubetsu"
                         + ", 支払方法"
-                        //+ ", 引落金融機関支店名"
                         + ", 引落口座種別"
                         + ", 事業所名"
                         + ", col0"
@@ -1917,61 +1916,21 @@ namespace rk_seikyu
                         , m_conn
                                 );
 
-                            da.InsertCommand = new NpgsqlCommand(
-                            "INSERT INTO t_seikyu ("
-                                        + " r_id"
-                                        + ", c3"
-                                        + ", c4"
-                                        + ", c9"
-                                        + ", c11"
-                                        + ", c14"
-                                        + ", c19"
-                                        + ", c22"
-                                        + ", s_id"
-                                        + ", o_id"
-                                        + " ) SELECT"
-                                        + " r_id"
-                                        + ", c3"
-                                        + ", c4"
-                                        + ", c9"
-                                        + ", c11"
-                                        + ", c14"
-                                        + ", c19"
-                                        + ", c22"
-                                        + ", s_id"
-                                        + ", o_id"
-                                        + " FROM t_csv"
-                                        + " ORDER BY id;"
-                                            , m_conn);
-                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c3", NpgsqlTypes.NpgsqlDbType.Text, 0, "c3", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c4", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c9", NpgsqlTypes.NpgsqlDbType.Text, 0, "c9", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c11", NpgsqlTypes.NpgsqlDbType.Text, 0, "c11", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c14", NpgsqlTypes.NpgsqlDbType.Text, 0, "c14", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c19", NpgsqlTypes.NpgsqlDbType.Text, 0, "c19", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c22", NpgsqlTypes.NpgsqlDbType.Text, 0, "c22", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-
                             // update
                             da.UpdateCommand = new NpgsqlCommand(
                                 "UPDATE t_seikyu SET w_flg = :w_flg"
                                 + " WHERE"
+                                //+ " c4_y = :c4_y AND"
+                                //+ " c4_m = :c4_m AND"
                                 + " r_id = :r_id;"
                                 , m_conn
                                 );
+                            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text) { Value = " + Cmb_nen_str + " });
+                            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text) { Value = " + Cmb_tsuki_str + " });
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("w_flg", NpgsqlTypes.NpgsqlDbType.Integer, 0, "w_flg", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
-
-                            // delete
-                            da.DeleteCommand = new NpgsqlCommand
-                            (
-                                   "DELETE FROM t_withdrawal"
-                                + " WHERE"
-                                + " w_id = :w_id;"
-                                , m_conn
-                            );
-                            da.DeleteCommand.Parameters.Add(new NpgsqlParameter("w_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "w_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                             // RowUpdate
                             da.RowUpdated += new NpgsqlRowUpdatedEventHandler(WithdrawalRowUpdated);
@@ -2026,14 +1985,7 @@ namespace rk_seikyu
                     + ", c.c16"
                     + ", c.c19"
                     + ", a.c22"
-                    + ", CASE substr(c.c4,strpos(c.c4, '[')+1, strpos(c.c4, ']')-strpos(c.c4, '[')-1)"
-                    + " WHEN '入所' THEN '入所'"
-                    + " WHEN '介護通所' THEN '通所'"
-                    + " WHEN '介護短期' THEN '短期'"
-                    + " WHEN '予防通所' THEN '予防通所'"
-                    + " WHEN '予防短期' THEN '予防短期'"
-                    + " WHEN '通所型サービス' THEN '通所型'"
-                    + " END s_id_str"
+                    + ", e.hyoujimei s_id_str"
                     + ", a.s_id"
                     + ", a.o_id"
                     + ", a.time_stamp"
@@ -2049,6 +2001,7 @@ namespace rk_seikyu
                     + " AND a.w_flg = '1'"
                     + " AND c.c9 = '" + Cmb_b_code_str + "'"
                     + " AND a.o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
+                    + " LEFT JOIN t_syubetsu e ON a.o_id = e.o_id AND a.s_id = e.s_id"
                     + " WHERE NOT EXISTS ("
                                             + " SELECT 1"
                                             + " FROM t_seikyu b"
@@ -2180,14 +2133,7 @@ namespace rk_seikyu
                     + ", c.c16"
                     + ", c.c19"
                     + ", a.c22"
-                    + ", CASE substr(c.c4,strpos(c.c4, '[')+1, strpos(c.c4, ']')-strpos(c.c4, '[')-1)"
-                    + " WHEN '入所' then '入所'"
-                    + " WHEN '介護通所' then '通所'"
-                    + " WHEN '介護短期' then '短期'"
-                    + " WHEN '予防通所' then '予防通所'"
-                    + " WHEN '予防短期' then '予防短期'"
-                    + " WHEN '通所型サービス' then '通所型'"
-                    + " END s_id_str"
+                    + ", e.hyoujimei s_id_str"
                     + ", a.s_id"
                     + ", a.o_id"
                     + ", a.time_stamp"
@@ -2201,6 +2147,7 @@ namespace rk_seikyu
                     + " AND a.o_id = c.o_id"
                     + " AND a.w_flg = '1'"
                     + " AND c.c9 = '" + Cmb_b_code_str + "'"
+                    + " LEFT JOIN t_syubetsu e ON a.o_id = e.o_id AND a.s_id = e.s_id"
                     + " WHERE NOT EXISTS ("
                                         + " SELECT 1"
                                         + " FROM t_seikyu b"
@@ -2554,14 +2501,7 @@ namespace rk_seikyu
                                 + ", c.c16"
                                 + ", c.c19"
                                 + ", a.c22"
-                                + ", CASE substr(c.c4,strpos(c.c4, '[')+1, strpos(c.c4, ']')-strpos(c.c4, '[')-1)"
-                                + " WHEN '入所' THEN '入所'"
-                                + " WHEN '介護通所' THEN '通所'"
-                                + " WHEN '介護短期' THEN '短期'"
-                                + " WHEN '予防通所' THEN '予防通所'"
-                                + " WHEN '予防短期' THEN '予防短期'"
-                                + " WHEN '通所型サービス' THEN '通所型'"
-                                + " END s_id_str"
+                                + ", e.hyoujimei s_id_str"
                                 + ", a.s_id"
                                 + ", a.o_id"
                                 + ", a.time_stamp"
@@ -2581,6 +2521,7 @@ namespace rk_seikyu
                                 + " AND a.w_flg = '1'"
                                 + " AND CASE c.c9 WHEN '' THEN '0000' ELSE c.c9 END = '" + Cmb_b_code_str + "'"
                                 + " AND a.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                                + " INNER JOIN t_syubetsu e ON a.o_id = e.o_id AND a.s_id = e.s_id"
                                 + " INNER JOIN t_gengou i ON substr(a.c4_y,1,1) = i.g_name"
                                 + " WHERE NOT EXISTS ("
                                 + " SELECT 1"
@@ -2835,13 +2776,7 @@ namespace rk_seikyu
                                 + ", c.c19"
                                 + ", a.c22"
                                 + ", CASE substr(c.c4,strpos(c.c4, '[')+1, strpos(c.c4, ']')-strpos(c.c4, '[')-1)"
-                                + " WHEN '入所' then '入所'"
-                                + " WHEN '介護通所' THEN '通所'"
-                                + " WHEN '介護短期' THEN '短期'"
-                                + " WHEN '予防通所' THEN '予防通所'"
-                                + " WHEN '予防短期' THEN '予防短期'"
-                                + " WHEN '通所型サービス' THEN '通所型'"
-                                + " END s_id_str"
+                                + ", e.hyoujimei s_id_str"
                                 + ", a.s_id"
                                 + ", a.o_id"
                                 + ", a.time_stamp"
@@ -2861,6 +2796,7 @@ namespace rk_seikyu
                                 + " AND a.w_flg = '1'"
                                 + " AND CASE c.c9 WHEN '' THEN '0000' ELSE c.c9 END = '" + Cmb_b_code_str + "'"
                                 + " AND a.o_id = '" + cmb_o_id_str + "'"
+                                + " INNER JOIN t_syubetsu e ON a.o_id = e.o_id AND a.s_id = e.s_id"
                                 + " INNER JOIN t_gengou i ON substr(a.c4_y,1,1) = i.g_name"
                                 + " WHERE NOT EXISTS ("
                                 + " SELECT 1"
