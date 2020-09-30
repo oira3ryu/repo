@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Accounting_manager" targetNamespace="http://tempuri.org/Accounting_manager.xsd" xmlns:mstns="http://tempuri.org/Accounting_manager.xsd" xmlns="http://tempuri.org/Accounting_manager.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Accounting_manager" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="Accounting_manager" msprop:Generator_UserDSName="Accounting_manager">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Accounting_manager_ds" msprop:Generator_TableClassName="Accounting_manager_dsDataTable" msprop:Generator_TableVarName="tableAccounting_manager_ds" msprop:Generator_TablePropName="Accounting_manager_ds" msprop:Generator_RowDeletingName="Accounting_manager_dsRowDeleting" msprop:Generator_RowChangingName="Accounting_manager_dsRowChanging" msprop:Generator_RowEvHandlerName="Accounting_manager_dsRowChangeEventHandler" msprop:Generator_RowDeletedName="Accounting_manager_dsRowDeleted" msprop:Generator_UserTableName="Accounting_manager_ds" msprop:Generator_RowChangedName="Accounting_manager_dsRowChanged" msprop:Generator_RowEvArgName="Accounting_manager_dsRowChangeEvent" msprop:Generator_RowClassName="Accounting_manager_dsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="acc_id" msprop:Generator_ColumnVarNameInTable="columnacc_id" msprop:Generator_ColumnPropNameInRow="acc_id" msprop:Generator_ColumnPropNameInTable="acc_idColumn" msprop:Generator_UserColumnName="acc_id" type="xs:string" />
+              <xs:element name="accounting_manager" msprop:Generator_ColumnVarNameInTable="columnaccounting_manager" msprop:Generator_ColumnPropNameInRow="accounting_manager" msprop:Generator_ColumnPropNameInTable="accounting_managerColumn" msprop:Generator_UserColumnName="accounting_manager" type="xs:string" minOccurs="0" />
+              <xs:element name="start_date" msprop:Generator_ColumnVarNameInTable="columnstart_date" msprop:Generator_ColumnPropNameInRow="start_date" msprop:Generator_ColumnPropNameInTable="start_dateColumn" msprop:Generator_UserColumnName="start_date" type="xs:string" minOccurs="0" />
+              <xs:element name="end_date" msprop:Generator_ColumnVarNameInTable="columnend_date" msprop:Generator_ColumnPropNameInRow="end_date" msprop:Generator_ColumnPropNameInTable="end_dateColumn" msprop:Generator_UserColumnName="end_date" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Accounting_manager_ds" />
+      <xs:field xpath="mstns:acc_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="office_ds" targetNamespace="http://tempuri.org/office_ds.xsd" xmlns:mstns="http://tempuri.org/office_ds.xsd" xmlns="http://tempuri.org/office_ds.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="office_ds" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="office_ds" msprop:Generator_UserDSName="office_ds">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="office_ds" msprop:Generator_TableClassName="office_dsDataTable" msprop:Generator_TableVarName="tableoffice_ds" msprop:Generator_RowChangedName="office_dsRowChanged" msprop:Generator_TablePropName="_office_ds" msprop:Generator_RowDeletingName="office_dsRowDeleting" msprop:Generator_RowChangingName="office_dsRowChanging" msprop:Generator_RowEvHandlerName="office_dsRowChangeEventHandler" msprop:Generator_RowDeletedName="office_dsRowDeleted" msprop:Generator_RowClassName="office_dsRow" msprop:Generator_UserTableName="office_ds" msprop:Generator_RowEvArgName="office_dsRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="o_id" msprop:Generator_ColumnVarNameInTable="columno_id" msprop:Generator_ColumnPropNameInRow="o_id" msprop:Generator_ColumnPropNameInTable="o_idColumn" msprop:Generator_UserColumnName="o_id" type="xs:string" />
+              <xs:element name="o_number" msprop:Generator_ColumnVarNameInTable="columno_number" msprop:Generator_ColumnPropNameInRow="o_number" msprop:Generator_ColumnPropNameInTable="o_numberColumn" msprop:Generator_UserColumnName="o_number" type="xs:string" minOccurs="0" />
+              <xs:element name="o_name" msprop:Generator_ColumnVarNameInTable="columno_name" msprop:Generator_ColumnPropNameInRow="o_name" msprop:Generator_ColumnPropNameInTable="o_nameColumn" msprop:Generator_UserColumnName="o_name" type="xs:string" minOccurs="0" />
+              <xs:element name="o_p_code" msprop:Generator_ColumnVarNameInTable="columno_p_code" msprop:Generator_ColumnPropNameInRow="o_p_code" msprop:Generator_ColumnPropNameInTable="o_p_codeColumn" msprop:Generator_UserColumnName="o_p_code" type="xs:string" minOccurs="0" />
+              <xs:element name="o_address" msprop:Generator_ColumnVarNameInTable="columno_address" msprop:Generator_ColumnPropNameInRow="o_address" msprop:Generator_ColumnPropNameInTable="o_addressColumn" msprop:Generator_UserColumnName="o_address" type="xs:string" minOccurs="0" />
+              <xs:element name="o_phone_number" msprop:Generator_ColumnVarNameInTable="columno_phone_number" msprop:Generator_ColumnPropNameInRow="o_phone_number" msprop:Generator_ColumnPropNameInTable="o_phone_numberColumn" msprop:Generator_UserColumnName="o_phone_number" type="xs:string" minOccurs="0" />
+              <xs:element name="flg" msprop:Generator_ColumnVarNameInTable="columnflg" msprop:Generator_ColumnPropNameInRow="flg" msprop:Generator_ColumnPropNameInTable="flgColumn" msprop:Generator_UserColumnName="flg" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:office_ds" />
+      <xs:field xpath="mstns:o_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
