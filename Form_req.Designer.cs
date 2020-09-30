@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_req));
-            this.req_ds = new rk_seikyu.req_ds();
-            this.bindingSourceReq = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorReq = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingSourceReq = new System.Windows.Forms.BindingSource(this.components);
+            this.req_ds = new rk_seikyu.req_ds();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -48,39 +48,23 @@
             this.dataGridViewReq = new System.Windows.Forms.DataGridView();
             this.cmdReqSave = new System.Windows.Forms.Button();
             this.cmdClose = new System.Windows.Forms.Button();
-            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.req_ds)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceReq)).BeginInit();
+            this.req_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.title1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.title2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.title3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.title4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.title4_kana = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.data7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.data8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.data9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.data10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.o_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorReq)).BeginInit();
             this.bindingNavigatorReq.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceReq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.req_ds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReq)).BeginInit();
             this.SuspendLayout();
-            // 
-            // req_ds
-            // 
-            this.req_ds.DataSetName = "req_ds";
-            this.req_ds.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // bindingSourceReq
-            // 
-            this.bindingSourceReq.DataMember = "req_ds";
-            this.bindingSourceReq.DataSource = this.req_ds;
             // 
             // bindingNavigatorReq
             // 
@@ -120,6 +104,16 @@
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "新規追加";
+            // 
+            // bindingSourceReq
+            // 
+            this.bindingSourceReq.DataMember = "req_ds";
+            this.bindingSourceReq.DataSource = this.req_ds;
+            // 
+            // req_ds
+            // 
+            this.req_ds.DataSetName = "req_ds";
+            this.req_ds.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // bindingNavigatorCountItem
             // 
@@ -208,27 +202,19 @@
             // 
             // dataGridViewReq
             // 
-            this.dataGridViewReq.AutoGenerateColumns = false;
             this.dataGridViewReq.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewReq.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn17,
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10,
-            this.dataGridViewTextBoxColumn11,
-            this.dataGridViewTextBoxColumn12,
-            this.dataGridViewTextBoxColumn13,
-            this.dataGridViewTextBoxColumn14,
-            this.dataGridViewTextBoxColumn15,
-            this.dataGridViewTextBoxColumn16});
-            this.dataGridViewReq.DataSource = this.bindingSourceReq;
+            this.req_id,
+            this.title1,
+            this.title2,
+            this.title3,
+            this.title4,
+            this.title4_kana,
+            this.data7,
+            this.data8,
+            this.data9,
+            this.data10,
+            this.o_id});
             this.dataGridViewReq.Location = new System.Drawing.Point(24, 78);
             this.dataGridViewReq.Name = "dataGridViewReq";
             this.dataGridViewReq.RowTemplate.Height = 21;
@@ -255,107 +241,71 @@
             this.cmdClose.UseVisualStyleBackColor = true;
             this.cmdClose.Click += new System.EventHandler(this.CmdClose_Click);
             // 
-            // dataGridViewTextBoxColumn17
+            // req_id
             // 
-            this.dataGridViewTextBoxColumn17.DataPropertyName = "req_id";
-            this.dataGridViewTextBoxColumn17.HeaderText = "req_id";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.req_id.DataPropertyName = "req_id";
+            this.req_id.HeaderText = "ID";
+            this.req_id.Name = "req_id";
             // 
-            // dataGridViewTextBoxColumn1
+            // title1
             // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "title1";
-            this.dataGridViewTextBoxColumn1.HeaderText = "title1";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.title1.DataPropertyName = "title1";
+            this.title1.HeaderText = "予備";
+            this.title1.Name = "title1";
             // 
-            // dataGridViewTextBoxColumn2
+            // title2
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "title2";
-            this.dataGridViewTextBoxColumn2.HeaderText = "title2";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.title2.DataPropertyName = "title2";
+            this.title2.HeaderText = "職名";
+            this.title2.Name = "title2";
             // 
-            // dataGridViewTextBoxColumn3
+            // title3
             // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "name1";
-            this.dataGridViewTextBoxColumn3.HeaderText = "name1";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.title3.DataPropertyName = "title3";
+            this.title3.HeaderText = "住所";
+            this.title3.Name = "title3";
             // 
-            // dataGridViewTextBoxColumn4
+            // title4
             // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "title3";
-            this.dataGridViewTextBoxColumn4.HeaderText = "title3";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.title4.DataPropertyName = "title4";
+            this.title4.HeaderText = "会計管理者";
+            this.title4.Name = "title4";
             // 
-            // dataGridViewTextBoxColumn5
+            // title4_kana
             // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "title4";
-            this.dataGridViewTextBoxColumn5.HeaderText = "title4";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.title4_kana.DataPropertyName = "title4_kana";
+            this.title4_kana.HeaderText = "会計管理者カナ";
+            this.title4_kana.Name = "title4_kana";
             // 
-            // dataGridViewTextBoxColumn6
+            // data7
             // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "name2";
-            this.dataGridViewTextBoxColumn6.HeaderText = "name2";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.data7.DataPropertyName = "data7";
+            this.data7.HeaderText = "口座種別";
+            this.data7.Name = "data7";
             // 
-            // dataGridViewTextBoxColumn7
+            // data8
             // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "title4_kana";
-            this.dataGridViewTextBoxColumn7.HeaderText = "title4_kana";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.data8.DataPropertyName = "data8";
+            this.data8.HeaderText = "口座番号";
+            this.data8.Name = "data8";
             // 
-            // dataGridViewTextBoxColumn8
+            // data9
             // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "name3";
-            this.dataGridViewTextBoxColumn8.HeaderText = "name3";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.data9.DataPropertyName = "data9";
+            this.data9.HeaderText = "予備";
+            this.data9.Name = "data9";
             // 
-            // dataGridViewTextBoxColumn9
+            // data10
             // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "name4";
-            this.dataGridViewTextBoxColumn9.HeaderText = "name4";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.data10.DataPropertyName = "data10";
+            this.data10.HeaderText = "予備";
+            this.data10.Name = "data10";
             // 
-            // dataGridViewTextBoxColumn10
+            // o_id
             // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "name5";
-            this.dataGridViewTextBoxColumn10.HeaderText = "name5";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "name2_kana";
-            this.dataGridViewTextBoxColumn11.HeaderText = "name2_kana";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "data6";
-            this.dataGridViewTextBoxColumn12.HeaderText = "data6";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "data7";
-            this.dataGridViewTextBoxColumn13.HeaderText = "data7";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "data8";
-            this.dataGridViewTextBoxColumn14.HeaderText = "data8";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "data9";
-            this.dataGridViewTextBoxColumn15.HeaderText = "data9";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.DataPropertyName = "data10";
-            this.dataGridViewTextBoxColumn16.HeaderText = "data10";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.o_id.DataPropertyName = "o_id";
+            this.o_id.HeaderText = "o_id";
+            this.o_id.Name = "o_id";
             // 
             // Form_req
             // 
@@ -369,11 +319,11 @@
             this.Name = "Form_req";
             this.Text = "Form_req";
             this.Load += new System.EventHandler(this.Form_req_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.req_ds)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceReq)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorReq)).EndInit();
             this.bindingNavigatorReq.ResumeLayout(false);
             this.bindingNavigatorReq.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceReq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.req_ds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReq)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -400,22 +350,19 @@
         private System.Windows.Forms.DataGridView dataGridViewReq;
         private System.Windows.Forms.Button cmdReqSave;
         private System.Windows.Forms.Button cmdClose;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn req_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn title1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn title2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn title3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn title4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn title4_kana;
+        private System.Windows.Forms.DataGridViewTextBoxColumn data7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn data8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn data9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn data10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn o_id;
     }
 }

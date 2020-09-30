@@ -122,7 +122,7 @@ namespace rk_seikyu
                 + ", end_date"
                 + ", o_id"
                 + " ) VALUES ("
-                + ", :manager"
+                + " :manager"
                 + ", :start_date"
                 + ", :end_date"
                 + ", :o_id"
@@ -190,6 +190,7 @@ namespace rk_seikyu
         private void cmb_o_id_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmb_o_id_int = cmb_o_id.SelectedIndex + 1;
+            this.textBoxO_id.Text = cmb_o_id_int.ToString();
             Console.WriteLine("cmb_o_id_int1 = " + cmb_o_id_int);
             cmb_o_id_str = cmb_o_id.Text;
             Console.WriteLine("cmb_o_id_str1 = " + cmb_o_id_str);

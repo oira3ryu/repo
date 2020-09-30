@@ -250,11 +250,11 @@
             this.cmdNenMod = new System.Windows.Forms.Button();
             this.cmdGyoumu = new System.Windows.Forms.Button();
             this.dataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.cmb_o_id_text = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.textBoxO_id = new System.Windows.Forms.TextBox();
             this.textBoxO_name = new System.Windows.Forms.TextBox();
             this.cmdDbconfig = new System.Windows.Forms.Button();
+            this.textBoxS_id = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.seikyu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorSeikyu)).BeginInit();
             this.bindingNavigatorSeikyu.SuspendLayout();
@@ -369,6 +369,7 @@
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "位置";
             this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Yu Gothic UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 25);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -454,7 +455,7 @@
             // cmb_s_id
             // 
             this.cmb_s_id.FormattingEnabled = true;
-            this.cmb_s_id.Location = new System.Drawing.Point(421, 105);
+            this.cmb_s_id.Location = new System.Drawing.Point(448, 103);
             this.cmb_s_id.Name = "cmb_s_id";
             this.cmb_s_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_s_id.TabIndex = 9;
@@ -539,7 +540,7 @@
             this.dataGridViewSeikyu.RowTemplate.Height = 21;
             this.dataGridViewSeikyu.Size = new System.Drawing.Size(1710, 750);
             this.dataGridViewSeikyu.TabIndex = 15;
-            this.dataGridViewSeikyu.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSeikyu_CellValueChanged);
+            this.dataGridViewSeikyu.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewSeikyu_CellValueChanged);
             // 
             // c1
             // 
@@ -812,6 +813,8 @@
             this.dataGridViewShiharai_houhou.RowTemplate.Height = 21;
             this.dataGridViewShiharai_houhou.Size = new System.Drawing.Size(1710, 750);
             this.dataGridViewShiharai_houhou.TabIndex = 15;
+            this.dataGridViewShiharai_houhou.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewShiharai_houhouu_CellMouseMove);
+            this.dataGridViewShiharai_houhou.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DataGridViewShiharai_houhou_CellPainting);
             // 
             // dataGridViewTextBoxColumn30
             // 
@@ -1218,6 +1221,8 @@
             this.dataGridViewShinzoku_kankei.RowTemplate.Height = 21;
             this.dataGridViewShinzoku_kankei.Size = new System.Drawing.Size(1710, 750);
             this.dataGridViewShinzoku_kankei.TabIndex = 15;
+            this.dataGridViewShinzoku_kankei.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewShinzoku_kankei_CellMouseMove);
+            this.dataGridViewShinzoku_kankei.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DataGridViewShinzoku_kankei_CellPainting);
             // 
             // dataGridViewTextBoxColumn84
             // 
@@ -1660,6 +1665,7 @@
             // 
             this.bindingNavigatorPositionItem1.AccessibleName = "位置";
             this.bindingNavigatorPositionItem1.AutoSize = false;
+            this.bindingNavigatorPositionItem1.Font = new System.Drawing.Font("Yu Gothic UI", 9F);
             this.bindingNavigatorPositionItem1.Name = "bindingNavigatorPositionItem1";
             this.bindingNavigatorPositionItem1.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem1.Text = "0";
@@ -1784,6 +1790,7 @@
             // 
             this.bindingNavigatorPositionItem2.AccessibleName = "位置";
             this.bindingNavigatorPositionItem2.AutoSize = false;
+            this.bindingNavigatorPositionItem2.Font = new System.Drawing.Font("Yu Gothic UI", 9F);
             this.bindingNavigatorPositionItem2.Name = "bindingNavigatorPositionItem2";
             this.bindingNavigatorPositionItem2.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem2.Text = "0";
@@ -1894,7 +1901,7 @@
             // cmb_g_id
             // 
             this.cmb_g_id.FormattingEnabled = true;
-            this.cmb_g_id.Location = new System.Drawing.Point(422, 145);
+            this.cmb_g_id.Location = new System.Drawing.Point(449, 143);
             this.cmb_g_id.Name = "cmb_g_id";
             this.cmb_g_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_g_id.TabIndex = 20;
@@ -1910,7 +1917,7 @@
             // 
             // cmd_serv
             // 
-            this.cmd_serv.Location = new System.Drawing.Point(547, 105);
+            this.cmd_serv.Location = new System.Drawing.Point(574, 103);
             this.cmd_serv.Name = "cmd_serv";
             this.cmd_serv.Size = new System.Drawing.Size(37, 20);
             this.cmd_serv.TabIndex = 22;
@@ -1930,7 +1937,7 @@
             // 
             // cmdGyoumu
             // 
-            this.cmdGyoumu.Location = new System.Drawing.Point(547, 145);
+            this.cmdGyoumu.Location = new System.Drawing.Point(574, 143);
             this.cmdGyoumu.Name = "cmdGyoumu";
             this.cmdGyoumu.Size = new System.Drawing.Size(37, 20);
             this.cmdGyoumu.TabIndex = 24;
@@ -1941,20 +1948,6 @@
             // dataTableBindingSource
             // 
             this.dataTableBindingSource.DataMember = "DataTable";
-            // 
-            // dataTableTableAdapter
-            // 
-            // 
-            // tableAdapterManager
-            // 
-            // 
-            // cmb_o_id_text
-            // 
-            this.cmb_o_id_text.Location = new System.Drawing.Point(422, 79);
-            this.cmb_o_id_text.Name = "cmb_o_id_text";
-            this.cmb_o_id_text.Size = new System.Drawing.Size(100, 19);
-            this.cmb_o_id_text.TabIndex = 25;
-            this.cmb_o_id_text.Visible = false;
             // 
             // button1
             // 
@@ -1968,12 +1961,11 @@
             // 
             // textBoxO_id
             // 
-            this.textBoxO_id.Location = new System.Drawing.Point(63, 103);
+            this.textBoxO_id.Location = new System.Drawing.Point(39, 78);
             this.textBoxO_id.Name = "textBoxO_id";
-            this.textBoxO_id.Size = new System.Drawing.Size(290, 19);
+            this.textBoxO_id.ReadOnly = true;
+            this.textBoxO_id.Size = new System.Drawing.Size(18, 19);
             this.textBoxO_id.TabIndex = 27;
-            this.textBoxO_id.Visible = false;
-            this.textBoxO_id.TextChanged += new System.EventHandler(this.textBoxO_id_TextChanged);
             // 
             // textBoxO_name
             // 
@@ -1992,18 +1984,26 @@
             this.cmdDbconfig.UseVisualStyleBackColor = true;
             this.cmdDbconfig.Click += new System.EventHandler(this.cmdDbconfig_Click);
             // 
+            // textBoxS_id
+            // 
+            this.textBoxS_id.Location = new System.Drawing.Point(424, 104);
+            this.textBoxS_id.Name = "textBoxS_id";
+            this.textBoxS_id.ReadOnly = true;
+            this.textBoxS_id.Size = new System.Drawing.Size(18, 19);
+            this.textBoxS_id.TabIndex = 31;
+            // 
             // Form_seikyu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1604, 881);
+            this.ClientSize = new System.Drawing.Size(1672, 949);
+            this.Controls.Add(this.textBoxS_id);
             this.Controls.Add(this.dataGridViewShiharai_houhou);
             this.Controls.Add(this.cmdDbconfig);
             this.Controls.Add(this.textBoxO_name);
             this.Controls.Add(this.textBoxO_id);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.cmb_o_id_text);
             this.Controls.Add(this.cmdGyoumu);
             this.Controls.Add(this.cmdNenMod);
             this.Controls.Add(this.cmd_serv);
@@ -2283,11 +2283,12 @@
         private System.Windows.Forms.Button cmdNenMod;
         private System.Windows.Forms.Button cmdGyoumu;
         private System.Windows.Forms.BindingSource dataTableBindingSource;
-        private System.Windows.Forms.TextBox cmb_o_id_text;
+        private System.Windows.Forms.TextBox cmb_s_id_text;
         internal System.Windows.Forms.ComboBox cmb_nen;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBoxO_id;
         private System.Windows.Forms.TextBox textBoxO_name;
         private System.Windows.Forms.Button cmdDbconfig;
+        private System.Windows.Forms.TextBox textBoxS_id;
     }
 }

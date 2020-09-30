@@ -63,6 +63,7 @@ namespace rk_seikyu
         public int Cmb_o_id_int { get; set; }
         public int Cmb_req_id_int { get; set; }
 
+        //public String cmb_s_id_text { get; set; }
 
         public String Cmb_c4_str { get; set; }
         public String Cmb_nen_str { get; set; }
@@ -79,10 +80,10 @@ namespace rk_seikyu
 
         public int I { get; set; }
 
-        //public string Cmb_o_id_str_TEXT { get => cmb_o_id.SelectedIndex.ToString(); set => cmb_o_id.Text = value; }
         private static Form_seikyu _form_seikyu_Instance;
 
         public String cmb_o_id_str;
+        public String cmb_s_id_str;
         public String new_o_id_str;
 
         public Form_seikyu()
@@ -116,6 +117,18 @@ namespace rk_seikyu
             }
         }
 
+        public string TextBoxS_id
+        {
+            get
+            {
+                return textBoxS_id.Text;
+            }
+            set
+            {
+                textBoxS_id.Text = value;
+            }
+        }
+
         public string TextBoxO_name
         {
             get
@@ -130,12 +143,12 @@ namespace rk_seikyu
 
         private void Form_seikyu_Load(object sender, EventArgs e)
         {
-            m_conn.Open();
-
-            NpgsqlCommand command = new NpgsqlCommand("SELECT o_id, o_name FROM t_office WHERE flg = '1';", m_conn);
-
             try
             {
+                m_conn.Open();
+
+                NpgsqlCommand command = new NpgsqlCommand("SELECT o_id, o_name FROM t_office WHERE flg = '1';", m_conn);
+
                 NpgsqlDataReader dr = command.ExecuteReader();
                 while (dr.Read())
                 {
@@ -148,6 +161,11 @@ namespace rk_seikyu
                     }
                     Console.WriteLine();
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("データ取得に失敗しました。\n\n[内容]\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
 
             }
             finally
@@ -218,10 +236,8 @@ namespace rk_seikyu
                   + " req_id"
                   + ", title1"
                   + ", title2"
-                  + ", name1"
                   + ", title3"
                   + ", title4"
-                  + ", name2"
                   + " FROM t_req"
                   + " ORDER BY req_id;",
                     m_conn
@@ -508,7 +524,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -608,7 +628,7 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // delete
@@ -729,7 +749,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y = " + Cmb_nen_str
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -1000,7 +1024,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = " + TextBoxO_id
-                                        + " AND c4_y = " + Cmb_nen_str
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -1209,7 +1237,7 @@ namespace rk_seikyu
         {
             dataGridViewSeikyu.CellMouseMove += new DataGridViewCellMouseEventHandler(DataGridViewSeikyu_CellMouseMove);
             dataGridViewSeikyu.CellPainting += new DataGridViewCellPaintingEventHandler(DataGridViewSeikyu_CellPainting);
-            dataGridViewSeikyu.CellValueChanged += new DataGridViewCellEventHandler(dataGridViewSeikyu_CellValueChanged);
+            dataGridViewSeikyu.CellValueChanged += new DataGridViewCellEventHandler(DataGridViewSeikyu_CellValueChanged);
         }
 
         private void CmdSave_Click(object sender, EventArgs e)
@@ -1427,7 +1455,7 @@ namespace rk_seikyu
                             break;
 
                         // 親族関係
-                        case 7:
+                        case 3:
                             switch (Cmb_s_id_int)
                             {
                                 case 1:
@@ -3099,7 +3127,8 @@ namespace rk_seikyu
 
                         //  t_csvにreq_idを付加
                         command = new NpgsqlCommand(
-                            "UPDATE " + TblStr + " SET req_id = " + Cmb_req_id_int
+                            //"UPDATE " + TblStr + " SET req_id = " + TextBoxO_id
+                            "UPDATE " + TblStr + " SET req_id = " + 1
                             , m_conn);
                         command.ExecuteNonQuery();
 
@@ -3298,7 +3327,10 @@ namespace rk_seikyu
                                             + ", c20"
                                             + ", c21"
                                             + ", c22"
-                                            + ", '" + Cmb_nen_str + "' c4_y"
+                                            + ", CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                + " substr('" + Cmb_nen_str + "', 1, 1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "') - 1 + 1, length('" + Cmb_nen_str + "'))"
+                                                + " ELSE '" + Cmb_nen_str + "'"
+                                                + " END"
                                             + ", CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                 + " ' ' || '" + Cmb_tsuki_str + "'"
                                                 + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -3470,7 +3502,10 @@ namespace rk_seikyu
                                                 + ", o_id"
                                                 + ", p_id"
                                                 + ", req_id"
-                                                + ", '" + Cmb_nen_str + "'"
+                                                + ", CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                    + " substr('" + Cmb_nen_str + "', 1, 1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "') - 1 + 1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE '" + Cmb_nen_str + "'"
+                                                    + " END"
                                                 + ", CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -3653,7 +3688,11 @@ namespace rk_seikyu
                                                 + ", o_id"
                                                 + ", p_id"
                                                 + ", req_id"
-                                                + ", '" + Cmb_nen_str + "'"
+                                                + ", CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                    + " substr('" + Cmb_nen_str + "', 1, 1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "') - 1 + 1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE"
+                                                    + "'" + Cmb_nen_str + "'"
+                                                    + " END"
                                                 + ", CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -3745,11 +3784,15 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
-                                                            + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                                + " ' ' || '" + Cmb_tsuki_str + "'"
                                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
-                                                            + " '' || '" + Cmb_tsuki_str + "'"
+                                                                + " '' || '" + Cmb_tsuki_str + "'"
                                                             + " END"
                                         + ");"
                                         , m_conn
@@ -3878,7 +3921,7 @@ namespace rk_seikyu
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.InsertCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // update
@@ -3946,7 +3989,7 @@ namespace rk_seikyu
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                                    da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                                     // delete
@@ -4054,7 +4097,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -4191,7 +4238,11 @@ namespace rk_seikyu
                                                 + ", :o_id"
                                                 + ", :p_id"
                                                 + ", :req_id"
-                                                + ", '" + Cmb_nen_str + "'"
+                                                + ", CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE"
+                                                        + "'" + Cmb_nen_str + "'"
+                                                    + " END"
                                                 + ", CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -4437,7 +4488,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -4592,7 +4647,11 @@ namespace rk_seikyu
                                                 + ", :o_id"
                                                 + ", :p_id"
                                                 + ", :req_id"
-                                                + ", '" + Cmb_nen_str + "'"
+                                                + ", CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE"
+                                                        + "'" + Cmb_nen_str + "'"
+                                                    + " END"
                                                 + ", CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -4886,8 +4945,50 @@ namespace rk_seikyu
 
         private void DataGridViewSeikyu_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
-            DataGridViewCellStyle dcs = new DataGridViewCellStyle();
-            dcs.BackColor = Color.Yellow;
+            DataGridViewCellStyle dcs = new DataGridViewCellStyle
+            {
+                BackColor = Color.Yellow
+            };
+
+            DataGridView dgv = (DataGridView)sender;
+
+            for (int rowIndex = 0; rowIndex < dgv.Rows.Count; rowIndex++)
+            {
+                dgv.Rows[rowIndex].DefaultCellStyle = null;
+            }
+
+            if (e.RowIndex >= 0)
+            {
+                dgv.Rows[e.RowIndex].DefaultCellStyle = dcs;
+            }
+        }
+
+        private void DataGridViewShinzoku_kankei_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewCellStyle dcs = new DataGridViewCellStyle
+            {
+                BackColor = Color.Yellow
+            };
+
+            DataGridView dgv = (DataGridView)sender;
+
+            for (int rowIndex = 0; rowIndex < dgv.Rows.Count; rowIndex++)
+            {
+                dgv.Rows[rowIndex].DefaultCellStyle = null;
+            }
+
+            if (e.RowIndex >= 0)
+            {
+                dgv.Rows[e.RowIndex].DefaultCellStyle = dcs;
+            }
+        }
+
+        private void DataGridViewShiharai_houhouu_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewCellStyle dcs = new DataGridViewCellStyle
+            {
+                BackColor = Color.Yellow
+            };
 
             DataGridView dgv = (DataGridView)sender;
 
@@ -4903,6 +5004,42 @@ namespace rk_seikyu
         }
 
         private void DataGridViewSeikyu_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.ColumnIndex < 0 && e.RowIndex >= 0)
+            {
+                e.Paint(e.ClipBounds, DataGridViewPaintParts.All);
+
+                Rectangle indexRect = e.CellBounds;
+                indexRect.Inflate(-2, -2);
+                TextRenderer.DrawText(e.Graphics,
+                    (e.RowIndex + 1).ToString(),
+                    e.CellStyle.Font,
+                    indexRect,
+                    e.CellStyle.ForeColor,
+                    TextFormatFlags.Right | TextFormatFlags.VerticalCenter);
+                e.Handled = true;
+            }
+        }
+
+        private void DataGridViewShiharai_houhou_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.ColumnIndex < 0 && e.RowIndex >= 0)
+            {
+                e.Paint(e.ClipBounds, DataGridViewPaintParts.All);
+
+                Rectangle indexRect = e.CellBounds;
+                indexRect.Inflate(-2, -2);
+                TextRenderer.DrawText(e.Graphics,
+                    (e.RowIndex + 1).ToString(),
+                    e.CellStyle.Font,
+                    indexRect,
+                    e.CellStyle.ForeColor,
+                    TextFormatFlags.Right | TextFormatFlags.VerticalCenter);
+                e.Handled = true;
+            }
+        }
+
+        private void DataGridViewShinzoku_kankei_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.ColumnIndex < 0 && e.RowIndex >= 0)
             {
@@ -5093,8 +5230,7 @@ namespace rk_seikyu
                 Cmb_s_id_str = ((DataRowView)cmb_s_id.SelectedItem).Row["s_id"].ToString();
             }
             Console.WriteLine("Form_seikyu_cmb_s_id_str = " + Cmb_s_id_str);
-            cmb_o_id_text.Text = Cmb_s_id_str;
-
+            this.TextBoxS_id = Cmb_s_id_str;
 
             switch (Cmb_g_id_int)
             {
@@ -5363,7 +5499,11 @@ namespace rk_seikyu
                                 + " WHERE s_id::Integer = " + Cmb_s_id_int
                                 + " AND g_id::Integer = " + Cmb_g_id_int
                                 + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                + " AND c4_y = '" + Cmb_nen_str + "'"
+                                + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE"
+                                                        + "'" + Cmb_nen_str + "'"
+                                                    + " END"
                                 + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -5582,7 +5722,11 @@ namespace rk_seikyu
                                 + " WHERE s_id::Integer = " + Cmb_s_id_int
                                 + " AND g_id::Integer = " + Cmb_g_id_int
                                 + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                + " AND c4_y = '" + Cmb_nen_str + "'"
+                                + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE"
+                                                        + "'" + Cmb_nen_str + "'"
+                                                    + " END"
                                 + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -5851,7 +5995,11 @@ namespace rk_seikyu
                                 + " WHERE s_id::Integer = " + Cmb_s_id_int
                                 + " AND g_id::Integer = " + Cmb_g_id_int
                                 + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                + " AND c4_y = '" + Cmb_nen_str + "'"
+                                + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE"
+                                                        + "'" + Cmb_nen_str + "'"
+                                                    + " END"
                                 + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
@@ -6076,7 +6224,7 @@ namespace rk_seikyu
             Form.ShowDialog();
         }
 
-        private void dataGridViewSeikyu_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void DataGridViewSeikyu_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == -1 || e.RowIndex == -1) return;
 
@@ -6410,7 +6558,11 @@ namespace rk_seikyu
                                 + " WHERE s_id::Integer = " + Cmb_s_id_int
                                 + " AND g_id::Integer = " + Cmb_g_id_int
                                 + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE"
+                                                        + "'" + Cmb_nen_str + "'"
+                                                    + " END"
                                 + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -6510,7 +6662,7 @@ namespace rk_seikyu
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("req_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "req_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("g_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "g_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                             // delete
@@ -6629,7 +6781,11 @@ namespace rk_seikyu
                                 + " WHERE s_id::Integer = " + Cmb_s_id_int
                                 + " AND g_id::Integer = " + Cmb_g_id_int
                                 + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE"
+                                                        + "'" + Cmb_nen_str + "'"
+                                                    + " END"
                                 + " AND c4_m::Text = CASE when length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -6898,7 +7054,11 @@ namespace rk_seikyu
                                 + " WHERE s_id::Integer = " + Cmb_s_id_int
                                 + " AND g_id::Integer = " + Cmb_g_id_int
                                 + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                    + " ELSE"
+                                                        + "'" + Cmb_nen_str + "'"
+                                                    + " END"
                                 + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -7063,8 +7223,8 @@ namespace rk_seikyu
                             // delete
                             da.DeleteCommand = new NpgsqlCommand
                             (
-                                   "delete FROM t_shinzoku_kankei"
-                                + " where"
+                                   "DELETE FROM t_shinzoku_kankei"
+                                + " WHERE"
                                 + " sk_id=:sk_id;"
                                 , m_conn
                             );
@@ -7408,7 +7568,7 @@ namespace rk_seikyu
                                     Console.WriteLine("Case " + Cmb_s_id_int + "!");
                                     da.SelectCommand = new NpgsqlCommand
                                     (
-                                        "select"
+                                        "SELECT"
                                         + " c1"
                                         + ", c2"
                                         + ", c3"
@@ -7443,16 +7603,20 @@ namespace rk_seikyu
                                         + ", req_id"
                                         + " FROM"
                                         + " t_seikyu"
-                                        + " where time_stamp = (select max(time_stamp) FROM t_seikyu"
-                                        + " where s_id::Integer = " + Cmb_s_id_int
-                                        + " and g_id::Integer = " + Cmb_g_id_int
-                                        + " and o_id::Text = " + TextBoxO_id
-                                        + " and c4_y::Text = '" + Cmb_nen_str + "'"
-                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_seikyu"
+                                        + " WHERE s_id::Integer = " + Cmb_s_id_int
+                                        + " AND g_id::Integer = " + Cmb_g_id_int
+                                        + " AND o_id::Text = " + TextBoxO_id
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
+                                        + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                            + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                                            + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                             + " '' || '" + Cmb_tsuki_str + "'"
-                                                            + " end"
+                                                            + " END"
                                         + ");"
                                         , m_conn
                                     );
@@ -7486,7 +7650,7 @@ namespace rk_seikyu
 
                                     // update
                                     da.UpdateCommand = new NpgsqlCommand(
-                                            "update t_seikyu set"
+                                            "UPDATE t_seikyu SET"
                                             + " c1 = :c1"
                                             + ", c2 = :c2"
                                             + ", c3 = :c3"
@@ -7516,7 +7680,7 @@ namespace rk_seikyu
                                             + ", s_id = :s_id"
                                             + ", g_id = :g_id"
                                             + ", o_id = :o_id"
-                                            + " where r_id=:r_id;"
+                                            + " WHERE r_id=:r_id;"
                                         , m_conn
                                         );
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -7601,7 +7765,7 @@ namespace rk_seikyu
                                     Console.WriteLine("Case " + Cmb_s_id_int + "!");
                                     da.SelectCommand = new NpgsqlCommand
                                     (
-                                        "select"
+                                        "SELECT"
                                         + " c1"
                                         + ", c2"
                                         + ", c3"
@@ -7662,16 +7826,20 @@ namespace rk_seikyu
                                         + ", time_stamp"
                                         + " FROM"
                                         + " t_shiharai_houhou"
-                                        + " where time_stamp = (select max(time_stamp) FROM t_shiharai_houhou"
-                                        + " where s_id::Integer = " + Cmb_s_id_int
-                                        + " and g_id::Integer = " + Cmb_g_id_int
-                                        + " and o_id::Text = '" + TextBoxO_id + "'"
-                                        + " and c4_y::Text = '" + Cmb_nen_str + "'"
-                                        + " and c4_m::Text = case when length('" + Cmb_tsuki_str + "')=1 then"
+                                        + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou"
+                                        + " WHERE s_id::Integer = " + Cmb_s_id_int
+                                        + " AND g_id::Integer = " + Cmb_g_id_int
+                                        + " AND o_id::Text = '" + TextBoxO_id + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
+                                        + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                            + " when length('" + Cmb_tsuki_str + "')=2 then"
+                                                            + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                             + " '' || '" + Cmb_tsuki_str + "'"
-                                                            + " end"
+                                                            + " END"
                                         + ")"
                                         + " order by c5;"
                                         , m_conn
@@ -7692,7 +7860,7 @@ namespace rk_seikyu
 
                                     // update
                                     da.UpdateCommand = new NpgsqlCommand(
-                                            "update t_shiharai_houhou set"
+                                            "UPDATE t_shiharai_houhou SET"
                                             + " c1 = :c1"
                                             + ", c2 = :c2"
                                             + ", c3 = :c3"
@@ -7749,7 +7917,7 @@ namespace rk_seikyu
                                             + ", req_id = :req_id"
                                             + ", c4_y = :c4_y"
                                             + ", c4_m = :c4_m"
-                                            + " where sh_id=:sh_id;"
+                                            + " WHERE sh_id=:sh_id;"
                                         , m_conn
                                         );
                                     da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c1", NpgsqlTypes.NpgsqlDbType.Text, 0, "c1", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -7935,7 +8103,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -8193,7 +8365,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -8412,7 +8588,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -8682,7 +8862,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                         + " ' ' || '" + Cmb_tsuki_str + "'"
                                         + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -8936,11 +9120,15 @@ namespace rk_seikyu
                                         + ", req_id"
                                         + " FROM"
                                         + " t_seikyu"
-                                        + " HWERE time_stamp = (SELECT max(time_stamp) FROM t_seikyu"
+                                        + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_seikyu"
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                         + " ' ' || '" + Cmb_tsuki_str + "'"
                                         + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -9159,7 +9347,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                         + " ' ' || '" + Cmb_tsuki_str + "'"
                                         + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -9428,7 +9620,11 @@ namespace rk_seikyu
                                         + " WHERE s_id::Integer = " + Cmb_s_id_int
                                         + " AND g_id::Integer = " + Cmb_g_id_int
                                         + " AND o_id::Text = '" + TextBoxO_id + "'"
-                                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                            + " ELSE"
+                                                                + "'" + Cmb_nen_str + "'"
+                                                            + " END"
                                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                         + " ' ' || '" + Cmb_tsuki_str + "'"
                                         + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -9689,11 +9885,6 @@ namespace rk_seikyu
             cmb_s_id.DisplayMember = "syubetsu";
             cmb_s_id.ValueMember = "s_id";
             cmb_s_id.DataSource = s_id_ds.Tables[0];
-        }
-
-        private void textBoxO_id_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void cmdDbconfig_Click(object sender, EventArgs e)

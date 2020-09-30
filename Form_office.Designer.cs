@@ -282,6 +282,7 @@
             this.Controls.Add(this.DataGridViewOffice);
             this.Name = "Form_office";
             this.Text = "Form_office";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_office_FormClosing);
             this.Load += new System.EventHandler(this.Form_office_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewOffice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceOffice)).EndInit();

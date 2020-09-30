@@ -98,17 +98,9 @@ namespace rk_seikyu {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_req_id {
-            get {
-                return this.DataDefinition.ParameterFields[1];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.Shared.IParameterField Parameter_c4 {
             get {
-                return this.DataDefinition.ParameterFields[2];
+                return this.DataDefinition.ParameterFields[1];
             }
         }
     }

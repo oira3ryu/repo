@@ -46,6 +46,7 @@ namespace rk_seikyu
         public int _year { get; set; }
         public int _month { get; set; }
         public int _day { get; set; }
+        public int rec { get; set; }
 
         public object Cmb_n_id_str { get; set; }
         public object Cmb_t_id_str { get; set; }
@@ -190,10 +191,8 @@ namespace rk_seikyu
                 + " req_id"
                 + ", title1"
                 + ", title2"
-                + ", name1"
                 + ", title3"
                 + ", title4"
-                + ", name2"
                 + " FROM"
                 + " t_req"
                 + " ORDER BY req_id;",
@@ -375,9 +374,17 @@ namespace rk_seikyu
 
                 da.InsertCommand = new NpgsqlCommand(
                        "INSERT INTO t_syutsuryokubi ("
-                    + "syutsuryokubi, s_nen, s_tsuki, s_hi, s_id"
+                    + "syutsuryokubi"
+                    + ", s_nen"
+                    + ", s_tsuki"
+                    + ", s_hi"
+                    + ", s_id"
                     + " ) VALUES ("
-                    + " :syutsuryokubi, :s_nen, :s_tsuki, :s_hi, :s_id"
+                    + " :syutsuryokubi"
+                    + ", :s_nen"
+                    + ", :s_tsuki"
+                    + ", :s_hi"
+                    + ", :s_id"
                     + ");"
                     , m_conn);
 
@@ -453,9 +460,9 @@ namespace rk_seikyu
                         + ", c20"
                         + ", c21"
                         + ", c22"
-                        + ", t_seikyu.s_id"
-                        + ", t_seikyu.o_id"
-                        + ", t_seikyu.p_id"
+                        + ", a.s_id"
+                        + ", a.o_id"
+                        + ", a.p_id"
                         + ", syubetsu"
                         + ", shisetsumei"
                         + ", title"
@@ -463,34 +470,52 @@ namespace rk_seikyu
                         + ", content1"
                         + ", content2"
                         + ", content3"
-                        + ", t_seikyu.req_id"
+                        + ", a.req_id"
                         + ", title1"
                         + ", title2"
-                        + ", name1"
+                        + ", chief"
+                        + ", accounting_manager"
                         + ", title3"
                         + ", title4"
-                        + ", name2"
                         + ", syutsuryokubi"
                         + ", s_nen"
                         + ", s_tsuki"
                         + ", s_hi"
                         + ", srb_id"
                         + ", time_stamp"
-                        + ", t_seikyu.id"
-                        + ", t_seikyu.c4_y"
-                        + ", t_seikyu.c4_m"
+                        + ", a.id"
+                        + ", a.c4_y"
+                        + ", a.c4_m"
                         + ", gengou"
                         + ", g_name"
-                        + ", start_date"
-                        + ", end_date"
+                        + ", f.start_date"
+                        + ", f.end_date"
                         + ", diff"
                         + " FROM"
-                        + " (((t_seikyu INNER JOIN t_syubetsu"
-                        + " ON t_seikyu.s_id::Integer = t_syubetsu.s_id AND t_seikyu.o_id::Integer = t_syubetsu.o_id)"
-                        + " INNER JOIN t_par ON t_seikyu.p_id::Integer = t_par.p_id)"
-                        + " INNER JOIN t_req ON t_seikyu.req_id::Integer = t_req.req_id)"
-                        + " INNER JOIN t_syutsuryokubi ON t_seikyu.s_id::Text = t_syutsuryokubi.s_id"
-                        + " INNER JOIN t_gengou ON substr(t_seikyu.c4_y,1,1) = t_gengou.g_name"
+                                + " ("
+                                    + "("
+                                        + "("
+                                            + "("
+                                                + "(t_seikyu a LEFT JOIN t_syubetsu b"
+                                                    + " ON a.s_id = b.s_id"
+                                                    + " AND a.o_id = b.o_id"
+                                                + ")"
+                                            + " LEFT JOIN t_par c ON a.p_id::Integer = c.p_id"
+                                            + ")"
+                                        + " LEFT JOIN t_req d ON a.req_id::Integer = d.req_id"
+                                        + ")"
+                                    + " LEFT JOIN t_syutsuryokubi e ON a.s_id = e.s_id"
+                                    + ")"
+                                + " LEFT JOIN t_gengou f ON substr(a.c4_y,1,1) = f.g_name"
+                                + ")"
+                            + " LEFT JOIN t_chief g ON "
+                                        + " g.start_date <= (SELECT to_date((to_number(c4_y,'999')+f.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                        + " AND (g.end_date Is Null Or g.end_date >= (SELECT to_date((to_number(c4_y,'999')+f.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1) "
+                            + ")"
+                        + " LEFT JOIN t_accounting_manager h ON "
+                                    + " h.start_date <= (SELECT to_date((to_number(c4_y,'999')+f.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " AND (h.end_date Is Null Or h.end_date >= (SELECT to_date((to_number(c4_y,'999')+f.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1) "
+                        + ")"
                         + " ORDER BY id"
                         + ")"
                         + "SELECT"
@@ -501,7 +526,7 @@ namespace rk_seikyu
                         + ", r.c4"
                         + ", r.c4_y"
                         + ", r.c4_m"
-                        + ", to_date((to_number(r.c4_y,'999')+diff || '/' || r.c4_m || '/' || 1),'yyyy/mm/dd') first_date"
+                        + ", first_day(r.c4_y, r.c4_m, r.g_name, r.diff) first_date"
                         + ", cast(CASE WHEN date_part('month', to_date((to_number(r.c4_y,'999')+diff || '/' || r.c4_m || '/' || 1),'yyyy/mm/dd')::timestamp) < 4 THEN"
                         + " to_number(r.c4_y,'999')-1 else to_number(r.c4_y,'999') END AS text) as nendo"
                         + ", to_number(r.c4_y,'999')::Text AS nen"
@@ -542,10 +567,10 @@ namespace rk_seikyu
                         + ", r.req_id"
                         + ", r.title1"
                         + ", r.title2"
-                        + ", r.name1"
+                        + ", r.chief"
+                        + ", r.accounting_manager"
                         + ", r.title3"
                         + ", r.title4"
-                        + ", r.name2"
                         + ", r.syutsuryokubi"
                         + ", r.s_nen"
                         + ", r.s_tsuki"
@@ -558,37 +583,59 @@ namespace rk_seikyu
                         + ", r.end_date"
                         + ", r.diff"
                         + " FROM r"
-                        + " LEFT JOIN (SELECT c4, c5, c6, c7, c9, c11, c14, c15, c16, c17, c19, s_id, o_id, CASE WHEN c7 = '現金' THEN '1' WHEN c7 = '引落' THEN '2' WHEN c7 = '振込' THEN '2' else '' END 支払方法, time_stamp FROM t_shiharai_houhou"
+                        + " LEFT JOIN (SELECT c4, c5, c6, c7, c9, c11, c14, c15, c16, c17, c19, s_id, o_id"
+                            + ", CASE WHEN c7 = '現金' THEN '1'"
+                            + " WHEN c7 = '引落' THEN '2'"
+                            + " WHEN c7 = '振込' THEN '2'"
+                            + " ELSE '' END 支払方法"
+                            + ", time_stamp FROM t_shiharai_houhou"
                         + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE"
-                            + " c4_y::Text = '" + Cmb_nen_str + "'"
+                            + " c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                    + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                + " ELSE"
+                                                    + "'" + Cmb_nen_str + "'"
+                                                + " END"
                             + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                 + " ' ' || '" + Cmb_tsuki_str + "'"
                                                 + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                 + " '' || '" + Cmb_tsuki_str + "'"
                                                 + " END"
                             + " AND s_id::Integer = " + Cmb_s_id_int
-                            + " AND o_id::Text = '" + Form_Seikyu_TextBoxO_id + "'"
-                        + ")) s ON r.c1 = s.c5 AND rtrim(replace(r.c3,substr(r.c3,strpos(r.c3, '('), strpos(r.c3, ')')),'')) = rtrim(replace(s.c6,substr(s.c6,strpos(s.c6, '('), strpos(s.c6, ')')),'')) AND r.s_id = s.s_id AND r.o_id = s.o_id AND s.s_id::Integer = " + Cmb_s_id_int
-                        + " WHERE"
-                        + " r.s_id::Integer = " + Cmb_s_id_int
-                        + " AND r.o_id::Text = '" + Form_Seikyu_TextBoxO_id + "'"
-                        + " AND r.time_stamp = (SELECT max(time_stamp) FROM t_seikyu WHERE"
-                            + " s_id::Integer = " + Cmb_s_id_int
-                            + " AND o_id::Text = '" + Form_Seikyu_TextBoxO_id + "'"
-                            + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                            + " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                                            + ")"
+                                    + ") s ON r.c1 = s.c5"
+                                    + " AND rtrim(replace(r.c3,substr(r.c3,strpos(r.c3, '('), strpos(r.c3, ')')),''))"
+                                        + "= rtrim(replace(s.c6,substr(s.c6,strpos(s.c6, '('), strpos(s.c6, ')')),''))"
+                                    + " AND r.s_id = s.s_id"
+                                    + " AND r.o_id = s.o_id"
+                                    + " AND s.s_id::Integer = " + Cmb_s_id_int
+                                    + " WHERE"
+                                    + " r.s_id::Integer = " + Cmb_s_id_int
+                                    + " AND r.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                                    + " AND r.time_stamp = (SELECT max(time_stamp) FROM t_seikyu WHERE"
+                                                            + " s_id::Integer = " + Cmb_s_id_int
+                                                            + " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                                                            + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                                    + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                                                + " ELSE"
+                                                                                    + "'" + Cmb_nen_str + "'"
+                                                                                + " END"
+                                                            + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
+                                                                                + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                                                + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
+                                                                                + " '' || '" + Cmb_tsuki_str + "'"
+                                                                                + " END"
+                                                        + ")"
+                            + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                    + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                + " ELSE"
+                                                    + "'" + Cmb_nen_str + "'"
+                                                + " END"
                             + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                 + " ' ' || '" + Cmb_tsuki_str + "'"
                                                 + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                 + " '' || '" + Cmb_tsuki_str + "'"
                                                 + " END"
-                            + ")"
-                            + " AND c4_y::Text = '" + Cmb_nen_str + "'"
-                            + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
-                                                + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
-                                                + " '' || '" + Cmb_tsuki_str + "'"
-                                                + " END"
-                        + " AND r.req_id::Integer = :req_id"
                         + " ORDER BY r.id"
                         + ")"
                         + "SELECT"
@@ -639,10 +686,10 @@ namespace rk_seikyu
                         + ", h.req_id"
                         + ", h.title1"
                         + ", h.title2"
-                        + ", h.name1"
+                        + ", h.chief"
                         + ", h.title3"
                         + ", h.title4"
-                        + ", h.name2"
+                        + ", h.accounting_manager"
                         + ", h.syutsuryokubi"
                         + ", h.s_nen"
                         + ", h.s_tsuki"
@@ -685,19 +732,6 @@ namespace rk_seikyu
                             da.SelectCommand.Parameters.AddWithValue("s_id", row["s_id"]);
                         }
 
-                        if (cmb_req_id.SelectedItem == null)
-                        {
-                            da.SelectCommand.Parameters.Add(new NpgsqlParameter("req_id",
-                            NpgsqlTypes.NpgsqlDbType.Integer, 0, "req_id",
-                            ParameterDirection.Input, false, 0, 0, DataRowVersion.Current,
-                            DBNull.Value));
-                        }
-                        else
-                        {
-                            DataRowView row = (DataRowView)cmb_req_id.SelectedItem;
-                            da.SelectCommand.Parameters.AddWithValue("req_id", row["req_id"]);
-                        }
-
                         if (ds.Tables["seikyu"] != null)
                             ds.Tables["seikyu"].Clear();
                         da.Fill(ds, "seikyu");
@@ -706,7 +740,7 @@ namespace rk_seikyu
                         myReport.SetDataSource(ds);
 
                         myReport.SetParameterValue("s_id", Cmb_s_id_int.ToString());
-                        myReport.SetParameterValue("req_id", Cmb_req_id_int.ToString());
+                        myReport.SetParameterValue("req_id", Form_Seikyu_TextBoxO_id);
 
                         crvSeikyu.ReportSource = myReport;
 
@@ -760,10 +794,8 @@ namespace rk_seikyu
                         + ", t_seikyu.req_id"
                         + ", title1"
                         + ", title2"
-                        + ", name1"
                         + ", title3"
                         + ", title4"
-                        + ", name2"
                         + ", syutsuryokubi"
                         + ", s_nen"
                         + ", s_tsuki"
@@ -780,10 +812,10 @@ namespace rk_seikyu
                         + ", diff"
                         + " FROM"
                         + " ((((t_seikyu INNER JOIN t_syubetsu"
-                        + " ON t_seikyu.s_id ::Integer = t_syubetsu.s_id AND t_seikyu.o_id::Integer = t_syubetsu.o_id)"
+                        + " ON t_seikyu.s_id = t_syubetsu.s_id AND t_seikyu.o_id = t_syubetsu.o_id)"
                         + " INNER JOIN t_par ON t_seikyu.p_id::Integer = t_par.p_id)"
                         + " INNER JOIN t_req ON t_seikyu.req_id::Integer = t_req.req_id)"
-                        + " INNER JOIN t_syutsuryokubi ON t_seikyu.s_id::Text = t_syutsuryokubi.s_id)"
+                        + " INNER JOIN t_syutsuryokubi ON t_seikyu.s_id = t_syutsuryokubi.s_id)"
                         + " INNER JOIN t_gengou ON substr(t_seikyu.c4_y,1,1) = t_gengou.g_name"
                         + " ORDER BY id"
                         + ")"
@@ -794,7 +826,7 @@ namespace rk_seikyu
                         + ", r.c3_mod"
                         + ", r.c3_flg"
                         + ", r.c4"
-                        + ", to_date((to_number(r.c4_y,'999')+r.diff || '/' || r.c4_m || '/' || 1),'yyyy/mm/dd') first_date"
+                        + ", first_day(r.c4_y, r.c4_m, r.g_name, r.diff) first_date"
                         + ", cast(CASE WHEN date_part('month', to_date((to_number(r.c4_y,'999')+r.diff || '/' || r.c4_m || '/' || 1),'yyyy/mm/dd')::timestamp) < 4 THEN"
                         + " to_number(r.c4_y,'999')-1 else to_number(r.c4_y,'999') end AS text) AS nendo"
                         + ", to_number(r.c4_y,'999')::Text AS nen"
@@ -835,10 +867,8 @@ namespace rk_seikyu
                         + ", r.req_id"
                         + ", r.title1"
                         + ", r.title2"
-                        + ", r.name1"
                         + ", r.title3"
                         + ", r.title4"
-                        + ", r.name2"
                         + ", r.syutsuryokubi"
                         + ", r.s_nen"
                         + ", r.s_tsuki"
@@ -856,35 +886,46 @@ namespace rk_seikyu
                         + " FROM r"
                         + " LEFT JOIN (SELECT c4, c5, c6, c7, c9, c11, c14, c15, c16, c17, c19, s_id, o_id, CASE WHEN c7 = '現金' THEN '1' WHEN c7 = '引落' THEN '2' WHEN c7 = '振込' THEN '2' else '' END 支払方法, time_stamp FROM t_shiharai_houhou"
                         + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE"
-                            + " c4_y::Text = '" + Cmb_nen_str + "'"
+                            + " c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                    + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                + " ELSE"
+                                                    + "'" + Cmb_nen_str + "'"
+                                                + " END"
                             + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                 + " ' ' || '" + Cmb_tsuki_str + "'"
                                                 + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                 + " '' || '" + Cmb_tsuki_str + "'"
                                                 + " END"
                             + " AND s_id::Integer = " + Cmb_s_id_int
-                            + " AND o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
+                            + " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
                         + ")) s ON r.c1 = s.c5 AND rtrim(replace(r.c3,substr(r.c3,strpos(r.c3, '('), strpos(r.c3, ')')),'')) = rtrim(replace(s.c6,substr(s.c6,strpos(s.c6, '('), strpos(s.c6, ')')),'')) AND r.s_id = s.s_id AND r.o_id = s.o_id AND s.s_id ::Integer = " + Cmb_s_id_int
                         + " WHERE"
                         + " r.s_id::Integer = " + Cmb_s_id_int
-                        + " AND r.o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
+                        + " AND r.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
                         + " AND r.time_stamp = (SELECT max(time_stamp) FROM t_seikyu WHERE"
                         + " s_id::Integer = " + Cmb_s_id_int
-                        + " AND o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
-                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                        + " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                            + " ELSE"
+                                                + "'" + Cmb_nen_str + "'"
+                                            + " END"
                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                             + " '' || '" + Cmb_tsuki_str + "'"
                                             + " END"
                         + " )"
-                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
+                        + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                            + " ELSE"
+                                                + "'" + Cmb_nen_str + "'"
+                                            + " END"
                         + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                             + " '' || '" + Cmb_tsuki_str + "'"
                                             + " END"
-                        + " AND r.req_id::Integer = :req_id"
                         + " ORDER BY r.id"
                         + ")"
                         + " SELECT"
@@ -934,10 +975,8 @@ namespace rk_seikyu
                         + ", h.req_id"
                         + ", h.title1"
                         + ", h.title2"
-                        + ", h.name1"
                         + ", h.title3"
                         + ", h.title4"
-                        + ", h.name2"
                         + ", h.syutsuryokubi"
                         + ", h.s_nen"
                         + ", h.s_tsuki"
@@ -983,19 +1022,6 @@ namespace rk_seikyu
                             da.SelectCommand.Parameters.AddWithValue("s_id", row["s_id"]);
                         }
 
-                        if (cmb_req_id.SelectedItem == null)
-                        {
-                            da.SelectCommand.Parameters.Add(new NpgsqlParameter("req_id",
-                            NpgsqlTypes.NpgsqlDbType.Integer, 0, "req_id",
-                            ParameterDirection.Input, false, 0, 0, DataRowVersion.Current,
-                            DBNull.Value));
-                        }
-                        else
-                        {
-                            DataRowView row = (DataRowView)cmb_req_id.SelectedItem;
-                            da.SelectCommand.Parameters.AddWithValue("req_id", row["req_id"]);
-                        }
-
                         if (ds.Tables["seikyu"] != null)
                             ds.Tables["seikyu"].Clear();
                         da.Fill(ds, "seikyu");
@@ -1004,7 +1030,7 @@ namespace rk_seikyu
                         myReport.SetDataSource(ds);
 
                         myReport.SetParameterValue("s_id", Cmb_s_id_int.ToString());
-                        myReport.SetParameterValue("req_id", Cmb_req_id_int.ToString());
+                        myReport.SetParameterValue("req_id", Form_Seikyu_TextBoxO_id);
 
                         crvSeikyu.ReportSource = myReport;
 
@@ -1046,9 +1072,9 @@ namespace rk_seikyu
                                 + ", c20"
                                 + ", c21"
                                 + ", c22"
-                                + ", t_seikyu.s_id"
-                                + ", t_seikyu.o_id"
-                                + ", t_seikyu.p_id"
+                                + ", a.s_id"
+                                + ", a.o_id"
+                                + ", a.p_id"
                                 + ", syubetsu"
                                 + ", shisetsumei"
                                 + ", title"
@@ -1056,13 +1082,11 @@ namespace rk_seikyu
                                 + ", content1"
                                 + ", content2"
                                 + ", content3"
-                                + ", t_seikyu.req_id"
+                                + ", a.req_id"
                                 + ", title1"
                                 + ", title2"
-                                + ", name1"
                                 + ", title3"
                                 + ", title4"
-                                + ", name2"
                                 + ", syutsuryokubi"
                                 + ", s_nen"
                                 + ", s_tsuki"
@@ -1077,13 +1101,17 @@ namespace rk_seikyu
                                 + ", end_date"
                                 + ", diff"
                                 + " FROM"
-                                + " ((((t_seikyu INNER JOIN t_syubetsu"
-                                + " ON t_seikyu.s_id::Integer = t_syubetsu.s_id AND t_seikyu.o_id::Integer = t_syubetsu.o_id)"
-                                + " INNER JOIN t_par ON t_seikyu.p_id::Integer = t_par.p_id)"
-                                + " INNER JOIN t_req ON t_seikyu.req_id::Integer = t_req.req_id)"
-                                + " INNER JOIN t_syutsuryokubi ON t_seikyu.s_id::Text = t_syutsuryokubi.s_id)"
-                                + " INNER JOIN t_gengou ON substr(t_seikyu.c4_y,1,1) = t_gengou.g_name"
-                                + " ORDER BY c1"
+                                + " ("
+                                    + "("
+                                        + "("
+                                            + "("
+                                            + "t_seikyu a INNER JOIN t_syubetsu b"
+                                            + " ON a.s_id = b.s_id AND a.o_id = b.o_id)"
+                                                + " INNER JOIN t_par c ON a.p_id::Integer = c.p_id)"
+                                                    + " INNER JOIN t_req d ON a.req_id::Integer = d.req_id)"
+                                        + " INNER JOIN t_syutsuryokubi e ON a.s_id::Text = e.s_id)"
+                                    + " INNER JOIN t_gengou f ON substr(a.c4_y,1,1) = f.g_name"
+                                    + " ORDER BY c1"
                                 + ")"// r
                             + " SELECT"
                             + " r.c4"
@@ -1120,19 +1148,26 @@ namespace rk_seikyu
                             + ", r.diff"
                             + " FROM r"
                             + " GROUP BY r.c4, r.s_id, r.o_id, r.c4_y, r.c4_m, r.req_id, r.syubetsu, r.tsuki, r.time_stamp, r.gengou, r.g_name, r.start_date, r.end_date, r.diff"
-                            + " HAVING r.c4_y ='" + Cmb_nen_str + "'"
+                            + " HAVING r.c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "') = 2 THEN"
+                                                    + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                + " ELSE"
+                                                    + "'" + Cmb_nen_str + "'"
+                                                + " END"
                             + " AND r.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                             + "       WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                             + " '' || '" + Cmb_tsuki_str + "'"
                                             + " END"
-                            + " AND r.s_id::Integer = :s_id"
-                            + " AND r.o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
-                            + " AND r.req_id::Integer = :req_id"
+                            + " AND r.s_id::Integer = " + Cmb_s_id_int
+                            + " AND r.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
                             + " AND r.time_stamp = (SELECT max(time_stamp) FROM t_seikyu WHERE"
-                                                    + " s_id::Integer = :s_id"
-                                                    + " AND o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
-                                                    + " AND c4_y = '" + Cmb_nen_str + "'"
+                                                    + " s_id::Integer = " + Cmb_s_id_int
+                                                    + " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                                                    + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                            + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                                        + " ELSE"
+                                                                            + "'" + Cmb_nen_str + "'"
+                                                                        + " END"
                                                     + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                                     + "       WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -1203,29 +1238,13 @@ namespace rk_seikyu
                             da.SelectCommand.Parameters.AddWithValue("s_id", row["s_id"]);
                         }
 
-                        if (cmb_req_id.SelectedItem == null)
-                        {
-                            da.SelectCommand.Parameters.Add(new NpgsqlParameter("req_id",
-                            NpgsqlTypes.NpgsqlDbType.Integer, 0, "req_id",
-                            ParameterDirection.Input, false, 0, 0, DataRowVersion.Current,
-                            DBNull.Value));
-                        }
-                        else
-                        {
-                            DataRowView row = (DataRowView)cmb_req_id.SelectedItem;
-                            da.SelectCommand.Parameters.AddWithValue("req_id", row["req_id"]);
-                        }
-
                         if (ds.Tables["seikyu"] != null)
                             ds.Tables["seikyu"].Clear();
                         da.Fill(ds, "seikyu");
 
                         crUchiwake myReport = new crUchiwake();
                         myReport.SetDataSource(ds);
-
                         myReport.SetParameterValue("s_id", Cmb_s_id_int.ToString());
-                        myReport.SetParameterValue("req_id", Cmb_req_id_int.ToString());
-
                         crvSeikyu.ReportSource = myReport;
 
                         bindingNavigatorWithdrawal.Visible = false;
@@ -1256,7 +1275,11 @@ namespace rk_seikyu
                         + ", b.c7 支払方法"
                         + ", b.c14 引落金融機関支店名"
                         + ", b.c15 引落口座種別"
-                        + ", substr(b.c4,strpos(b.c4, '[')+1, strpos(b.c4, ']')-strpos(b.c4, '[')-1) 事業所名"
+                        + ", CASE WHEN strpos(b.c4, '[')>=1 THEN" 
+                        + " substr(b.c4, strpos(b.c4, '[') + 1, strpos(b.c4, ']') - strpos(b.c4, '[') - 1)"
+                        + " ELSE"
+                        + " b.c4"
+                        + " END 事業所名"
                         + ", d.col0"
                         + ", d.col1"
                         + ", d.col2"
@@ -1282,16 +1305,13 @@ namespace rk_seikyu
                         + ", f.title2"
                         + ", f.title3"
                         + ", f.title4"
-                        + ", f.name1"
-                        + ", f.name2"
-                        + ", f.name3"
-                        + ", f.name4"
-                        + ", f.name5"
-                        + ", f.data6"
+                        + ", f1.o_phone_number"
+                        + ", f1.o_name"
                         + ", f.data7"
                         + ", f.data8"
                         + ", f.title4_kana"
-                        + ", f.name2_kana"
+                        + ", L.acc_kana"
+                        + ", L.accounting_manager"
                         + ", g.syutsuryokubi"
                         + ", CASE WHEN ((b.c7 = '現金') or (b.c11 = '')) THEN '1021' ELSE h.b_code END _b_code"
                         + ", CASE WHEN ((b.c7 = '現金') or (b.c11 = '')) THEN '稚内信用金庫' ELSE h.b_name END _b_name"
@@ -1342,69 +1362,108 @@ namespace rk_seikyu
                         + " END target_date"
                         + ", CASE WHEN ((h.b_name is null)or(h.b_name = '')) THEN '稚内信用金庫'"
                         + " ELSE h.b_name END b_name"
-                        //+ ", t5,sd"
-                        //+ ", t5,sm"
-                        //+ ", t5,sy"
                         + ", i.c25 shiharaisya"
                         + ", k.gengou"
                         + ", k.g_name"
                         + ", k.start_date"
                         + ", k.end_date"
                         + ", k.diff"
-                        + " FROM (((((((((SELECT id, c1, c3, c4, c4_y, c4_m, c22, s_id, o_id, req_id"
-                        + " , time_stamp FROM t_seikyu"
-                        + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_seikyu WHERE"
-                        + " s_id::Integer = " + Cmb_s_id_int
-                        + " AND o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
-                        + " AND c4_y::Text = '" + Cmb_nen_str + "'"
-                        + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
-                        + " ' ' || '" + Cmb_tsuki_str + "'"
-                        + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
-                        + " '' || '" + Cmb_tsuki_str + "'"
-                        + " END"
-                        + " )) a"
-                        + " LEFT JOIN (SELECT c4, c5, c6, c7, c11, c14, c15, c16, c19, s_id, o_id,"
-                        + " CASE WHEN c7 = '現金' THEN '1'"
-                            + " WHEN c7 = Null THEN '1'"
-                            + " WHEN c7 = '引落' THEN '2'"
-                            + " WHEN c7 = '振込' THEN '2'"
-                            + " ELSE '' END 支払方法"
-                        + ", time_stamp FROM t_shiharai_houhou"
-                        + " WHERE time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE"
-                            + " c4_y::Text = '" + Cmb_nen_str + "'"
-                            + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
-                            + " ' ' || '" + Cmb_tsuki_str + "'"
-                            + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
-                            + " '' || '" + Cmb_tsuki_str + "'"
-                            + " END"
-                            + " AND s_id::Integer = " + Cmb_s_id_int
-                            + " AND o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
-                        + ")) b ON a.c1 = b.c5"
-                            + " AND rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),''))"
-                                + " = rtrim(replace(b.c6,substr(b.c6,strpos(b.c6, '('), strpos(b.c6, ')')),''))"
-                            + " AND a.s_id = b.s_id"
-                            + " AND a.o_id = b.o_id"
-                            + " AND b.s_id::Integer = " + Cmb_s_id_int + ")"
-                        + " LEFT JOIN (SELECT s_id, o_id, syubetsu FROM t_syubetsu) c ON a.s_id::Integer = c.s_id AND a.o_id::Integer = c.o_id)"
-                        + " LEFT JOIN (SELECT rep_id, pt_id, s_id, o_id, col0, col1, col2, col3, col4, col5, ac0, ac1, ac2, ac3 FROM t_rep) d ON b.支払方法 = d.pt_id AND a.s_id = d.s_id AND a.o_id::Text = d.o_id)"
-                        + " LEFT JOIN (SELECT bid, b_id, b_code, b_name, sb_name, br_code, br_name, sd, sm, sy FROM t_bank) e ON b.c11 = e.b_name)"
-                        + " LEFT JOIN (SELECT req_id, title1, title2, title3, title4, name1, name2, name3, name4, name5, data6, data7, data8, title4_kana, name2_kana FROM t_req) f ON a.req_id::Integer = f.req_id)"
-                        + " LEFT JOIN (SELECT syutsuryokubi, s_id FROM t_syutsuryokubi) g ON a.s_id = g.s_id)"
-                        + " LEFT JOIN (SELECT bid, b_id, b_code, b_name, sb_name, br_code, br_name, sd FROM t_bank WHERE b_id = '1') h ON b.c11 = h.b_name)"
-                        + " LEFT JOIN (SELECT c1, c5, c25, c48, s_id, o_id FROM t_shinzoku_kankei WHERE c48 = '1' AND time_stamp = (SELECT max(time_stamp) FROM t_shinzoku_kankei WHERE"
-                            + " c4_y::Text = '" + Cmb_nen_str + "'"
-                            + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
-                            + " ' ' || '" + Cmb_tsuki_str + "'"
-                            + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
-                            + " '' || '" + Cmb_tsuki_str + "'"
-                            + " end"
-                            + " AND s_id::Integer = " + Cmb_s_id_int
-                            + " AND o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
-                        + " )) i ON a.c1 = i.c1"
-                        + " AND i.s_id::Integer = " + Cmb_s_id_int
-                        + " AND i.o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
-                        + ") INNER JOIN t_gengou k ON substr(c4_y,1,1) = k.g_name"
-                        + " ORDER BY a.id"
+                        + ", j.stuff"
+                        + ", m.manager"
+                        + " FROM ("
+                        + "("
+                            + "("
+                                + "("
+                                    + "("
+                                        + "("
+                                            + "("
+                                                + "("
+                                                    + "("
+                                                        + "("
+                                                            + "("
+                                                                + "(SELECT id, c1, c3, c4, c4_y, c4_m, c22, s_id, o_id, req_id"
+                                                                + " , time_stamp FROM t_seikyu"
+                                                                + " WHERE time_stamp = "
+                                                                    + "(SELECT max(time_stamp) FROM t_seikyu WHERE"
+                                                                    + " s_id::Integer = " + Cmb_s_id_int
+                                                                    + " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                                                                    + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                                            + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                                                        + " ELSE"
+                                                                                            + "'" + Cmb_nen_str + "'"
+                                                                                        + " END"
+                                                                    + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
+                                                                    + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                                    + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
+                                                                    + " '' || '" + Cmb_tsuki_str + "'"
+                                                                    + " END"
+                                                                    + ")"
+                                                                + ") a LEFT JOIN (SELECT c4, c5, c6, c7, c11, c14, c15, c16, c19, s_id, o_id,"
+                                                                    + " CASE WHEN c7 = '現金' THEN '1'"
+                                                                        + " WHEN c7 = Null THEN '1'"
+                                                                        + " WHEN c7 = '引落' THEN '2'"
+                                                                        + " WHEN c7 = '振込' THEN '2'"
+                                                                        + " ELSE '' END 支払方法"
+                                                                    + ", time_stamp FROM t_shiharai_houhou"
+                                                                    + " WHERE time_stamp = "
+                                                                                        + "(SELECT max(time_stamp) FROM t_shiharai_houhou WHERE"
+                                                                                            + " c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                                                                    + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                                                                                + " ELSE"
+                                                                                                                    + "'" + Cmb_nen_str + "'"
+                                                                                                                + " END"
+                                                                                            + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
+                                                                                            + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                                                            + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
+                                                                                            + " '' || '" + Cmb_tsuki_str + "'"
+                                                                                            + " END"
+                                                                                            + " AND s_id::Integer = " + Cmb_s_id_int
+                                                                                            + " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                                                                                        + ")"
+                                                                                + ") b ON a.c1 = b.c5"
+                                                                                + " AND rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),''))"
+                                                                                    + " = rtrim(replace(b.c6,substr(b.c6,strpos(b.c6, '('), strpos(b.c6, ')')),''))"
+                                                                                + " AND a.s_id = b.s_id"
+                                                                                + " AND a.o_id = b.o_id"
+                                                                                + " AND b.s_id::Integer = " + Cmb_s_id_int + ")"
+                                                                        + " LEFT JOIN (SELECT s_id, o_id, syubetsu FROM t_syubetsu) c ON a.s_id = c.s_id AND a.o_id = c.o_id)"
+                                                                    + " LEFT JOIN (SELECT rep_id, pt_id, s_id, o_id, col0, col1, col2, col3, col4, col5, ac0, ac1, ac2, ac3 FROM t_rep) d ON b.支払方法 = d.pt_id AND a.s_id = d.s_id AND a.o_id = d.o_id)"
+                                                                + " LEFT JOIN (SELECT bid, b_id, b_code, b_name, sb_name, br_code, br_name, sd, sm, sy FROM t_bank) e ON b.c11 = e.b_name)"
+                                                            + " LEFT JOIN (SELECT req_id, title1, title2, title3, title4, data7, data8, title4_kana FROM t_req) f ON a.req_id = f.req_id::Text)"
+                                                        + " LEFT JOIN (SELECT o_id, o_name, o_phone_number FROM t_office) f1 ON a.o_id = f1.o_id::Text)"
+                                                    + " LEFT JOIN (SELECT syutsuryokubi, s_id FROM t_syutsuryokubi) g ON a.s_id = g.s_id)"
+                                                + " LEFT JOIN (SELECT bid, b_id, b_code, b_name, sb_name, br_code, br_name, sd FROM t_bank WHERE b_id = '1') h ON b.c11 = h.b_name)"
+                                            + " LEFT JOIN (SELECT c1, c5, c25, c48, s_id, o_id FROM t_shinzoku_kankei WHERE c48 = '1' AND time_stamp = (SELECT max(time_stamp) FROM t_shinzoku_kankei WHERE"
+                                                + " c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                                    + " ELSE"
+                                                                        + "'" + Cmb_nen_str + "'"
+                                                                    + " END"
+                                                + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
+                                                + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
+                                                + " '' || '" + Cmb_tsuki_str + "'"
+                                                + " END"
+                                                + " AND s_id::Integer = " + Cmb_s_id_int
+                                                + " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                                            + " )) i ON a.c1 = i.c1"
+                                            + " AND i.s_id::Integer = " + Cmb_s_id_int
+                                            + " AND i.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                                            + ") "
+                                        + " LEFT JOIN (SELECT gg_id, g_name, gengou, start_date, end_date, diff FROM t_gengou) k ON substr(c4_y,1,1) = k.g_name)"
+                                    + " LEFT JOIN (SELECT m_id, manager, start_date, end_date, o_id FROM t_manager) m ON m.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                                        + " AND m.start_date <= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                        + " AND (m.end_date Is Null Or m.end_date >= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1) "
+                                    + ")"
+                                + " LEFT JOIN (SELECT stf_id, stuff, start_date, end_date, o_id FROM t_stuff) j ON j.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                                    + " AND j.start_date <= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " AND (j.end_date Is Null Or j.end_date >= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1) "
+                                + ")"
+                                + " LEFT JOIN (SELECT acc_id, accounting_manager, start_date, end_date, acc_kana FROM t_accounting_manager) L ON "
+                                    + " L.start_date <= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " AND (L.end_date Is Null Or L.end_date >= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1) "
+                                + ")"
+                            + ") ORDER BY a.id"
                         + ")"
                         + " SELECT"
                         + " 利用者番号"
@@ -1445,16 +1504,15 @@ namespace rk_seikyu
                         + ", title2"
                         + ", title3"
                         + ", title4"
-                        + ", name1"
-                        + ", name2"
-                        + ", name3"
-                        + ", name4"
-                        + ", name5"
-                        + ", data6"
+                        + ", manager"
+                        + ", stuff"
+                        + ", o_phone_number name5"
+                        + ", o_name data6"
                         + ", data7"
                         + ", data8"
                         + ", title4_kana"
-                        + ", name2_kana"
+                        + ", accounting_manager"
+                        + ", acc_kana"
                         + ", syutsuryokubi"
                         + ", _b_code"
                         + ", _br_code"
@@ -1497,19 +1555,6 @@ namespace rk_seikyu
                             da.SelectCommand.Parameters.AddWithValue("s_id", row["s_id"]);
                         }
 
-                        if (cmb_req_id.SelectedItem == null)
-                        {
-                            da.SelectCommand.Parameters.Add(new NpgsqlParameter("req_id",
-                            NpgsqlTypes.NpgsqlDbType.Integer, 0, "req_id",
-                            ParameterDirection.Input, false, 0, 0, DataRowVersion.Current,
-                            DBNull.Value));
-                        }
-                        else
-                        {
-                            DataRowView row = (DataRowView)cmb_req_id.SelectedItem;
-                            da.SelectCommand.Parameters.AddWithValue("req_id", row["req_id"]);
-                        }
-
                         if (ds.Tables["seikyu"] != null)
                             ds.Tables["seikyu"].Clear();
                         da.Fill(ds, "seikyu");
@@ -1518,7 +1563,7 @@ namespace rk_seikyu
                         myReport.SetDataSource(ds);
 
                         myReport.SetParameterValue("s_id", Cmb_s_id_int.ToString());
-                        myReport.SetParameterValue("req_id", Cmb_req_id_int.ToString());
+                        myReport.SetParameterValue("req_id", Form_Seikyu_TextBoxO_id);
 
                         crvSeikyu.ReportSource = myReport;
 
@@ -1530,105 +1575,280 @@ namespace rk_seikyu
 
                 case 5: // 引落請求書
                     {
-                        Console.WriteLine("Cmb_b_code_str = " + Cmb_b_code_str);
+                        if (checkBoxIni.Checked)
+                        {
+                            try
+                            {
+                                m_conn.Open();
+                                using (var tran = m_conn.BeginTransaction())
+                                {
+                                    //データ登録
+                                    var cmd = new NpgsqlCommand(@"UPDATE t_seikyu SET w_flg = Null WHERE w_flg = '1';", m_conn);
+                                    cmd.ExecuteNonQuery();
+                                    //データ検索
+                                    var dataAdapter = new NpgsqlDataAdapter(@"SELECT * FROM t_seikyu", m_conn);
+                                    var dataSet = new DataSet();
+                                    dataAdapter.Fill(dataSet);
 
-                        da.SelectCommand = new NpgsqlCommand
-                        (
+                                    DataTable dst = dataSet.Tables[0];
+                                    Console.WriteLine("コミット前データ件数：{0}", dst.Rows.Count);
+
+                                    // コミットして、再検索
+                                    tran.Commit();
+
+                                    dataSet = new DataSet();
+                                    dataAdapter.Fill(dataSet);
+
+                                    dst = dataSet.Tables[0];
+                                    Console.WriteLine("コミット後データ件数：{0}", dst.Rows.Count);
+                                    rec = dst.Rows.Count;
+                                }
+                                m_conn.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("保存に失敗しました。\n\n[内容]\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            MessageBox.Show(rec.ToString() + "件、保存しました。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+
+                            Console.WriteLine("Cmb_b_code_str = " + Cmb_b_code_str);
+
+                            da.SelectCommand = new NpgsqlCommand
+                            (
                         "WITH RECURSIVE r as ("
-                        + "SELECT"
+                        + " SELECT"
                         + " a.r_id"
+                        + ", a.id"
                         + ", a.c1"
-                        + ", c.c5"
-                        + ", c.c6"
-                        + ", a.c3"
-                        + ", rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),'')) c3_mod"
                         + ", a.c4"
-                        + ", rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),'')) c6_mod"
-                        + ", c.c6"
-                        + ", c.c9"
-                        + ", c.c11"
-                        + ", c.c14"
-                        + ", c.c16"
-                        + ", c.c19"
-                        + ", a.c22"
                         + ", a.c4_y"
                         + ", a.c4_m"
-                        + ", CASE substr(c.c4,strpos(c.c4, '[')+1, strpos(c.c4, ']')-strpos(c.c4, '[')-1)"
-                        + " WHEN '入所' THEN '入所'"
-                        + " WHEN '介護通所' THEN '通所'"
-                        + " WHEN '介護短期' THEN '短期'"
-                        + " WHEN '予防通所' THEN '予防通所'"
-                        + " WHEN '予防短期' THEN '予防短期'"
-                        + " WHEN '通所型サービス' THEN '通所型'"
-                        + " END s_id_str"
+                        + ", a.c22"
                         + ", a.s_id"
                         + ", a.o_id"
+                        + ", a.req_id"
+                        + ", c.syubetsu"
+                        + ", a.c3"
+                        + ", rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),'')) c3_mod"
+                        + ", rtrim(replace(b.c6,substr(b.c6,strpos(b.c6, '('), strpos(b.c6, ')')),'')) c6_mod"
                         + ", a.w_flg"
-                        + ", i.gengou"
-                        + ", i.g_name"
-                        + ", i.start_date"
-                        + ", i.end_date"
-                        + ", i.diff"
-                        + " FROM t_seikyu a LEFT JOIN t_shiharai_houhou c"
-                        + " ON a.c1 = c.c5"
-                        + " AND rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),''))"
-                            + " = rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),''))"
-                        + " AND a.o_id = c.o_id"
-                        + " AND a.s_id = c.s_id"
-                        + " AND a.o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
-                        + " INNER JOIN t_gengou i ON substr(a.c4_y,1,1) = i.g_name"
-                        + " WHERE NOT EXISTS ("
-                                            + " SELECT 1 FROM t_seikyu b"
-                                            + " WHERE"
-                                            + " a.c4_y::Text = '" + Cmb_nen_str + "'"
-                                            + " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
+                        + ", c.hyoujimei s_id_str"
+                        + ", b.c5"
+                        + ", b.c7 支払方法"
+                        + ", b.c9"
+                        + ", b.c11"
+                        + ", b.c14"
+                        + ", b.c15 引落口座種別"
+                        + ", b.c16"
+                        + ", b.c19"
+                         + ", CASE WHEN strpos(b.c4, '[')>=1 THEN"
+                        + " substr(b.c4, strpos(b.c4, '[') + 1, strpos(b.c4, ']') - strpos(b.c4, '[') - 1)"
+                        + " ELSE"
+                        + " b.c4"
+                        + " END 事業所名"
+                        + ", d.col0"
+                        + ", d.col1"
+                        + ", d.col2"
+                        + ", d.col3"
+                        + ", d.col4"
+                        + ", d.col5"
+                        + ", d.ac0"
+                        + ", d.ac1"
+                        + ", d.ac2"
+                        + ", d.ac3"
+                        + ", CASE WHEN length(b.c16)=7 THEN left(b.c16,4) || replace(right(b.c16,3),right(b.c16,3),'***')"
+                        + " WHEN length(b.c16)=14 THEN left(b.c16,4) || replace(right(b.c16,10),right(b.c16,10),'**-*******')"
+                        + " END 引落口座番号"
+                        + ", CASE WHEN ((b.c19 is null) OR (b.c19 = '')) AND b.c7 = '1' THEN b.c6"
+                        + " ELSE b.c19 END 引落口座名義人"
+                        + ", CASE WHEN ((b.c7 = '現金') OR (b.c11 is null)or(b.c11 = '')) THEN '稚内信用金庫'"
+                        + " ELSE b.c11 END 引落金融機関銀行名"
+                        + ", e.b_code"
+                        + ", e.br_code"
+                        + ", e.sb_name"
+                        + ", e.sd"
+                        + ", f.title1"
+                        + ", f.title2"
+                        + ", f.title3"
+                        + ", f.title4"
+                        + ", f1.o_phone_number"
+                        + ", f1.o_name"
+                        + ", f.data7"
+                        + ", f.data8"
+                        + ", f.title4_kana"
+                        + ", L.acc_kana"
+                        + ", L.accounting_manager"
+                        + ", g.syutsuryokubi"
+                        + ", CASE WHEN ((b.c7 = '現金') or (b.c11 = '')) THEN '1021' ELSE h.b_code END _b_code"
+                        + ", CASE WHEN ((b.c7 = '現金') or (b.c11 = '')) THEN '稚内信用金庫' ELSE h.b_name END _b_name"
+                        + ", CASE WHEN ((b.c7 = '現金') or (b.c11 = '')) THEN '014' ELSE h.br_code END _br_code"
+                        + ", CASE WHEN ((b.c7 = '現金') or (b.c11 = '')) THEN '利尻富士支店' ELSE h.br_name END _br_name"
+                        + ", CASE WHEN e.sy IS NULL or e.sm IS NULL THEN" /* 引落年月日自動入力の場合*/
+                            + " CASE WHEN e.b_id = '0' THEN null"
+                                + " WHEN e.b_id = '1' THEN" /* 稚内信金の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff || '/' || to_number(c4_m,'99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '2' THEN" /* ゆうちょ銀行の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff || '/' || to_number(c4_m,'99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '3' THEN" /* 利尻漁協の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff || '/' || to_number(c4_m,'99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                            + " END"
+                        + " ELSE" /* 引落年月日手入力の場合*/
+                            + " CASE WHEN e.b_id = '0' THEN null"
+                                + " WHEN e.b_id = '1' THEN" /* 稚内信金の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff || '/' || to_number(e.sm,'99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff || '/' || to_number(e.sm,'99') || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '2' THEN" /* ゆうちょ銀行の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff || '/' || to_number(e.sm,'99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff || '/' || to_number(e.sm,'99') || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '3' THEN" /* 利尻漁協の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff || '/' || to_number(e.sm,'99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff || '/' || to_number(e.sm,'99') || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                            + " END"
+                        + " END target_date"
+                        + ", CASE WHEN ((h.b_name is null)or(h.b_name = '')) THEN '稚内信用金庫'"
+                        + " ELSE h.b_name END b_name"
+                        + ", i.c25 shiharaisya"
+                        + ", k.gengou"
+                        + ", k.g_name"
+                        + ", k.start_date"
+                        + ", k.end_date"
+                        + ", k.diff"
+                        + ", j.stuff"
+                        + ", m.manager"
+                        + " FROM ("
+                        + "("
+                            + "("
+                                + "("
+                                    + "("
+                                        + "("
+                                            + "("
+                                                + "("
+                                                    + "("
+                                                        + "("
+                                                            + "("
+                                                                + "(SELECT r_id, id, c1, c3, c4, c4_y, c4_m, c22, s_id, o_id, req_id, w_flg"
+                                                                + " , time_stamp FROM t_seikyu t1"
+                                                                + " WHERE time_stamp = "
+                                                                    + "(SELECT max(time_stamp) FROM t_seikyu WHERE"
+                                                                    + " s_id = t1.s_id"
+                                                                    + " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                                                                    + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                                            + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                                                        + " ELSE"
+                                                                                            + "'" + Cmb_nen_str + "'"
+                                                                                        + " END"
+                                                                    + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
                                                                     + " '' || '" + Cmb_tsuki_str + "'"
                                                                     + " END"
-                                            + " AND a.s_id = b.s_id"
-                                            + " AND a.o_id = b.o_id"
-                                            + " AND a.time_stamp < b.time_stamp"
-                                            + ")"
-                        + " AND a.c4_y::Text = '" + Cmb_nen_str + "'"
-                        + " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
-                                                + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
-                                                + " '' || '" + Cmb_tsuki_str + "'"
-                                                + " END"
-                        + " AND NOT EXISTS ("
-                                        + " SELECT 1 FROM t_shiharai_houhou d"
-                                        + " WHERE"
-                                        + " d.c4_y::Text = '" + Cmb_nen_str + "'"
-                                        + " AND d.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
-                                                                + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                                + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
-                                                                + " '' || '" + Cmb_tsuki_str + "'"
-                                                                + " END"
-                                        + " AND c.s_id = d.s_id"
-                                        + " AND c.o_id = d.o_id"
-                                        + " AND c.time_stamp < d.time_stamp"
-                                        + ")"
-                        + " AND c.c4_y::Text = '" + Cmb_nen_str + "'"
-                        + " AND c.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
-                                                + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
-                                                + " '' || '" + Cmb_tsuki_str + "'"
-                                                + " END"
-                        + " AND CASE WHEN '" + Cmb_b_code_str + "' ='0000' THEN"
-                                + " c.c9 = ''"
-                                + " ELSE"
-                                + " c.c9 = '" + Cmb_b_code_str + "'"
-                                + " END"
-                        + " ORDER BY a.r_id"
+                                                                    + ")"
+                                                                + ") a LEFT JOIN (SELECT c4, c5, c6, c7, c9, c11, c14, c15, c16, c19, s_id, o_id,"
+                                                                    + " CASE WHEN c7 = '現金' THEN '1'"
+                                                                        + " WHEN c7 = Null THEN '1'"
+                                                                        + " WHEN c7 = '引落' THEN '2'"
+                                                                        + " WHEN c7 = '振込' THEN '2'"
+                                                                        + " ELSE '' END 支払方法"
+                                                                    + ", time_stamp FROM t_shiharai_houhou t2"
+                                                                    + " WHERE time_stamp = "
+                                                                                        + "(SELECT max(time_stamp) FROM t_shiharai_houhou WHERE"
+                                                                                            + " c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                                                                    + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                                                                                + " ELSE"
+                                                                                                                    + "'" + Cmb_nen_str + "'"
+                                                                                                                + " END"
+                                                                                            + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
+                                                                                            + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                                                            + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
+                                                                                            + " '' || '" + Cmb_tsuki_str + "'"
+                                                                                            + " END"
+                                                                                            + " AND s_id = t2.s_id"
+                                                                                            + " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                                                                                        + ")"
+                                                                                + ") b ON a.c1 = b.c5"
+                                                                                + " AND rtrim(replace(a.c3,substr(a.c3,strpos(a.c3, '('), strpos(a.c3, ')')),''))"
+                                                                                    + " = rtrim(replace(b.c6,substr(b.c6,strpos(b.c6, '('), strpos(b.c6, ')')),''))"
+                                                                                + " AND a.s_id = b.s_id"
+                                                                                + " AND a.o_id = b.o_id"
+                                                                                + ")"
+                                                                                //+ " AND b.s_id::Integer = " + Cmb_s_id_int + ")"
+                                                                        + " LEFT JOIN (SELECT s_id, o_id, syubetsu, hyoujimei FROM t_syubetsu) c ON a.s_id::Text = c.s_id AND a.o_id = c.o_id)"
+                                                                    + " LEFT JOIN (SELECT rep_id, pt_id, s_id, o_id, col0, col1, col2, col3, col4, col5, ac0, ac1, ac2, ac3 FROM t_rep) d ON b.支払方法 = d.pt_id AND a.s_id = d.s_id AND a.o_id::Text = d.o_id)"
+                                                                + " LEFT JOIN (SELECT bid, b_id, b_code, b_name, sb_name, br_code, br_name, sd, sm, sy FROM t_bank) e ON b.c11 = e.b_name)"
+                                                            + " LEFT JOIN (SELECT req_id, title1, title2, title3, title4, data7, data8, title4_kana FROM t_req) f ON a.req_id::Integer = f.req_id)"
+                                                        + " LEFT JOIN (SELECT o_id, o_name, o_phone_number FROM t_office) f1 ON a.o_id::Integer = f1.o_id)"
+                                                    + " LEFT JOIN (SELECT syutsuryokubi, s_id FROM t_syutsuryokubi) g ON a.s_id = g.s_id)"
+                                                + " LEFT JOIN (SELECT bid, b_id, b_code, b_name, sb_name, br_code, br_name, sd FROM t_bank WHERE b_id = '1') h ON b.c11 = h.b_name)"
+                                            + " LEFT JOIN (SELECT c1, c5, c25, c48, s_id, o_id FROM t_shinzoku_kankei t3"
+                                            + " WHERE c48 = '1' AND time_stamp = "
+                                                                            + "(SELECT max(time_stamp) FROM t_shinzoku_kankei WHERE"
+                                                                                + " c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                                                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                                                                    + " ELSE"
+                                                                                                        + "'" + Cmb_nen_str + "'"
+                                                                                                    + " END"
+                                                                                + " AND c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
+                                                                                                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                                                                                        + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
+                                                                                                        + " '' || '" + Cmb_tsuki_str + "'"
+                                                                                                        + " END"
+                                                                                + " AND s_id = t3.s_id"
+                                                                                + " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                                                                            + ")"
+                                                        + ") i ON a.c1 = i.c1"
+                                                        + " AND a.s_id = i.s_id"
+                                                        //+ " AND i.s_id::Integer = " + Cmb_s_id_int
+                                                        + " AND i.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                                            + ") "
+                                        + " LEFT JOIN (SELECT gg_id, g_name, gengou, start_date, end_date, diff FROM t_gengou) k ON substr(c4_y,1,1) = k.g_name)"
+                                    + " LEFT JOIN (SELECT m_id, manager, start_date, end_date, o_id FROM t_manager) m ON m.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                                        + " AND m.start_date <= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                        + " AND (m.end_date Is Null Or m.end_date >= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1) "
+                                    + ")"
+                                + " LEFT JOIN (SELECT stf_id, stuff, start_date, end_date, o_id FROM t_stuff) j ON j.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                                    + " AND j.start_date <= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " AND (j.end_date Is Null Or j.end_date >= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1) "
+                                + ")"
+                                + " LEFT JOIN (SELECT acc_id, accounting_manager, start_date, end_date, acc_kana FROM t_accounting_manager) L ON "
+                                    + " L.start_date <= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " AND (L.end_date Is Null Or L.end_date >= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1) "
+                                + ")"
+                            + ") ORDER BY a.id"
                         + ")"
-                        + "SELECT"
+                        + " SELECT"
                         + " r_id"
+                        + ", id"
                         + ", c1"
-                        + ", c5"
                         + ", c3"
                         + ", c3_mod"
                         + ", c4"
+                        + ", c4_y || '/' || c4_m c4_ym"
+                        + ", c5"
                         + ", c6_mod"
                         + ", c9"
                         + ", c11"
@@ -1636,100 +1856,106 @@ namespace rk_seikyu
                         + ", c16"
                         + ", c19"
                         + ", c22"
-                        + ", c4_y"
-                        + ", c4_m"
-                        + ", c4_y || '/' || c4_m c4_ym"
-                        + ", s_id_str"
                         + ", s_id"
                         + ", o_id"
                         + ", w_flg"
+                        + ", req_id"
+                        + ", syubetsu"
+                        + ", 支払方法"
+                        + ", 引落口座種別"
+                        + ", 事業所名"
+                        + ", col0"
+                        + ", col1"
+                        + ", col2"
+                        + ", col3"
+                        + ", col4"
+                        + ", col5"
+                        + ", ac0"
+                        + ", ac1"
+                        + ", ac2"
+                        + ", ac3"
+                        + ", 引落口座番号"
+                        + ", 引落口座名義人"
+                        + ", 引落金融機関銀行名"
+                        + ", b_code"
+                        + ", b_name"
+                        + ", br_code"
+                        + ", sb_name"
+                        + ", sd"
+                        + ", title1"
+                        + ", title2"
+                        + ", title3"
+                        + ", title4"
+                        + ", manager"
+                        + ", stuff"
+                        + ", o_phone_number name5"
+                        + ", o_name data6"
+                        + ", data7"
+                        + ", data8"
+                        + ", title4_kana"
+                        + ", accounting_manager"
+                        + ", acc_kana"
+                        + ", syutsuryokubi"
+                        + ", _b_code"
+                        + ", _br_code"
+                        + ", _br_name"
+                        + ", shiharaisya"
+                        + ", target_date last_day"
                         + ", gengou"
                         + ", g_name"
                         + ", start_date"
                         + ", end_date"
                         + ", diff"
-                        + " FROM r;"
+                        + " FROM r"
+                        + " WHERE CASE WHEN '" + Cmb_b_code_str + "' ='0000' THEN"
+                                + " c9 = ''"
+                                + " ELSE"
+                                + " c9 = '" + Cmb_b_code_str + "'"
+                                + " END;"
+
+                        , m_conn
+                                );
+
+                            // update
+                            da.UpdateCommand = new NpgsqlCommand(
+                                "UPDATE t_seikyu SET w_flg = :w_flg"
+                                + " WHERE"
+                                //+ " c4_y = :c4_y AND"
+                                //+ " c4_m = :c4_m AND"
+                                + " r_id = :r_id;"
                                 , m_conn
-                            );
+                                );
+                            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text) { Value = " + Cmb_nen_str + " });
+                            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text) { Value = " + Cmb_tsuki_str + " });
+                            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("w_flg", NpgsqlTypes.NpgsqlDbType.Integer, 0, "w_flg", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
-                        da.InsertCommand = new NpgsqlCommand(
-                        "INSERT INTO t_seikyu ("
-                                    + " r_id"
-                                    + ", c3"
-                                    + ", c4"
-                                    + ", c9"
-                                    + ", c11"
-                                    + ", c14"
-                                    + ", c19"
-                                    + ", c22"
-                                    + ", s_id"
-                                    + ", o_id"
-                                    + " ) SELECT"
-                                    + " r_id"
-                                    + ", c3"
-                                    + ", c4"
-                                    + ", c9"
-                                    + ", c11"
-                                    + ", c14"
-                                    + ", c19"
-                                    + ", c22"
-                                    + ", s_id"
-                                    + ", o_id"
-                                    + " FROM t_csv"
-                                    + " ORDER BY id;"
-                                        , m_conn);
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("c3", NpgsqlTypes.NpgsqlDbType.Text, 0, "c3", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("c4", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("c9", NpgsqlTypes.NpgsqlDbType.Text, 0, "c9", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("c11", NpgsqlTypes.NpgsqlDbType.Text, 0, "c11", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("c14", NpgsqlTypes.NpgsqlDbType.Text, 0, "c14", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("c19", NpgsqlTypes.NpgsqlDbType.Text, 0, "c19", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("c22", NpgsqlTypes.NpgsqlDbType.Text, 0, "c22", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            // RowUpdate
+                            da.RowUpdated += new NpgsqlRowUpdatedEventHandler(WithdrawalRowUpdated);
 
-                        // update
-                        da.UpdateCommand = new NpgsqlCommand(
-                            "UPDATE t_seikyu SET w_flg = :w_flg"
-                            + " WHERE r_id = :r_id;"
-                            , m_conn
-                            );
-                        da.UpdateCommand.Parameters.Add(new NpgsqlParameter("w_flg", NpgsqlTypes.NpgsqlDbType.Integer, 0, "w_flg", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                        da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
+                            if (withdrawalds.Tables["withdrawal_ds"] != null)
+                                withdrawalds.Tables["withdrawal_ds"].Clear();
+                            da.Fill(withdrawalds, "withdrawal_ds");
 
-                        // delete
-                        da.DeleteCommand = new NpgsqlCommand
-                        (
-                               "DELETE FROM t_withdrawal"
-                            + " WHERE"
-                            + " w_id = :w_id;"
-                            , m_conn
-                        );
-                        da.DeleteCommand.Parameters.Add(new NpgsqlParameter("w_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "w_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
+                            bindingSourceWithdrawal.DataSource = withdrawalds;
+                            bindingSourceWithdrawal.DataMember = "withdrawal_ds";
 
-                        // RowUpdate
-                        da.RowUpdated += new NpgsqlRowUpdatedEventHandler(WithdrawalRowUpdated);
+                            bindingNavigatorWithdrawal.BindingSource = bindingSourceWithdrawal;
 
-                        if (withdrawalds.Tables["withdrawal_ds"] != null)
-                            withdrawalds.Tables["withdrawal_ds"].Clear();
-                        da.Fill(withdrawalds, "withdrawal_ds");
+                            dataGridViewWithdrawal.AutoGenerateColumns = false;
 
-                        bindingSourceWithdrawal.DataSource = withdrawalds;
-                        bindingSourceWithdrawal.DataMember = "withdrawal_ds";
+                            dataGridViewWithdrawal.DataSource = bindingSourceWithdrawal;
 
-                        bindingNavigatorWithdrawal.BindingSource = bindingSourceWithdrawal;
+                            dataGridViewWithdrawal.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
 
-                        dataGridViewWithdrawal.AutoGenerateColumns = false;
-
-                        dataGridViewWithdrawal.DataSource = bindingSourceWithdrawal;
-
-                        dataGridViewWithdrawal.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-
-                        crvSeikyu.Visible = false;
-                        bindingNavigatorWithdrawal.Visible = true;
-                        dataGridViewWithdrawal.Visible = true;
+                            crvSeikyu.Visible = false;
+                            bindingNavigatorWithdrawal.Visible = true;
+                            dataGridViewWithdrawal.Visible = true;
+                        }
+                        break;
                     }
-                    break;
             }
         }
 
@@ -1759,14 +1985,7 @@ namespace rk_seikyu
                     + ", c.c16"
                     + ", c.c19"
                     + ", a.c22"
-                    + ", CASE substr(c.c4,strpos(c.c4, '[')+1, strpos(c.c4, ']')-strpos(c.c4, '[')-1)"
-                    + " WHEN '入所' THEN '入所'"
-                    + " WHEN '介護通所' THEN '通所'"
-                    + " WHEN '介護短期' THEN '短期'"
-                    + " WHEN '予防通所' THEN '予防通所'"
-                    + " WHEN '予防短期' THEN '予防短期'"
-                    + " WHEN '通所型サービス' THEN '通所型'"
-                    + " END s_id_str"
+                    + ", e.hyoujimei s_id_str"
                     + ", a.s_id"
                     + ", a.o_id"
                     + ", a.time_stamp"
@@ -1782,6 +2001,7 @@ namespace rk_seikyu
                     + " AND a.w_flg = '1'"
                     + " AND c.c9 = '" + Cmb_b_code_str + "'"
                     + " AND a.o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
+                    + " LEFT JOIN t_syubetsu e ON a.o_id = e.o_id AND a.s_id = e.s_id"
                     + " WHERE NOT EXISTS ("
                                             + " SELECT 1"
                                             + " FROM t_seikyu b"
@@ -1790,7 +2010,11 @@ namespace rk_seikyu
                                             + " AND a.c4_y = b.c4_y"
                                             + " AND a.c4_m = b.c4_m"
                                             + " AND a.time_stamp < b.time_stamp"
-                                            + " AND a.c4_y::Text = '" + Cmb_nen_str + "'"
+                                            + " AND a.c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                    + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                                + " ELSE"
+                                                                    + "'" + Cmb_nen_str + "'"
+                                                                + " END"
                                             + " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -1801,7 +2025,11 @@ namespace rk_seikyu
                     + " AND a.o_id = c.o_id"
                     + " AND a.c4_y = c.c4_y"
                     + " AND a.c4_m = c.c4_m"
-                    + " AND a.c4_y::Text = '" + Cmb_nen_str + "'"
+                    + " AND a.c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                            + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                        + " ELSE"
+                                            + "'" + Cmb_nen_str + "'"
+                                        + " END"
                     + " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -1815,7 +2043,11 @@ namespace rk_seikyu
                                             + " AND c.c4_y = d.c4_y"
                                             + " AND c.c4_m = d.c4_m"
                                             + " AND c.time_stamp < d.time_stamp"
-                                            + " AND c.c4_y::Text = '" + Cmb_nen_str + "'"
+                                            + " AND c.c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                    + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                                + " ELSE"
+                                                                    + "'" + Cmb_nen_str + "'"
+                                                                + " END"
                                             + " AND c.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                                                     + " ' ' || '" + Cmb_tsuki_str + "'"
                                                                     + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -1826,7 +2058,11 @@ namespace rk_seikyu
                     + " AND a.o_id = c.o_id"
                     + " AND a.c4_y = c.c4_y"
                     + " AND a.c4_m = c.c4_m"
-                    + " AND a.c4_y::Text = '" + Cmb_nen_str + "'"
+                    + " AND a.c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                            + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                        + " ELSE"
+                                            + "'" + Cmb_nen_str + "'"
+                                        + " END"
                     + " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 THEN"
                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 THEN"
@@ -1897,14 +2133,7 @@ namespace rk_seikyu
                     + ", c.c16"
                     + ", c.c19"
                     + ", a.c22"
-                    + ", CASE substr(c.c4,strpos(c.c4, '[')+1, strpos(c.c4, ']')-strpos(c.c4, '[')-1)"
-                    + " WHEN '入所' then '入所'"
-                    + " WHEN '介護通所' then '通所'"
-                    + " WHEN '介護短期' then '短期'"
-                    + " WHEN '予防通所' then '予防通所'"
-                    + " WHEN '予防短期' then '予防短期'"
-                    + " WHEN '通所型サービス' then '通所型'"
-                    + " END s_id_str"
+                    + ", e.hyoujimei s_id_str"
                     + ", a.s_id"
                     + ", a.o_id"
                     + ", a.time_stamp"
@@ -1918,6 +2147,7 @@ namespace rk_seikyu
                     + " AND a.o_id = c.o_id"
                     + " AND a.w_flg = '1'"
                     + " AND c.c9 = '" + Cmb_b_code_str + "'"
+                    + " LEFT JOIN t_syubetsu e ON a.o_id = e.o_id AND a.s_id = e.s_id"
                     + " WHERE NOT EXISTS ("
                                         + " SELECT 1"
                                         + " FROM t_seikyu b"
@@ -1926,7 +2156,11 @@ namespace rk_seikyu
                                         + " AND a.c4_y = b.c4_y"
                                         + " AND a.c4_m = b.c4_m"
                                         + " AND a.time_stamp < b.time_stamp"
-                                        + " AND a.c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND a.c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                    + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                                + " ELSE"
+                                                                    + "'" + Cmb_nen_str + "'"
+                                                                + " END"
                                         + " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
                                                                 + " ' ' || '" + Cmb_tsuki_str + "'"
                                                                 + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
@@ -1945,7 +2179,11 @@ namespace rk_seikyu
                                         + " AND c.s_id = d.s_id"
                                         + " AND c.o_id = d.o_id"
                                         + " AND c.time_stamp < d.time_stamp"
-                                        + " AND c.c4_y::Text = '" + Cmb_nen_str + "'"
+                                        + " AND c.c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                                    + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                                                + " ELSE"
+                                                                    + "'" + Cmb_nen_str + "'"
+                                                                + " END"
                                         + " AND c.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
                                                                 + " ' ' || '" + Cmb_tsuki_str + "'"
                                                                 + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
@@ -1956,7 +2194,11 @@ namespace rk_seikyu
                     + " AND a.o_id = c.o_id"
                     + " AND a.c4_y = c.c4_y"
                     + " AND a.c4_m = c.c4_m"
-                    + " AND a.c4_y::Text = '" + Cmb_nen_str + "'"
+                    + " AND a.c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                                + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                            + " ELSE"
+                                                + "'" + Cmb_nen_str + "'"
+                                            + " END"
                     + " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
                                             + " ' ' || '" + Cmb_tsuki_str + "'"
                                             + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
@@ -2018,30 +2260,36 @@ namespace rk_seikyu
                     {
                         cmb_b_code.Visible = false;
                         cmdPrnWithdrawal.Visible = false;
+                        checkBoxIni.Visible = false;
                     }
                     break;
                 case 2: // 
                     {
                         cmb_b_code.Visible = false;
                         cmdPrnWithdrawal.Visible = false;
+                        checkBoxIni.Visible = false;
                     }
                     break;
                 case 3: // 
                     {
                         cmb_b_code.Visible = false;
                         cmdPrnWithdrawal.Visible = false;
+                        checkBoxIni.Visible = false;
                     }
                     break;
                 case 4: // 
                     {
                         cmb_b_code.Visible = false;
                         cmdPrnWithdrawal.Visible = false;
+                        checkBoxIni.Visible = false;
                     }
                     break;
                 case 5: // 
                     {
                         cmb_b_code.Visible = true;
                         cmdPrnWithdrawal.Visible = true;
+                        checkBoxIni.Visible = true;
+
                     }
                     break;
             }
@@ -2244,20 +2492,16 @@ namespace rk_seikyu
                                 + ", c.c5"
                                 + ", rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),'')) c6_mod"
                                 + ", c.c6"
-                                + ", c.c9"
+                                + ", CASE  c.c9 WHEN '' THEN '0000'"
+                                + " ELSE"
+                                + " c.c9"
+                                + " END c9"
                                 + ", c.c11"
                                 + ", c.c14"
                                 + ", c.c16"
                                 + ", c.c19"
                                 + ", a.c22"
-                                + ", CASE substr(c.c4,strpos(c.c4, '[')+1, strpos(c.c4, ']')-strpos(c.c4, '[')-1)"
-                                + " WHEN '入所' then '入所'"
-                                + " WHEN '介護通所' then '通所'"
-                                + " WHEN '介護短期' then '短期'"
-                                + " WHEN '予防通所' then '予防通所'"
-                                + " WHEN '予防短期' then '予防短期'"
-                                + " WHEN '通所型サービス' then '通所型'"
-                                + " END s_id_str"
+                                + ", e.hyoujimei s_id_str"
                                 + ", a.s_id"
                                 + ", a.o_id"
                                 + ", a.time_stamp"
@@ -2275,8 +2519,9 @@ namespace rk_seikyu
                                     + " = rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),''))"
                                 + " AND a.s_id = c.s_id"
                                 + " AND a.w_flg = '1'"
-                                + " AND c.c9 = '" + Cmb_b_code_str + "'"
-                                + " AND a.o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
+                                + " AND CASE c.c9 WHEN '' THEN '0000' ELSE c.c9 END = '" + Cmb_b_code_str + "'"
+                                + " AND a.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                                + " INNER JOIN t_syubetsu e ON a.o_id = e.o_id AND a.s_id = e.s_id"
                                 + " INNER JOIN t_gengou i ON substr(a.c4_y,1,1) = i.g_name"
                                 + " WHERE NOT EXISTS ("
                                 + " SELECT 1"
@@ -2285,21 +2530,29 @@ namespace rk_seikyu
                                 + " AND a.o_id = b.o_id"
                                 + " AND a.c4_y = b.c4_y"
                                 + " AND a.c4_m = b.c4_m"
-                                + " AND a.c4_y::Text = '" + Cmb_nen_str + "'"
-                                + " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
-                                                        + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                        + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
-                                                        + " '' || '" + Cmb_tsuki_str + "'"
-                                                        + " END"
+                                //+ " AND a.c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                //                            + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                //                        + " ELSE"
+                                //                            + "'" + Cmb_nen_str + "'"
+                                //                        + " END"
+                                //+ " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
+                                //                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                //                        + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
+                                //                        + " '' || '" + Cmb_tsuki_str + "'"
+                                //                        + " END"
                                 + " AND a.time_stamp < b.time_stamp)"
                                 + " AND a.c4_y = c.c4_y"
                                 + " AND a.c4_m = c.c4_m"
-                                + " AND a.c4_y::Text = '" + Cmb_nen_str + "'"
-                                + " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
-                                                        + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                        + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
-                                                        + " '' || '" + Cmb_tsuki_str + "'"
-                                                        + " END"
+                                //+ " AND a.c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                //                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                //                    + " ELSE"
+                                //                        + "'" + Cmb_nen_str + "'"
+                                //                    + " END"
+                                //+ " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
+                                //                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                //                        + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
+                                //                        + " '' || '" + Cmb_tsuki_str + "'"
+                                //                        + " END"
                                 + " AND NOT EXISTS ("
                                 + " SELECT 1"
                                 + " FROM t_shiharai_houhou d"
@@ -2307,23 +2560,31 @@ namespace rk_seikyu
                                 + " AND c.o_id = d.o_id"
                                 + " AND c.c4_y = d.c4_y"
                                 + " AND c.c4_m = d.c4_m"
-                                + " AND c.c4_y::Text = '" + Cmb_nen_str + "'"
-                                + " AND c.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
-                                                        + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                        + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
-                                                        + " '' || '" + Cmb_tsuki_str + "'"
-                                                        + " END"
+                                //+ " AND c.c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                //                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                //                    + " ELSE"
+                                //                        + "'" + Cmb_nen_str + "'"
+                                //                    + " END"
+                                //+ " AND c.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
+                                //                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                //                        + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
+                                //                        + " '' || '" + Cmb_tsuki_str + "'"
+                                //                        + " END"
                                 + " AND c.time_stamp < d.time_stamp)"
                                 + " AND a.s_id = c.s_id"
                                 + " AND a.o_id = c.o_id"
                                 + " AND a.c4_y = c.c4_y"
                                 + " AND a.c4_m = c.c4_m"
-                                + " AND a.c4_y::Text = '" + Cmb_nen_str + "'"
-                                + " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
-                                                        + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                        + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
-                                                        + " '' || '" + Cmb_tsuki_str + "'"
-                                                        + " END"
+                                //+ " AND a.c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                //                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                //                    + " ELSE"
+                                //                        + "'" + Cmb_nen_str + "'"
+                                //                    + " END"
+                                //+ " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
+                                //                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                //                        + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
+                                //                        + " '' || '" + Cmb_tsuki_str + "'"
+                                //                        + " END"
                                 + " ORDER BY a.r_id"
                                 + ")"
                                 + " SELECT"
@@ -2379,12 +2640,12 @@ namespace rk_seikyu
                                         + " CASE WHEN b.b_id = '0' then null"
                                             + " WHEN b.b_id = '1' then" /* 稚内信金の場合の処理*/
                                                 + " CASE WHEN b.sd = '99' then" /* 翌月末引落の場合の処理 */
-                                                    + " CASE WHEN '" + Cmb_tsuki_str + "' = '11' Or '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
-                                                        + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                                    + " ELSE"
-                                                        /* 11, 12月以外の場合の処理 */
-                                                        + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                                    + " END"
+                                                                                + " CASE WHEN '" + Cmb_tsuki_str + "' = '11' Or '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
+                                                                                    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                                                + " ELSE"
+                                                                                    /* 11, 12月以外の場合の処理 */
+                                                                                    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                                                + " END"
                                                 + " ELSE" /* 翌月末引落以外の場合の処理 */
                                                     + " CASE WHEN '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
                                                         + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-11 || '/' || to_number(b.sd,'99')),'yyyy/mm/dd'))"
@@ -2395,12 +2656,12 @@ namespace rk_seikyu
                                                 + " END"
                                             + " WHEN b.b_id = '2' then" /* ゆうちょ銀行の場合の処理*/
                                                 + " CASE WHEN b.sd = '99' then" /* 翌月末引落の場合の処理 */
-                                                    + " CASE WHEN '" + Cmb_tsuki_str + "' = '11' Or '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
-                                                        + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                                    + " ELSE"
-                                                        /* 11, 12月以外の場合の処理 */
-                                                        + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                                    + " END"
+                                                                                + " CASE WHEN '" + Cmb_tsuki_str + "' = '11' Or '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
+                                                                                    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                                                + " ELSE"
+                                                                                    /* 11, 12月以外の場合の処理 */
+                                                                                    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                                                + " END"
                                                 + " ELSE" /* 翌月末引落以外の場合の処理 */
                                                     + " CASE WHEN '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
                                                         + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-11 || '/' || to_number(b.sd,'99')),'yyyy/mm/dd'))"
@@ -2411,12 +2672,12 @@ namespace rk_seikyu
                                                 + " END"
                                             + " WHEN b.b_id = '3' then" /* 利尻漁協の場合の処理*/
                                                 + " CASE WHEN b.sd = '99' then" /* 翌月末引落の場合の処理 */
-                                                    + " CASE WHEN '" + Cmb_tsuki_str + "' = '11' Or '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
-                                                        + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                                    + " ELSE"
-                                                        /* 11, 12月以外の場合の処理 */
-                                                        + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                                    + " END"
+                                                                                + " CASE WHEN '" + Cmb_tsuki_str + "' = '11' Or '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
+                                                                                    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                                                + " ELSE"
+                                                                                    /* 11, 12月以外の場合の処理 */
+                                                                                    + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                                                + " END"
                                                 + " ELSE" /* 翌月末引落以外の場合の処理 */
                                                     + " CASE WHEN '" + Cmb_tsuki_str + "' = '12' then" /* 年末12月の場合の処理 */
                                                         + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff+1 || '/' || to_number('" + Cmb_tsuki_str + "','99')-11 || '/' || to_number(b.sd,'99')),'yyyy/mm/dd'))"
@@ -2448,8 +2709,8 @@ namespace rk_seikyu
                                                 + " END"
                                         + " END"
                                     + " END last_day"
-                                    + ", s.data6"
-                                    + ", s.name3"
+                                    + ", o.o_name data6"
+                                    + ", m.manager name3"
                                     + ", x.syubetsu"
                                     + ", x.shisetsumei"
                                     + ", h.gengou"
@@ -2458,15 +2719,23 @@ namespace rk_seikyu
                                     + ", h.end_date"
                                     + ", h.diff"
                             + " FROM h LEFT JOIN t_bank b"
-                            + " ON h.c9 = b.b_code, t_req s, t_syubetsu x"
+                            + " ON CASE h.c9 WHEN '' THEN '0000' ELSE h.c9 END = b.b_code, t_office o, t_manager m, t_syubetsu x"
                             + " WHERE x.o_id = h.o_id"
-                            + " AND h.o_id::Text = s.o_id"
-                            + " AND x.s_id = h.s_id::Integer"
-                            + " AND x.o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
-                            + " AND s.o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
+                            + " AND x.s_id = h.s_id"
+                            + " AND x.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                            + " AND m.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                            + " AND o.o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
                             + " ORDER BY to_number(concat(to_number(ltrim(left(h.c4,3)),'999')+h.diff ,lpad(trim(right(h.c4,2)),2,'0')),'999999'), h.r_id;"
                             , m_conn
                         );
+
+                        da.SelectCommand.Parameters.Add(new NpgsqlParameter("add_year", NpgsqlTypes.NpgsqlDbType.Text));
+                        da.SelectCommand.Parameters.Add(new NpgsqlParameter("add_month", NpgsqlTypes.NpgsqlDbType.Text));
+                        da.SelectCommand.Parameters.Add(new NpgsqlParameter("add_day", NpgsqlTypes.NpgsqlDbType.Text));
+                        da.SelectCommand.Parameters["add_year"].Value = Cmb_nen_str;
+                        da.SelectCommand.Parameters["add_month"].Value = Cmb_tsuki_str;
+                        da.SelectCommand.Parameters["add_day"].Value = "1";
+
 
                         if (withdrawalds.Tables["withdrawal_ds"] != null)
                             withdrawalds.Tables["withdrawal_ds"].Clear();
@@ -2481,6 +2750,7 @@ namespace rk_seikyu
                         crvSeikyu.Visible = true;
                     }
                     break;
+
                 case '1': // 
                     {
                         da.SelectCommand = new NpgsqlCommand
@@ -2496,20 +2766,17 @@ namespace rk_seikyu
                                 + ", c.c5"
                                 + ", rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),'')) c6_mod"
                                 + ", c.c6"
-                                + ", c.c9"
+                                + ", CASE  c.c9 WHEN '' THEN '0000'"
+                                + " ELSE"
+                                + " c.c9"
+                                + " END c9"
                                 + ", c.c11"
                                 + ", c.c14"
                                 + ", c.c16"
                                 + ", c.c19"
                                 + ", a.c22"
                                 + ", CASE substr(c.c4,strpos(c.c4, '[')+1, strpos(c.c4, ']')-strpos(c.c4, '[')-1)"
-                                + " WHEN '入所' then '入所'"
-                                + " WHEN '介護通所' then '通所'"
-                                + " WHEN '介護短期' then '短期'"
-                                + " WHEN '予防通所' then '予防通所'"
-                                + " WHEN '予防短期' then '予防短期'"
-                                + " WHEN '通所型サービス' then '通所型'"
-                                + " END s_id_str"
+                                + ", e.hyoujimei s_id_str"
                                 + ", a.s_id"
                                 + ", a.o_id"
                                 + ", a.time_stamp"
@@ -2527,8 +2794,9 @@ namespace rk_seikyu
                                     + " = rtrim(replace(c.c6,substr(c.c6,strpos(c.c6, '('), strpos(c.c6, ')')),''))"
                                 + " AND a.s_id = c.s_id"
                                 + " AND a.w_flg = '1'"
-                                + " AND c.c9 = '" + Cmb_b_code_str + "'"
+                                + " AND CASE c.c9 WHEN '' THEN '0000' ELSE c.c9 END = '" + Cmb_b_code_str + "'"
                                 + " AND a.o_id = '" + cmb_o_id_str + "'"
+                                + " INNER JOIN t_syubetsu e ON a.o_id = e.o_id AND a.s_id = e.s_id"
                                 + " INNER JOIN t_gengou i ON substr(a.c4_y,1,1) = i.g_name"
                                 + " WHERE NOT EXISTS ("
                                 + " SELECT 1"
@@ -2537,23 +2805,31 @@ namespace rk_seikyu
                                 + " AND a.o_id = b.o_id"
                                 + " AND a.c4_y = b.c4_y"
                                 + " AND a.c4_m = b.c4_m"
-                                + " AND a.c4_y::Text = '" + Cmb_nen_str + "'"
-                                + " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
-                                                        + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                        + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
-                                                        + " '' || '" + Cmb_tsuki_str + "'"
-                                                        + " END"
+                                //+ " AND a.c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                //                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                //                    + " ELSE"
+                                //                        + "'" + Cmb_nen_str + "'"
+                                //                    + " END"
+                                //+ " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
+                                //                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                //                        + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
+                                //                        + " '' || '" + Cmb_tsuki_str + "'"
+                                //                        + " END"
                                 + " AND a.time_stamp < b.time_stamp)"
                                 + " AND a.s_id = c.s_id"
                                 + " AND a.o_id = c.o_id"
                                 + " AND a.c4_y = c.c4_y"
                                 + " AND a.c4_m = c.c4_m"
-                                + " AND a.c4_y::Text = '" + Cmb_nen_str + "'"
-                                + " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
-                                                        + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                        + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
-                                                        + " '' || '" + Cmb_tsuki_str + "'"
-                                                        + " END"
+                                //+ " AND a.c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                //                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                //                    + " ELSE"
+                                //                        + "'" + Cmb_nen_str + "'"
+                                //                    + " END"
+                                //+ " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
+                                //                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                //                        + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
+                                //                        + " '' || '" + Cmb_tsuki_str + "'"
+                                //                        + " END"
                                 + " AND NOT EXISTS ("
                                 + " SELECT 1"
                                 + " FROM t_shiharai_houhou d"
@@ -2561,28 +2837,36 @@ namespace rk_seikyu
                                 + " AND c.o_id = d.o_id"
                                 + " AND c.c4_y = d.c4_y"
                                 + " AND c.c4_m = d.c4_m"
-                                + " AND c.c4_y::Text = '" + Cmb_nen_str + "'"
-                                + " AND c.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
-                                                        + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                        + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
-                                                        + " '' || '" + Cmb_tsuki_str + "'"
-                                                        + " END"
+                                //+ " AND c.c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                //                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                //                    + " ELSE"
+                                //                        + "'" + Cmb_nen_str + "'"
+                                //                    + " END"
+                                //+ " AND c.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
+                                //                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                //                        + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
+                                //                        + " '' || '" + Cmb_tsuki_str + "'"
+                                //                        + " END"
                                 + " AND c.time_stamp < d.time_stamp)"
                                 + " AND a.c4_y = c.c4_y"
                                 + " AND a.c4_m = c.c4_m"
-                                + " AND a.c4_y::Text = '" + Cmb_nen_str + "'"
-                                + " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
-                                                        + " ' ' || '" + Cmb_tsuki_str + "'"
-                                                        + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
-                                                        + " '' || '" + Cmb_tsuki_str + "'"
-                                                        + " END"
+                                //+ " AND a.c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
+                                //                        + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
+                                //                    + " ELSE"
+                                //                        + "'" + Cmb_nen_str + "'"
+                                //                    + " END"
+                                //+ " AND a.c4_m::Text = CASE WHEN length('" + Cmb_tsuki_str + "')=1 then"
+                                //                        + " ' ' || '" + Cmb_tsuki_str + "'"
+                                //                        + " WHEN length('" + Cmb_tsuki_str + "')=2 then"
+                                //                        + " '' || '" + Cmb_tsuki_str + "'"
+                                //                        + " END"
                                 + " ORDER BY a.r_id"
                                 + ")"
                                 + " SELECT"
-                                + " distinct array_to_string(ARRAY(select distinctON(to_number(concat(to_number(ltrim(left(r.c4,3)),'999')+h.diff ,lpad(trim(right(r.c4,2)),2,'0')),'999999')) ltrim(right(r.c4,2)) FROM t_seikyu r"
+                                + " distinct array_to_string(ARRAY(select distinct ON (to_number(concat(to_number(ltrim(left(r.c4,3)),'999')+r.diff ,lpad(trim(right(r.c4,2)),2,'0')),'999999')) ltrim(right(r.c4,2)) FROM t_seikyu"
                                 + " INNER JOIN t_shiharai_houhou s"
                                 + " ON r.c1 = s.c5 AND r.c3 = s.c6"
-                                + " WHERE w_flg = '1' AND s.c9 = '" + Cmb_b_code_str + "' ORDER BY to_number(concat(to_number(ltrim(left(r.c4,3)),'999')+h.diff ,lpad(trim(right(r.c4,2)),2,'0')),'999999')),'-') title"
+                                + " WHERE w_flg = '1' AND s.c9 = '" + Cmb_b_code_str + "' ORDER BY to_number(concat(to_number(ltrim(left(r.c4,3)),'999')+r.diff ,lpad(trim(right(r.c4,2)),2,'0')),'999999')),'-') title"
                                 + ", ltrim(right(r.c4,2)) array_length"
                                 + ", r.r_id"
                                 + ", r.c1"
@@ -2633,11 +2917,11 @@ namespace rk_seikyu
                                     + ", CASE WHEN b.sy IS NULL or b.sm IS NULL then" /* 引落年月日自動入力の場合*/
                                         + " CASE WHEN b.b_id = '0' then null"
                                             + " WHEN b.b_id = '1' then" /* 稚内信金の場合の処理*/
-                                                + " CASE WHEN b.sd = '99' then" /* 翌月末引落の場合の処理 */
-                                                        + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                                + " ELSE" /* 翌月末引落以外の場合の処理 */
-                                                        + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+1 || '/' || to_number(b.sd,'99')),'yyyy/mm/dd'))"
-                                                + " END"
+                                                                        + " CASE WHEN b.sd = '99' then" /* 翌月末引落の場合の処理 */
+                                                                                + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                                        + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                                                                + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+1 || '/' || to_number(b.sd,'99')),'yyyy/mm/dd'))"
+                                                                        + " END"
                                             + " WHEN b.b_id = '2' then" /* ゆうちょ銀行の場合の処理*/
                                                 + " CASE WHEN b.sd = '99' then" /* 翌月末引落の場合の処理 */
                                                         + " target_date(to_date((to_number('" + Cmb_nen_str + "','999')+h.diff || '/' || to_number('" + Cmb_tsuki_str + "','99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
@@ -2673,8 +2957,8 @@ namespace rk_seikyu
                                                 + " END"
                                         + " END"
                                     + " END last_day"
-                                    + ", s.data6"
-                                    + ", s.name3"
+                                    + ", o.o_name data6"
+                                    + ", m.manager name3"
                                     + ", x.syubetsu"
                                     + ", h.gengou"
                                     + ", h.g_name"
@@ -2682,12 +2966,12 @@ namespace rk_seikyu
                                     + ", h.end_date"
                                     + ", h.diff"
                             + " FROM h LEFT JOIN t_bank b"
-                            + " ON h.c9 = b.b_code, t_req s, t_syubetsu x"
+                            + " ON CASE h.c9 WHEN '' THEN '0000' ELSE h.c9 END = b.b_code, t_office o, t_manager m, t_syubetsu x"
                             + " WHERE x.o_id = h.o_id"
-                            + " AND h.o_id::Text = s.o_id"
-                            + " AND x.s_id = h.s_id::Integer"
-                            + " AND x.o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
-                            + " AND s.o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
+                            + " AND x.s_id = h.s_id"
+                            + " AND x.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                            + " AND m.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                            + " AND o.o_id::Text= '" + Form_Seikyu_TextBoxO_id + "'"
                             + " ORDER BY to_number(concat(to_number(ltrim(left(h.c4,3)),'999')+h.diff ,lpad(trim(right(h.c4,2)),2,'0')),'999999'), h.r_id;"
                         , m_conn
                         );
@@ -2699,6 +2983,8 @@ namespace rk_seikyu
                         crWithdrawal myReport = new crWithdrawal();
                         myReport.SetDataSource(withdrawalds);
                         myReport.SetParameterValue("r_cmb_o_id_item", cmb_o_id_item);  // 指定したパラメータ値をセット
+                        //myReport.SetParameterValue("Cmb_nen_str", Cmb_nen_str);  // 指定したパラメータ値をセット
+                        //myReport.SetParameterValue("Cmb_tsuki_str", Cmb_tsuki_str);  // 指定したパラメータ値をセット
                         crvSeikyu.ReportSource = myReport;
 
                         bindingNavigatorWithdrawal.Visible = true;
@@ -2713,7 +2999,7 @@ namespace rk_seikyu
         {
         }
 
-         // 列ヘッダーのチェックボックスを押したときに、すべて選択用のチェックボックス状態を切り替え
+        // 列ヘッダーのチェックボックスを押したときに、すべて選択用のチェックボックス状態を切り替え
         private void DataGridViewWithdrawal_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0 && e.RowIndex == -1)

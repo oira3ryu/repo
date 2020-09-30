@@ -20,6 +20,8 @@ namespace rk_seikyu
         private NpgsqlDataAdapter o_id_da = new NpgsqlDataAdapter();
         private Form_seikyu form_seikyu_Instance;
 
+        public string Form_Seikyu_TextBoxO_name;
+
         public int I { get; set; }
 
         public Form_office()
@@ -28,19 +30,22 @@ namespace rk_seikyu
 
             //Form_seikyuのインスタンスを取得
             form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
+            Form_Seikyu_TextBoxO_name = form_seikyu_Instance.TextBoxO_name;
+
         }
+
 
         private void Form_office_Load(object sender, EventArgs e)
         {
             DataGridViewOffice.Columns[0].HeaderText = "ID";
-            DataGridViewOffice.Columns[1].HeaderText = "既定";
-            DataGridViewOffice.Columns[2].HeaderText = "事業所番号";
-            DataGridViewOffice.Columns[3].HeaderText = "事業所名";
-            DataGridViewOffice.Columns[4].HeaderText = "郵便番号";
-            DataGridViewOffice.Columns[5].HeaderText = "住所";
-            DataGridViewOffice.Columns[6].HeaderText = "電話番号";
-            DataGridViewOffice.Columns[7].HeaderText = "管理者";
-            DataGridViewOffice.Columns[8].HeaderText = "担当者";
+            DataGridViewOffice.Columns[1].HeaderText = "事業所番号";
+            DataGridViewOffice.Columns[2].HeaderText = "事業所名";
+            DataGridViewOffice.Columns[3].HeaderText = "郵便番号";
+            DataGridViewOffice.Columns[4].HeaderText = "住所";
+            DataGridViewOffice.Columns[5].HeaderText = "電話番号";
+            DataGridViewOffice.Columns[6].HeaderText = "管理者";
+            DataGridViewOffice.Columns[7].HeaderText = "担当者";
+            DataGridViewOffice.Columns[8].HeaderText = "既定";
 
             da.SelectCommand = new NpgsqlCommand
             (
@@ -64,8 +69,7 @@ namespace rk_seikyu
             da.InsertCommand = new NpgsqlCommand
             (
                     "INSERT INTO t_office ("
-                + " o_id"
-                + ", flg"
+                + " flg"
                 + ", o_number"
                 + ", o_name"
                 + ", o_p_code"
@@ -74,8 +78,7 @@ namespace rk_seikyu
                 + ", o_manager"
                 + ", o_stuff"
                 + " ) VALUES ("
-                + " :o_id"
-                + ", :flg"
+                + " :flg"
                 + ", :o_number"
                 + ", :o_name"
                 + ", :o_p_code"
@@ -86,7 +89,7 @@ namespace rk_seikyu
                 + ");",
                 m_conn
             );
-            da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+            //da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("flg", NpgsqlTypes.NpgsqlDbType.Boolean, 0, "flg", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_number", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_number", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_name", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_name", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
@@ -100,7 +103,7 @@ namespace rk_seikyu
 
             // update
             da.UpdateCommand = new NpgsqlCommand(
-                "UPDATE t_Office SET"
+                "UPDATE t_office SET"
                 + " o_id = :o_id"
                 + ", flg = :flg"
                 + ", o_number = :o_number"
@@ -126,7 +129,7 @@ namespace rk_seikyu
             // delete
             da.DeleteCommand = new NpgsqlCommand
             (
-                   "DELETE FROM t_Office"
+                   "DELETE FROM t_office"
                 + " WHERE"
                 + " o_id = :o_id"
                 , m_conn
@@ -180,7 +183,7 @@ namespace rk_seikyu
                 {
                     //データ登録
                     //var cmd = new NpgsqlCommand(@"insert into t_settings (id, o_id_val) values (:id, '" + Cmb_o_id_int.ToString() + "')", m_conn);
-                    var cmd = new NpgsqlCommand(@"UPDATE t_settings SET o_id_val = '" + Cmb_o_id_int.ToString() + "' WHERE id = 1;", m_conn);
+                    var cmd = new NpgsqlCommand(@"UPDATE t_settings SET o_id_val = '" + Cmb_o_id_int.ToString() + "' WHERE sid = 1;", m_conn);
                     //cmd.Parameters.Add(new NpgsqlParameter("id", DbType.Int32) { Value = 1 });
                     //cmd.Parameters.Add(new NpgsqlParameter("o_id_val", DbType.String) { Value = "1" });
                     cmd.ExecuteNonQuery();
@@ -208,7 +211,7 @@ namespace rk_seikyu
                 MessageBox.Show("保存に失敗しました。\n\n[内容]\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            MessageBox.Show(update_count.ToString() + "件、保存しました。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("事業所を変更しました。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void OfficeRowUpdated(Object sender, NpgsqlRowUpdatedEventArgs e)
@@ -409,13 +412,13 @@ namespace rk_seikyu
                   DataGridViewOffice[e.ColumnIndex, e.RowIndex].Value);
                 // 選択列の場合
                 if (bool.Equals(DataGridViewOffice[e.ColumnIndex, e.RowIndex].Value, true))
-                    {
+                {
                     // 他にチェックされている項目がある場合はそのチェックを解除
                     for (int rowIndex = 0; rowIndex < DataGridViewOffice.Rows.Count; rowIndex++)
                     {
                         // チェックした行以外
                         if (rowIndex != e.RowIndex)
-                            {
+                        {
                             // チェックを解除
                             DataGridViewOffice[e.ColumnIndex, rowIndex].Value = false;
                             // ReadOnlyを解除

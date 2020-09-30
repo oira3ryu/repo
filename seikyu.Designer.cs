@@ -363,13 +363,9 @@ namespace rk_seikyu {
             
             private global::System.Data.DataColumn columntitle2;
             
-            private global::System.Data.DataColumn columnname1;
-            
             private global::System.Data.DataColumn columntitle3;
             
             private global::System.Data.DataColumn columntitle4;
-            
-            private global::System.Data.DataColumn columnname2;
             
             private global::System.Data.DataColumn columnreq_id;
             
@@ -596,6 +592,16 @@ namespace rk_seikyu {
             private global::System.Data.DataColumn columndiff;
             
             private global::System.Data.DataColumn columnc4_ym;
+            
+            private global::System.Data.DataColumn columnstuff;
+            
+            private global::System.Data.DataColumn columnmanager;
+            
+            private global::System.Data.DataColumn columnchief;
+            
+            private global::System.Data.DataColumn columnaccounting_manager;
+            
+            private global::System.Data.DataColumn columnacc_kana;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -968,14 +974,6 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn name1Column {
-                get {
-                    return this.columnname1;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn title3Column {
                 get {
                     return this.columntitle3;
@@ -987,14 +985,6 @@ namespace rk_seikyu {
             public global::System.Data.DataColumn title4Column {
                 get {
                     return this.columntitle4;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn name2Column {
-                get {
-                    return this.columnname2;
                 }
             }
             
@@ -1904,6 +1894,46 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn stuffColumn {
+                get {
+                    return this.columnstuff;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn managerColumn {
+                get {
+                    return this.columnmanager;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn chiefColumn {
+                get {
+                    return this.columnchief;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn accounting_managerColumn {
+                get {
+                    return this.columnaccounting_manager;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn acc_kanaColumn {
+                get {
+                    return this.columnacc_kana;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1982,10 +2012,8 @@ namespace rk_seikyu {
                         string noufusyo_bangou, 
                         string title1, 
                         string title2, 
-                        string name1, 
                         string title3, 
                         string title4, 
-                        string name2, 
                         string req_id, 
                         string c4_array, 
                         string srb_id, 
@@ -2098,7 +2126,12 @@ namespace rk_seikyu {
                         string c4_y, 
                         string c4_m, 
                         string diff, 
-                        string c4_ym) {
+                        string c4_ym, 
+                        string stuff, 
+                        string manager, 
+                        string chief, 
+                        string accounting_manager, 
+                        string acc_kana) {
                 seikyuRow rowseikyuRow = ((seikyuRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         c1,
@@ -2143,10 +2176,8 @@ namespace rk_seikyu {
                         noufusyo_bangou,
                         title1,
                         title2,
-                        name1,
                         title3,
                         title4,
-                        name2,
                         req_id,
                         c4_array,
                         srb_id,
@@ -2259,7 +2290,12 @@ namespace rk_seikyu {
                         c4_y,
                         c4_m,
                         diff,
-                        c4_ym};
+                        c4_ym,
+                        stuff,
+                        manager,
+                        chief,
+                        accounting_manager,
+                        acc_kana};
                 rowseikyuRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowseikyuRow);
                 return rowseikyuRow;
@@ -2331,10 +2367,8 @@ namespace rk_seikyu {
                 this.columnnoufusyo_bangou = base.Columns["noufusyo_bangou"];
                 this.columntitle1 = base.Columns["title1"];
                 this.columntitle2 = base.Columns["title2"];
-                this.columnname1 = base.Columns["name1"];
                 this.columntitle3 = base.Columns["title3"];
                 this.columntitle4 = base.Columns["title4"];
-                this.columnname2 = base.Columns["name2"];
                 this.columnreq_id = base.Columns["req_id"];
                 this.columnc4_array = base.Columns["c4_array"];
                 this.columnsrb_id = base.Columns["srb_id"];
@@ -2448,6 +2482,11 @@ namespace rk_seikyu {
                 this.columnc4_m = base.Columns["c4_m"];
                 this.columndiff = base.Columns["diff"];
                 this.columnc4_ym = base.Columns["c4_ym"];
+                this.columnstuff = base.Columns["stuff"];
+                this.columnmanager = base.Columns["manager"];
+                this.columnchief = base.Columns["chief"];
+                this.columnaccounting_manager = base.Columns["accounting_manager"];
+                this.columnacc_kana = base.Columns["acc_kana"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2537,14 +2576,10 @@ namespace rk_seikyu {
                 base.Columns.Add(this.columntitle1);
                 this.columntitle2 = new global::System.Data.DataColumn("title2", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntitle2);
-                this.columnname1 = new global::System.Data.DataColumn("name1", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnname1);
                 this.columntitle3 = new global::System.Data.DataColumn("title3", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntitle3);
                 this.columntitle4 = new global::System.Data.DataColumn("title4", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntitle4);
-                this.columnname2 = new global::System.Data.DataColumn("name2", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnname2);
                 this.columnreq_id = new global::System.Data.DataColumn("req_id", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnreq_id);
                 this.columnc4_array = new global::System.Data.DataColumn("c4_array", typeof(string), null, global::System.Data.MappingType.Element);
@@ -2771,6 +2806,16 @@ namespace rk_seikyu {
                 base.Columns.Add(this.columndiff);
                 this.columnc4_ym = new global::System.Data.DataColumn("c4_ym", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnc4_ym);
+                this.columnstuff = new global::System.Data.DataColumn("stuff", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstuff);
+                this.columnmanager = new global::System.Data.DataColumn("manager", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmanager);
+                this.columnchief = new global::System.Data.DataColumn("chief", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnchief);
+                this.columnaccounting_manager = new global::System.Data.DataColumn("accounting_manager", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccounting_manager);
+                this.columnacc_kana = new global::System.Data.DataColumn("acc_kana", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnacc_kana);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AllowDBNull = false;
@@ -3591,22 +3636,6 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string name1 {
-                get {
-                    try {
-                        return ((string)(this[this.tableseikyu.name1Column]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("テーブル \'seikyu\' にある列 \'name1\' の値は DBNull です。", e);
-                    }
-                }
-                set {
-                    this[this.tableseikyu.name1Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string title3 {
                 get {
                     try {
@@ -3634,22 +3663,6 @@ namespace rk_seikyu {
                 }
                 set {
                     this[this.tableseikyu.title4Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string name2 {
-                get {
-                    try {
-                        return ((string)(this[this.tableseikyu.name2Column]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("テーブル \'seikyu\' にある列 \'name2\' の値は DBNull です。", e);
-                    }
-                }
-                set {
-                    this[this.tableseikyu.name2Column] = value;
                 }
             }
             
@@ -5458,6 +5471,86 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string stuff {
+                get {
+                    try {
+                        return ((string)(this[this.tableseikyu.stuffColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'seikyu\' にある列 \'stuff\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableseikyu.stuffColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string manager {
+                get {
+                    try {
+                        return ((string)(this[this.tableseikyu.managerColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'seikyu\' にある列 \'manager\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableseikyu.managerColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string chief {
+                get {
+                    try {
+                        return ((string)(this[this.tableseikyu.chiefColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'seikyu\' にある列 \'chief\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableseikyu.chiefColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string accounting_manager {
+                get {
+                    try {
+                        return ((string)(this[this.tableseikyu.accounting_managerColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'seikyu\' にある列 \'accounting_manager\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableseikyu.accounting_managerColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string acc_kana {
+                get {
+                    try {
+                        return ((string)(this[this.tableseikyu.acc_kanaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'seikyu\' にある列 \'acc_kana\' の値は DBNull です。", e);
+                    }
+                }
+                set {
+                    this[this.tableseikyu.acc_kanaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool Isc1Null() {
                 return this.IsNull(this.tableseikyu.c1Column);
             }
@@ -5962,18 +6055,6 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool Isname1Null() {
-                return this.IsNull(this.tableseikyu.name1Column);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void Setname1Null() {
-                this[this.tableseikyu.name1Column] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool Istitle3Null() {
                 return this.IsNull(this.tableseikyu.title3Column);
             }
@@ -5994,18 +6075,6 @@ namespace rk_seikyu {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void Settitle4Null() {
                 this[this.tableseikyu.title4Column] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool Isname2Null() {
-                return this.IsNull(this.tableseikyu.name2Column);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void Setname2Null() {
-                this[this.tableseikyu.name2Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7350,6 +7419,66 @@ namespace rk_seikyu {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void Setc4_ymNull() {
                 this[this.tableseikyu.c4_ymColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsstuffNull() {
+                return this.IsNull(this.tableseikyu.stuffColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetstuffNull() {
+                this[this.tableseikyu.stuffColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsmanagerNull() {
+                return this.IsNull(this.tableseikyu.managerColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetmanagerNull() {
+                this[this.tableseikyu.managerColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IschiefNull() {
+                return this.IsNull(this.tableseikyu.chiefColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetchiefNull() {
+                this[this.tableseikyu.chiefColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isaccounting_managerNull() {
+                return this.IsNull(this.tableseikyu.accounting_managerColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setaccounting_managerNull() {
+                this[this.tableseikyu.accounting_managerColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isacc_kanaNull() {
+                return this.IsNull(this.tableseikyu.acc_kanaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setacc_kanaNull() {
+                this[this.tableseikyu.acc_kanaColumn] = global::System.Convert.DBNull;
             }
         }
         

@@ -23,13 +23,28 @@ namespace rk_seikyu.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server=127.0.0.1;Port=5433;User Id=rkadmin;Password=yu2;Database=rk_seikyu;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=127.0.0.1;Port=5433;User Id=rkadmin;Password=yu2;Database=rk_seikyu")]
+        public string PostgresConnect1 {
+            get {
+                return ((string)(this["PostgresConnect1"]));
+            }
+            set {
+                this["PostgresConnect1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=127.0.0.1;Port=5433;User Id=rkadmin;Password=yu2;Database=rk_seikyu")]
         public string PostgresConnect {
             get {
                 return ((string)(this["PostgresConnect"]));
+            }
+            set {
+                this["PostgresConnect"] = value;
             }
         }
     }

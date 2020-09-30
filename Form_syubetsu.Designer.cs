@@ -46,19 +46,22 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingSourceSyubetsu = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewSyubetsu = new System.Windows.Forms.DataGridView();
-            this.syubetsu = new rk_seikyu.syubetsu();
-            this.syubetsuBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.syubetsuBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.sidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.syubetsuBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.syubetsu = new rk_seikyu.syubetsu();
+            this.s_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.syubetsuDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.shisetsumeiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hyoujimei = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.shisetsumei = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.o_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TextBoxS_id = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorSyubetsu)).BeginInit();
             this.bindingNavigatorSyubetsu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceSyubetsu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSyubetsu)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.syubetsu)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.syubetsuBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.syubetsuBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.syubetsuBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.syubetsu)).BeginInit();
             this.SuspendLayout();
             // 
             // cmdSyubetsuSave
@@ -121,7 +124,7 @@
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(38, 22);
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(29, 22);
             this.bindingNavigatorCountItem.Text = "/ {0}";
             this.bindingNavigatorCountItem.ToolTipText = "項目の総数";
             // 
@@ -161,8 +164,9 @@
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "位置";
             this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Yu Gothic UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 25);
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
             this.bindingNavigatorPositionItem.ToolTipText = "現在の場所";
             // 
@@ -203,36 +207,39 @@
             this.dataGridViewSyubetsu.AutoGenerateColumns = false;
             this.dataGridViewSyubetsu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSyubetsu.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.sidDataGridViewTextBoxColumn,
+            this.s_id,
             this.syubetsuDataGridViewTextBoxColumn,
-            this.shisetsumeiDataGridViewTextBoxColumn});
+            this.hyoujimei,
+            this.shisetsumei,
+            this.o_id});
             this.dataGridViewSyubetsu.DataSource = this.syubetsuBindingSource1;
             this.dataGridViewSyubetsu.Location = new System.Drawing.Point(200, 85);
             this.dataGridViewSyubetsu.Name = "dataGridViewSyubetsu";
             this.dataGridViewSyubetsu.RowTemplate.Height = 21;
             this.dataGridViewSyubetsu.Size = new System.Drawing.Size(831, 220);
             this.dataGridViewSyubetsu.TabIndex = 3;
-            // 
-            // syubetsu
-            // 
-            this.syubetsu.DataSetName = "syubetsu";
-            this.syubetsu.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // syubetsuBindingSource
-            // 
-            this.syubetsuBindingSource.DataSource = this.syubetsu;
-            this.syubetsuBindingSource.Position = 0;
+            this.dataGridViewSyubetsu.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridViewSyubetsu_DefaultValuesNeeded);
             // 
             // syubetsuBindingSource1
             // 
             this.syubetsuBindingSource1.DataMember = "syubetsu";
             this.syubetsuBindingSource1.DataSource = this.syubetsuBindingSource;
             // 
-            // sidDataGridViewTextBoxColumn
+            // syubetsuBindingSource
             // 
-            this.sidDataGridViewTextBoxColumn.DataPropertyName = "s_id";
-            this.sidDataGridViewTextBoxColumn.HeaderText = "s_id";
-            this.sidDataGridViewTextBoxColumn.Name = "sidDataGridViewTextBoxColumn";
+            this.syubetsuBindingSource.DataSource = this.syubetsu;
+            this.syubetsuBindingSource.Position = 0;
+            // 
+            // syubetsu
+            // 
+            this.syubetsu.DataSetName = "syubetsu";
+            this.syubetsu.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // s_id
+            // 
+            this.s_id.DataPropertyName = "s_id";
+            this.s_id.HeaderText = "s_id";
+            this.s_id.Name = "s_id";
             // 
             // syubetsuDataGridViewTextBoxColumn
             // 
@@ -240,23 +247,43 @@
             this.syubetsuDataGridViewTextBoxColumn.HeaderText = "syubetsu";
             this.syubetsuDataGridViewTextBoxColumn.Name = "syubetsuDataGridViewTextBoxColumn";
             // 
-            // shisetsumeiDataGridViewTextBoxColumn
+            // hyoujimei
             // 
-            this.shisetsumeiDataGridViewTextBoxColumn.DataPropertyName = "shisetsumei";
-            this.shisetsumeiDataGridViewTextBoxColumn.HeaderText = "shisetsumei";
-            this.shisetsumeiDataGridViewTextBoxColumn.Name = "shisetsumeiDataGridViewTextBoxColumn";
+            this.hyoujimei.DataPropertyName = "hyoujimei";
+            this.hyoujimei.HeaderText = "hyoujimei";
+            this.hyoujimei.Name = "hyoujimei";
+            // 
+            // shisetsumei
+            // 
+            this.shisetsumei.DataPropertyName = "shisetsumei";
+            this.shisetsumei.HeaderText = "shisetsumei";
+            this.shisetsumei.Name = "shisetsumei";
+            // 
+            // o_id
+            // 
+            this.o_id.DataPropertyName = "o_id";
+            this.o_id.HeaderText = "o_id";
+            this.o_id.Name = "o_id";
+            // 
+            // TextBoxS_id
+            // 
+            this.TextBoxS_id.Location = new System.Drawing.Point(325, 40);
+            this.TextBoxS_id.Name = "TextBoxS_id";
+            this.TextBoxS_id.Size = new System.Drawing.Size(100, 19);
+            this.TextBoxS_id.TabIndex = 4;
             // 
             // Form_syubetsu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1127, 356);
+            this.Controls.Add(this.TextBoxS_id);
             this.Controls.Add(this.dataGridViewSyubetsu);
             this.Controls.Add(this.bindingNavigatorSyubetsu);
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.cmdSyubetsuSave);
             this.Name = "Form_syubetsu";
-            this.Text = "Form_serv";
+            this.Text = "Form_syubetsu";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_syubetsu_FormClosing);
             this.Load += new System.EventHandler(this.Form_syubetsu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorSyubetsu)).EndInit();
@@ -264,9 +291,9 @@
             this.bindingNavigatorSyubetsu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceSyubetsu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSyubetsu)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.syubetsu)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.syubetsuBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.syubetsuBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.syubetsuBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.syubetsu)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -291,14 +318,14 @@
 //      private syubetsu syubetsu1;
         private System.Windows.Forms.BindingSource bindingSourceSyubetsu;
         private System.Windows.Forms.DataGridView dataGridViewSyubetsu;
-        //private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        //private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        //private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sidDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn syubetsuDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn shisetsumeiDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource syubetsuBindingSource1;
         private System.Windows.Forms.BindingSource syubetsuBindingSource;
         private syubetsu syubetsu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn s_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn syubetsuDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hyoujimei;
+        private System.Windows.Forms.DataGridViewTextBoxColumn shisetsumei;
+        private System.Windows.Forms.DataGridViewTextBoxColumn o_id;
+        private System.Windows.Forms.TextBox TextBoxS_id;
     }
 }

@@ -9,7 +9,7 @@ namespace rk_seikyu
 {
     public partial class Form_dbconfig : Form
     {
-        private NpgsqlConnection m_conn = new NpgsqlConnection(rk_seikyu.Properties.Settings.Default.PostgresConnect);
+        private NpgsqlConnection m_conn = new NpgsqlConnection(rk_seikyu.Properties.Settings.Default.PostgresConnect1);
 
         private NpgsqlDataAdapter da = new NpgsqlDataAdapter();
         private DataSet ds = new DataSet();
@@ -20,6 +20,19 @@ namespace rk_seikyu
         public int Cmb_o_id_int { get; set; }
         private NpgsqlDataAdapter o_id_da = new NpgsqlDataAdapter();
         private Form_seikyu form_seikyu_Instance;
+        private string val_d_id;
+        private string val_d_name;
+        private string val_d_oct1;
+        private string val_d_oct2;
+        private string val_d_oct3;
+        private string val_d_oct4;
+        private string val_d_port;
+        private string val_d_user;
+        private string val_d_pass;
+        private string val_d_database_name;
+        private string val_d_flg;
+
+
 
         public int I { get; set; }
 
@@ -192,34 +205,6 @@ namespace rk_seikyu
                 update_count += da.Update(ds.Tables["dbconfig_ds"].Select(null, null, DataViewRowState.Deleted));
                 update_count += da.Update(ds.Tables["dbconfig_ds"].Select(null, null, DataViewRowState.ModifiedCurrent));
                 update_count += da.Update(ds.Tables["dbconfig_ds"].Select(null, null, DataViewRowState.Added));
-
-                //m_conn.Open();
-                //using (var tran = m_conn.BeginTransaction())
-                //{
-                //    //データ登録
-                //    //var cmd = new NpgsqlCommand(@"insert into t_settings (id, o_id_val) values (:id, '" + Cmb_o_id_int.ToString() + "')", m_conn);
-                //    var cmd = new NpgsqlCommand(@"UPDATE t_dbconfig SET d_id_val = '" + Cmb_o_id_int.ToString() + "' WHERE d_id = 1;", m_conn);
-                //    //cmd.Parameters.Add(new NpgsqlParameter("id", DbType.Int32) { Value = 1 });
-                //    //cmd.Parameters.Add(new NpgsqlParameter("o_id_val", DbType.String) { Value = "1" });
-                //    cmd.ExecuteNonQuery();
-                //    //データ検索
-                //    var dataAdapter = new NpgsqlDataAdapter(@"SELECT * FROM t_dbconfig", m_conn);
-                //    var dataSet = new DataSet();
-                //    dataAdapter.Fill(dataSet);
-
-                //    DataTable dt = dataSet.Tables[0];
-                //    Console.WriteLine("コミット前データ件数：{0}", dt.Rows.Count);
-
-                //    // コミットして、再検索
-                //    tran.Commit();
-
-                //    dataSet = new DataSet();
-                //    dataAdapter.Fill(dataSet);
-
-                //    dt = dataSet.Tables[0];
-                //    Console.WriteLine("コミット後データ件数：{0}", dt.Rows.Count);
-                //}
-                //m_conn.Close();
             }
             catch (Exception ex)
             {
@@ -330,32 +315,104 @@ namespace rk_seikyu
 
         private void CmdClose_Click(object sender, EventArgs e)
         {
+            try
+            {
+                m_conn.Open();
+
+                NpgsqlCommand command = new NpgsqlCommand(
+                "SELECT"
+                + " d_id"
+                + ", d_name"
+                + ", d_oct1"
+                + ", d_oct2"
+                + ", d_oct3"
+                + ", d_oct4"
+                + ", d_port"
+                + ", d_user"
+                + ", d_pass"
+                + ", d_database_name"
+                + ", d_flg"
+                + " FROM"
+                + " t_dbconfig"
+                + " WHERE d_flg = 'TRUE'"
+                + " ORDER BY d_id;"
+                , m_conn);
+
+                try
+                {
+
+                    NpgsqlDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        for (I = 0; I < dr.FieldCount; I++)
+                        {
+                            val_d_id = dr[0].ToString();
+                            val_d_name = dr[1].ToString();
+                            val_d_oct1 = dr[2].ToString();
+                            val_d_oct2 = dr[3].ToString();
+                            val_d_oct3 = dr[4].ToString();
+                            val_d_oct4 = dr[5].ToString();
+                            val_d_port = dr[6].ToString();
+                            val_d_user = dr[7].ToString();
+                            val_d_pass = dr[8].ToString();
+                            val_d_database_name = dr[9].ToString();
+                            val_d_flg = dr[10].ToString();
+                        }
+                        Console.WriteLine("val_d_id = " + val_d_id);
+                        Console.WriteLine("val_d_name = " + val_d_name);
+                        Console.WriteLine("val_d_oct1 = " + val_d_oct1);
+                        Console.WriteLine("val_d_oct2 = " + val_d_oct2);
+                        Console.WriteLine("val_d_oct3 = " + val_d_oct3);
+                        Console.WriteLine("val_d_oct4 = " + val_d_oct4);
+                        Console.WriteLine("val_d_port = " + val_d_port);
+                        Console.WriteLine("val_d_user = " + val_d_user);
+                        Console.WriteLine("val_d_pass = " + val_d_pass);
+                        Console.WriteLine("val_d_database_name = " + val_d_database_name);
+                        Console.WriteLine("val_d_flg = " + val_d_flg);
+                    }
+                    dr.Close();
+                }
+                finally
+                {
+                    m_conn.Close();
+                }
+
+                //書き込み処理
+                //var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                //var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
+                //if (connectionStringsSection != null)
+                //{
+                //    connectionStringsSection.ConnectionStrings[val_d_name].ConnectionString
+                //        = "Server = " + val_d_oct1 + "." + val_d_oct2 + "." + val_d_oct3 + "." + val_d_oct4 + "; "
+                //        + "Port = " + val_d_port + "; "
+                //        + "User Id = " + val_d_user + "; "
+                //        + "Password = " + val_d_pass + "; "
+                //        + "Database = " + val_d_database_name + ";";
+                //    config.Save(ConfigurationSaveMode.Modified, true);
+                //}
+
+                Properties.Settings.Default.PostgresConnect =
+                    "Server = " + val_d_oct1 + "." + val_d_oct2 + "." + val_d_oct3 + "." + val_d_oct4 + "; "
+                    + "Port = " + val_d_port + "; "
+                    + "User Id = " + val_d_user + "; "
+                    + "Password = " + val_d_pass + "; "
+                    + "Database = " + val_d_database_name + ";";
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("保存に失敗しました。\n\n[内容]\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            finally
+            {
+                MessageBox.Show("保存しました。変更を有効にするにはアプリケーションを再起動してください。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                m_conn.Close();
+                m_conn.Dispose();
+            }
             this.DialogResult = DialogResult.OK;
             this.Close();
-
-            //m_conn.Open();
-
-            //NpgsqlCommand command = new NpgsqlCommand("SELECT d_id, d_name FROM t_dbconfig WHEREd_ flg = '1';", m_conn);
-
-            //try
-            //{
-            //    NpgsqlDataReader dr = command.ExecuteReader();
-            //    while (dr.Read())
-            //    {
-            //        for (I = 0; I < dr.FieldCount; I++)
-            //        {
-            //            form_seikyu_Instance.TextBoxO_id = dr[0].ToString();
-            //            form_seikyu_Instance.TextBoxO_name = dr[1].ToString();
-            //        }
-            //        Console.WriteLine();
-            //    }
-
-            //}
-
-            //finally
-            //{
-            //    m_conn.Close();
-            //}
         }
 
         private void Form_dbconfig_FormClosing(object sender, FormClosingEventArgs e)

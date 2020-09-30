@@ -257,6 +257,7 @@
             this.Controls.Add(this.cmdClose_Form_gengou);
             this.Controls.Add(this.CmdGengouSave);
             this.Name = "Form_gengou";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Gengou_FormClosing);
             this.Load += new System.EventHandler(this.Form_Gengou_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorGengou)).EndInit();
             this.bindingNavigatorGengou.ResumeLayout(false);

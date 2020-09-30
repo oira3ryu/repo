@@ -30,10 +30,14 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
-    <SccProjectName>Svn</SccProjectName>
-    <SccLocalPath>Svn</SccLocalPath>
-    <SccAuxPath>Svn</SccAuxPath>
-    <SccProvider>SubversionScc</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -61,37 +65,44 @@
     <ApplicationIcon>レシートアイコン3.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CRVsPackageLib, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Design, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Data.AdoDotNetInterop, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304">
-      <HintPath>packages\CrystalReports.FlashControlV71.13.0.3501\lib\net20\FlashControlV71.dll</HintPath>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Npgsql, Version=4.0.4.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>packages\Npgsql.4.0.4\lib\net451\Npgsql.dll</HintPath>
-    </Reference>
-    <Reference Include="ShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304">
-      <HintPath>packages\CrystalReports.FlashControlV71.13.0.3501\lib\net20\ShockwaveFlashObjects.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+    <Reference Include="Npgsql, Version=4.1.4.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>packages\Npgsql.4.1.4\lib\net461\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encodings.Web.4.7.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
@@ -108,10 +119,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounting_manager.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Accounting_manager.xsd</DependentUpon>
+    </Compile>
     <Compile Include="bank.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>bank.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="chief_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>chief_ds.xsd</DependentUpon>
     </Compile>
     <Compile Include="crGenbo.cs">
       <AutoGen>True</AutoGen>
@@ -144,6 +165,18 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="dbconfig_ds.Designer.cs" />
+    <Compile Include="Form_accounting_manager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_accounting_manager.Designer.cs">
+      <DependentUpon>Form_accounting_manager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_chief.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_chief.Designer.cs">
+      <DependentUpon>Form_chief.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_dbconfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -179,6 +212,12 @@
     </Compile>
     <Compile Include="Form_holiday.Designer.cs">
       <DependentUpon>Form_holiday.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_manager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_manager.Designer.cs">
+      <DependentUpon>Form_manager.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_nen.cs">
       <SubType>Form</SubType>
@@ -222,6 +261,12 @@
     <Compile Include="Form_seikyu.Designer.cs">
       <DependentUpon>Form_seikyu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_stuff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_stuff.Designer.cs">
+      <DependentUpon>Form_stuff.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_syubetsu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -245,6 +290,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>nen.xsd</DependentUpon>
     </Compile>
+    <Compile Include="office_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>office_ds.xsd</DependentUpon>
+    </Compile>
     <Compile Include="par.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -264,8 +314,16 @@
       <DependentUpon>seikyu.xsd</DependentUpon>
     </Compile>
     <Compile Include="seikyu_ds.Designer.cs" />
+    <Compile Include="settings_ds.cs">
+      <DependentUpon>settings_ds.xsd</DependentUpon>
+    </Compile>
     <Compile Include="shiharai_houhou_ds.Designer.cs" />
     <Compile Include="shinzoku_kankei_ds.Designer.cs" />
+    <Compile Include="stuff_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>stuff_ds.xsd</DependentUpon>
+    </Compile>
     <Compile Include="syubetsu.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -298,6 +356,12 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crWithdrawal.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_accounting_manager.resx">
+      <DependentUpon>Form_accounting_manager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_chief.resx">
+      <DependentUpon>Form_chief.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_dbconfig.resx">
       <DependentUpon>Form_dbconfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -315,6 +379,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_holiday.resx">
       <DependentUpon>Form_holiday.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_manager.resx">
+      <DependentUpon>Form_manager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_nen.resx">
       <DependentUpon>Form_nen.cs</DependentUpon>
@@ -337,6 +404,9 @@
     <EmbeddedResource Include="Form_seikyu.resx">
       <DependentUpon>Form_seikyu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_stuff.resx">
+      <DependentUpon>Form_stuff.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_syubetsu.resx">
       <DependentUpon>Form_syubetsu.cs</DependentUpon>
     </EmbeddedResource>
@@ -353,6 +423,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Accounting_manager.xsc">
+      <DependentUpon>Accounting_manager.xsd</DependentUpon>
+    </None>
+    <None Include="Accounting_manager.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Accounting_manager.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Accounting_manager.xss">
+      <DependentUpon>Accounting_manager.xsd</DependentUpon>
+    </None>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
@@ -366,6 +447,17 @@
     </None>
     <None Include="bank.xss">
       <DependentUpon>bank.xsd</DependentUpon>
+    </None>
+    <None Include="chief_ds.xsc">
+      <DependentUpon>chief_ds.xsd</DependentUpon>
+    </None>
+    <None Include="chief_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>chief_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="chief_ds.xss">
+      <DependentUpon>chief_ds.xsd</DependentUpon>
     </None>
     <None Include="dbconfig_ds.xsc">
       <DependentUpon>dbconfig_ds.xsd</DependentUpon>
@@ -400,6 +492,17 @@
     <None Include="holiday.xss">
       <DependentUpon>holiday.xsd</DependentUpon>
     </None>
+    <None Include="manager_ds.xsc">
+      <DependentUpon>manager_ds.xsd</DependentUpon>
+    </None>
+    <None Include="manager_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>manager_ds1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="manager_ds.xss">
+      <DependentUpon>manager_ds.xsd</DependentUpon>
+    </None>
     <None Include="nen.xsc">
       <DependentUpon>nen.xsd</DependentUpon>
     </None>
@@ -410,6 +513,17 @@
     </None>
     <None Include="nen.xss">
       <DependentUpon>nen.xsd</DependentUpon>
+    </None>
+    <None Include="office_ds.xsc">
+      <DependentUpon>office_ds.xsd</DependentUpon>
+    </None>
+    <None Include="office_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>office_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="office_ds.xss">
+      <DependentUpon>office_ds.xsd</DependentUpon>
     </None>
     <None Include="o_id_ds.xsc">
       <DependentUpon>o_id_ds.xsd</DependentUpon>
@@ -528,6 +642,17 @@
     </None>
     <None Include="shinzoku_kankei_ds.xss">
       <DependentUpon>shinzoku_kankei_ds.xsd</DependentUpon>
+    </None>
+    <None Include="stuff_ds.xsc">
+      <DependentUpon>stuff_ds.xsd</DependentUpon>
+    </None>
+    <None Include="stuff_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>stuff_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="stuff_ds.xss">
+      <DependentUpon>stuff_ds.xsd</DependentUpon>
     </None>
     <None Include="syubetsu.xsc">
       <DependentUpon>syubetsu.xsd</DependentUpon>
