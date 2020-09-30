@@ -44,7 +44,7 @@ namespace rk_seikyu
 
             dataGridViewSyubetsu.Columns[0].HeaderText = "ID";
             dataGridViewSyubetsu.Columns[1].HeaderText = "種別";
-            dataGridViewSyubetsu.Columns[2].HeaderText = "引落口座表示名";
+            dataGridViewSyubetsu.Columns[2].HeaderText = "自動引落請求書表示名";
             dataGridViewSyubetsu.Columns[3].HeaderText = "施設名";
             dataGridViewSyubetsu.Columns[4].HeaderText = "種別ID";
 
@@ -106,8 +106,8 @@ namespace rk_seikyu
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("syubetsu", NpgsqlTypes.NpgsqlDbType.Text, 0, "syubetsu", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("hyoujimei", NpgsqlTypes.NpgsqlDbType.Text, 0, "hyoujimei", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("shisetsumei", NpgsqlTypes.NpgsqlDbType.Text, 0, "shisetsumei", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text) { Value = "" + Form_Seikyu_TextBoxS_id + "" });
+            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text) { Value = "" + Form_Seikyu_TextBoxS_id + "" });
             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
             // delete
