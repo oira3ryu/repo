@@ -1757,7 +1757,6 @@ namespace rk_seikyu
                                                                     + "(SELECT max(time_stamp) FROM t_seikyu WHERE"
                                                                     + " s_id = t1.s_id"
                                                                     + " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
-                                                                    //+ " AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
                                                                     + " AND c4_y::Text = CASE WHEN length('" + Cmb_nen_str + "')=2 THEN"
                                                                                             + " substr('" + Cmb_nen_str + "',1,1) || ' ' || substr('" + Cmb_nen_str + "', length('" + Cmb_nen_str + "')-1+1, length('" + Cmb_nen_str + "'))"
                                                                                         + " ELSE"
@@ -1863,7 +1862,6 @@ namespace rk_seikyu
                         + ", req_id"
                         + ", syubetsu"
                         + ", 支払方法"
-                        //+ ", 引落金融機関支店名"
                         + ", 引落口座種別"
                         + ", 事業所名"
                         + ", col0"
@@ -1918,61 +1916,21 @@ namespace rk_seikyu
                         , m_conn
                                 );
 
-                            da.InsertCommand = new NpgsqlCommand(
-                            "INSERT INTO t_seikyu ("
-                                        + " r_id"
-                                        + ", c3"
-                                        + ", c4"
-                                        + ", c9"
-                                        + ", c11"
-                                        + ", c14"
-                                        + ", c19"
-                                        + ", c22"
-                                        + ", s_id"
-                                        + ", o_id"
-                                        + " ) SELECT"
-                                        + " r_id"
-                                        + ", c3"
-                                        + ", c4"
-                                        + ", c9"
-                                        + ", c11"
-                                        + ", c14"
-                                        + ", c19"
-                                        + ", c22"
-                                        + ", s_id"
-                                        + ", o_id"
-                                        + " FROM t_csv"
-                                        + " ORDER BY id;"
-                                            , m_conn);
-                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c3", NpgsqlTypes.NpgsqlDbType.Text, 0, "c3", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c4", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c9", NpgsqlTypes.NpgsqlDbType.Text, 0, "c9", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c11", NpgsqlTypes.NpgsqlDbType.Text, 0, "c11", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c14", NpgsqlTypes.NpgsqlDbType.Text, 0, "c14", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c19", NpgsqlTypes.NpgsqlDbType.Text, 0, "c19", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("c22", NpgsqlTypes.NpgsqlDbType.Text, 0, "c22", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("s_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "s_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-                            da.InsertCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-
                             // update
                             da.UpdateCommand = new NpgsqlCommand(
                                 "UPDATE t_seikyu SET w_flg = :w_flg"
                                 + " WHERE"
+                                //+ " c4_y = :c4_y AND"
+                                //+ " c4_m = :c4_m AND"
                                 + " r_id = :r_id;"
                                 , m_conn
                                 );
+                            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_y", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_y", NpgsqlTypes.NpgsqlDbType.Text) { Value = " + Cmb_nen_str + " });
+                            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text, 0, "c4_m", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+                            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("c4_m", NpgsqlTypes.NpgsqlDbType.Text) { Value = " + Cmb_tsuki_str + " });
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("w_flg", NpgsqlTypes.NpgsqlDbType.Integer, 0, "w_flg", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
                             da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
-
-                            // delete
-                            da.DeleteCommand = new NpgsqlCommand
-                            (
-                                   "DELETE FROM t_withdrawal"
-                                + " WHERE"
-                                + " w_id = :w_id;"
-                                , m_conn
-                            );
-                            da.DeleteCommand.Parameters.Add(new NpgsqlParameter("w_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "w_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
 
                             // RowUpdate
                             da.RowUpdated += new NpgsqlRowUpdatedEventHandler(WithdrawalRowUpdated);
