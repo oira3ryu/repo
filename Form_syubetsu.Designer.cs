@@ -46,14 +46,14 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingSourceSyubetsu = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewSyubetsu = new System.Windows.Forms.DataGridView();
-            this.syubetsuBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.syubetsuBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.syubetsu = new rk_seikyu.syubetsu();
             this.s_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.syubetsuDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hyoujimei = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shisetsumei = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.o_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.syubetsuBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.syubetsuBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.syubetsu = new rk_seikyu.syubetsu();
             this.TextBoxS_id = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorSyubetsu)).BeginInit();
             this.bindingNavigatorSyubetsu.SuspendLayout();
@@ -220,21 +220,6 @@
             this.dataGridViewSyubetsu.TabIndex = 3;
             this.dataGridViewSyubetsu.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridViewSyubetsu_DefaultValuesNeeded);
             // 
-            // syubetsuBindingSource1
-            // 
-            this.syubetsuBindingSource1.DataMember = "syubetsu";
-            this.syubetsuBindingSource1.DataSource = this.syubetsuBindingSource;
-            // 
-            // syubetsuBindingSource
-            // 
-            this.syubetsuBindingSource.DataSource = this.syubetsu;
-            this.syubetsuBindingSource.Position = 0;
-            // 
-            // syubetsu
-            // 
-            this.syubetsu.DataSetName = "syubetsu";
-            this.syubetsu.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // s_id
             // 
             this.s_id.DataPropertyName = "s_id";
@@ -265,12 +250,28 @@
             this.o_id.HeaderText = "o_id";
             this.o_id.Name = "o_id";
             // 
+            // syubetsuBindingSource1
+            // 
+            this.syubetsuBindingSource1.DataMember = "syubetsu";
+            this.syubetsuBindingSource1.DataSource = this.syubetsuBindingSource;
+            // 
+            // syubetsuBindingSource
+            // 
+            this.syubetsuBindingSource.DataSource = this.syubetsu;
+            this.syubetsuBindingSource.Position = 0;
+            // 
+            // syubetsu
+            // 
+            this.syubetsu.DataSetName = "syubetsu";
+            this.syubetsu.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // TextBoxS_id
             // 
             this.TextBoxS_id.Location = new System.Drawing.Point(325, 40);
             this.TextBoxS_id.Name = "TextBoxS_id";
-            this.TextBoxS_id.Size = new System.Drawing.Size(100, 19);
+            this.TextBoxS_id.Size = new System.Drawing.Size(20, 19);
             this.TextBoxS_id.TabIndex = 4;
+            this.TextBoxS_id.Visible = false;
             // 
             // Form_syubetsu
             // 
