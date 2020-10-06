@@ -9895,5 +9895,14 @@ namespace rk_seikyu
             };
             Form.ShowDialog();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form_prn1 Form = new Form_prn1
+            {
+                WindowState = FormWindowState.Maximized
+            };
+            Form.ShowDialog();
+        }
     }
 }

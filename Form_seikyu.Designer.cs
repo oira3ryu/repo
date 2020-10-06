@@ -255,6 +255,7 @@
             this.textBoxO_name = new System.Windows.Forms.TextBox();
             this.cmdDbconfig = new System.Windows.Forms.Button();
             this.textBoxS_id = new System.Windows.Forms.TextBox();
+            this.cmdPrn1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.seikyu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorSeikyu)).BeginInit();
             this.bindingNavigatorSeikyu.SuspendLayout();
@@ -1992,12 +1993,23 @@
             this.textBoxS_id.Size = new System.Drawing.Size(18, 19);
             this.textBoxS_id.TabIndex = 31;
             // 
+            // cmdPrn1
+            // 
+            this.cmdPrn1.Location = new System.Drawing.Point(972, 153);
+            this.cmdPrn1.Name = "cmdPrn1";
+            this.cmdPrn1.Size = new System.Drawing.Size(75, 23);
+            this.cmdPrn1.TabIndex = 32;
+            this.cmdPrn1.Text = "印　刷";
+            this.cmdPrn1.UseVisualStyleBackColor = true;
+            this.cmdPrn1.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form_seikyu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1672, 949);
+            this.Controls.Add(this.cmdPrn1);
             this.Controls.Add(this.textBoxS_id);
             this.Controls.Add(this.dataGridViewShiharai_houhou);
             this.Controls.Add(this.cmdDbconfig);
@@ -2290,5 +2302,6 @@
         private System.Windows.Forms.TextBox textBoxO_name;
         private System.Windows.Forms.Button cmdDbconfig;
         private System.Windows.Forms.TextBox textBoxS_id;
+        private System.Windows.Forms.Button cmdPrn1;
     }
 }

@@ -62,7 +62,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>レシートアイコン3.ico</ApplicationIcon>
+    <ApplicationIcon>納.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
@@ -119,6 +119,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="abd.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>abd.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Accounting_manager.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -242,6 +247,12 @@
     </Compile>
     <Compile Include="Form_par.Designer.cs">
       <DependentUpon>Form_par.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_prn1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_prn1.Designer.cs">
+      <DependentUpon>Form_prn1.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_rep.cs">
       <SubType>Form</SubType>
@@ -395,6 +406,9 @@
     <EmbeddedResource Include="Form_par.resx">
       <DependentUpon>Form_par.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_prn1.resx">
+      <DependentUpon>Form_prn1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_rep.resx">
       <DependentUpon>Form_rep.cs</DependentUpon>
     </EmbeddedResource>
@@ -423,6 +437,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="abd.xsc">
+      <DependentUpon>abd.xsd</DependentUpon>
+    </None>
+    <None Include="abd.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>abd.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="abd.xss">
+      <DependentUpon>abd.xsd</DependentUpon>
+    </None>
     <None Include="Accounting_manager.xsc">
       <DependentUpon>Accounting_manager.xsd</DependentUpon>
     </None>
@@ -707,6 +732,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="レシートアイコン3.ico" />
+    <Content Include="納.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
