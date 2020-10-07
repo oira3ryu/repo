@@ -19,21 +19,29 @@ namespace rk_seikyu
         private NpgsqlDataAdapter da = new NpgsqlDataAdapter();
         private NpgsqlDataAdapter c19_da = new NpgsqlDataAdapter();
         private NpgsqlDataAdapter c9_da = new NpgsqlDataAdapter();
-        private NpgsqlDataAdapter cmb_o_id_da = new NpgsqlDataAdapter();
-        private NpgsqlDataAdapter o_id_da = new NpgsqlDataAdapter();
+        private NpgsqlDataAdapter c11_da = new NpgsqlDataAdapter();
+        private NpgsqlDataAdapter c14_da = new NpgsqlDataAdapter();
+        private NpgsqlDataAdapter c16_da = new NpgsqlDataAdapter();
+
+        //private NpgsqlDataAdapter cmb_o_id_da = new NpgsqlDataAdapter();
+        //private NpgsqlDataAdapter o_id_da = new NpgsqlDataAdapter();
 
         private DataSet ds = new DataSet();
         private DataSet c19_ds = new DataSet();
         private DataSet c9_ds = new DataSet();
-        private DataSet cmb_s_id_ds = new DataSet();
+        //private DataSet c11_ds = new DataSet();
+        private DataSet c14_ds = new DataSet();
+        private DataSet c16_ds = new DataSet();
 
-        public int cmb_s_id_int;
+        //private DataSet cmb_s_id_ds = new DataSet();
 
-        public string cmb_s_id_item;
-        public string cmb_s_id_str;
-        public string Form_Seikyu_TextBoxS_id;
+        //public int cmb_s_id_int;
 
-        private Form_seikyu form_seikyu_Instance;
+        //public string cmb_s_id_item;
+        //public string cmb_s_id_str;
+        //public string Form_Seikyu_TextBoxS_id;
+
+        //private Form_seikyu form_seikyu_Instance;
 
 
 
@@ -100,6 +108,66 @@ namespace rk_seikyu
             c1_bc.DisplayMember = "c9";
             c1_bc.ValueMember = "c1_bc";
 
+            // コンボボックスで銀行名を表示
+            c11_da.SelectCommand = new NpgsqlCommand
+            (
+                   "SELECT"
+                   + " b.c1 c1_bn,CASE WHEN a.c11 = '' THEN '' ELSE a.c11 END c11"
+                   + " FROM t_shiharai_houhou a INNER JOIN t_seikyu b"
+                   + " ON a.c5 = b.c1"
+                   + " WHERE b.c4_y = 'R 2'"
+                   + " AND b.c4_m = ' 8'"
+                   + " AND b.s_id = '1'"
+                   + " AND b.o_id = '4'"
+                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '4')"
+                   + " ORDER BY r_id;",
+                m_conn
+                );
+            c11_da.Fill(c11_ds, "c11_ds");
+            c1_bn.DataSource = c11_ds.Tables[0];
+            c1_bn.DisplayMember = "c11";
+            c1_bn.ValueMember = "c1_bn";
+
+            // コンボボックスで銀行支店名を表示
+            c14_da.SelectCommand = new NpgsqlCommand
+            (
+                   "SELECT"
+                   + " b.c1 c1_brn,CASE WHEN a.c14 = '' THEN '' ELSE a.c14 END c14"
+                   + " FROM t_shiharai_houhou a INNER JOIN t_seikyu b"
+                   + " ON a.c5 = b.c1"
+                   + " WHERE b.c4_y = 'R 2'"
+                   + " AND b.c4_m = ' 8'"
+                   + " AND b.s_id = '1'"
+                   + " AND b.o_id = '4'"
+                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '4')"
+                   + " ORDER BY r_id;",
+                m_conn
+                );
+            c14_da.Fill(c14_ds, "c14_ds");
+            c1_brn.DataSource = c14_ds.Tables[0];
+            c1_brn.DisplayMember = "c14";
+            c1_brn.ValueMember = "c1_brn";
+
+            // コンボボックスで口座番号を表示
+            c16_da.SelectCommand = new NpgsqlCommand
+            (
+                   "SELECT"
+                   + " b.c1 c1_acn,CASE WHEN a.c16 = '' THEN '' ELSE a.c16 END c16"
+                   + " FROM t_shiharai_houhou a INNER JOIN t_seikyu b"
+                   + " ON a.c5 = b.c1"
+                   + " WHERE b.c4_y = 'R 2'"
+                   + " AND b.c4_m = ' 8'"
+                   + " AND b.s_id = '1'"
+                   + " AND b.o_id = '4'"
+                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '4')"
+                   + " ORDER BY r_id;",
+                m_conn
+                );
+            c16_da.Fill(c16_ds, "c16_ds");
+            c1_acn.DataSource = c16_ds.Tables[0];
+            c1_acn.DisplayMember = "c16";
+            c1_acn.ValueMember = "c1_acn";
+
 
             //cmb_o_id_da.SelectCommand = new NpgsqlCommand
             //(
@@ -146,11 +214,14 @@ namespace rk_seikyu
                 + ", c3"
                 + ", c1"
                 + ", concat_ws('/',c4_y,c4_m) c4_ym"
-                + ", c1 c1_bc"
                 + ", c9"
+                + ", c1 c1_bc"
                 + ", c11"
+                + ", c1 c1_bn"
                 + ", c14"
+                + ", c1 c1_brn"
                 + ", c16"
+                + ", c1 c1_acn"
                 + ", c22"
                 + ", s_id"
                 + ", o_id"
@@ -232,10 +303,14 @@ namespace rk_seikyu
             c3.DataPropertyName = "c3";
             c1.DataPropertyName = "c1";
             c4_ym.DataPropertyName = "c4_ym";
+            //c9.DataPropertyName = "c9";
             c1_bc.DataPropertyName = "c1_bc";
-            c11.DataPropertyName = "c11";
-            c14.DataPropertyName = "c14";
-            c16.DataPropertyName = "c16";
+            //c11.DataPropertyName = "c11";
+            c1_bn.DataPropertyName = "c1_bn";
+            //c14.DataPropertyName = "c14";
+            c1_brn.DataPropertyName = "c1_brn";
+            //c16.DataPropertyName = "c16";
+            c1_acn.DataPropertyName = "c1_acn";
             c22.DataPropertyName = "c22";
             s_id.DataPropertyName = "s_id";
             r_id.DataPropertyName = "r_id";

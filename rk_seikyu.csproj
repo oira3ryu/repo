@@ -136,6 +136,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>bank.xsd</DependentUpon>
     </Compile>
+    <Compile Include="c11_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>c11_ds.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="c14_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>c14_ds.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="c16_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>c16_ds.xsd</DependentUpon>
+    </Compile>
     <Compile Include="c19_ds.cs">
       <DependentUpon>c19_ds.xsd</DependentUpon>
     </Compile>
@@ -487,6 +502,39 @@
     </None>
     <None Include="bank.xss">
       <DependentUpon>bank.xsd</DependentUpon>
+    </None>
+    <None Include="c11_ds.xsc">
+      <DependentUpon>c11_ds.xsd</DependentUpon>
+    </None>
+    <None Include="c11_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>c11_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="c11_ds.xss">
+      <DependentUpon>c11_ds.xsd</DependentUpon>
+    </None>
+    <None Include="c14_ds.xsc">
+      <DependentUpon>c14_ds.xsd</DependentUpon>
+    </None>
+    <None Include="c14_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>c14_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="c14_ds.xss">
+      <DependentUpon>c14_ds.xsd</DependentUpon>
+    </None>
+    <None Include="c16_ds.xsc">
+      <DependentUpon>c16_ds.xsd</DependentUpon>
+    </None>
+    <None Include="c16_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>c16_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="c16_ds.xss">
+      <DependentUpon>c16_ds.xsd</DependentUpon>
     </None>
     <None Include="c19_ds.xsc">
       <DependentUpon>c19_ds.xsd</DependentUpon>

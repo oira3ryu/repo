@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="c16_ds" targetNamespace="http://tempuri.org/c16_ds.xsd" xmlns:mstns="http://tempuri.org/c16_ds.xsd" xmlns="http://tempuri.org/c16_ds.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="c16_ds" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="c16_ds" msprop:Generator_UserDSName="c16_ds">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="c16_ds" msprop:Generator_TableClassName="c16_dsDataTable" msprop:Generator_TableVarName="tablec16_ds" msprop:Generator_TablePropName="_c16_ds" msprop:Generator_RowDeletingName="c16_dsRowDeleting" msprop:Generator_RowChangingName="c16_dsRowChanging" msprop:Generator_RowEvHandlerName="c16_dsRowChangeEventHandler" msprop:Generator_RowDeletedName="c16_dsRowDeleted" msprop:Generator_UserTableName="c16_ds" msprop:Generator_RowChangedName="c16_dsRowChanged" msprop:Generator_RowEvArgName="c16_dsRowChangeEvent" msprop:Generator_RowClassName="c16_dsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="c16" msprop:Generator_ColumnVarNameInTable="columnc16" msprop:Generator_ColumnPropNameInRow="c16" msprop:Generator_ColumnPropNameInTable="c16Column" msprop:Generator_UserColumnName="c16" type="xs:string" minOccurs="0" />
+              <xs:element name="c1_acn" msprop:Generator_ColumnVarNameInTable="columnc1_acn" msprop:Generator_ColumnPropNameInRow="c1_acn" msprop:Generator_ColumnPropNameInTable="c1_acnColumn" msprop:Generator_UserColumnName="c1_acn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

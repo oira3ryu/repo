@@ -32,6 +32,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_prn1));
             this.dataGridViewAbd = new System.Windows.Forms.DataGridView();
             this.c19ds1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.c9ds1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.c9_ds1 = new rk_seikyu.c9_ds();
+            this.c11dsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.c11_ds = new rk_seikyu.c11_ds();
+            this.c11dsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSourceAbd = new System.Windows.Forms.BindingSource(this.components);
+            this.abd = new rk_seikyu.abd();
             this.bindingNavigatorAbd = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -46,20 +53,18 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.button1 = new System.Windows.Forms.Button();
             this.CmdClose = new System.Windows.Forms.Button();
-            this.bindingSourceAbd = new System.Windows.Forms.BindingSource(this.components);
-            this.abd = new rk_seikyu.abd();
             this.c19_ds1 = new rk_seikyu.c19_ds();
             this.c19ds1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.c9_ds1 = new rk_seikyu.c9_ds();
-            this.c9ds1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.c16_ds1 = new rk_seikyu.c16_ds();
+            this.c16ds1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.w_flg = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.c3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.c1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.c4_ym = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.c1_bc = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.c11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.c14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.c16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.c1_bn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.c1_brn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.c1_acn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.c22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.s_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.r_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,14 +72,19 @@
             this.last_day = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAbd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c19ds1BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorAbd)).BeginInit();
-            this.bindingNavigatorAbd.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.c9ds1BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c9_ds1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c11dsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c11_ds)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c11dsBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceAbd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.abd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorAbd)).BeginInit();
+            this.bindingNavigatorAbd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.c19_ds1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c19ds1BindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.c9_ds1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.c9ds1BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c16_ds1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c16ds1BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewAbd
@@ -87,9 +97,9 @@
             this.c1,
             this.c4_ym,
             this.c1_bc,
-            this.c11,
-            this.c14,
-            this.c16,
+            this.c1_bn,
+            this.c1_brn,
+            this.c1_acn,
             this.c22,
             this.s_id,
             this.r_id,
@@ -101,6 +111,42 @@
             this.dataGridViewAbd.RowTemplate.Height = 21;
             this.dataGridViewAbd.Size = new System.Drawing.Size(1089, 314);
             this.dataGridViewAbd.TabIndex = 0;
+            // 
+            // c9ds1BindingSource
+            // 
+            this.c9ds1BindingSource.DataSource = this.c9_ds1;
+            this.c9ds1BindingSource.Position = 0;
+            // 
+            // c9_ds1
+            // 
+            this.c9_ds1.DataSetName = "c9_ds";
+            this.c9_ds1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // c11dsBindingSource
+            // 
+            this.c11dsBindingSource.DataSource = this.c11_ds;
+            this.c11dsBindingSource.Position = 0;
+            // 
+            // c11_ds
+            // 
+            this.c11_ds.DataSetName = "c11_ds";
+            this.c11_ds.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // c11dsBindingSource1
+            // 
+            this.c11dsBindingSource1.DataSource = this.c11_ds;
+            this.c11dsBindingSource1.Position = 0;
+            // 
+            // bindingSourceAbd
+            // 
+            this.bindingSourceAbd.DataSource = this.abd;
+            this.bindingSourceAbd.Position = 0;
+            this.bindingSourceAbd.CurrentChanged += new System.EventHandler(this.abdBindingSource_CurrentChanged);
+            // 
+            // abd
+            // 
+            this.abd.DataSetName = "abd";
+            this.abd.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // bindingNavigatorAbd
             // 
@@ -235,17 +281,6 @@
             this.CmdClose.UseVisualStyleBackColor = true;
             this.CmdClose.Click += new System.EventHandler(this.CmdClose_Click_1);
             // 
-            // bindingSourceAbd
-            // 
-            this.bindingSourceAbd.DataSource = this.abd;
-            this.bindingSourceAbd.Position = 0;
-            this.bindingSourceAbd.CurrentChanged += new System.EventHandler(this.abdBindingSource_CurrentChanged);
-            // 
-            // abd
-            // 
-            this.abd.DataSetName = "abd";
-            this.abd.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // c19_ds1
             // 
             this.c19_ds1.DataSetName = "c19_ds";
@@ -256,15 +291,15 @@
             this.c19ds1BindingSource1.DataSource = this.c19_ds1;
             this.c19ds1BindingSource1.Position = 0;
             // 
-            // c9_ds1
+            // c16_ds1
             // 
-            this.c9_ds1.DataSetName = "c9_ds";
-            this.c9_ds1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.c16_ds1.DataSetName = "c16_ds";
+            this.c16_ds1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // c9ds1BindingSource
+            // c16ds1BindingSource
             // 
-            this.c9ds1BindingSource.DataSource = this.c9_ds1;
-            this.c9ds1BindingSource.Position = 0;
+            this.c16ds1BindingSource.DataSource = this.c16_ds1;
+            this.c16ds1BindingSource.Position = 0;
             // 
             // w_flg
             // 
@@ -304,23 +339,32 @@
             this.c1_bc.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.c1_bc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // c11
+            // c1_bn
             // 
-            this.c11.DataPropertyName = "c11";
-            this.c11.HeaderText = "金融機関名";
-            this.c11.Name = "c11";
+            this.c1_bn.DataPropertyName = "c1_bn";
+            this.c1_bn.DataSource = this.c11dsBindingSource;
+            this.c1_bn.HeaderText = "金融機関名";
+            this.c1_bn.Name = "c1_bn";
+            this.c1_bn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.c1_bn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // c14
+            // c1_brn
             // 
-            this.c14.DataPropertyName = "c14";
-            this.c14.HeaderText = "支店名";
-            this.c14.Name = "c14";
+            this.c1_brn.DataPropertyName = "c1_brn";
+            this.c1_brn.DataSource = this.c11dsBindingSource1;
+            this.c1_brn.HeaderText = "支店名";
+            this.c1_brn.Name = "c1_brn";
+            this.c1_brn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.c1_brn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // c16
+            // c1_acn
             // 
-            this.c16.DataPropertyName = "c16";
-            this.c16.HeaderText = "口座番号";
-            this.c16.Name = "c16";
+            this.c1_acn.DataPropertyName = "c1_acn";
+            this.c1_acn.DataSource = this.c16ds1BindingSource;
+            this.c1_acn.HeaderText = "口座番号";
+            this.c1_acn.Name = "c1_acn";
+            this.c1_acn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.c1_acn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // c22
             // 
@@ -366,15 +410,20 @@
             this.Load += new System.EventHandler(this.Form_prn1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAbd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.c19ds1BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c9ds1BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c9_ds1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c11dsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c11_ds)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c11dsBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceAbd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.abd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorAbd)).EndInit();
             this.bindingNavigatorAbd.ResumeLayout(false);
             this.bindingNavigatorAbd.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceAbd)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.abd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.c19_ds1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.c19ds1BindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.c9_ds1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.c9ds1BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c16_ds1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c16ds1BindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -404,14 +453,19 @@
         private System.Windows.Forms.BindingSource c19ds1BindingSource1;
         private System.Windows.Forms.BindingSource c9ds1BindingSource;
         private c9_ds c9_ds1;
+        private System.Windows.Forms.BindingSource c11dsBindingSource;
+        private c11_ds c11_ds;
+        private System.Windows.Forms.BindingSource c11dsBindingSource1;
+        private System.Windows.Forms.BindingSource c16ds1BindingSource;
+        private c16_ds c16_ds1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn w_flg;
         private System.Windows.Forms.DataGridViewTextBoxColumn c3;
         private System.Windows.Forms.DataGridViewComboBoxColumn c1;
         private System.Windows.Forms.DataGridViewTextBoxColumn c4_ym;
         private System.Windows.Forms.DataGridViewComboBoxColumn c1_bc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn c11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn c14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn c16;
+        private System.Windows.Forms.DataGridViewComboBoxColumn c1_bn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn c1_brn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn c1_acn;
         private System.Windows.Forms.DataGridViewTextBoxColumn c22;
         private System.Windows.Forms.DataGridViewTextBoxColumn s_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn r_id;
