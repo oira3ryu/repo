@@ -5,13 +5,6 @@ VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rk_seikyu", "rk_seikyu.csproj", "{E686D0CE-538E-4BEE-9BCD-5C7E0DFE07FA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7FF925C4-E12C-4386-855F-32C0AC7889D2}"
-	ProjectSection(SolutionItems) = preProject
-		納.ico = 納.ico
-	EndProjectSection
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "納付書作成", "..\納付書作成\納付書作成.vdproj", "{AB065348-4DB9-4440-8938-DBFA7EB3F06F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|x86 = CD_ROM|x86
@@ -31,18 +24,13 @@ Global
 		{E686D0CE-538E-4BEE-9BCD-5C7E0DFE07FA}.Release|x86.Build.0 = Release|x86
 		{E686D0CE-538E-4BEE-9BCD-5C7E0DFE07FA}.SingleImage|x86.ActiveCfg = Release|x86
 		{E686D0CE-538E-4BEE-9BCD-5C7E0DFE07FA}.SingleImage|x86.Build.0 = Release|x86
-		{AB065348-4DB9-4440-8938-DBFA7EB3F06F}.CD_ROM|x86.ActiveCfg = Debug
-		{AB065348-4DB9-4440-8938-DBFA7EB3F06F}.Debug|x86.ActiveCfg = Debug
-		{AB065348-4DB9-4440-8938-DBFA7EB3F06F}.DVD-5|x86.ActiveCfg = Debug
-		{AB065348-4DB9-4440-8938-DBFA7EB3F06F}.Release|x86.ActiveCfg = Release
-		{AB065348-4DB9-4440-8938-DBFA7EB3F06F}.SingleImage|x86.ActiveCfg = Debug
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		SolutionGuid = {A723C434-93B6-465C-9DEE-91A4ECA17290}
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
