@@ -74,8 +74,9 @@
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Npgsql, Version=4.1.5.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>packages\Npgsql.4.1.5\lib\net461\Npgsql.dll</HintPath>
+    <Reference Include="Npgsql, Version=4.1.4.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Windows\Microsoft.NET\assembly\GAC_MSIL\Npgsql\v4.0_4.1.4.0__5d8b90d52f46fda7\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -134,6 +135,19 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>bank.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="c19_ds.cs">
+      <DependentUpon>c19_ds.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="c19_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>c19_ds.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="c9_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>c9_ds.xsd</DependentUpon>
     </Compile>
     <Compile Include="chief_ds.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -473,6 +487,28 @@
     </None>
     <None Include="bank.xss">
       <DependentUpon>bank.xsd</DependentUpon>
+    </None>
+    <None Include="c19_ds.xsc">
+      <DependentUpon>c19_ds.xsd</DependentUpon>
+    </None>
+    <None Include="c19_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>c19_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="c19_ds.xss">
+      <DependentUpon>c19_ds.xsd</DependentUpon>
+    </None>
+    <None Include="c9_ds.xsc">
+      <DependentUpon>c9_ds.xsd</DependentUpon>
+    </None>
+    <None Include="c9_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>c9_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="c9_ds.xss">
+      <DependentUpon>c9_ds.xsd</DependentUpon>
     </None>
     <None Include="chief_ds.xsc">
       <DependentUpon>chief_ds.xsd</DependentUpon>

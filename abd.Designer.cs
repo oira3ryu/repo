@@ -283,7 +283,7 @@ namespace rk_seikyu {
             
             private global::System.Data.DataColumn columnc3;
             
-            private global::System.Data.DataColumn columnc19;
+            private global::System.Data.DataColumn columnc1;
             
             private global::System.Data.DataColumn columnc4_ym;
             
@@ -356,9 +356,9 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn c19Column {
+            public global::System.Data.DataColumn c1Column {
                 get {
-                    return this.columnc19;
+                    return this.columnc1;
                 }
             }
             
@@ -479,12 +479,12 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public abd_dsRow Addabd_dsRow(string chk, string c3, string c19, string c4_ym, string c9, string c11, string c14, string c16, string c22, string s_id, string r_id, string last_day, string o_id) {
+            public abd_dsRow Addabd_dsRow(string chk, string c3, string c1, string c4_ym, string c9, string c11, string c14, string c16, string c22, string s_id, string r_id, string last_day, string o_id) {
                 abd_dsRow rowabd_dsRow = ((abd_dsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         chk,
                         c3,
-                        c19,
+                        c1,
                         c4_ym,
                         c9,
                         c11,
@@ -526,7 +526,7 @@ namespace rk_seikyu {
             internal void InitVars() {
                 this.columnchk = base.Columns["chk"];
                 this.columnc3 = base.Columns["c3"];
-                this.columnc19 = base.Columns["c19"];
+                this.columnc1 = base.Columns["c1"];
                 this.columnc4_ym = base.Columns["c4_ym"];
                 this.columnc9 = base.Columns["c9"];
                 this.columnc11 = base.Columns["c11"];
@@ -546,8 +546,8 @@ namespace rk_seikyu {
                 base.Columns.Add(this.columnchk);
                 this.columnc3 = new global::System.Data.DataColumn("c3", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnc3);
-                this.columnc19 = new global::System.Data.DataColumn("c19", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnc19);
+                this.columnc1 = new global::System.Data.DataColumn("c1", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnc1);
                 this.columnc4_ym = new global::System.Data.DataColumn("c4_ym", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnc4_ym);
                 this.columnc9 = new global::System.Data.DataColumn("c9", typeof(string), null, global::System.Data.MappingType.Element);
@@ -746,17 +746,17 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string c19 {
+            public string c1 {
                 get {
                     try {
-                        return ((string)(this[this.tableabd_ds.c19Column]));
+                        return ((string)(this[this.tableabd_ds.c1Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("テーブル \'abd_ds\' にある列 \'c19\' の値は DBNull です。", e);
+                        throw new global::System.Data.StrongTypingException("テーブル \'abd_ds\' にある列 \'c1\' の値は DBNull です。", e);
                     }
                 }
                 set {
-                    this[this.tableabd_ds.c19Column] = value;
+                    this[this.tableabd_ds.c1Column] = value;
                 }
             }
             
@@ -941,14 +941,14 @@ namespace rk_seikyu {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isc19Null() {
-                return this.IsNull(this.tableabd_ds.c19Column);
+            public bool Isc1Null() {
+                return this.IsNull(this.tableabd_ds.c1Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setc19Null() {
-                this[this.tableabd_ds.c19Column] = global::System.Convert.DBNull;
+            public void Setc1Null() {
+                this[this.tableabd_ds.c1Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
