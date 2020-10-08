@@ -37,6 +37,8 @@
             this.c11dsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.c11_ds = new rk_seikyu.c11_ds();
             this.c11dsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.c16ds1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.c16_ds1 = new rk_seikyu.c16_ds();
             this.bindingSourceAbd = new System.Windows.Forms.BindingSource(this.components);
             this.abd = new rk_seikyu.abd();
             this.bindingNavigatorAbd = new System.Windows.Forms.BindingNavigator(this.components);
@@ -51,12 +53,14 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cmdSave = new System.Windows.Forms.Button();
             this.CmdClose = new System.Windows.Forms.Button();
             this.c19_ds1 = new rk_seikyu.c19_ds();
             this.c19ds1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.c16_ds1 = new rk_seikyu.c16_ds();
-            this.c16ds1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.onameds1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.o_name_ds1 = new rk_seikyu.o_name_ds();
+            this.hyoujimei_ds1 = new rk_seikyu.hyoujimei_ds();
+            this.hyoujimeids1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.w_flg = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.c3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.c1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -66,9 +70,9 @@
             this.c1_brn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.c1_acn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.c22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.s_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.s_id = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.r_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.o_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.o_id = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.last_day = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAbd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c19ds1BindingSource)).BeginInit();
@@ -77,14 +81,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.c11dsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c11_ds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c11dsBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c16ds1BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c16_ds1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceAbd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.abd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorAbd)).BeginInit();
             this.bindingNavigatorAbd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.c19_ds1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c19ds1BindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.c16_ds1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.c16ds1BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.onameds1BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.o_name_ds1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hyoujimei_ds1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hyoujimeids1BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewAbd
@@ -106,10 +114,10 @@
             this.o_id,
             this.last_day});
             this.dataGridViewAbd.DataSource = this.bindingSourceAbd;
-            this.dataGridViewAbd.Location = new System.Drawing.Point(202, 100);
+            this.dataGridViewAbd.Location = new System.Drawing.Point(144, 100);
             this.dataGridViewAbd.Name = "dataGridViewAbd";
             this.dataGridViewAbd.RowTemplate.Height = 21;
-            this.dataGridViewAbd.Size = new System.Drawing.Size(1089, 314);
+            this.dataGridViewAbd.Size = new System.Drawing.Size(1188, 706);
             this.dataGridViewAbd.TabIndex = 0;
             // 
             // c9ds1BindingSource
@@ -136,6 +144,16 @@
             // 
             this.c11dsBindingSource1.DataSource = this.c11_ds;
             this.c11dsBindingSource1.Position = 0;
+            // 
+            // c16ds1BindingSource
+            // 
+            this.c16ds1BindingSource.DataSource = this.c16_ds1;
+            this.c16ds1BindingSource.Position = 0;
+            // 
+            // c16_ds1
+            // 
+            this.c16_ds1.DataSetName = "c16_ds";
+            this.c16_ds1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // bindingSourceAbd
             // 
@@ -172,7 +190,7 @@
             this.bindingNavigatorAbd.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigatorAbd.Name = "bindingNavigatorAbd";
             this.bindingNavigatorAbd.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigatorAbd.Size = new System.Drawing.Size(1321, 25);
+            this.bindingNavigatorAbd.Size = new System.Drawing.Size(1344, 25);
             this.bindingNavigatorAbd.TabIndex = 1;
             this.bindingNavigatorAbd.Text = "bindingNavigator1";
             // 
@@ -262,18 +280,19 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // button1
+            // cmdSave
             // 
-            this.button1.Location = new System.Drawing.Point(63, 128);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.cmdSave.Location = new System.Drawing.Point(34, 128);
+            this.cmdSave.Name = "cmdSave";
+            this.cmdSave.Size = new System.Drawing.Size(75, 23);
+            this.cmdSave.TabIndex = 2;
+            this.cmdSave.Text = "保　存";
+            this.cmdSave.UseVisualStyleBackColor = true;
+            this.cmdSave.Click += new System.EventHandler(this.cmdSave_Click);
             // 
             // CmdClose
             // 
-            this.CmdClose.Location = new System.Drawing.Point(63, 174);
+            this.CmdClose.Location = new System.Drawing.Point(34, 174);
             this.CmdClose.Name = "CmdClose";
             this.CmdClose.Size = new System.Drawing.Size(75, 23);
             this.CmdClose.TabIndex = 3;
@@ -291,15 +310,25 @@
             this.c19ds1BindingSource1.DataSource = this.c19_ds1;
             this.c19ds1BindingSource1.Position = 0;
             // 
-            // c16_ds1
+            // onameds1BindingSource
             // 
-            this.c16_ds1.DataSetName = "c16_ds";
-            this.c16_ds1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.onameds1BindingSource.DataSource = this.o_name_ds1;
+            this.onameds1BindingSource.Position = 0;
             // 
-            // c16ds1BindingSource
+            // o_name_ds1
             // 
-            this.c16ds1BindingSource.DataSource = this.c16_ds1;
-            this.c16ds1BindingSource.Position = 0;
+            this.o_name_ds1.DataSetName = "o_name_ds";
+            this.o_name_ds1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // hyoujimei_ds1
+            // 
+            this.hyoujimei_ds1.DataSetName = "hyoujimei_ds";
+            this.hyoujimei_ds1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // hyoujimeids1BindingSource
+            // 
+            this.hyoujimeids1BindingSource.DataSource = this.hyoujimei_ds1;
+            this.hyoujimeids1BindingSource.Position = 0;
             // 
             // w_flg
             // 
@@ -375,8 +404,11 @@
             // s_id
             // 
             this.s_id.DataPropertyName = "s_id";
+            this.s_id.DataSource = this.hyoujimeids1BindingSource;
             this.s_id.HeaderText = "種別";
             this.s_id.Name = "s_id";
+            this.s_id.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.s_id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // r_id
             // 
@@ -387,8 +419,11 @@
             // o_id
             // 
             this.o_id.DataPropertyName = "o_id";
+            this.o_id.DataSource = this.onameds1BindingSource;
             this.o_id.HeaderText = "事業名";
             this.o_id.Name = "o_id";
+            this.o_id.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.o_id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // last_day
             // 
@@ -399,9 +434,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1321, 450);
+            this.ClientSize = new System.Drawing.Size(1344, 839);
             this.Controls.Add(this.CmdClose);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.cmdSave);
             this.Controls.Add(this.bindingNavigatorAbd);
             this.Controls.Add(this.dataGridViewAbd);
             this.Name = "Form_prn1";
@@ -415,6 +450,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.c11dsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.c11_ds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.c11dsBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c16ds1BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.c16_ds1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceAbd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.abd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorAbd)).EndInit();
@@ -422,8 +459,10 @@
             this.bindingNavigatorAbd.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.c19_ds1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.c19ds1BindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.c16_ds1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.c16ds1BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.onameds1BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.o_name_ds1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hyoujimei_ds1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hyoujimeids1BindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -446,7 +485,7 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cmdSave;
         private System.Windows.Forms.Button CmdClose;
         private System.Windows.Forms.BindingSource c19ds1BindingSource;
         private c19_ds c19_ds1;
@@ -458,6 +497,8 @@
         private System.Windows.Forms.BindingSource c11dsBindingSource1;
         private System.Windows.Forms.BindingSource c16ds1BindingSource;
         private c16_ds c16_ds1;
+        private System.Windows.Forms.BindingSource onameds1BindingSource;
+        private o_name_ds o_name_ds1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn w_flg;
         private System.Windows.Forms.DataGridViewTextBoxColumn c3;
         private System.Windows.Forms.DataGridViewComboBoxColumn c1;
@@ -467,9 +508,11 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn c1_brn;
         private System.Windows.Forms.DataGridViewComboBoxColumn c1_acn;
         private System.Windows.Forms.DataGridViewTextBoxColumn c22;
-        private System.Windows.Forms.DataGridViewTextBoxColumn s_id;
+        private System.Windows.Forms.DataGridViewComboBoxColumn s_id;
+        private System.Windows.Forms.BindingSource hyoujimeids1BindingSource;
+        private hyoujimei_ds hyoujimei_ds1;
         private System.Windows.Forms.DataGridViewTextBoxColumn r_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn o_id;
+        private System.Windows.Forms.DataGridViewComboBoxColumn o_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn last_day;
     }
 }

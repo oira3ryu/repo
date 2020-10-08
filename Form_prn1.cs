@@ -22,6 +22,8 @@ namespace rk_seikyu
         private NpgsqlDataAdapter c11_da = new NpgsqlDataAdapter();
         private NpgsqlDataAdapter c14_da = new NpgsqlDataAdapter();
         private NpgsqlDataAdapter c16_da = new NpgsqlDataAdapter();
+        private NpgsqlDataAdapter o_name_da = new NpgsqlDataAdapter();
+        private NpgsqlDataAdapter hyoujimei_da = new NpgsqlDataAdapter();
 
         //private NpgsqlDataAdapter cmb_o_id_da = new NpgsqlDataAdapter();
         //private NpgsqlDataAdapter o_id_da = new NpgsqlDataAdapter();
@@ -32,6 +34,8 @@ namespace rk_seikyu
         //private DataSet c11_ds = new DataSet();
         private DataSet c14_ds = new DataSet();
         private DataSet c16_ds = new DataSet();
+        private DataSet o_name_ds = new DataSet();
+        private DataSet hyoujimei_ds = new DataSet();
 
         //private DataSet cmb_s_id_ds = new DataSet();
 
@@ -168,6 +172,44 @@ namespace rk_seikyu
             c1_acn.DisplayMember = "c16";
             c1_acn.ValueMember = "c1_acn";
 
+            // コンボボックスで種別を表示
+            hyoujimei_da.SelectCommand = new NpgsqlCommand
+            (
+                   "SELECT hyoujimei, b.s_id FROM t_seikyu b INNER JOIN t_syubetsu a"
+                    + " ON b.o_id = a.o_id AND b.s_id = a.s_id"
+                    + " WHERE NOT EXISTS("
+                    + " SELECT 1"
+                    + " FROM t_seikyu AS s"
+                    + " WHERE b.o_id = s.o_id"
+                    + " AND b.time_stamp < s.time_stamp);",
+                m_conn
+                );
+            hyoujimei_da.Fill(hyoujimei_ds, "hyoujimei_ds");
+            s_id.DataSource = hyoujimei_ds.Tables[0];
+            s_id.DisplayMember = "hyoujimei";
+            s_id.ValueMember = "s_id";
+
+
+            // コンボボックスで事業所名を表示
+            o_name_da.SelectCommand = new NpgsqlCommand
+            (
+                   "SELECT"
+                   + " o_name, b.o_id"
+                   + " FROM t_office a INNER JOIN t_seikyu b"
+                   + " ON a.o_id::Text = b.o_id"
+                   + " WHERE NOT EXISTS ("
+                   + " SELECT 1"
+                   + " FROM t_seikyu AS s"
+                   + " WHERE b.o_id = s.o_id"
+                   + " AND b.time_stamp < s.time_stamp)"
+                   + " ORDER BY r_id;",
+                m_conn
+                );
+            o_name_da.Fill(o_name_ds, "o_name_ds");
+            o_id.DataSource = o_name_ds.Tables[0];
+            o_id.DisplayMember = "o_name";
+            o_id.ValueMember = "o_id";
+
 
             //cmb_o_id_da.SelectCommand = new NpgsqlCommand
             //(
@@ -258,21 +300,16 @@ namespace rk_seikyu
 
 
             // update
-            //da.UpdateCommand = new NpgsqlCommand(
-            //    "UPDATE t_manager SET"
-            //    + " manager = :manager"
-            //    + ", start_date = :start_date"
-            //    + ", end_date = :end_date"
-            //    + ", o_id = :o_id"
-            //    + " WHERE"
-            //    + " m_id = :m_id"
-            //    , m_conn
-            //    );
-            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("manager", NpgsqlTypes.NpgsqlDbType.Text, 0, "manager", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("start_date", NpgsqlTypes.NpgsqlDbType.TimestampTz, 0, "start_date", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("end_date", NpgsqlTypes.NpgsqlDbType.TimestampTz, 0, "end_date", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("o_id", NpgsqlTypes.NpgsqlDbType.Text, 0, "o_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
-            //da.UpdateCommand.Parameters.Add(new NpgsqlParameter("m_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "m_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
+            da.UpdateCommand = new NpgsqlCommand(
+                "UPDATE t_seikyu SET"
+                + " w_flg = :w_flg"
+                + " WHERE"
+                + " r_id = :r_id"
+                , m_conn
+                );
+
+            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("w_flg", NpgsqlTypes.NpgsqlDbType.Integer, 0, "w_flg", ParameterDirection.Input, false, 0, 0, DataRowVersion.Current, DBNull.Value));
+            da.UpdateCommand.Parameters.Add(new NpgsqlParameter("r_id", NpgsqlTypes.NpgsqlDbType.Integer, 0, "r_id", ParameterDirection.Input, false, 0, 0, DataRowVersion.Original, DBNull.Value));
             // delete
             //da.DeleteCommand = new NpgsqlCommand
             //(
@@ -496,5 +533,22 @@ namespace rk_seikyu
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+        private void cmdSave_Click(object sender, EventArgs e)
+        {
+                int update_count = 0;
+                try
+                {
+                    update_count += da.Update(ds.Tables["abd_ds"].Select(null, null, DataViewRowState.Deleted));
+                    update_count += da.Update(ds.Tables["abd_ds"].Select(null, null, DataViewRowState.ModifiedCurrent));
+                    update_count += da.Update(ds.Tables["abd_ds"].Select(null, null, DataViewRowState.Added));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("レコードの保存に失敗しました。\n\n[内容]\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                MessageBox.Show(update_count.ToString() + "件、保存しました。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
     }
 }

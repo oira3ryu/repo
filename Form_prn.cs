@@ -1920,8 +1920,8 @@ namespace rk_seikyu
                             da.UpdateCommand = new NpgsqlCommand(
                                 "UPDATE t_seikyu SET w_flg = :w_flg"
                                 + " WHERE"
-                                //+ " c4_y = :c4_y AND"
-                                //+ " c4_m = :c4_m AND"
+                                //+ " c4_y = '" + Cmb_nen_str + "'AND"
+                                //+ " c4_m = '" + Cmb_tsuki_str + "' AND"
                                 + " r_id = :r_id;"
                                 , m_conn
                                 );

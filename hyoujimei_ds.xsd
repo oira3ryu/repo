@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="hyoujimei_ds" targetNamespace="http://tempuri.org/hyoujimei_ds.xsd" xmlns:mstns="http://tempuri.org/hyoujimei_ds.xsd" xmlns="http://tempuri.org/hyoujimei_ds.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="hyoujimei_ds" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="hyoujimei_ds" msprop:Generator_UserDSName="hyoujimei_ds">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="hyoujimei_ds" msprop:Generator_TableClassName="hyoujimei_dsDataTable" msprop:Generator_TableVarName="tablehyoujimei_ds" msprop:Generator_TablePropName="_hyoujimei_ds" msprop:Generator_RowDeletingName="hyoujimei_dsRowDeleting" msprop:Generator_RowChangingName="hyoujimei_dsRowChanging" msprop:Generator_RowEvHandlerName="hyoujimei_dsRowChangeEventHandler" msprop:Generator_RowDeletedName="hyoujimei_dsRowDeleted" msprop:Generator_UserTableName="hyoujimei_ds" msprop:Generator_RowChangedName="hyoujimei_dsRowChanged" msprop:Generator_RowEvArgName="hyoujimei_dsRowChangeEvent" msprop:Generator_RowClassName="hyoujimei_dsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="hyoujimei" msprop:Generator_ColumnVarNameInTable="columnhyoujimei" msprop:Generator_ColumnPropNameInRow="hyoujimei" msprop:Generator_ColumnPropNameInTable="hyoujimeiColumn" msprop:Generator_UserColumnName="hyoujimei" type="xs:string" minOccurs="0" />
+              <xs:element name="s_id" msprop:Generator_ColumnVarNameInTable="columns_id" msprop:Generator_ColumnPropNameInRow="s_id" msprop:Generator_ColumnPropNameInTable="s_idColumn" msprop:Generator_UserColumnName="s_id" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -326,6 +326,11 @@
       <DependentUpon>gyoumu_ds.xsd</DependentUpon>
     </Compile>
     <Compile Include="holiday.Designer.cs" />
+    <Compile Include="hyoujimei_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>hyoujimei_ds.xsd</DependentUpon>
+    </Compile>
     <Compile Include="nen.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -335,6 +340,14 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>office_ds.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="o_name_ds.cs">
+      <DependentUpon>o_name_ds.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="o_name_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>o_name_ds.xsd</DependentUpon>
     </Compile>
     <Compile Include="par.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -602,6 +615,17 @@
     <None Include="holiday.xss">
       <DependentUpon>holiday.xsd</DependentUpon>
     </None>
+    <None Include="hyoujimei_ds.xsc">
+      <DependentUpon>hyoujimei_ds.xsd</DependentUpon>
+    </None>
+    <None Include="hyoujimei_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>hyoujimei_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="hyoujimei_ds.xss">
+      <DependentUpon>hyoujimei_ds.xsd</DependentUpon>
+    </None>
     <None Include="manager_ds.xsc">
       <DependentUpon>manager_ds.xsd</DependentUpon>
     </None>
@@ -644,6 +668,17 @@
     </None>
     <None Include="o_id_ds.xss">
       <DependentUpon>o_id_ds.xsd</DependentUpon>
+    </None>
+    <None Include="o_name_ds.xsc">
+      <DependentUpon>o_name_ds.xsd</DependentUpon>
+    </None>
+    <None Include="o_name_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>o_name_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="o_name_ds.xss">
+      <DependentUpon>o_name_ds.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="par.xsc">
