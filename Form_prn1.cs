@@ -24,6 +24,10 @@ namespace rk_seikyu
         private NpgsqlDataAdapter c16_da = new NpgsqlDataAdapter();
         private NpgsqlDataAdapter o_name_da = new NpgsqlDataAdapter();
         private NpgsqlDataAdapter hyoujimei_da = new NpgsqlDataAdapter();
+        private NpgsqlDataAdapter nen_da = new NpgsqlDataAdapter();
+        private NpgsqlDataAdapter tsuki_da = new NpgsqlDataAdapter();
+        private NpgsqlDataAdapter b_code_da = new NpgsqlDataAdapter();
+        private NpgsqlDataAdapter s_id_da = new NpgsqlDataAdapter();
 
         //private NpgsqlDataAdapter cmb_o_id_da = new NpgsqlDataAdapter();
         //private NpgsqlDataAdapter o_id_da = new NpgsqlDataAdapter();
@@ -36,16 +40,24 @@ namespace rk_seikyu
         private DataSet c16_ds = new DataSet();
         private DataSet o_name_ds = new DataSet();
         private DataSet hyoujimei_ds = new DataSet();
-
+        private DataSet nen_ds = new DataSet();
+        private DataSet tsuki_ds = new DataSet();
+        private DataSet withdrawalds = new DataSet();
+        private DataSet b_codeds = new DataSet();
+        private DataSet s_id_ds = new DataSet();
         //private DataSet cmb_s_id_ds = new DataSet();
 
         //public int cmb_s_id_int;
 
         //public string cmb_s_id_item;
         //public string cmb_s_id_str;
-        //public string Form_Seikyu_TextBoxS_id;
+        public string Form_Seikyu_TextBoxS_id;
+        public string Form_Seikyu_TextBoxO_id;
+        public string Form_Prn_TextBoxS_id;
+        public string Form_Prn_TextBoxO_id;
 
-        //private Form_seikyu form_seikyu_Instance;
+        private Form_seikyu form_seikyu_Instance;
+        private Form_prn form_prn_Instance;
 
 
 
@@ -54,10 +66,13 @@ namespace rk_seikyu
             InitializeComponent();
 
             //Form_seikyuのインスタンスを取得
-            //form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
+            form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
+            form_prn_Instance = Form_prn.Form_prn_Instance;
             //Form_seikyuのテキストボックス文字列を
             //Form_prnの文字列変数Form_Seikyu_TextBoxO_idへ設定
-            //Form_Seikyu_TextBoxO_id = form_seikyu_Instance.TextBoxO_id;
+            Form_Seikyu_TextBoxO_id = form_seikyu_Instance.TextBoxO_id;
+            Form_Prn_TextBoxS_id = form_prn_Instance.TextBoxS_id;
+
             //cmb_o_id_item = form_seikyu_Instance.TextBoxO_name;
             //Console.WriteLine("cmb_o_idからのメンバーは、" + cmb_o_id_item);
 
@@ -71,6 +86,62 @@ namespace rk_seikyu
 
         private void Form_prn1_Load(object sender, EventArgs e)
         {
+            nen_da.SelectCommand = new NpgsqlCommand
+            (
+                   "SELECT"
+                + " n_id"
+                + ", nen"
+                + " FROM"
+                + " t_nen"
+                + " ORDER BY n_id;",
+                m_conn
+            );
+            if (nen_ds.Tables["nen_ds"] != null)
+                nen_ds.Tables["nen_ds"].Clear();
+            nen_da.Fill(nen_ds, "nen_ds");
+
+            cmb_nen.DataSource = nen_ds.Tables[0];
+            cmb_nen.DisplayMember = "nen";
+            cmb_nen.ValueMember = "nen";
+
+            tsuki_da.SelectCommand = new NpgsqlCommand
+            (
+                   "SELECT"
+                + " t_id"
+                + ", tsuki"
+                + " FROM"
+                + " t_tsuki"
+                + " ORDER BY t_id;",
+                m_conn
+            );
+            if (tsuki_ds.Tables["tsuki_ds"] != null)
+                tsuki_ds.Tables["tsuki_ds"].Clear();
+            tsuki_da.Fill(tsuki_ds, "tsuki_ds");
+
+            cmb_tsuki.DataSource = tsuki_ds.Tables[0];
+            cmb_tsuki.DisplayMember = "tsuki";
+            cmb_tsuki.ValueMember = "tsuki";
+
+            s_id_da.SelectCommand = new NpgsqlCommand
+            (
+                   "SELECT"
+                + " s_id"
+                + ", syubetsu"
+                + ", shisetsumei"
+                + ", o_id"
+                + " FROM"
+                + " t_syubetsu"
+                + " WHERE o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                + " ORDER BY s_id;",
+                m_conn
+            );
+            if (s_id_ds.Tables["s_id_ds"] != null)
+                s_id_ds.Tables["s_id_ds"].Clear();
+            s_id_da.Fill(s_id_ds, "s_id_ds");
+
+            cmb_s_id.DataSource = s_id_ds.Tables[0];
+            cmb_s_id.DisplayMember = "syubetsu";
+            cmb_s_id.ValueMember = "s_id";
 
             // コンボボックスで支払者を表示
             c19_da.SelectCommand = new NpgsqlCommand
@@ -83,7 +154,7 @@ namespace rk_seikyu
                    + " AND b.c4_m = ' 8'"
                    + " AND b.s_id = '1'"
                    + " AND b.o_id = '4'"
-                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '4')"
+                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '" + Form_Seikyu_TextBoxO_id + "')"
                    + " ORDER BY r_id;",
                 m_conn
                 );
@@ -103,7 +174,7 @@ namespace rk_seikyu
                    + " AND b.c4_m = ' 8'"
                    + " AND b.s_id = '1'"
                    + " AND b.o_id = '4'"
-                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '4')"
+                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '" + Form_Seikyu_TextBoxO_id + "')"
                    + " ORDER BY r_id;",
                 m_conn
                 );
@@ -123,7 +194,7 @@ namespace rk_seikyu
                    + " AND b.c4_m = ' 8'"
                    + " AND b.s_id = '1'"
                    + " AND b.o_id = '4'"
-                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '4')"
+                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '" + Form_Seikyu_TextBoxO_id + "')"
                    + " ORDER BY r_id;",
                 m_conn
                 );
@@ -143,7 +214,7 @@ namespace rk_seikyu
                    + " AND b.c4_m = ' 8'"
                    + " AND b.s_id = '1'"
                    + " AND b.o_id = '4'"
-                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '4')"
+                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '" + Form_Seikyu_TextBoxO_id + "')"
                    + " ORDER BY r_id;",
                 m_conn
                 );
@@ -163,7 +234,7 @@ namespace rk_seikyu
                    + " AND b.c4_m = ' 8'"
                    + " AND b.s_id = '1'"
                    + " AND b.o_id = '4'"
-                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '4')"
+                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '" + Form_Seikyu_TextBoxO_id + "')"
                    + " ORDER BY r_id;",
                 m_conn
                 );
@@ -271,7 +342,7 @@ namespace rk_seikyu
                 //+ ", last_day"
                 + " FROM"
                 + " t_seikyu"
-                + " WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '4'"
+                + " WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
                 + " ORDER BY r_id;",
                 m_conn
                 );

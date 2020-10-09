@@ -256,6 +256,10 @@
             this.cmdDbconfig = new System.Windows.Forms.Button();
             this.textBoxS_id = new System.Windows.Forms.TextBox();
             this.cmdPrn1 = new System.Windows.Forms.Button();
+            this.textBoxNen = new System.Windows.Forms.TextBox();
+            this.textBoxTsuki = new System.Windows.Forms.TextBox();
+            this.textBoxN_id = new System.Windows.Forms.TextBox();
+            this.textBoxT_id = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.seikyu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorSeikyu)).BeginInit();
             this.bindingNavigatorSeikyu.SuspendLayout();
@@ -2003,12 +2007,44 @@
             this.cmdPrn1.UseVisualStyleBackColor = true;
             this.cmdPrn1.Click += new System.EventHandler(this.button2_Click);
             // 
+            // textBoxNen
+            // 
+            this.textBoxNen.Location = new System.Drawing.Point(250, 104);
+            this.textBoxNen.Name = "textBoxNen";
+            this.textBoxNen.Size = new System.Drawing.Size(18, 19);
+            this.textBoxNen.TabIndex = 33;
+            // 
+            // textBoxTsuki
+            // 
+            this.textBoxTsuki.Location = new System.Drawing.Point(360, 104);
+            this.textBoxTsuki.Name = "textBoxTsuki";
+            this.textBoxTsuki.Size = new System.Drawing.Size(18, 19);
+            this.textBoxTsuki.TabIndex = 34;
+            // 
+            // textBoxN_id
+            // 
+            this.textBoxN_id.Location = new System.Drawing.Point(225, 104);
+            this.textBoxN_id.Name = "textBoxN_id";
+            this.textBoxN_id.Size = new System.Drawing.Size(19, 19);
+            this.textBoxN_id.TabIndex = 35;
+            // 
+            // textBoxT_id
+            // 
+            this.textBoxT_id.Location = new System.Drawing.Point(336, 104);
+            this.textBoxT_id.Name = "textBoxT_id";
+            this.textBoxT_id.Size = new System.Drawing.Size(18, 19);
+            this.textBoxT_id.TabIndex = 36;
+            // 
             // Form_seikyu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1672, 949);
+            this.Controls.Add(this.textBoxT_id);
+            this.Controls.Add(this.textBoxN_id);
+            this.Controls.Add(this.textBoxTsuki);
+            this.Controls.Add(this.textBoxNen);
             this.Controls.Add(this.cmdPrn1);
             this.Controls.Add(this.textBoxS_id);
             this.Controls.Add(this.dataGridViewShiharai_houhou);
@@ -2303,5 +2339,9 @@
         private System.Windows.Forms.Button cmdDbconfig;
         private System.Windows.Forms.TextBox textBoxS_id;
         private System.Windows.Forms.Button cmdPrn1;
+        private System.Windows.Forms.TextBox textBoxNen;
+        private System.Windows.Forms.TextBox textBoxTsuki;
+        private System.Windows.Forms.TextBox textBoxN_id;
+        private System.Windows.Forms.TextBox textBoxT_id;
     }
 }

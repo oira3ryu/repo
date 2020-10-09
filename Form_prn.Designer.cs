@@ -89,6 +89,12 @@
             this.checkBoxAll = new System.Windows.Forms.CheckBox();
             this.chk_title = new System.Windows.Forms.CheckBox();
             this.checkBoxIni = new System.Windows.Forms.CheckBox();
+            this.textBoxO_id = new System.Windows.Forms.TextBox();
+            this.textBoxS_id = new System.Windows.Forms.TextBox();
+            this.textBoxN_id = new System.Windows.Forms.TextBox();
+            this.textBoxT_id = new System.Windows.Forms.TextBox();
+            this.textBoxNen = new System.Windows.Forms.TextBox();
+            this.textBoxTsuki = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nenBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tsukiBindingSource1)).BeginInit();
@@ -604,12 +610,60 @@
             this.checkBoxIni.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.checkBoxIni.UseVisualStyleBackColor = true;
             // 
+            // textBoxO_id
+            // 
+            this.textBoxO_id.Location = new System.Drawing.Point(44, 190);
+            this.textBoxO_id.Name = "textBoxO_id";
+            this.textBoxO_id.Size = new System.Drawing.Size(20, 19);
+            this.textBoxO_id.TabIndex = 27;
+            // 
+            // textBoxS_id
+            // 
+            this.textBoxS_id.Location = new System.Drawing.Point(70, 190);
+            this.textBoxS_id.Name = "textBoxS_id";
+            this.textBoxS_id.Size = new System.Drawing.Size(20, 19);
+            this.textBoxS_id.TabIndex = 28;
+            // 
+            // textBoxN_id
+            // 
+            this.textBoxN_id.Location = new System.Drawing.Point(95, 190);
+            this.textBoxN_id.Name = "textBoxN_id";
+            this.textBoxN_id.Size = new System.Drawing.Size(20, 19);
+            this.textBoxN_id.TabIndex = 29;
+            // 
+            // textBoxT_id
+            // 
+            this.textBoxT_id.Location = new System.Drawing.Point(120, 190);
+            this.textBoxT_id.Name = "textBoxT_id";
+            this.textBoxT_id.Size = new System.Drawing.Size(20, 19);
+            this.textBoxT_id.TabIndex = 30;
+            // 
+            // textBoxNen
+            // 
+            this.textBoxNen.Location = new System.Drawing.Point(94, 215);
+            this.textBoxNen.Name = "textBoxNen";
+            this.textBoxNen.Size = new System.Drawing.Size(21, 19);
+            this.textBoxNen.TabIndex = 31;
+            // 
+            // textBoxTsuki
+            // 
+            this.textBoxTsuki.Location = new System.Drawing.Point(121, 215);
+            this.textBoxTsuki.Name = "textBoxTsuki";
+            this.textBoxTsuki.Size = new System.Drawing.Size(19, 19);
+            this.textBoxTsuki.TabIndex = 32;
+            // 
             // Form_prn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1604, 968);
+            this.Controls.Add(this.textBoxTsuki);
+            this.Controls.Add(this.textBoxNen);
+            this.Controls.Add(this.textBoxT_id);
+            this.Controls.Add(this.textBoxN_id);
+            this.Controls.Add(this.textBoxS_id);
+            this.Controls.Add(this.textBoxO_id);
             this.Controls.Add(this.checkBoxIni);
             this.Controls.Add(this.chk_title);
             this.Controls.Add(this.checkBoxAll);
@@ -717,5 +771,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn timestampDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn last_day;
         private System.Windows.Forms.CheckBox checkBoxIni;
+        private System.Windows.Forms.TextBox textBoxO_id;
+        private System.Windows.Forms.TextBox textBoxS_id;
+        private System.Windows.Forms.TextBox textBoxN_id;
+        private System.Windows.Forms.TextBox textBoxT_id;
+        private System.Windows.Forms.TextBox textBoxNen;
+        private System.Windows.Forms.TextBox textBoxTsuki;
     }
 }

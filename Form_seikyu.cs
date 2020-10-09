@@ -129,6 +129,54 @@ namespace rk_seikyu
             }
         }
 
+        public string TextBoxN_id
+        {
+            get
+            {
+                return textBoxN_id.Text;
+            }
+            set
+            {
+                textBoxN_id.Text = value;
+            }
+        }
+
+        public string TextBoxNen
+        {
+            get
+            {
+                return textBoxNen.Text;
+            }
+            set
+            {
+                textBoxNen.Text = value;
+            }
+        }
+
+        public string TextBoxTsuki
+        {
+            get
+            {
+                return textBoxTsuki.Text;
+            }
+            set
+            {
+                textBoxTsuki.Text = value;
+            }
+        }
+
+        public string TextBoxT_id
+        {
+            get
+            {
+                return textBoxT_id.Text;
+            }
+            set
+            {
+                textBoxT_id.Text = value;
+            }
+        }
+
         public string TextBoxO_name
         {
             get
@@ -6279,12 +6327,16 @@ namespace rk_seikyu
         {
             Cmb_nen_str = cmb_nen.Text;
             Console.WriteLine("cmb_nen_str = " + Cmb_nen_str);
+            textBoxN_id.Text = cmb_nen.SelectedIndex.ToString();
+            textBoxNen.Text = cmb_nen.SelectedValue.ToString();
         }
 
         private void Cmb_tsuki_SelectedIndexChanged(object sender, EventArgs e)
         {
             Cmb_tsuki_str = cmb_tsuki.Text;
             Console.WriteLine("cmb_tsuki_str = " + Cmb_tsuki_str);
+            textBoxT_id.Text = cmb_tsuki.SelectedIndex.ToString();
+            textBoxTsuki.Text = cmb_tsuki.SelectedValue.ToString();
         }
 
         private void Cmb_g_id_SelectedIndexChanged(object sender, EventArgs e)

@@ -336,6 +336,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>nen.xsd</DependentUpon>
     </Compile>
+    <Compile Include="nen_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>nen_ds.xsd</DependentUpon>
+    </Compile>
     <Compile Include="office_ds.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -383,7 +388,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>syubetsu.xsd</DependentUpon>
     </Compile>
+    <Compile Include="s_id_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>s_id_ds.xsd</DependentUpon>
+    </Compile>
     <Compile Include="tsuki.Designer.cs" />
+    <Compile Include="tsuki_ds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>tsuki_ds.xsd</DependentUpon>
+    </Compile>
     <Compile Include="withdrawal_ds.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -648,6 +663,17 @@
     <None Include="nen.xss">
       <DependentUpon>nen.xsd</DependentUpon>
     </None>
+    <None Include="nen_ds.xsc">
+      <DependentUpon>nen_ds.xsd</DependentUpon>
+    </None>
+    <None Include="nen_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>nen_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="nen_ds.xss">
+      <DependentUpon>nen_ds.xsd</DependentUpon>
+    </None>
     <None Include="office_ds.xsc">
       <DependentUpon>office_ds.xsd</DependentUpon>
     </None>
@@ -810,6 +836,17 @@
     <None Include="syubetsu.xss">
       <DependentUpon>syubetsu.xsd</DependentUpon>
     </None>
+    <None Include="s_id_ds.xsc">
+      <DependentUpon>s_id_ds.xsd</DependentUpon>
+    </None>
+    <None Include="s_id_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>s_id_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="s_id_ds.xss">
+      <DependentUpon>s_id_ds.xsd</DependentUpon>
+    </None>
     <None Include="tsuki.xsc">
       <DependentUpon>tsuki.xsd</DependentUpon>
     </None>
@@ -820,6 +857,17 @@
     </None>
     <None Include="tsuki.xss">
       <DependentUpon>tsuki.xsd</DependentUpon>
+    </None>
+    <None Include="tsuki_ds.xsc">
+      <DependentUpon>tsuki_ds.xsd</DependentUpon>
+    </None>
+    <None Include="tsuki_ds.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>tsuki_ds.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="tsuki_ds.xss">
+      <DependentUpon>tsuki_ds.xsd</DependentUpon>
     </None>
     <None Include="withdrawal_ds.xsc">
       <DependentUpon>withdrawal_ds.xsd</DependentUpon>

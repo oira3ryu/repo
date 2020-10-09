@@ -62,21 +62,75 @@ namespace rk_seikyu
         public string cmb_o_id_str;
         public string cmb_o_id_item;
         public string Form_Seikyu_TextBoxO_id;
+        public string Form_Seikyu_TextBoxS_id;
+        public string Form_Seikyu_TextBoxN_id;
+        public string Form_Seikyu_TextBoxT_id;
+        public string Form_Seikyu_TextBoxNen;
+        public string Form_Seikyu_TextBoxTsuki;
+
+        private static Form_prn _form_prn_Instance;
 
         private Form_seikyu form_seikyu_Instance;
+        //private Form_prn form_prn_Instance;
 
         public Form_prn()
         {
             InitializeComponent();
+            _form_prn_Instance = this;
 
             //Form_seikyuのインスタンスを取得
             form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
+
             //Form_seikyuのテキストボックス文字列を
             //Form_prnの文字列変数Form_Seikyu_TextBoxO_idへ設定
             Form_Seikyu_TextBoxO_id = form_seikyu_Instance.TextBoxO_id;
+            Form_Seikyu_TextBoxS_id = form_seikyu_Instance.TextBoxS_id;
+            Form_Seikyu_TextBoxN_id = form_seikyu_Instance.TextBoxN_id;
+            Form_Seikyu_TextBoxT_id = form_seikyu_Instance.TextBoxT_id;
+            Form_Seikyu_TextBoxNen = form_seikyu_Instance.TextBoxNen;
+            Form_Seikyu_TextBoxTsuki = form_seikyu_Instance.TextBoxTsuki;
             cmb_o_id_item = form_seikyu_Instance.TextBoxO_name;
             Console.WriteLine("cmb_o_idからのメンバーは、" + cmb_o_id_item);
         }
+
+        //Form_prnインスタンスを設定、取得する。
+        public static Form_prn Form_prn_Instance
+        {
+            get
+            {
+                return _form_prn_Instance;
+            }
+            set
+            {
+                _form_prn_Instance = value;
+            }
+        }
+
+        public string TextBoxO_id
+        {
+            get
+            {
+                return textBoxO_id.Text;
+            }
+            set
+            {
+                textBoxO_id.Text = value;
+            }
+        }
+
+        public string TextBoxS_id
+        {
+            get
+            {
+                return textBoxS_id.Text;
+            }
+            set
+            {
+                textBoxS_id.Text = value;
+            }
+        }
+
+
 
         private void CmdClose_Click(object sender, EventArgs e)
         {
@@ -91,8 +145,16 @@ namespace rk_seikyu
             this.Height = Screen.GetBounds(this).Height - 30;
             this.Top = (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2;
             this.Left = (Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2;
+            
+            this.textBoxO_id.Text = Form_Seikyu_TextBoxO_id;
+            this.textBoxS_id.Text = Form_Seikyu_TextBoxS_id;
+            this.textBoxN_id.Text = Form_Seikyu_TextBoxN_id;
+            this.textBoxT_id.Text = Form_Seikyu_TextBoxT_id;
+            this.textBoxNen.Text = Form_Seikyu_TextBoxNen;
+            this.textBoxTsuki.Text = Form_Seikyu_TextBoxTsuki;
 
             Console.WriteLine("Form_Seikyu_TextBoxO_id = " + Form_Seikyu_TextBoxO_id);
+            Console.WriteLine("Form_Seikyu_TextBoxS_id = " + Form_Seikyu_TextBoxS_id);
 
             nen_da.SelectCommand = new NpgsqlCommand
             (
@@ -317,6 +379,8 @@ namespace rk_seikyu
             Console.WriteLine("cmb_s_id_int1 = " + Cmb_s_id_int);
             Cmb_s_id_str = cmb_s_id.Text;
             Console.WriteLine("cmb_s_id_str1 = " + Cmb_s_id_str);
+            textBoxS_id.Text = Cmb_s_id_int.ToString();
+            //textBoxS_id.Text = Form_Seikyu_TextBoxS_id;
         }
 
         private void Cmb_c4_SelectedIndexChanged(object sender, EventArgs e)
