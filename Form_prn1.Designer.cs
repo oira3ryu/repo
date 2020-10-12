@@ -79,6 +79,14 @@
             this.cmb_nen = new System.Windows.Forms.ComboBox();
             this.cmb_prn_id = new System.Windows.Forms.ComboBox();
             this.cmb_s_id = new System.Windows.Forms.ComboBox();
+            this.textBoxTsuki = new System.Windows.Forms.TextBox();
+            this.textBoxNen = new System.Windows.Forms.TextBox();
+            this.textBoxT_id = new System.Windows.Forms.TextBox();
+            this.textBoxN_id = new System.Windows.Forms.TextBox();
+            this.textBoxS_id = new System.Windows.Forms.TextBox();
+            this.textBoxO_id = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAbd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c19ds1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c9ds1BindingSource)).BeginInit();
@@ -470,6 +478,7 @@
             this.cmb_prn_id.Name = "cmb_prn_id";
             this.cmb_prn_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_prn_id.TabIndex = 21;
+            this.cmb_prn_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_prn_id_SelectedIndexChanged);
             // 
             // cmb_s_id
             // 
@@ -479,11 +488,78 @@
             this.cmb_s_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_s_id.TabIndex = 20;
             // 
+            // textBoxTsuki
+            // 
+            this.textBoxTsuki.Location = new System.Drawing.Point(126, 197);
+            this.textBoxTsuki.Name = "textBoxTsuki";
+            this.textBoxTsuki.Size = new System.Drawing.Size(19, 19);
+            this.textBoxTsuki.TabIndex = 38;
+            // 
+            // textBoxNen
+            // 
+            this.textBoxNen.Location = new System.Drawing.Point(99, 197);
+            this.textBoxNen.Name = "textBoxNen";
+            this.textBoxNen.Size = new System.Drawing.Size(21, 19);
+            this.textBoxNen.TabIndex = 37;
+            // 
+            // textBoxT_id
+            // 
+            this.textBoxT_id.Location = new System.Drawing.Point(125, 172);
+            this.textBoxT_id.Name = "textBoxT_id";
+            this.textBoxT_id.Size = new System.Drawing.Size(20, 19);
+            this.textBoxT_id.TabIndex = 36;
+            // 
+            // textBoxN_id
+            // 
+            this.textBoxN_id.Location = new System.Drawing.Point(100, 172);
+            this.textBoxN_id.Name = "textBoxN_id";
+            this.textBoxN_id.Size = new System.Drawing.Size(20, 19);
+            this.textBoxN_id.TabIndex = 35;
+            // 
+            // textBoxS_id
+            // 
+            this.textBoxS_id.Location = new System.Drawing.Point(75, 172);
+            this.textBoxS_id.Name = "textBoxS_id";
+            this.textBoxS_id.Size = new System.Drawing.Size(20, 19);
+            this.textBoxS_id.TabIndex = 34;
+            // 
+            // textBoxO_id
+            // 
+            this.textBoxO_id.Location = new System.Drawing.Point(49, 172);
+            this.textBoxO_id.Name = "textBoxO_id";
+            this.textBoxO_id.Size = new System.Drawing.Size(20, 19);
+            this.textBoxO_id.TabIndex = 33;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(46, 89);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(132, 19);
+            this.textBox1.TabIndex = 39;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(45, 60);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 40;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form_prn1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1409, 989);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxTsuki);
+            this.Controls.Add(this.textBoxNen);
+            this.Controls.Add(this.textBoxT_id);
+            this.Controls.Add(this.textBoxN_id);
+            this.Controls.Add(this.textBoxS_id);
+            this.Controls.Add(this.textBoxO_id);
             this.Controls.Add(this.cmb_b_code);
             this.Controls.Add(this.cmb_tsuki);
             this.Controls.Add(this.cmb_nen);
@@ -573,5 +649,13 @@
         private System.Windows.Forms.ComboBox cmb_nen;
         private System.Windows.Forms.ComboBox cmb_prn_id;
         private System.Windows.Forms.ComboBox cmb_s_id;
+        private System.Windows.Forms.TextBox textBoxTsuki;
+        private System.Windows.Forms.TextBox textBoxNen;
+        private System.Windows.Forms.TextBox textBoxT_id;
+        private System.Windows.Forms.TextBox textBoxN_id;
+        private System.Windows.Forms.TextBox textBoxS_id;
+        private System.Windows.Forms.TextBox textBoxO_id;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button1;
     }
 }

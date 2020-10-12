@@ -28,6 +28,7 @@ namespace rk_seikyu
         private NpgsqlDataAdapter tsuki_da = new NpgsqlDataAdapter();
         private NpgsqlDataAdapter b_code_da = new NpgsqlDataAdapter();
         private NpgsqlDataAdapter s_id_da = new NpgsqlDataAdapter();
+        private NpgsqlDataAdapter prn_id_da = new NpgsqlDataAdapter();
 
         //private NpgsqlDataAdapter cmb_o_id_da = new NpgsqlDataAdapter();
         //private NpgsqlDataAdapter o_id_da = new NpgsqlDataAdapter();
@@ -45,37 +46,133 @@ namespace rk_seikyu
         private DataSet withdrawalds = new DataSet();
         private DataSet b_codeds = new DataSet();
         private DataSet s_id_ds = new DataSet();
+        private DataSet prn_id_ds = new DataSet();
         //private DataSet cmb_s_id_ds = new DataSet();
 
-        //public int cmb_s_id_int;
+        public string Cmb_nen_str { get; set; }
+        public string Cmb_tsuki_str { get; set; }
+        public string Cmb_b_code_str { get; set; }
+
+        public int Cmb_prn_id_int { get; set; }
 
         //public string cmb_s_id_item;
         //public string cmb_s_id_str;
         public string Form_Seikyu_TextBoxS_id;
         public string Form_Seikyu_TextBoxO_id;
-        public string Form_Prn_TextBoxS_id;
-        public string Form_Prn_TextBoxO_id;
+        public string Form_Seikyu_TextBoxNen;
+        public string Form_Seikyu_TextBoxTsuki;
+        public string Form_Seikyu_TextBoxN_id;
+        public string Form_Seikyu_TextBoxT_id;
+
+        private static Form_prn1 _form_prn1_Instance;
 
         private Form_seikyu form_seikyu_Instance;
-        private Form_prn form_prn_Instance;
+        private Form_prn1 form_prn1_Instance;
 
 
 
         public Form_prn1()
         {
             InitializeComponent();
+            _form_prn1_Instance = this;
 
             //Form_seikyuのインスタンスを取得
             form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
-            form_prn_Instance = Form_prn.Form_prn_Instance;
+            form_prn1_Instance = Form_prn1.Form_prn1_Instance;
             //Form_seikyuのテキストボックス文字列を
             //Form_prnの文字列変数Form_Seikyu_TextBoxO_idへ設定
             Form_Seikyu_TextBoxO_id = form_seikyu_Instance.TextBoxO_id;
-            Form_Prn_TextBoxS_id = form_prn_Instance.TextBoxS_id;
+            Form_Seikyu_TextBoxS_id = form_seikyu_Instance.TextBoxS_id;
+            Form_Seikyu_TextBoxN_id = form_seikyu_Instance.TextBoxN_id;
+            Form_Seikyu_TextBoxT_id = form_seikyu_Instance.TextBoxT_id;
+            Form_Seikyu_TextBoxNen = form_seikyu_Instance.TextBoxNen;
+            Form_Seikyu_TextBoxTsuki = form_seikyu_Instance.TextBoxTsuki;
 
-            //cmb_o_id_item = form_seikyu_Instance.TextBoxO_name;
-            //Console.WriteLine("cmb_o_idからのメンバーは、" + cmb_o_id_item);
+        }
 
+        //Form_prnインスタンスを設定、取得する。
+        public static Form_prn1 Form_prn1_Instance
+        {
+            get
+            {
+                return _form_prn1_Instance;
+            }
+            set
+            {
+                _form_prn1_Instance = value;
+            }
+        }
+
+        public string TextBoxO_id
+        {
+            get
+            {
+                return textBoxO_id.Text;
+            }
+            set
+            {
+                textBoxO_id.Text = value;
+            }
+        }
+
+        public string TextBoxS_id
+        {
+            get
+            {
+                return textBoxS_id.Text;
+            }
+            set
+            {
+                textBoxS_id.Text = value;
+            }
+        }
+
+        public string TextBoxN_id
+        {
+            get
+            {
+                return textBoxN_id.Text;
+            }
+            set
+            {
+                textBoxN_id.Text = value;
+            }
+        }
+
+        public string TextBoxT_id
+        {
+            get
+            {
+                return textBoxT_id.Text;
+            }
+            set
+            {
+                textBoxT_id.Text = value;
+            }
+        }
+
+        public string TextBoxNen
+        {
+            get
+            {
+                return textBoxNen.Text;
+            }
+            set
+            {
+                textBoxNen.Text = value;
+            }
+        }
+
+        public string TextBoxTsuki
+        {
+            get
+            {
+                return textBoxTsuki.Text;
+            }
+            set
+            {
+                textBoxTsuki.Text = value;
+            }
         }
 
         private void CmdClose_Click(object sender, EventArgs e)
@@ -84,8 +181,36 @@ namespace rk_seikyu
             this.Close();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // コンボボックスが未選択の場合
+            if (dataGridViewAbd[4, 0].FormattedValue == null)
+            {
+                textBox1.Text = "null";
+            }
+            else
+            {
+                textBox1.Text = dataGridViewAbd[4, 0].FormattedValue.ToString();
+            }
+        }
+
         private void Form_prn1_Load(object sender, EventArgs e)
         {
+            this.textBoxO_id.Text = Form_Seikyu_TextBoxO_id;
+            this.textBoxS_id.Text = Form_Seikyu_TextBoxS_id;
+            this.textBoxN_id.Text = Form_Seikyu_TextBoxN_id;
+            this.textBoxT_id.Text = Form_Seikyu_TextBoxT_id;
+            this.textBoxNen.Text = Form_Seikyu_TextBoxNen;
+            this.textBoxTsuki.Text = Form_Seikyu_TextBoxTsuki;
+
+            Console.WriteLine("Form_Seikyu_TextBoxO_id = " + Form_Seikyu_TextBoxO_id);
+            Console.WriteLine("Form_Seikyu_TextBoxS_id = " + Form_Seikyu_TextBoxS_id);
+            Console.WriteLine("Form_Seikyu_TextBoxN_id = " + Form_Seikyu_TextBoxN_id);
+            Console.WriteLine("Form_Seikyu_TextBoxT_id = " + Form_Seikyu_TextBoxT_id);
+            Console.WriteLine("Form_Seikyu_TextBoxNen = " + Form_Seikyu_TextBoxNen);
+            Console.WriteLine("Form_Seikyu_TextBoxTsuki = " + Form_Seikyu_TextBoxTsuki);
+
+
             nen_da.SelectCommand = new NpgsqlCommand
             (
                    "SELECT"
@@ -103,6 +228,7 @@ namespace rk_seikyu
             cmb_nen.DataSource = nen_ds.Tables[0];
             cmb_nen.DisplayMember = "nen";
             cmb_nen.ValueMember = "nen";
+            cmb_nen.SelectedValue = Form_Seikyu_TextBoxNen;
 
             tsuki_da.SelectCommand = new NpgsqlCommand
             (
@@ -121,6 +247,7 @@ namespace rk_seikyu
             cmb_tsuki.DataSource = tsuki_ds.Tables[0];
             cmb_tsuki.DisplayMember = "tsuki";
             cmb_tsuki.ValueMember = "tsuki";
+            cmb_tsuki.SelectedValue = Form_Seikyu_TextBoxTsuki;
 
             s_id_da.SelectCommand = new NpgsqlCommand
             (
@@ -143,6 +270,46 @@ namespace rk_seikyu
             cmb_s_id.DisplayMember = "syubetsu";
             cmb_s_id.ValueMember = "s_id";
 
+            prn_id_da.SelectCommand = new NpgsqlCommand
+            (
+                   "SELECT"
+                + " ps_id"
+                + ", syubetsu"
+                + " FROM"
+                + " t_prn_syubetsu"
+                + " ORDER BY ps_id;",
+                m_conn
+            );
+            if (prn_id_ds.Tables["t_prn_syubetsu"] != null)
+                prn_id_ds.Tables["t_prn_syubetsu"].Clear();
+            prn_id_da.Fill(prn_id_ds, "t_prn_syubetsu");
+
+            cmb_prn_id.DataSource = prn_id_ds.Tables["t_prn_syubetsu"];
+            cmb_prn_id.DisplayMember = "syubetsu";
+            cmb_prn_id.ValueMember = "ps_id";
+            this.cmb_prn_id.SelectedIndex = 0;
+            //cmb_prn_id.SelectedIndexChanged += new EventHandler(Cmb_prn_id_SelectedIndexChanged);
+
+            b_code_da.SelectCommand = new NpgsqlCommand
+            (
+                "SELECT"
+                + " b_code"
+                + ", b_name"
+                + ", b_id"
+                + " FROM"
+                + " t_bank"
+                + " ORDER BY b_id;",
+                m_conn
+            );
+            if (b_codeds.Tables["t_bank"] != null)
+                b_codeds.Tables["t_bank"].Clear();
+            b_code_da.Fill(b_codeds, "t_bank");
+
+            cmb_b_code.DataSource = b_codeds.Tables["t_bank"];
+            cmb_b_code.DisplayMember = "b_name";
+            cmb_b_code.ValueMember = "b_code";
+            cmb_b_code.SelectedIndexChanged += new EventHandler(Cmb_b_code_SelectedIndexChanged);
+
             // コンボボックスで支払者を表示
             c19_da.SelectCommand = new NpgsqlCommand
             (
@@ -150,11 +317,21 @@ namespace rk_seikyu
                    + " b.c1,CASE WHEN a.c19 = '' THEN a.c6 ELSE a.c19 END c19"
                    + " FROM t_shiharai_houhou a INNER JOIN t_seikyu b"
                    + " ON a.c5 = b.c1"
-                   + " WHERE b.c4_y = 'R 2'"
-                   + " AND b.c4_m = ' 8'"
-                   + " AND b.s_id = '1'"
-                   + " AND b.o_id = '4'"
-                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '" + Form_Seikyu_TextBoxO_id + "')"
+                   + " WHERE b.c4_y = '" + Form_Seikyu_TextBoxNen + "'"
+                   + " AND b.c4_m = CASE WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=1 THEN"
+                                                            + " ' ' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=2 THEN"
+                                                            + " '' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " END"
+                   + " AND b.s_id = '" + Form_Seikyu_TextBoxS_id + "'"
+                   + " AND b.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = '" + Form_Seikyu_TextBoxNen + "'"
+                                                            + " AND c4_m = CASE WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=1 THEN"
+                                                            + " ' ' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=2 THEN"
+                                                            + " '' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " END"
+                                                            + " AND s_id = '" + Form_Seikyu_TextBoxS_id + "' AND o_id = '" + Form_Seikyu_TextBoxO_id + "')"
                    + " ORDER BY r_id;",
                 m_conn
                 );
@@ -170,11 +347,21 @@ namespace rk_seikyu
                    + " b.c1 c1_bc,CASE WHEN a.c9 = '' THEN '' ELSE a.c9 END c9"
                    + " FROM t_shiharai_houhou a INNER JOIN t_seikyu b"
                    + " ON a.c5 = b.c1"
-                   + " WHERE b.c4_y = 'R 2'"
-                   + " AND b.c4_m = ' 8'"
-                   + " AND b.s_id = '1'"
-                   + " AND b.o_id = '4'"
-                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '" + Form_Seikyu_TextBoxO_id + "')"
+                   + " WHERE b.c4_y = '" + Form_Seikyu_TextBoxNen + "'"
+                   + " AND b.c4_m = CASE WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=1 THEN"
+                                                            + " ' ' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=2 THEN"
+                                                            + " '' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " END"
+                   + " AND b.s_id = '" + Form_Seikyu_TextBoxS_id + "'"
+                   + " AND b.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = '" + Form_Seikyu_TextBoxNen + "'"
+                                                            + " AND c4_m = CASE WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=1 THEN"
+                                                            + " ' ' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=2 THEN"
+                                                            + " '' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " END"
+                                                            + " AND s_id = '" + Form_Seikyu_TextBoxS_id + "' AND o_id = '" + Form_Seikyu_TextBoxO_id + "')"
                    + " ORDER BY r_id;",
                 m_conn
                 );
@@ -190,11 +377,21 @@ namespace rk_seikyu
                    + " b.c1 c1_bn,CASE WHEN a.c11 = '' THEN '' ELSE a.c11 END c11"
                    + " FROM t_shiharai_houhou a INNER JOIN t_seikyu b"
                    + " ON a.c5 = b.c1"
-                   + " WHERE b.c4_y = 'R 2'"
-                   + " AND b.c4_m = ' 8'"
-                   + " AND b.s_id = '1'"
-                   + " AND b.o_id = '4'"
-                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '" + Form_Seikyu_TextBoxO_id + "')"
+                   + " WHERE b.c4_y = '" + Form_Seikyu_TextBoxNen + "'"
+                   + " AND b.c4_m = CASE WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=1 THEN"
+                                                            + " ' ' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=2 THEN"
+                                                            + " '' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " END"
+                   + " AND b.s_id = '" + Form_Seikyu_TextBoxS_id + "'"
+                   + " AND b.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = '" + Form_Seikyu_TextBoxNen + "'"
+                                                            + " AND c4_m = CASE WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=1 THEN"
+                                                            + " ' ' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=2 THEN"
+                                                            + " '' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " END"
+                                                            + " AND s_id = '" + Form_Seikyu_TextBoxS_id + "' AND o_id = '" + Form_Seikyu_TextBoxO_id + "')"
                    + " ORDER BY r_id;",
                 m_conn
                 );
@@ -210,11 +407,21 @@ namespace rk_seikyu
                    + " b.c1 c1_brn,CASE WHEN a.c14 = '' THEN '' ELSE a.c14 END c14"
                    + " FROM t_shiharai_houhou a INNER JOIN t_seikyu b"
                    + " ON a.c5 = b.c1"
-                   + " WHERE b.c4_y = 'R 2'"
-                   + " AND b.c4_m = ' 8'"
-                   + " AND b.s_id = '1'"
-                   + " AND b.o_id = '4'"
-                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '" + Form_Seikyu_TextBoxO_id + "')"
+                   + " WHERE b.c4_y = '" + Form_Seikyu_TextBoxNen + "'"
+                   + " AND b.c4_m = CASE WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=1 THEN"
+                                                            + " ' ' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=2 THEN"
+                                                            + " '' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " END"
+                   + " AND b.s_id = '" + Form_Seikyu_TextBoxS_id + "'"
+                   + " AND b.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = '" + Form_Seikyu_TextBoxNen + "'"
+                                                            + " AND c4_m = CASE WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=1 THEN"
+                                                            + " ' ' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=2 THEN"
+                                                            + " '' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " END"
+                                                            + " AND s_id = '" + Form_Seikyu_TextBoxS_id + "' AND o_id = '" + Form_Seikyu_TextBoxO_id + "')"
                    + " ORDER BY r_id;",
                 m_conn
                 );
@@ -230,11 +437,21 @@ namespace rk_seikyu
                    + " b.c1 c1_acn,CASE WHEN a.c16 = '' THEN '' ELSE a.c16 END c16"
                    + " FROM t_shiharai_houhou a INNER JOIN t_seikyu b"
                    + " ON a.c5 = b.c1"
-                   + " WHERE b.c4_y = 'R 2'"
-                   + " AND b.c4_m = ' 8'"
-                   + " AND b.s_id = '1'"
-                   + " AND b.o_id = '4'"
-                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '" + Form_Seikyu_TextBoxO_id + "')"
+                   + " WHERE b.c4_y = '" + Form_Seikyu_TextBoxNen + "'"
+                   + " AND b.c4_m = CASE WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=1 THEN"
+                                                            + " ' ' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=2 THEN"
+                                                            + " '' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " END"
+                   + " AND b.s_id = '" + Form_Seikyu_TextBoxS_id + "'"
+                   + " AND b.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
+                   + " AND a.time_stamp = (SELECT max(time_stamp) FROM t_shiharai_houhou WHERE c4_y = '" + Form_Seikyu_TextBoxNen + "'"
+                                                            + " AND c4_m = CASE WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=1 THEN"
+                                                            + " ' ' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=2 THEN"
+                                                            + " '' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " END"
+                                                            + " AND s_id = '" + Form_Seikyu_TextBoxS_id + "' AND o_id = '" + Form_Seikyu_TextBoxO_id + "')"
                    + " ORDER BY r_id;",
                 m_conn
                 );
@@ -312,38 +529,50 @@ namespace rk_seikyu
             dataGridViewAbd.Columns[2].HeaderText = "支払者";
             dataGridViewAbd.Columns[3].HeaderText = "年月";
             dataGridViewAbd.Columns[4].HeaderText = "銀行ｺｰﾄﾞ";
+            dataGridViewAbd.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewAbd.Columns[5].HeaderText = "金融機関名";
             dataGridViewAbd.Columns[6].HeaderText = "支店名";
             dataGridViewAbd.Columns[7].HeaderText = "口座番号";
+            dataGridViewAbd.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewAbd.Columns[8].HeaderText = "請求額";
+            dataGridViewAbd.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewAbd.Columns[8].DefaultCellStyle.Format = "#,##0";
             dataGridViewAbd.Columns[9].HeaderText = "種別";
             dataGridViewAbd.Columns[10].HeaderText = "番号";
+            dataGridViewAbd.Columns[10].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             //dataGridViewAbd.Columns[11].HeaderText = "引落日ﾞ";
 
             da.SelectCommand = new NpgsqlCommand
             (
                    "SELECT"
-                + " w_flg"
-                + ", c3"
-                + ", c1"
-                + ", concat_ws('/',c4_y,c4_m) c4_ym"
-                + ", c9"
-                + ", c1 c1_bc"
-                + ", c11"
-                + ", c1 c1_bn"
-                + ", c14"
-                + ", c1 c1_brn"
-                + ", c16"
-                + ", c1 c1_acn"
-                + ", c22"
-                + ", s_id"
-                + ", o_id"
-                + ", r_id"
+                + " a.w_flg"
+                + ", a.c3"
+                + ", a.c1"
+                + ", concat_ws('/', a.c4_y, a.c4_m) c4_ym"
+                + ", a.c9"
+                + ", a.c1 c1_bc"
+                + ", a.c11"
+                + ", a.c1 c1_bn"
+                + ", a.c14"
+                + ", a.c1 c1_brn"
+                + ", a.c16"
+                + ", a.c1 c1_acn"
+                + ", a.c22"
+                + ", a.s_id"
+                + ", a.o_id"
+                + ", a.r_id"
                 //+ ", last_day"
                 + " FROM"
-                + " t_seikyu"
-                + " WHERE c4_y = 'R 2' AND c4_m = ' 8' AND s_id = '1' AND o_id = '" + Form_Seikyu_TextBoxO_id + "'"
-                + " ORDER BY r_id;",
+                + " t_seikyu a"
+                + " WHERE a.time_stamp = (SELECT max(time_stamp) FROM t_seikyu b"
+                + " WHERE b.c4_m = CASE WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=1 THEN"
+                                                            + " ' ' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " WHEN length('" + Form_Seikyu_TextBoxTsuki + "')=2 THEN"
+                                                            + " '' || '" + Form_Seikyu_TextBoxTsuki + "'"
+                                                            + " END"
+                + " AND b.s_id = '" + Form_Seikyu_TextBoxS_id + "'"
+                + " AND b.o_id = '" + Form_Seikyu_TextBoxO_id + "')"
+                + " ORDER BY a.r_id;",
                 m_conn
                 );
 
@@ -538,6 +767,89 @@ namespace rk_seikyu
                     }
                 }
             }
+        }
+
+        private void Cmb_prn_id_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Cmb_prn_id_int = cmb_prn_id.SelectedIndex + 1;
+            Console.WriteLine("Cmb_prn_id_int1 = " + Cmb_prn_id_int);
+
+            switch (Cmb_prn_id_int)
+            {
+                case 1: // 
+                    {
+                        cmb_b_code.Visible = false;
+                        //cmdPrnWithdrawal.Visible = false;
+                        //checkBoxIni.Visible = false;
+                    }
+                    break;
+                case 2: // 
+                    {
+                        cmb_b_code.Visible = false;
+                        //cmdPrnWithdrawal.Visible = false;
+                        //checkBoxIni.Visible = false;
+                    }
+                    break;
+                case 3: // 
+                    {
+                        cmb_b_code.Visible = false;
+                        //cmdPrnWithdrawal.Visible = false;
+                        //checkBoxIni.Visible = false;
+                    }
+                    break;
+                case 4: // 
+                    {
+                        cmb_b_code.Visible = false;
+                        //cmdPrnWithdrawal.Visible = false;
+                        //checkBoxIni.Visible = false;
+                    }
+                    break;
+                case 5: // 
+                    {
+                        cmb_b_code.Visible = true;
+                        //cmdPrnWithdrawal.Visible = true;
+                        //checkBoxIni.Visible = true;
+
+                    }
+                    break;
+            }
+        }
+
+
+        private void Cmb_nen_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Cmb_nen_str = cmb_nen.Text;
+            Console.WriteLine("Cmb_nen_str = " + Cmb_nen_str);
+        }
+
+        private void Cmb_tsuki_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Cmb_tsuki_str = cmb_tsuki.Text;
+            Console.WriteLine("Cmb_tsuki_str = " + Cmb_tsuki_str);
+        }
+
+        private void Cmb_b_code_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Cmb_b_code_str = cmb_b_code.SelectedValue.ToString();
+
+            Console.WriteLine("Cmb_b_code_str = " + Cmb_b_code_str);
+
+            //dataGridViewWithdrawal.Columns[0].HeaderText = "選択";
+            dataGridViewAbd.Columns[1].HeaderText = "氏名";
+            dataGridViewAbd.Columns[2].HeaderText = "支払者";
+            dataGridViewAbd.Columns[3].HeaderText = "年月";
+            dataGridViewAbd.Columns[4].HeaderText = "銀行ｺｰﾄﾞ";
+            dataGridViewAbd.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewAbd.Columns[5].HeaderText = "金融機関名";
+            dataGridViewAbd.Columns[6].HeaderText = "支店名";
+            dataGridViewAbd.Columns[7].HeaderText = "口座番号";
+            dataGridViewAbd.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewAbd.Columns[8].HeaderText = "請求金額";
+            dataGridViewAbd.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewAbd.Columns[8].DefaultCellStyle.Format = "#,##0";
+            dataGridViewAbd.Columns[9].HeaderText = "種別";
+            dataGridViewAbd.Columns[10].HeaderText = "番号";
+            dataGridViewAbd.Columns[10].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
         private void Form_prn1_FormClosing(object sender, FormClosingEventArgs e)

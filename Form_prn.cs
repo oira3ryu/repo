@@ -82,7 +82,7 @@ namespace rk_seikyu
             form_seikyu_Instance = Form_seikyu.Form_seikyu_Instance;
 
             //Form_seikyuのテキストボックス文字列を
-            //Form_prnの文字列変数Form_Seikyu_TextBoxO_idへ設定
+            //Form_seiyuの文字列変数Form_Seikyu_TextBoxO_idへ設定
             Form_Seikyu_TextBoxO_id = form_seikyu_Instance.TextBoxO_id;
             Form_Seikyu_TextBoxS_id = form_seikyu_Instance.TextBoxS_id;
             Form_Seikyu_TextBoxN_id = form_seikyu_Instance.TextBoxN_id;
@@ -130,7 +130,53 @@ namespace rk_seikyu
             }
         }
 
+        public string TextBoxN_id
+        {
+            get
+            {
+                return textBoxN_id.Text;
+            }
+            set
+            {
+                textBoxN_id.Text = value;
+            }
+        }
 
+        public string TextBoxT_id
+        {
+            get
+            {
+                return textBoxT_id.Text;
+            }
+            set
+            {
+                textBoxT_id.Text = value;
+            }
+        }
+
+        public string TextBoxNen
+        {
+            get
+            {
+                return textBoxNen.Text;
+            }
+            set
+            {
+                textBoxNen.Text = value;
+            }
+        }
+
+        public string TextBoxTsuki
+        {
+            get
+            {
+                return textBoxTsuki.Text;
+            }
+            set
+            {
+                textBoxTsuki.Text = value;
+            }
+        }
 
         private void CmdClose_Click(object sender, EventArgs e)
         {
@@ -155,6 +201,10 @@ namespace rk_seikyu
 
             Console.WriteLine("Form_Seikyu_TextBoxO_id = " + Form_Seikyu_TextBoxO_id);
             Console.WriteLine("Form_Seikyu_TextBoxS_id = " + Form_Seikyu_TextBoxS_id);
+            Console.WriteLine("Form_Seikyu_TextBoxN_id = " + Form_Seikyu_TextBoxN_id);
+            Console.WriteLine("Form_Seikyu_TextBoxT_id = " + Form_Seikyu_TextBoxT_id);
+            Console.WriteLine("Form_Seikyu_TextBoxNen = " + Form_Seikyu_TextBoxNen);
+            Console.WriteLine("Form_Seikyu_TextBoxTsuki = " + Form_Seikyu_TextBoxTsuki);
 
             nen_da.SelectCommand = new NpgsqlCommand
             (
@@ -304,10 +354,12 @@ namespace rk_seikyu
             cmb_nen.DataSource = nends.Tables[0];
             cmb_nen.DisplayMember = "nen";
             cmb_nen.ValueMember = "nen";
+            cmb_nen.SelectedValue = Form_Seikyu_TextBoxNen;
 
             cmb_tsuki.DataSource = tsukids.Tables[0];
             cmb_tsuki.DisplayMember = "tsuki";
             cmb_tsuki.ValueMember = "tsuki";
+            cmb_tsuki.SelectedValue = Form_Seikyu_TextBoxTsuki;
 
             cmb_prn_id.DataSource = prn_id_ds.Tables["t_prn_syubetsu"];
             cmb_prn_id.DisplayMember = "syubetsu";
