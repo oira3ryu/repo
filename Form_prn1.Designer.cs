@@ -87,6 +87,7 @@
             this.textBoxO_id = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.cmdPrv = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAbd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c19ds1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c9ds1BindingSource)).BeginInit();
@@ -296,7 +297,7 @@
             // 
             // abd
             // 
-            this.abd.DataSetName = "abd";
+            this.abd.DataSetName = "abd_ds";
             this.abd.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // bindingNavigatorAbd
@@ -415,7 +416,7 @@
             // 
             // cmdSave
             // 
-            this.cmdSave.Location = new System.Drawing.Point(75, 418);
+            this.cmdSave.Location = new System.Drawing.Point(75, 435);
             this.cmdSave.Name = "cmdSave";
             this.cmdSave.Size = new System.Drawing.Size(75, 23);
             this.cmdSave.TabIndex = 2;
@@ -450,6 +451,7 @@
             this.cmb_b_code.Name = "cmb_b_code";
             this.cmb_b_code.Size = new System.Drawing.Size(121, 20);
             this.cmb_b_code.TabIndex = 24;
+            this.cmb_b_code.SelectedIndexChanged += new System.EventHandler(this.Cmb_b_code_SelectedIndexChanged);
             // 
             // cmb_tsuki
             // 
@@ -460,6 +462,7 @@
             this.cmb_tsuki.Size = new System.Drawing.Size(56, 20);
             this.cmb_tsuki.TabIndex = 23;
             this.cmb_tsuki.ValueMember = "t_id";
+            this.cmb_tsuki.SelectedIndexChanged += new System.EventHandler(this.Cmb_tsuki_SelectedIndexChanged);
             // 
             // cmb_nen
             // 
@@ -470,6 +473,7 @@
             this.cmb_nen.Size = new System.Drawing.Size(56, 20);
             this.cmb_nen.TabIndex = 22;
             this.cmb_nen.ValueMember = "n_id";
+            this.cmb_nen.SelectedIndexChanged += new System.EventHandler(this.Cmb_nen_SelectedIndexChanged);
             // 
             // cmb_prn_id
             // 
@@ -487,6 +491,7 @@
             this.cmb_s_id.Name = "cmb_s_id";
             this.cmb_s_id.Size = new System.Drawing.Size(121, 20);
             this.cmb_s_id.TabIndex = 20;
+            this.cmb_s_id.SelectedIndexChanged += new System.EventHandler(this.Cmb_s_id_SelectedIndexChanged);
             // 
             // textBoxTsuki
             // 
@@ -547,11 +552,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // cmdPrv
+            // 
+            this.cmdPrv.Location = new System.Drawing.Point(75, 406);
+            this.cmdPrv.Name = "cmdPrv";
+            this.cmdPrv.Size = new System.Drawing.Size(75, 23);
+            this.cmdPrv.TabIndex = 41;
+            this.cmdPrv.Text = "表示";
+            this.cmdPrv.UseVisualStyleBackColor = true;
+            this.cmdPrv.Click += new System.EventHandler(this.cmdPrv_Click);
+            // 
             // Form_prn1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1409, 989);
+            this.Controls.Add(this.cmdPrv);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.textBoxTsuki);
@@ -657,5 +673,6 @@
         private System.Windows.Forms.TextBox textBoxO_id;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cmdPrv;
     }
 }

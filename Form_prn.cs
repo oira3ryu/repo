@@ -1803,7 +1803,102 @@ namespace rk_seikyu
                         + ", CASE WHEN ((b.c7 = '現金') or (b.c11 = '')) THEN '稚内信用金庫' ELSE h.b_name END _b_name"
                         + ", CASE WHEN ((b.c7 = '現金') or (b.c11 = '')) THEN '014' ELSE h.br_code END _br_code"
                         + ", CASE WHEN ((b.c7 = '現金') or (b.c11 = '')) THEN '利尻富士支店' ELSE h.br_name END _br_name"
-                        + ", CASE WHEN e.sy IS NULL or e.sm IS NULL THEN" /* 引落年月日自動入力の場合*/
+
+                        + ", CASE WHEN to_number(c4_m, '99') = 11 THEN"
+
+                        + " CASE WHEN e.sy IS NULL or e.sm IS NULL THEN" /* 引落年月日自動入力の場合*/
+                            + " CASE WHEN e.b_id = '0' THEN null"
+                                + " WHEN e.b_id = '1' THEN" /* 稚内信金の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff || '/' || to_number(c4_m,'99') + 1 || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '2' THEN" /* ゆうちょ銀行の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff || '/' || to_number(c4_m,'99') + 1 || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '3' THEN" /* 利尻漁協の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff + 1 || '/' ||  to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff || '/' || to_number(c4_m,'99') + 1 || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                            + " END"
+                        + " ELSE" /* 引落年月日手入力の場合*/
+                            + " CASE WHEN e.b_id = '0' THEN null"
+                                + " WHEN e.b_id = '1' THEN" /* 稚内信金の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff + 1 || '/' || to_number(e.sm,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff || '/' || to_number(e.sm,'99') || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '2' THEN" /* ゆうちょ銀行の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff + 1 || '/' || to_number(e.sm,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff || '/' || to_number(e.sm,'99') || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '3' THEN" /* 利尻漁協の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff + 1 || '/' || to_number(e.sm,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff || '/' || to_number(e.sm,'99') || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                            + " END"
+                        + " END"
+
+                        + " WHEN to_number(c4_m, '99') = 12 THEN"
+
+                        + " CASE WHEN e.sy IS NULL or e.sm IS NULL THEN" /* 引落年月日自動入力の場合*/
+                            + " CASE WHEN e.b_id = '0' THEN null"
+                                + " WHEN e.b_id = '1' THEN" /* 稚内信金の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff + 1 || '/' || to_number(c4_m,'99') - 11 || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '2' THEN" /* ゆうちょ銀行の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff + 1 || '/' || to_number(c4_m,'99') - 11 || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '3' THEN" /* 利尻漁協の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff + 1 || '/' ||  to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff + 1 || '/' || to_number(c4_m,'99') - 11 || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                            + " END"
+                        + " ELSE" /* 引落年月日手入力の場合*/
+                            + " CASE WHEN e.b_id = '0' THEN null"
+                                + " WHEN e.b_id = '1' THEN" /* 稚内信金の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff + 1 || '/' || to_number(e.sm,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff || '/' || to_number(e.sm,'99') || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '2' THEN" /* ゆうちょ銀行の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff + 1 || '/' || to_number(e.sm,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff || '/' || to_number(e.sm,'99') || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '3' THEN" /* 利尻漁協の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff + 1 || '/' || to_number(e.sm,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff || '/' || to_number(e.sm,'99') || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                            + " END"
+                        + " END"
+
+                        + " ELSE"
+
+                        + " CASE WHEN e.sy IS NULL or e.sm IS NULL THEN" /* 引落年月日自動入力の場合*/
                             + " CASE WHEN e.b_id = '0' THEN null"
                                 + " WHEN e.b_id = '1' THEN" /* 稚内信金の場合の処理*/
                                     + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
@@ -1845,7 +1940,10 @@ namespace rk_seikyu
                                         + " target_date(to_date((to_number(e.sy,'999')+diff || '/' || to_number(e.sm,'99') || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
                                     + " END"
                             + " END"
-                        + " END target_date"
+                        + " END"
+
+                        + " END  target_date"
+
                         + ", CASE WHEN ((h.b_name is null)or(h.b_name = '')) THEN '稚内信用金庫'"
                         + " ELSE h.b_name END b_name"
                         + ", i.c25 shiharaisya"
@@ -2432,13 +2530,17 @@ namespace rk_seikyu
         private void Cmb_nen_SelectedIndexChanged(object sender, EventArgs e)
         {
             Cmb_nen_str = cmb_nen.Text;
-            Console.WriteLine("Cmb_nen_str = " + Cmb_nen_str);
+            Console.WriteLine("cmb_nen_str = " + Cmb_nen_str);
+            textBoxN_id.Text = cmb_nen.SelectedIndex.ToString();
+            textBoxNen.Text = cmb_nen.SelectedValue.ToString();
         }
 
         private void Cmb_tsuki_SelectedIndexChanged(object sender, EventArgs e)
         {
             Cmb_tsuki_str = cmb_tsuki.Text;
-            Console.WriteLine("Cmb_tsuki_str = " + Cmb_tsuki_str);
+            Console.WriteLine("cmb_tsuki_str = " + Cmb_tsuki_str);
+            textBoxT_id.Text = cmb_tsuki.SelectedIndex.ToString();
+            textBoxTsuki.Text = cmb_tsuki.SelectedValue.ToString();
         }
 
         private void Cmb_b_code_SelectedIndexChanged(object sender, EventArgs e)
