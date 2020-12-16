@@ -625,12 +625,36 @@ namespace rk_seikyu
                                 + " LEFT JOIN t_gengou f ON substr(a.c4_y,1,1) = f.g_name"
                                 + ")"
                             + " LEFT JOIN t_chief g ON "
-                                        + " g.start_date <= (SELECT to_date((to_number(c4_y,'999')+f.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                        + " AND (g.end_date Is Null Or g.end_date >= (SELECT to_date((to_number(c4_y,'999')+f.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1) "
+                                        + " g.start_date <= (SELECT"
+                                        + " CASE WHEN to_number(c4_m,'99') >= 11 THEN"
+                                        + " to_date((to_number(c4_y,'999')+f.diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " ELSE"
+                                        + " to_date((to_number(c4_y,'999')+f.diff || '/' || to_number(c4_m,'99') + 1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " END"
+                                        + " )"
+                                        + " AND (g.end_date Is Null Or g.end_date >= (SELECT"
+                                        + " CASE WHEN to_number(c4_m,'99') >= 11 THEN"
+                                        + " to_date((to_number(c4_y,'999')+f.diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " ELSE"
+                                        + " to_date((to_number(c4_y,'999')+f.diff || '/' || to_number(c4_m,'99') + 1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " END"
+                                        + " )"
                             + ")"
                         + " LEFT JOIN t_accounting_manager h ON "
-                                    + " h.start_date <= (SELECT to_date((to_number(c4_y,'999')+f.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                    + " AND (h.end_date Is Null Or h.end_date >= (SELECT to_date((to_number(c4_y,'999')+f.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1) "
+                                    + " h.start_date <= (SELECT"
+                                        + " CASE WHEN to_number(c4_m,'99') >= 11 THEN"
+                                        + " to_date((to_number(c4_y,'999')+f.diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " ELSE"
+                                        + " to_date((to_number(c4_y,'999')+f.diff || '/' || to_number(c4_m,'99') + 1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " END"
+                                        + " )"
+                                    + " AND (h.end_date Is Null Or h.end_date >= (SELECT"
+                                        + " CASE WHEN to_number(c4_m,'99') >= 11 THEN"
+                                        + " to_date((to_number(c4_y,'999')+f.diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " ELSE"
+                                        + " to_date((to_number(c4_y,'999')+f.diff || '/' || to_number(c4_m,'99') + 1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " END"
+                                        + " )"
                         + ")"
                         + " ORDER BY id"
                         + ")"
@@ -1433,7 +1457,103 @@ namespace rk_seikyu
                         + ", CASE WHEN ((b.c7 = '現金') or (b.c11 = '')) THEN '稚内信用金庫' ELSE h.b_name END _b_name"
                         + ", CASE WHEN ((b.c7 = '現金') or (b.c11 = '')) THEN '014' ELSE h.br_code END _br_code"
                         + ", CASE WHEN ((b.c7 = '現金') or (b.c11 = '')) THEN '利尻富士支店' ELSE h.br_name END _br_name"
-                        + ", CASE WHEN e.sy IS NULL or e.sm IS NULL THEN" /* 引落年月日自動入力の場合*/
+
+                        + ", CASE  to_number(c4_m,'99')"
+                        + " WHEN 11 THEN"
+
+                        + " CASE WHEN e.sy IS NULL or e.sm IS NULL THEN" /* 引落年月日自動入力の場合*/
+                            + " CASE WHEN e.b_id = '0' THEN null"
+                                + " WHEN e.b_id = '1' THEN" /* 稚内信金の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '2' THEN" /* ゆうちょ銀行の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '3' THEN" /* 利尻漁協の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                            + " END"
+                        + " ELSE" /* 引落年月日手入力の場合*/
+                            + " CASE WHEN e.b_id = '0' THEN null"
+                                + " WHEN e.b_id = '1' THEN" /* 稚内信金の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff + 1 || '/' || to_number(e.sm,'99') -10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff || '/' || to_number(e.sm,'99') || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '2' THEN" /* ゆうちょ銀行の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff + 1 || '/' || to_number(e.sm,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff || '/' || to_number(e.sm,'99') || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '3' THEN" /* 利尻漁協の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff + 1 || '/' || to_number(e.sm,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff || '/' || to_number(e.sm,'99') || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                            + " END"
+                        + " END"
+
+                        + " WHEN 12 THEN"
+
+                        + " CASE WHEN e.sy IS NULL or e.sm IS NULL THEN" /* 引落年月日自動入力の場合*/
+                            + " CASE WHEN e.b_id = '0' THEN null"
+                                + " WHEN e.b_id = '1' THEN" /* 稚内信金の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff  + 1 || '/' || to_number(c4_m,'99') - 11 || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '2' THEN" /* ゆうちょ銀行の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff + 1 || '/' || to_number(c4_m,'99') - 11 || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '3' THEN" /* 利尻漁協の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                            + " target_date(to_date((to_number(c4_y,'999')+diff + 1 || '/' || to_number(c4_m,'99') - 11 || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                            + " END"
+                        + " ELSE" /* 引落年月日手入力の場合*/
+                            + " CASE WHEN e.b_id = '0' THEN null"
+                                + " WHEN e.b_id = '1' THEN" /* 稚内信金の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff + 1 || '/' || to_number(e.sm,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff + 1 || '/' || to_number(e.sm,'99') - 11 || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '2' THEN" /* ゆうちょ銀行の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff + 1 || '/' || to_number(e.sm,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff + 1 || '/' || to_number(e.sm,'99') - 11 || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                                + " WHEN e.b_id = '3' THEN" /* 利尻漁協の場合の処理*/
+                                    + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff + 1 || '/' || to_number(e.sm,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                    + " ELSE" /* 翌月末引落以外の場合の処理 */
+                                        + " target_date(to_date((to_number(e.sy,'999')+diff + 1 || '/' || to_number(e.sm,'99') - 11 || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
+                                    + " END"
+                            + " END"
+                        + " END"
+
+                        + " ELSE"
+
+                        + " CASE WHEN e.sy IS NULL or e.sm IS NULL THEN" /* 引落年月日自動入力の場合*/
                             + " CASE WHEN e.b_id = '0' THEN null"
                                 + " WHEN e.b_id = '1' THEN" /* 稚内信金の場合の処理*/
                                     + " CASE WHEN e.sd = '99' THEN" /* 翌月末引落の場合の処理 */
@@ -1475,7 +1595,10 @@ namespace rk_seikyu
                                         + " target_date(to_date((to_number(e.sy,'999')+diff || '/' || to_number(e.sm,'99') || '/' || to_number(e.sd,'99')),'yyyy/mm/dd'))"
                                     + " END"
                             + " END"
+                        + " END"
+
                         + " END target_date"
+
                         + ", CASE WHEN ((h.b_name is null)or(h.b_name = '')) THEN '稚内信用金庫'"
                         + " ELSE h.b_name END b_name"
                         + ", i.c25 shiharaisya"
@@ -1568,16 +1691,52 @@ namespace rk_seikyu
                                             + ") "
                                         + " LEFT JOIN (SELECT gg_id, g_name, gengou, start_date, end_date, diff FROM t_gengou) k ON substr(c4_y,1,1) = k.g_name)"
                                     + " LEFT JOIN (SELECT m_id, manager, start_date, end_date, o_id FROM t_manager) m ON m.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
-                                        + " AND m.start_date <= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                        + " AND (m.end_date Is Null Or m.end_date >= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1) "
+                                        + " AND m.start_date <= (SELECT"
+                                        + " CASE WHEN to_number(c4_m,'99') >= 11 THEN"
+                                        + " to_date((to_number(c4_y,'999')+k.diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " ELSE"
+                                        + " to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99') + 1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " END"
+                                        + " )"
+                                        + " AND (m.end_date Is Null Or m.end_date >= (SELECT"
+                                        + " CASE WHEN to_number(c4_m,'99') >= 11 THEN"
+                                        + " to_date((to_number(c4_y,'999')+k.diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " ELSE"
+                                        + " to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99') + 1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " END"
+                                        + " )"
                                     + ")"
                                 + " LEFT JOIN (SELECT stf_id, stuff, start_date, end_date, o_id FROM t_stuff) j ON j.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
-                                    + " AND j.start_date <= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                    + " AND (j.end_date Is Null Or j.end_date >= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1) "
+                                    + " AND j.start_date <= (SELECT"
+                                        + " CASE WHEN to_number(c4_m,'99') >= 11 THEN"
+                                        + " to_date((to_number(c4_y,'999')+k.diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " ELSE"
+                                        + " to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99') + 1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " END"
+                                        + " )"
+                                    + " AND (j.end_date Is Null Or j.end_date >= (SELECT"
+                                        + " CASE WHEN to_number(c4_m,'99') >= 11 THEN"
+                                        + " to_date((to_number(c4_y,'999')+k.diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " ELSE"
+                                        + " to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99') + 1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " END"
+                                        + " )"
                                 + ")"
                                 + " LEFT JOIN (SELECT acc_id, accounting_manager, start_date, end_date, acc_kana FROM t_accounting_manager) L ON "
-                                    + " L.start_date <= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                    + " AND (L.end_date Is Null Or L.end_date >= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1) "
+                                    + " L.start_date <= (SELECT"
+                                        + " CASE WHEN to_number(c4_m,'99') >= 11 THEN"
+                                        + " to_date((to_number(c4_y,'999')+k.diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " ELSE"
+                                        + " to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99') + 1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " END"
+                                        + " )"
+                                    + " AND (L.end_date Is Null Or L.end_date >= (SELECT"
+                                        + " CASE WHEN to_number(c4_m,'99') >= 11 THEN"
+                                        + " to_date((to_number(c4_y,'999')+k.diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " ELSE"
+                                        + " to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99') + 1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " END"
+                                        + " )"
                                 + ")"
                             + ") ORDER BY a.id"
                         + ")"
@@ -2041,17 +2200,53 @@ namespace rk_seikyu
                                             + ") "
                                         + " LEFT JOIN (SELECT gg_id, g_name, gengou, start_date, end_date, diff FROM t_gengou) k ON substr(c4_y,1,1) = k.g_name)"
                                     + " LEFT JOIN (SELECT m_id, manager, start_date, end_date, o_id FROM t_manager) m ON m.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
-                                        + " AND m.start_date <= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                        + " AND (m.end_date Is Null Or m.end_date >= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1) "
+                                        + " AND m.start_date <= (SELECT"
+                                        + " CASE WHEN to_number(c4_m,'99') >= 11 THEN"
+                                        + " to_date((to_number(c4_y,'999')+k.diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " ELSE"
+                                        + " to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " END"
+                                        + " )"
+                                        + " AND (m.end_date Is Null Or m.end_date >= (SELECT"
+                                        + " CASE WHEN to_number(c4_m,'99') >= 11 THEN"
+                                        + " to_date((to_number(c4_y,'999')+k.diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1 "
+                                        + " ELSE"
+                                        + " to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1 "
+                                        + " END"
+                                        + " )"
                                     + ")"
                                 + " LEFT JOIN (SELECT stf_id, stuff, start_date, end_date, o_id FROM t_stuff) j ON j.o_id = '" + Form_Seikyu_TextBoxO_id + "'"
-                                    + " AND j.start_date <= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                    + " AND (j.end_date Is Null Or j.end_date >= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1) "
-                                + ")"
+                                    + " AND j.start_date <= (SELECT"
+                                        + " CASE WHEN to_number(c4_m,'99') >= 11 THEN"
+                                        + " to_date((to_number(c4_y,'999')+k.diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " ELSE"
+                                        + " to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " END"
+                                        + " )"
+                                    + " AND (j.end_date Is Null Or j.end_date >= (SELECT"
+                                        + " CASE WHEN to_number(c4_m,'99') >= 11 THEN"
+                                        + " to_date((to_number(c4_y,'999')+k.diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " ELSE"
+                                        + " to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " END"
+                                        + " )"
+                                        + ")"
                                 + " LEFT JOIN (SELECT acc_id, accounting_manager, start_date, end_date, acc_kana FROM t_accounting_manager) L ON "
-                                    + " L.start_date <= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
-                                    + " AND (L.end_date Is Null Or L.end_date >= (SELECT to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1) "
-                                + ")"
+                                    + " L.start_date <= (SELECT"
+                                        + " CASE WHEN to_number(c4_m,'99') >= 11 THEN"
+                                        + " to_date((to_number(c4_y,'999')+k.diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " ELSE"
+                                        + " to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " END"
+                                        + " )"
+                                    + " AND (L.end_date Is Null Or L.end_date >= (SELECT"
+                                        + " CASE WHEN to_number(c4_m,'99') >= 11 THEN"
+                                        + " to_date((to_number(c4_y,'999')+k.diff + 1 || '/' || to_number(c4_m,'99') - 10 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " ELSE"
+                                        + " to_date((to_number(c4_y,'999')+k.diff || '/' || to_number(c4_m,'99')+1 || '/' || to_number('01','99')),'yyyy/mm/dd')-1"
+                                        + " END"
+                                        + " )"
+                                        + ")"
                             + ") ORDER BY a.id"
                         + ")"
                         + " SELECT"
