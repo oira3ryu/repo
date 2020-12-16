@@ -279,11 +279,6 @@
             this.tsukiBindingSource1.DataMember = "tsuki";
             this.tsukiBindingSource1.DataSource = this.tsukiBindingSource;
             // 
-            // tsukiBindingSource
-            // 
-            this.tsukiBindingSource.DataSource = this.tsuki;
-            this.tsukiBindingSource.Position = 0;
-            // 
             // tsuki
             // 
             this.tsuki.DataSetName = "tsuki";
@@ -616,6 +611,7 @@
             this.textBoxO_id.Name = "textBoxO_id";
             this.textBoxO_id.Size = new System.Drawing.Size(20, 19);
             this.textBoxO_id.TabIndex = 27;
+            this.textBoxO_id.Visible = false;
             // 
             // textBoxS_id
             // 
@@ -623,6 +619,7 @@
             this.textBoxS_id.Name = "textBoxS_id";
             this.textBoxS_id.Size = new System.Drawing.Size(20, 19);
             this.textBoxS_id.TabIndex = 28;
+            this.textBoxS_id.Visible = false;
             // 
             // textBoxN_id
             // 
@@ -630,6 +627,7 @@
             this.textBoxN_id.Name = "textBoxN_id";
             this.textBoxN_id.Size = new System.Drawing.Size(20, 19);
             this.textBoxN_id.TabIndex = 29;
+            this.textBoxN_id.Visible = false;
             // 
             // textBoxT_id
             // 
@@ -637,6 +635,7 @@
             this.textBoxT_id.Name = "textBoxT_id";
             this.textBoxT_id.Size = new System.Drawing.Size(20, 19);
             this.textBoxT_id.TabIndex = 30;
+            this.textBoxT_id.Visible = false;
             // 
             // textBoxNen
             // 
@@ -644,6 +643,7 @@
             this.textBoxNen.Name = "textBoxNen";
             this.textBoxNen.Size = new System.Drawing.Size(21, 19);
             this.textBoxNen.TabIndex = 31;
+            this.textBoxNen.Visible = false;
             // 
             // textBoxTsuki
             // 
@@ -651,6 +651,7 @@
             this.textBoxTsuki.Name = "textBoxTsuki";
             this.textBoxTsuki.Size = new System.Drawing.Size(19, 19);
             this.textBoxTsuki.TabIndex = 32;
+            this.textBoxTsuki.Visible = false;
             // 
             // Form_prn
             // 
@@ -694,7 +695,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nenBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tsukiBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tsukiBindingSource)).EndInit();
+            //((System.ComponentModel.ISupportInitialize)(this.tsukiBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tsuki)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.withdrawal_ds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceWithdrawal)).EndInit();

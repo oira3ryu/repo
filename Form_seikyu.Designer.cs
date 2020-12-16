@@ -2005,6 +2005,7 @@
             this.cmdPrn1.TabIndex = 32;
             this.cmdPrn1.Text = "印　刷";
             this.cmdPrn1.UseVisualStyleBackColor = true;
+            this.cmdPrn1.Visible = false;
             this.cmdPrn1.Click += new System.EventHandler(this.button2_Click);
             // 
             // textBoxNen
@@ -2013,6 +2014,7 @@
             this.textBoxNen.Name = "textBoxNen";
             this.textBoxNen.Size = new System.Drawing.Size(18, 19);
             this.textBoxNen.TabIndex = 33;
+            this.textBoxNen.Visible = false;
             // 
             // textBoxTsuki
             // 
@@ -2020,6 +2022,7 @@
             this.textBoxTsuki.Name = "textBoxTsuki";
             this.textBoxTsuki.Size = new System.Drawing.Size(18, 19);
             this.textBoxTsuki.TabIndex = 34;
+            this.textBoxTsuki.Visible = false;
             // 
             // textBoxN_id
             // 
@@ -2027,6 +2030,7 @@
             this.textBoxN_id.Name = "textBoxN_id";
             this.textBoxN_id.Size = new System.Drawing.Size(19, 19);
             this.textBoxN_id.TabIndex = 35;
+            this.textBoxN_id.Visible = false;
             // 
             // textBoxT_id
             // 
@@ -2034,6 +2038,7 @@
             this.textBoxT_id.Name = "textBoxT_id";
             this.textBoxT_id.Size = new System.Drawing.Size(18, 19);
             this.textBoxT_id.TabIndex = 36;
+            this.textBoxT_id.Visible = false;
             // 
             // Form_seikyu
             // 
