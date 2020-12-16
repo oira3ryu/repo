@@ -3352,21 +3352,21 @@ namespace rk_seikyu
                                         + " CASE WHEN b.b_id = '0' then null"
                                             + " WHEN b.b_id = '1' then" /* 稚内信金の場合の処理*/
                                                 + " CASE WHEN b.sd = '99' then" /* 翌月末引落の場合の処理 */
-                                                    + " target_date(to_date((to_number(b.sy,'999')-12+2000 || '/' || to_number(b.sm,'99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                    + " target_date(to_date((to_number(b.sy,'999')+h.diff || '/' || to_number(b.sm,'99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
                                                 + " ELSE" /* 翌月末引落以外の場合の処理 */
-                                                    + " target_date(to_date((to_number(b.sy,'999')-12+2000 || '/' || to_number(b.sm,'99') || '/' || to_number(b.sd,'99')),'yyyy/mm/dd'))"
+                                                    + " target_date(to_date((to_number(b.sy,'999')+h.diff || '/' || to_number(b.sm,'99') || '/' || to_number(b.sd,'99')),'yyyy/mm/dd'))"
                                                 + " END"
                                             + " WHEN b.b_id = '2' then" /* ゆうちょ銀行の場合の処理*/
                                                 + " CASE WHEN b.sd = '99' then" /* 翌月末引落の場合の処理 */
-                                                    + " target_date(to_date((to_number(b.sy,'999')-12+2000 || '/' || to_number(b.sm,'99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                    + " target_date(to_date((to_number(b.sy,'999')+h.diff || '/' || to_number(b.sm,'99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
                                                 + " ELSE" /* 翌月末引落以外の場合の処理 */
-                                                    + " target_date(to_date((to_number(b.sy,'999')-12+2000 || '/' || to_number(b.sm,'99') || '/' || to_number(b.sd,'99')),'yyyy/mm/dd'))"
+                                                    + " target_date(to_date((to_number(b.sy,'999')+h.diff || '/' || to_number(b.sm,'99') || '/' || to_number(b.sd,'99')),'yyyy/mm/dd'))"
                                                 + " END"
                                             + " WHEN b.b_id = '3' then" /* 利尻漁協の場合の処理*/
                                                 + " CASE WHEN b.sd = '99' then" /* 翌月末引落の場合の処理 */
-                                                    + " target_date(to_date((to_number(b.sy,'999')-12+2000 || '/' || to_number(b.sm,'99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
+                                                    + " target_date(to_date((to_number(b.sy,'999')+h.diff || '/' || to_number(b.sm,'99')+2 || '/' || to_number('01','99')),'yyyy/mm/dd')-1)"
                                                 + " ELSE" /* 翌月末引落以外の場合の処理 */
-                                                    + " target_date(to_date((to_number(b.sy,'999')-12+2000 || '/' || to_number(b.sm,'99') || '/' || to_number(b.sd,'99')),'yyyy/mm/dd'))"
+                                                    + " target_date(to_date((to_number(b.sy,'999')+h.diff || '/' || to_number(b.sm,'99') || '/' || to_number(b.sd,'99')),'yyyy/mm/dd'))"
                                                 + " END"
                                         + " END"
                                     + " END last_day"
